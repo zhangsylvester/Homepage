@@ -1,0 +1,22 @@
+\subsection{Second formula for KL polynomials}
+Let $s\in D_L(w)$ and 
+$c=\begin{cases}
+	1&s\in D_L(x)\\0&s\notin D_L(x)
+\end{cases}$, then
+\[P_{x,w}=q^{1-c}P_{sx,sw}+q^cP_{x,sw}-\sum_{z<sw}\mu(z,sw)q^{\ell(z,w)}P_{x,z}\]
+where $\mu(z,v)$ is the $\mu$-coefficient of $P_{z,v}$.
+
+\begin{corollary}
+	For $s\in D_L(w)$, we have $P_{x,w}(q)=P_{sx,w}(q)$.
+\end{corollary}
+\begin{corollary}
+	For any finite Coxeter group, $P_{u,w_0}=1$. 
+\end{corollary}
+\begin{corollary}
+	If $\mu(z,w)\neq 0$ and $\ell(z,w)>1$, then $D_L(w)\subset D_L(u)$.
+\end{corollary}
+\begin{proof}
+	Assume not, then there exists an $s$ such that $s\in D_L(w)\setminus D_L(u)$. then
+	\[P_{z,w}=\mu(z,w)q^{{\ell(w,z)-1\over 2}}+\cdots.\]
+	At the same time $P_{sz,w}=P_{z,w}$, which violates the degree conditions.
+\end{proof}

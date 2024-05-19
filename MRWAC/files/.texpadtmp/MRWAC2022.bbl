@@ -1,0 +1,44 @@
+% \bib, bibdiv, biblist are defined by the amsrefs package.
+\begin{bibdiv}
+\begin{biblist}
+
+\bib{BjornerWachs}{article}{
+      author={Bj\"{o}rner, Anders},
+      author={Wachs, Michelle~L.},
+       title={Permutation statistics and linear extensions of posets},
+        date={1991},
+        ISSN={0097-3165},
+     journal={J. Combin. Theory Ser. A},
+      volume={58},
+      number={1},
+       pages={85\ndash 114},
+         url={https://doi-org.ezp3.lib.umn.edu/10.1016/0097-3165(91)90075-R},
+      review={\MR{1119703}},
+}
+
+\bib{FerayReiner}{article}{
+      author={F\'{e}ray, Valentin},
+      author={Reiner, Victor},
+       title={{$P$}-partitions revisited},
+        date={2012},
+        ISSN={1939-0807},
+     journal={J. Commut. Algebra},
+      volume={4},
+      number={1},
+       pages={101\ndash 152},
+         url={https://doi-org.ezp3.lib.umn.edu/10.1216/JCA-2012-4-1-101},
+      review={\MR{2913529}},
+}
+
+\bib{Knuth}{book}{
+      author={Knuth, Donald~E.},
+       title={The art of computer programming. {V}ol. 3},
+   publisher={Addison-Wesley, Reading, MA},
+        date={1998},
+        ISBN={0-201-89685-0},
+        note={Sorting and searching, Second edition [of MR0445948]},
+      review={\MR{3077154}},
+}
+
+\end{biblist}
+\end{bibdiv}

@@ -1,0 +1,55 @@
+\begin{theorem}
+	There exists unique $\tilde R_{u,v}\in \mathbb{Z}[q]$ with positive coefficient such that $R_{u,v}(q)=q^{\ell(u,v)} \tilde{R}(q^{1 \over 2}-q^{-{1\over2}})$.
+\end{theorem}
+\begin{proof}
+	Existence will be proved by induction via recursion.
+	
+	Say $s\in D_L(v)$. If $s\in D_L(u)$ then $\tilde R_{u,v}=\tilde R_{su,sv}$. If $s\notin D_L(u)$ then,
+	\[\tilde R_{u,v}(q^{1\over 2}-q^{-{1\over 2}})=q^{-{\ell(u,v)\over 2}}R_{u,v}=q^{-{\ell(u,v)\over 2}}\bigg[(q-1)q^{\ell(u,sv)\over 2}\tilde R_{u,sv}+q\cdot q^{\ell(su,sv)\over 2}\tilde R_{su,sv}\bigg]\]
+	\[=(q^{1\over 2}-q^{-{1\over 2}})\tilde R_{u,sv}+\tilde R_{su,sv}\]
+	We then get a recurrence for $\tilde R$-polynomials.
+	\begin{equation}
+		\tilde R_{u,v}=\begin{cases}
+			\tilde R_{su,sv}&\text{ if }s\in D_L(u)\\
+			q\tilde R_{u,sv}+\tilde R_{su,v}&\text{ otherwise}.
+		\end{cases}
+	\end{equation}
+	
+	From the above recurrence it becomes clear that $\tilde R$-polynomials have positive coefficients.
+\end{proof}
+\begin{example}
+	$\tilde R_{123,132}=q$\quad
+	$\tilde R_{123,312}=q^2$\quad
+	$\tilde R_{123,321}=q^3+q$
+\end{example}
+Now the $\tilde R$-polynomials have positive coefficients, can we give a combinatorial interpretation for them?
+
+\begin{definition}
+	Let $\xi=(s_1,\cdots,s_r)\in S^r$. A subexpression of $\xi$ is $a=(a_1,\cdots,a_r\in (S\cup \{e\})^r$ such that $a_i\in\{r_i,e\}$. We say $||a||=\#\{i:a_i=r_i\}$. A subexpression $a$ is said to be distinguished if
+	\(s_j\notin D_r(a_1\cdots a_{j-1})\) for $2 \leq j \leq r$ such that $a_j = e$. Given $u\in W$, let $D(\xi)_u=\{(a_1,\cdots,a_r)\in D(\xi):a_1\cdots a_r=u\}$.
+	\end{definition}
+	\begin{example}
+		In $\mathfrak{S}_5$, let $\xi=(s_3,s_2,s_1,s_2,s_4)$. $(s_3,-,-,-,-)$ and $(s_3,-,s_1,s_2,-)$ are distinguished subexpressions, while $(s_3,s_2,-,-,-)$ is not.
+	\end{example}
+\begin{theorem}\label{thm:R-formula}
+	\[\tilde R_{(u,v)}(q)=\sum_{\xi \in D(s_1,\cdots,s_r)_u}q^{\ell(v)-||\xi||}\]
+	where $v=s_1\cdots s_r$ is a reduced expression of $v$.
+\end{theorem}
+\begin{example}
+	Let $u=1234$ and $v=4321=s_1s_2s_1s_3s_2s_1$.
+	$\xi=(s_1,s_2,s_1,s_3,s_2,s_1)$ has the following subexpressions which has the correct product to $u=\text{id}$
+	\[101000,000000,020020,001001,120021,100001\]
+	Every thing except for the last one is distinguished. Therefore
+	\[\tilde R_{1234,4321}=q^6+3q^4+q^2\]
+\end{example}
+\begin{exercise}
+	$R_{u,v}=R_{u^{-1},v^{-1}}$ (Ex 10)
+\end{exercise}
+\begin{exercise}
+	In $\mathfrak{S}_n$ if $u\to v$ in Bruhat graph, then
+	\[R_{u,v}=(q-1)(q^2-q+1)^{\ell(u,v)-1\over 2}\]
+\end{exercise}
+\begin{exercise}
+	$(-1)^{\ell(v)-1}[q]R_{e,v}=a(e,v)$ where $a(e,v)$ is the number of atoms of the interval $[e,v]$.
+\end{exercise}
+
