@@ -1,4 +1,5 @@
 \documentclass{amsart}
+\usepackage[margin = 1in]{geometry}
 \begin{document}
 	\leftline{\bf MATH 4242 Quiz 1}\rightline{Name:\underline{\quad\quad\quad\quad\quad\quad\quad\quad}}
 	\rightline{Student Id:\underline{\quad\quad\quad\quad\quad\quad\quad\quad}}
@@ -10,8 +11,23 @@ Let $V=\mathbb{R}^2$ the real vector space, and define
 
 \begin{enumerate}
 	\item Prove that both $U$ and $W$ are subspaces of $V$. (4 pts)
-	\vspace{8cm}
-	\item Describe their sum $U+W$. Is it a direct sum? (6 pts)
+	\begin{proof}
+		Let $u_1,u_2$ be arbitrary vectors in $ U$, then $u_1=(a,a)$ and $u_2=(b,b)$ for some $a,b\in\mathbb{R}$. Then $u_1+u_2=(a+b,a+b)$ satisfies the defining equation of $U$, thus is also a vector in $U$.
+		
+		For any $c\in\mathbb{R}$, $cu_1 = (ca,ca)\in \mathbb{R}$. Therefore $U$ is closed under addition and scalar multiplication, thus is a subspace. Proof for $W$ is similar.
+	\end{proof}
+	\item Describe their sum $U+W$. Is it a direct sum? (Provide a counterexample or a proof.) (6 pts)
+	\begin{proof}
+		\[U+W = \{(a,a)+(b,-b)|a,b\in\mathbb{R}\}=\{(a+b,a-b)|a,b\in\mathbb{R}\}\]
+		We will show that this equals to $\mathbb{R}^2$. For any arbitrary vector $(c,d)\in\mathbb{R}^2$, we want to show that it can be written in the form $(a+b,a-b)$. This is equivalent to solving the equations
+		\[a+b = c\]
+		\[a-b = d\]
+		The only solution is $a={c+d\over 2}, b = {c-d\over 2}$. Therefore every $(c,d)\in\mathbb{R}^2$ is an element in $U+W$. Since $U+W$ is a subspace of $\mathbb{R}^2$. Therefore $U+W = \mathbb{R}^2$.
+		
+		Furthermore, because of the uniques of the above solution. Every $(c,d)$ can be uniquely written as
+		\[(c,d) = ({c+d\over 2},{c+d\over 2})+({c-d\over 2},-{c-d\over 2})\]
+		where $({c+d\over 2},{c+d\over 2})\in U$ and $({c-d\over 2},-{c-d\over 2})\in W$. Thus $U+W = U\oplus W$ is a direct sum.
+	\end{proof}
 \end{enumerate}
 
 %\noindent Part a (4 pts)
