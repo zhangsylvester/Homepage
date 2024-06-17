@@ -1,0 +1,318 @@
+\documentclass[12pt]{amsart}
+%\usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
+%\input{command}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+%\input{tikzsetup.tex}
+\usepackage{ytableau}
+\usepackage{mathtools, amssymb, old-arrows}
+\usepackage[margin = 1in]{geometry}
+%\input{theorems}
+\usepackage{tikz-cd}
+
+\renewcommand{\leq}{\leqslant}
+
+\usepackage{mathbbol}
+\usepackage{amssymb}            % AMS Math
+
+\DeclareSymbolFontAlphabet{\amsmathbb}{AMSb}
+
+
+\newlength\friezelen 
+\settowidth{\friezelen}{$\xi_{m}$} % calculate width of widest element
+
+\usepackage{array} % for "\newcolumntype" macro
+\newcolumntype{Q}{>{\centering}p{\friezelen}<{}}
+
+\usepackage{mathrsfs} 
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{comment}
+\usetikzlibrary{arrows}
+\tikzset {->-/.style={decoration={markings, mark=at position .5 with {\arrow{latex}}}, postaction={decorate}}}
+\tikzset {-->-/.style={decoration={markings, mark=at position .5 with {\arrow[scale=2]{latex}}}, postaction={decorate}}}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\newcommand{\miduparrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\newcommand{\midrevarrow}{\tikz \draw[-triangle 90] (0,0) -- +(-.1,0);}
+\newcommand{\shiftright}[2]{\makebox[#1][r]{\makebox[0pt][l]{#2}}}
+
+\newcommand{\lhdot}[0]{\adjustbox{lap={\width}{0.6em}}{$\cdot$}\lhd}
+
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{etoolbox}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,graphicx,tikz,tikz-cd}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    citecolor = orange,%
+}
+\usepackage[noabbrev]{cleveref}
+\usepackage{subcaption}
+
+\makeatletter
+\patchcmd{\@settitle}{\uppercasenonmath\@title}{}{}{}
+\patchcmd{\@setauthors}{\MakeUppercase}{}{}{}
+\patchcmd{\section}{\scshape}{}{}{}
+\makeatother
+\makeatletter
+\patchcmd{\@maketitle}
+  {\ifx\@empty\@dedicatory}
+  {\ifx\@empty\@date \else {\vskip2ex %vertical position of date
+  \centering\footnotesize\@date\par\vskip1ex}\fi
+   \ifx\@empty\@dedicatory}
+  {}{}
+\patchcmd{\@adminfootnotes}
+  {\ifx\@empty\@date\else \@footnotetext{\@setdate}\fi}
+  {}{}{}
+\makeatother
+
+\DeclareMathOperator{\fH}{\mathfrak{H}}
+\renewcommand{\l}[2]{\lambda_{#1,#2}}
+
+
+\DeclareMathOperator{\fA}{\mathfrak{A}}
+\DeclareMathOperator{\fC}{\mathfrak{C}}
+\DeclareMathOperator{\spin}{spin}
+\newcommand{\fh}[0]{\mathfrak{h}}
+\newcommand{\fhh}[0]{\mathfrak{\tilde h}}
+\newcommand{\fc}[0]{\mathfrak{C}}
+\newcommand{\fcc}[0]{\mathfrak{\tilde C}}
+\newcommand{\fff}[0]{\mathbb{F}}
+\newcommand{\bbb}[0]{\mathbb{B}}
+\renewcommand{\geq}{\geqslant}
+\DeclareMathOperator{\inv}{inv}
+
+\DeclareMathOperator{\pd}{\textup{\textbf{PD}}}
+\DeclareMathOperator{\rpd}{\textup{\textbf{RPD}}}
+
+
+\newcommand{\syl}[1]{{\color{orange}[Sylvester: #1]}}
+\newcommand{\new}[1]{{#1}}
+%\newcommand{\calP}[0]{\mathcal{P}}
+\newcommand{\calPn}[0]{\mathcal{P}^{(n)}}
+\newcommand{\fa}[1]{\mathfrak{a}_{#1}}
+\newcommand{\cal}[1]{\mathcal{#1}}
+\newcommand{\zsharp}[0]{\mathbb{Z}_{\sharp}}
+\newcommand{\bS}[0]{\overleftarrow{\mathfrak{S}}}
+\renewcommand{\ss}[0]{\mathfrak{S}}
+\newcommand{\sz}[0]{S_{\mathbb{Z}}}
+\DeclareMathOperator{\des}{Des}
+\DeclareMathOperator{\bb}{{\bf B}}
+\DeclareMathOperator{\ff}{{\bf F}}
+\DeclareMathOperator{\qq}{\mathbb{Q}}
+\DeclareMathOperator{\rr}{\mathbb{R}}
+\DeclareMathOperator{\cc}{\mathbb{C}}
+\DeclareMathOperator{\xx}{{\bf{x}}}
+\DeclareMathOperator{\ms}{\mathfrak{S}}
+\DeclareMathOperator{\mf}{\mathfrak{F}}
+\DeclareMathOperator{\bR}{\overleftarrow{R}}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\rtile}[0]{
+\begin{tikzpicture}[scale=0.6, tikzfig, baseline = -0.5 em]
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (204) at (15.25, -1) {};
+		\node [style=none] (205) at (15.25, 0.25) {};
+		\node [style=none] (206) at (16.5, 0.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red, rounded corners=0.2cm] (204.center) to (205.center)  to (206.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\jtile}[0]{
+\begin{tikzpicture}[scale=0.6, tikzfig, baseline = 0.5 em]
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (201) at (14.25, 0.25) {};
+		\node [style=none] (202) at (14.25, 1.5) {};
+		\node [style=none] (203) at (13, 0.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red, rounded corners=0.2cm] (203.center) to (201.center) to (202.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+
+
+%%augmented matrix
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\numberwithin{equation}{section}
+
+
+\title{MATH 4242 Applied Linear Algebra}
+%\author[M. Shimozono]{Mark Shimozono$^\flat$}
+%\thanks{$^\flat$\url{mshimo@math.vt.edu} Virginia Tech.}
+\author[S. Zhang]{Sylvester W. Zhang$^\natural$}
+\thanks{$^\natural$\url{swzhang@umn.edu} University of Minnesota.}
+
+\date{Summer 2024}
+
+\begin{document}
+\maketitle	
+
+\tableofcontents
+
+\section{Systems of Linear Equations}
+A $m\times n$ system of linear equation is of the form
+\begin{align*}
+	a_{11}x_1+\cdots +a_{n1}x_n&=b_1\\
+	a_{21}x_1+\cdots +a_{n2}x_n&=b_n\\
+	\cdots\quad \cdots \quad\cdots&\\
+	a_{m1}x_1+\cdots+a_{mn}x_n&=b_n
+\end{align*}
+Such equation can be represented using product of matrices.
+\[\begin{bmatrix}
+	a_{11}&a_{21}&\cdots &a_{m1}\\
+	a_{21}&a_{22}&\cdots &a_{m2}\\
+	\cdots&\cdots&\cdots &\cdots\\
+	a_{m1}&a_{m2}&\cdots &a_{mn}
+\end{bmatrix} \begin{bmatrix}
+	x_1\\x_2\\\vdots\\x_n
+\end{bmatrix} = \begin{bmatrix} b_1\\b_2\\ \vdots \\b_n \end{bmatrix}\]
+or by an augmented matrix.
+
+\[\begin{bmatrix}[cccc|c]
+	a_{11}&a_{21}&\cdots &a_{m1}&b_1\\
+	a_{21}&a_{22}&\cdots &a_{m2}&b_2\\
+	\cdots&\cdots&\cdots &\cdots&\\
+	a_{m1}&a_{m2}&\cdots &a_{mn}&b_n
+\end{bmatrix} \]
+\begin{definition}
+	We have three types of elementary row operations.
+	\begin{enumerate}
+		\item Multiply the $i$-th equation (or the $i$-th row of the augmented matrix), then add it to the $j$-th equation (or the $j$-th row of the augmented matrix).
+		\item Permute the equations (or the rows of the augmented matrix)
+		\item Multiply one equation (or one row of the augmented matrix) by a non-zero number.
+	\end{enumerate}
+\end{definition}
+
+\subsection{Systems of $n\times n$ Equations.}
+Matrices considered in this sections are all $n\times n$.
+\begin{definition}
+	A matrix is \emph{regular} if it can be turned into a upper triangular matrix such that every entry on the diagonal is non-zero.
+\end{definition}
+%\begin{definition}
+%	Define an \emph{elementary lower-triangular matrix} to be a matrix with $1$'s on the diagonal and only one non-zero entry in the lower triangular part.
+%\end{definition}
+\begin{proposition}
+	Let $E$ be the matrix with $1$'s on the diagonal and $E_{ij}=k\neq 0$ is the only other non-zero entry in the lower triangular part. Then for any matrix $M$, $EM$ is the matrix obtained by multiplying the $j$-th row of $M$ then adding to the $i$-th row of $M$.
+\end{proposition}
+
+\begin{proposition}
+	A matrix $A$ is regular if and only if it has an $LU$ factorization, i.e.
+	\[A=LU\]
+	where $L$ is a lower uni-triangular matrix, and $U$ is a upper triangular matrix with non-zero diagonal entries.
+\end{proposition}
+
+\begin{definition}
+	Let $w\in S_n$ be a permutation, then define $P_w=\{a_{ij}\}$ to be the matrix such that $$a_{i,j}=\begin{cases}
+		1&j=w(i) \\ 0&  \text{otherwise.}
+	\end{cases}$$
+\end{definition}
+
+\begin{proposition}
+	For any matrix $M$, $P_wM$ is the matrix obtained by permuting the rows of $M$ according to the permutation $w$.
+\end{proposition}
+
+\begin{definition}
+	A matrix $A$ is called \emph{non-singular} if it can be turned into a upper triangular matrix without non-zero diagonal entry via row operations of the first two types.
+\end{definition}
+\begin{proposition}
+	A matrix $A$ is non-singular if and only if it has a permuted LU factorization:
+	$PA=LU$ where $P$ is some permutation matrix.
+\end{proposition}
+\begin{proposition}
+	Denote $A^T$ the transpose of $A$. We have that $AB = (BA)^T$.
+\end{proposition}
+
+\begin{proposition}
+	A matrix $A$ is regular if it admits an LDV factorization, $A=LDU$ where $L$ is lower-unitriangular matrix, $D$ is a diagonal matrix, and $U$ is a uni-upper triangular matrix.
+\end{proposition}
+\subsection{Systems of $m\times n$ Equations.}
+\begin{definition}
+A matrix is in row echelon form if it looks like,
+	\[
+\begin{pmatrix}
+\bullet & * & * & * & * & * \\
+0 & \bullet & * & * & * & * \\
+0 & 0 & 0 & \bullet & * & * \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+\end{pmatrix}
+\]
+where $\bullet$'s are non-zero entries (called \emph{pivots}) and $*$ represent generic entries. The pivots are the first non-zero entries in each rows. We require the pivots occupy the first several rows consecutively.
+\end{definition}
+\begin{proposition}
+	Every matrix can be turned into a row echelon form using elementary row operations of type I and II. In other words, every matrix $A$ has a factorization $PA=LU$ where $P$ is a permutation matrix, $L$ is a lower uni-triangular matrix, and $U$ a matrix in row-echelon form.
+\end{proposition}
+\begin{definition}
+	Since every matrix can be turned in to row-echelon form using elementary row operations, we define its \emph{rank} to be the number of pivots.
+\end{definition}
+\begin{proposition}
+	A square $n\times n$ matrix is non-singular if its rank is $n$ (full-rank).
+\end{proposition}
+
+
+
+\section{Vector Spaces}
+\subsection{Some basic setup}
+\begin{definition}\footnote{You don't need to worry too much about the abstract structures of a field. The purpose of this definition is to make everything self-contained. You can basically think of a field as a set on which you can do some sort of arithmetic.}
+	A field is a set $\fff$ with two binary operations $\times$ (multiplication) and $+$ (addition), satisfying the following axioms.
+	\begin{itemize}
+	    \item $a+b=b+a$ and $a\times b = b\times a$ for all $a,b\in\fff$.
+		\item There exists an additive identity $0$ such that $0+a=a+0 = a$ for all $a\in\fff$.
+		\item There exists a multiplication identity $1$ such that $1\times a= a\times 1=a$ for all $a\in\fff$.
+		\item For every $a\in\fff$, there exists an element denoted $-a$, such that $a+(-a)=0$.
+		\item $0\neq 1$.
+		\item For every $a\in\fff$ and $a\neq 0$, there exists an element denoted $a^{-1}$, such that $a\times (a^{-1})=1$.
+		\item For every $a,b,c\in\fff$, $a\times (b+c)=ab+ac$.
+	\end{itemize}
+For most part of this class, we will take $\fff=\rr $  or $\fff=\cc=\{a+bi|a,b\in\rr\text{ and }i^2 = -1\}$.
+\end{definition}
+\begin{definition}
+	For a field $\fff$, denote $\fff[x]$ the ring\footnote{A ring is a field, where multiplication need not to be commutative, and multiplicative identity ($0$) need not exists.}of polynomials over $\fff$. 
+	\[\fff[x]=\{a_0+a_1x+a_2x^2+\cdots a_nx^n|a_0,\cdots,a_n\in \fff,n\geq 0, x^mx^n=x^{m+n}\}\]\end{definition} 
+\begin{proposition}\label{prop:C_alg_close}
+	Every polynomial $a_0+a_1x+a_2x^2+\cdots+a_nx^n = 0$ with complex coefficient has at least one complex solution. Note that this is not true for real polynomials.
+\end{proposition}
+\begin{definition}
+	A field $\fff$ is called \emph{algebraically closed} if every polynomial in $\fff[x]$ has a solution in $\fff$. (By \Cref{prop:C_alg_close}, $\cc$ is algebraically closed).
+\end{definition}
+\begin{proposition}
+	The field of complex numbers $\cc$ is the algebraic closure of $\rr$. In other words, $\cc$ is the smallest algebraically closed field that contains $\rr$.
+\end{proposition}
+\subsection{Vector spaces}
+Let $\fff$ be a field.
+\begin{definition}
+	A set $V$ is called a vector space over $\fff$ if there exists an commutative addition map
+	\[a:V\times V\to V\]
+	and a scalar multiplication map
+	\[m:\fff\times V\to V\]
+	(Here $\times$ denote the Cartesian product of sets\footnote{For sets $A$ and $B$, defined $A\times B=\{(a,b)|a\in A,b\in B\}$}.)
+	
+\end{definition}
+
+
+
+\section{Linear Maps and Matrices}
+\end{document}
