@@ -39,6 +39,7 @@
 \newcommand{\shiftright}[2]{\makebox[#1][r]{\makebox[0pt][l]{#2}}}
 
 \newcommand{\lhdot}[0]{\adjustbox{lap={\width}{0.6em}}{$\cdot$}\lhd}
+%\renewcommand{\ker}[0]{\textup{Ker}}
 
 \usepackage{comment}
 \usepackage{graphicx}
@@ -85,10 +86,12 @@
 \newcommand{\fff}[0]{\mathbb{F}}
 \newcommand{\bbb}[0]{\mathbb{B}}
 \renewcommand{\geq}{\geqslant}
+\renewcommand{\ker}{\Ker}
 \DeclareMathOperator{\inv}{inv}
 
 \DeclareMathOperator{\pd}{\textup{\textbf{PD}}}
 \DeclareMathOperator{\rpd}{\textup{\textbf{RPD}}}
+\DeclareMathOperator{\Ker}{Ker}
 
 
 \newcommand{\syl}[1]{{\color{orange}[Sylvester: #1]}}
@@ -111,6 +114,11 @@
 \DeclareMathOperator{\ms}{\mathfrak{S}}
 \DeclareMathOperator{\mf}{\mathfrak{F}}
 \DeclareMathOperator{\bR}{\overleftarrow{R}}
+\DeclareMathOperator{\s}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\img}{Img}
+\newcommand{\calM}[0]{\mathcal{M}}
 \renewcommand{\emptyset}{\varnothing}
 \newcommand{\rtile}[0]{
 \begin{tikzpicture}[scale=0.6, tikzfig, baseline = -0.5 em]
@@ -275,7 +283,7 @@ where $\bullet$'s are non-zero entries (called \emph{pivots}) and $*$ represent 
 
 
 \section{Vector Spaces}
-\subsection{Some basic setup}
+\subsection{Some Basic Setup}
 \begin{definition}\footnote{You don't need to worry too much about the abstract structures of a field. The purpose of this definition is to make everything self-contained. You can basically think of a field as a set on which you can do some sort of arithmetic.}
 	A field is a set $\fff$ with two binary operations $\times$ (multiplication) and $+$ (addition), satisfying the following axioms.
 	\begin{itemize}
@@ -301,18 +309,178 @@ For most part of this class, we will take $\fff=\rr $  or $\fff=\cc=\{a+bi|a,b\i
 \begin{proposition}
 	The field of complex numbers $\cc$ is the algebraic closure of $\rr$. In other words, $\cc$ is the smallest algebraically closed field that contains $\rr$.
 \end{proposition}
-\subsection{Vector spaces}
+\subsection{Vector Spaces and Subspaces}
 Let $\fff$ be a field.
-\begin{definition}
-	A set $V$ is called a vector space over $\fff$ if there exists an commutative addition map
-	\[a:V\times V\to V\]
+\begin{definition}\label{def:vs}
+	A set $V$ is called a vector space over $\fff$ if there exists an addition map
+	\[add:V\times V\to V\]
+	%\[(v_1,v_2)\mapsto v_1+v_2\]
 	and a scalar multiplication map
-	\[m:\fff\times V\to V\]
-	(Here $\times$ denote the Cartesian product of sets\footnote{For sets $A$ and $B$, defined $A\times B=\{(a,b)|a\in A,b\in B\}$}.)
+	\[mult:\fff\times V\to V\]
+	%\[(a,v)\mapsto av\]
+	(Here $\times$ denote the Cartesian product of sets\footnote{For sets $A$ and $B$, defined $A\times B=\{(a,b)|a\in A,b\in B\}$}.) We will abbreviate them by $a(v_1,v_2)=v_1+v_2$ and $mult(a,v)=av$.
 	
+	Note that this definition (implicitly) requires that a vector space $V$ is closed under addition and scalar multiplication, i.e. $v_1+v_2=add(v_1,v_2)\in V$ and $av = mult(a,v)\in V$.
+	
+	Elements of a vector spaces are called \emph{vectors.}
 \end{definition}
 
+\begin{definition}\label{def:subspace}
+	Let $V$ be a vector space over $\fff$. A subset $U$ of $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication. (In other words, a subspace is a subset that is a vector space itself.)
+\end{definition}
+\begin{definition}\label{def:sum}
+	Let $U_1,\cdots,U_m$ be subspaces of $V$. Then define their sum to be
+	\[U_1+\cdots+U_m = \{u_1+\cdots+u_m|u_1\in U_1,\cdots,u_m\in U_m\}\]
+\end{definition}
+\begin{proposition}
+	Let $U_1,\cdots,U_m$ be subspaces of $V$. Then $U_1+\cdots+U_m$ is also a subspace of $V$, furthermore, it's the smallest subspace of $V$ that contain all of $U_1,\cdots,U_m$.
+\end{proposition}
+\begin{definition}
+	A sum of subspaces $U_1+\cdots+U_m$ of $V$ is a \emph{direct sum} if every vector $v\in U_1+\cdots+U_m$ can be uniquely written as $v=u_1+\cdots+u_m$ where $u_i\in U_i$ for each $i$. When a summation is direct, we denote it as $U_1\oplus\cdots\oplus U_m$.
+\end{definition}
+\subsection{Linear Combination, Span, and Dimension}
+Let $V$ be a vector space over $\fff$.
+\begin{definition}
+	Let $v_1,v_2,\cdots,v_n\in V $, a vector $v\in V$ is a linear combination of $\{v_1,\cdots,v_n\}$ if there exists $a_1,\cdots,a_n\in\fff$ such that 
+	\[v=a_1v_1+\cdots+a_nv_n\]
+\end{definition}
+\begin{definition}\label{def:lin_comb}
+	Let $v_1,v_2,\cdots,v_n$ be a list of vectors in $V$, define their span to be the set of all linear combinations of $v_1,\cdots, v_n$.
+	\[ \s(v_1,\cdots,v_n)=\{a_1 v_1+\cdots+a_nv_n|a_1,\cdots,a_n\in\fff \}\]
+\end{definition}
+\begin{proposition}
+	For a list of vectors $v_1,\cdots,v_n\in V$, $\s(v_1,\cdots,v_n)$ is a subspace of $V$. Furthermore, it's the smallest subspace containing all of $v_1,\cdots,v_n$.
+\end{proposition}
+\begin{definition}
+	A vector space $V$ is said to be \emph{finite dimensional} it it is the span of a finitely many vectors.
+\end{definition}
 
+\begin{definition}\label{def:linear_ind}
+	$v_1,\cdots,v_m\in V$ are \emph{linearly independent} if the only way to write $0$ as a linear combination of $v_1,\cdots,v_n$ is
+	\[0=0v_1+0v_2+\cdots+0v_n.\]
+\end{definition}
+
+\begin{proposition}
+	$v_1,\cdots,v_m\in V$ are \emph{linearly independent} if and only if any vector $v\in \s(v_1,\cdots,v_m)$ can be uniquely written as a linear combination of $v_1,\cdots,v_n$.
+\end{proposition}
+\begin{definition}
+	A list of vectors $v_1,\cdots,v_n$ is a basis of $V$ if
+	\begin{itemize}
+		\item $V=\s(v_1,\cdots,v_n)$
+		\item $v_1,\cdots,v_n$ are linearly independent.
+	\end{itemize}
+\end{definition}
+\begin{proposition}
+	$v_1,\cdots,v_n$ is a basis of $V$ iff every vector $v\in V$ can be uniquely written as a linear combination of $v_1,\cdots,v_n$.
+\end{proposition}
+\begin{lemma}Let $v_1,\cdots,v_m\in V$ be a list of vectors that spans $V$, i.e. $\s (v_1,\cdots,v_m)=V$. Then $\{v_1,\cdots,v_m\}$ can be reduced to  a basis of $V$. In other words, there exists a basis $\{w_1,\cdots,w_n\}$ of $V$ such that $w_i\in \{v_1,\cdots,v_m\}$ for all $i$ and $n\leq m$.
+\end{lemma}
+\begin{lemma}
+	Let $v_1,\cdots,v_k\in V$ be linearly independent. Then there exists a basis of $V$ in the form
+	\[\{v_1,\cdots,v_k,w_1,\cdots,w_m\}\]
+	Note that it's possible that $m=0$, in the case when $\{v_1\cdots v_k\}$ is already a basis.
+\end{lemma}
+\begin{corollary}
+	If $U$ is a subspace of $V$, then there exists another subspace $W$ such that $V=U\oplus W$.
+\end{corollary}
+\begin{proposition}
+	If $v_1,\cdots,v_n$ is a basis of $V$ and $w_1,\cdots,w_m$ is another basis of $V$. Then $n=m$.
+\end{proposition}
+\begin{definition}
+	Define the dimension of a vector space to be the size of its basis.
+\end{definition}
+\begin{proposition}
+	If $\{v_1,\cdots,v_n\}$ linearly independent and $n=\dim(V)$, then $\{v_1,\cdots,v_n\}$ is a basis.
+\end{proposition}
+\begin{proposition}
+	If $U$ is a subspace of $V$, then $\dim(U)\leq \dim(V)$. Furthermore, $\dim(U)=\dim(V)$ iff $U=V$.
+\end{proposition}
+\begin{proposition}
+	If $\s(v_1,\cdots,v_n)=V$ and $n=\dim(V)$, then $\{v_1,\cdots,v_n\}$ is a basis.
+\end{proposition}
+\begin{theorem}
+	Let $V$ be a finite dimensional vector space and $V_1,V_2$ subspaces. Then
+	\[\dim(V_1+V_2)=\dim(V_1)+\dim(V_2)-\dim(V_1\cap V_2)\]
+\end{theorem}
+\begin{corollary}
+	$\dim(V_1\oplus V_2)=\dim(V_1)+\dim(V_2)$.
+\end{corollary}
 
 \section{Linear Maps and Matrices}
-\end{document}
+\subsection{Linear Maps}
+Let $V,W$ be vector spaces over $\fff$.
+
+\begin{definition}
+	A map $T:V\to W$ is linear if
+	\begin{enumerate}
+		\item $T(u+v)=T(u)+T(v)$ for all $u,v\in V$.
+		\item $T(\lambda v)=\lambda T(v)$ for all $\lambda\in\fff$ and $v\in V$.
+	\end{enumerate}
+\end{definition}
+\begin{definition}
+	We denote the set of all linear maps from $V\to W$ by $\Hom(V,W)$. And define $\End(V)=\Hom(V,V)$. \end{definition}
+	\begin{lemma}
+		Let $v_1,\cdots,v_n$ be a basis for $V$ and $w_1,\cdots,w_n$ a basis for $W$ (i.e. $V,W$ same dimension). Then there exists a unique linear map $T\in\Hom(V,W)$ such that $T(v_i)=w_i$ for all $i$. The map is given by $T(a_1 v_1+\cdots+a_n v_n)=a_1w_1+\cdots+a_nw_n$.
+	\end{lemma}
+	\begin{proposition}
+		The set $\Hom(V,W)$ is a vector space over $\fff$, with addition and scalar multiplication given as follows.
+		\[(\varphi+\psi)(v):=\varphi(v)+\psi(v)\]
+		\[(\lambda \varphi)(v):=\lambda \varphi(v)\]
+	\end{proposition}
+%	\begin{proposition}
+%		Compositions of linear maps have the following properties. 
+%		\[(T_1T_2)T_3 = T_1(T_2T_3)\]
+%		\[(T_1+T_2)T_3=T_1T_3+T_1T_2\]
+%	\end{proposition}
+	\begin{lemma}
+		Let $T\in\Hom(V,W)$, then $T(0_V)=0_W$.
+	\end{lemma}
+	%\subsection{Fundamental Subspaces}
+	Let $T\in\Hom(V,W)$.
+	
+	\begin{definition}
+		The \emph{kernal} (or null space) of $T$ is $\ker(T)=\{v\in V:Tv=0\}$
+	\end{definition}
+	\begin{proposition}
+		$\ker(T)$ is a subspace of $V$.
+	\end{proposition}
+	\begin{proposition}
+		$\ker(T)=\{0\}$ if and only if $T$ is injective. 
+	\end{proposition}
+	\begin{definition}
+		The \emph{image} (or range) of $T$ is $\img(T)=\{Tv|v\in V\}$
+	\end{definition}
+	\begin{proposition}
+		$\img(T)$ is a subspace of $W$.
+	\end{proposition}
+	\begin{proposition}
+		$T$ is surjective iff $\img(T)=W$.
+	\end{proposition}
+	\begin{theorem}
+		$\dim(V)=\dim(\ker(T))+\dim(\img(T))$.
+	\end{theorem}
+	\begin{proposition}
+		\begin{enumerate}
+			\item if $\dim(V)>\dim(W)$, then any $T\in\Hom(V,W)$ is not injective.
+			\item if $\dim(V)<\dim(W)$, then any $T\in \Hom(V,W)$ is not surjective.
+			\item if there exists a bijective $T\in\Hom (V,W)$, then $\dim(V)=\dim(W)$.
+		\end{enumerate}
+	\end{proposition}
+	\subsection{Matrices from Linear Maps}Denote the set of all $m\times n$ matrix with entries in $\fff$ by $M_{m\times n}(\fff)$.
+	Let $V,W$ be finite dimensional vector spaces over $\fff$.
+	
+	\begin{definition}
+	Suppose $V$ has basis $v_1,\cdots,v_n$ and $W$ has basis $w_1,\cdots,w_m$.
+		Let $T\in\Hom(V,W)$. Then define $\calM(T)$ to be the matrix $[a_{ij}]$
+		such that $$T(v_k)=a_{1k}w_1+a_{2k}w_2+\cdots+a_{m,k}w_m$$.
+	\end{definition}
+	\begin{proposition}
+		Let $S,T\in\Hom(V,W)$, 
+		\(\calM(S)+\calM(T)=\calM(S+T)\)
+		
+		Let $S\in\Hom(U,W)$ and $T\in\Hom(V,U)$, then $\calM(S)\calM(T)=\calM(ST)$.
+	\end{proposition}
+
+	\begin{definition}
+	\end{definition}
+	\end{document}
