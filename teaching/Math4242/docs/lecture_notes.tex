@@ -594,7 +594,73 @@ Let $V,W$ be vector spaces over $\fff$.
 	\begin{theorem}
 		Let $T\in \Hom(V,W)$, and $T^*\in\Hom(W^*,V^*)$. Then $\calM(T)^t=\calM(T^*)$.
 	\end{theorem}
-	\section{Inner Product Spaces}
+	\section{Inner Product Spaces}Throughout this section, let $\fff=\rr$ or $\cc$.
+	\subsection{Real Vector Spaces}
+	\begin{definition}
+		The dot product of two vectors in $\rr^n$ is a map from $\rr^n\times \rr^n\to \fff$, defined by
+		\[(x_1,\cdots,x_n)\cdot (y_1,\cdots,y_n)=x_1y_1+\cdots+x_ny_n\]
+	\end{definition}
+	
+%	\begin{definition}
+%		A
+%	\end{definition}
+	
+	
+	\begin{definition}
+		The dot product of two vectors in $\cc^n$ is a map from $\cc^n\times \cc^n\to \fff$, defined by
+		\[(x_1,\cdots,x_n)\cdot (y_1,\cdots,y_n)=x_1\overline y_1+\cdots+x_n\overline y_n\]
+		where $\overline{a+bi}=a-bi$ is the complex conjugate.
+	\end{definition}
+	\begin{definition}\label{def:inner_product}Let $V$ be vector space over $\fff$ ($\cc$ or $\rr$).
+		A inner product on $V$ is a map $V\times V\to \fff$ which sends $(v,u)$ to $\langle v,u\rangle$ such that
+		\begin{enumerate}
+			\item $\langle v,v\rangle\geq 0$.
+			\item $\langle v,v\rangle=0\iff v=0$.
+			\item $\langle u+v,w\rangle=\langle u,w\rangle+\langle v,w\rangle$
+			\item $\langle \lambda u,v\rangle=\lambda \langle u,v\rangle$.
+			\item $\langle u,v\rangle=\overline{\langle v,u\rangle }$\footnote{When $\fff=\rr$, the `complex' conjugate of a real number is just itself.}
+		\end{enumerate}
+	\end{definition}
+	\begin{proposition}[Bilinearity]\label{prop:bilinear} A inner product $\langle\ ,\ \rangle$ satisfy $\langle u,v+w\rangle = \langle u,v\rangle + \langle u,w\rangle$ and $\langle u,\lambda v\rangle =\overline{\lambda}\langle u,v\rangle$.
+	\end{proposition}
+	\begin{remark}
+		A pairing satisfying (4) and (6) of \Cref{def:inner_product} and \Cref{prop:bilinear} together is known as being \emph{bilinear}. Usually a inner product is defined to be bilinear, however, as we see here one-sided linearity is enough to imply bilinearity.
+	\end{remark}
+	\begin{proposition}
+		An inner product $\langle\ , \ \rangle$ on $V$ satisfy
+		\begin{enumerate}
+			\item Fix any $u\in V$, the map $v\mapsto \langle u,v\rangle$ is a linear functional.
+			\item $\langle v,0\rangle =0= \langle 0,v\rangle $ for any $v\in V$.
+		\end{enumerate}
+	\end{proposition}
+	\begin{definition}
+		Given an inner product $\langle \ ,\ \rangle$, define the norm $\Vert\ \Vert$ to be the positive square-root $\Vert v\Vert=\sqrt{\langle v,v\rangle}$.
+	\end{definition}
+	
+	\begin{proposition}
+		Let $I=[a,b]\subset \rr$ be an closed interval on $\rr$. Let $V=C^0(I)$ denote all continuous $\rr$-valued functions defined on $I$ (domain is $I$). Then
+		\[\langle f,g\rangle =\int_a^bf(x)g(x)\ dx\]
+		defines an inner product on $V$. The norm $\Vert f\Vert=\sqrt{\langle f,g\rangle}$ is called the $L_2$ norm on $C^0(I)$.
+	\end{proposition}
+	
+	\begin{theorem}[Cauchy-Schwartz inequality]
+		Let $V$ be an inner product space with inner product $\langle\ ,\ \rangle$ and norm $\Vert\ \Vert$. Then for any $u,v\in V$, we have
+		\[|\langle u,v\rangle| \leq  \Vert u\Vert \Vert v\Vert\]
+		Moreover, the equality occurs only when $u,v$ are linearly independent.
+	\end{theorem}
+	\begin{remark}
+		The Cauchy-Schwartz inequality tells us that the ratio $|\langle u,v\rangle |\over \Vert u\Vert \Vert v\Vert$ is in between $-1$ and $1$. Therefore we can define the `abstract' angle between two vectors $v,u$ to be
+		\[\theta_{u,v}=\arccos {|\langle u,v\rangle |\over \Vert u\Vert \Vert v\Vert}\]
+	\end{remark}
+	\begin{definition}\label{def:ortho}
+		We say two vectors $u,v$ are orthogonal if $\langle u,v\rangle = 0$.
+	\end{definition}
+	\begin{remark}
+		\Cref{def:ortho} generalizes the usual notion of orthogonality in $\rr^2$ in a sense that when two vectors are orthogonal, then the angle between then is $\theta_{u,v}=\pi/2$.
+	\end{remark}
+	\begin{theorem}Let $V$ be an inner product space, and $u,v\in V$. Then
+		$\Vert u+v\Vert\leq \Vert u\Vert +\Vert v\Vert$.
+	\end{theorem}
 	
 	
 	\end{document}
