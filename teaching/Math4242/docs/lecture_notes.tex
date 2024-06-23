@@ -258,8 +258,19 @@ Matrices considered in this sections are all $n\times n$.
 \end{proposition}
 
 \begin{proposition}
-	A matrix $A$ is regular if it admits an LDV factorization, $A=LDU$ where $L$ is lower-unitriangular matrix, $D$ is a diagonal matrix, and $U$ is a uni-upper triangular matrix.
+	A matrix $A$ is regular iff it admits an LDV factorization, $A=LDU$ where $L$ is lower-unitriangular matrix, $D$ is a diagonal matrix, and $U$ is a uni-upper triangular matrix.
 \end{proposition}
+\begin{definition}
+	Let $A$ be an $n\times n$ matrix. Suppose $X$ is a matrix such that $XA=AX=I$ where $I$ is the identity matrix. Then $X$ is called the inverse of $A$ and denoted by $A^{-1}$. A matrix is called \emph{invertible} if $A^{-1}$ exists.
+\end{definition}
+\begin{proposition}
+	A matrix is invertible if and only if it is non-singular.
+\end{proposition}
+\begin{remark}
+	Inverse of a matrix can be found using Gauss–-Jordan Elimination --- see chapter 1 of Olver-Shakiban.
+\end{remark}
+	
+
 \subsection{Systems of $m\times n$ Equations.}
 \begin{definition}
 A matrix is in row echelon form if it looks like,
@@ -475,7 +486,7 @@ Let $V,W$ be vector spaces over $\fff$.
 	\begin{definition}
 	Suppose $V$ has basis $v_1,\cdots,v_n$ and $W$ has basis $w_1,\cdots,w_m$.
 		Let $T\in\Hom(V,W)$. Then define $\calM(T)$ to be the matrix $[a_{ij}]$
-		such that $$T(v_k)=a_{1k}w_1+a_{2k}w_2+\cdots+a_{m,k}w_m$$.%
+		such that $$T(v_k)=a_{1k}w_1+a_{2k}w_2+\cdots+a_{m,k}w_m.$$%
 	\end{definition}
 	\begin{remark}
 		Note that the usage of $\calM$ requires a choice of basis for $V$ and $W$. In general we shall denote $\calM_{B_1,B_2}(T)$ where $B_1$ is the basis for $V$ and $B_2$ the basis for $W$. However in most case we will omit the subscript when the context is clear.
@@ -486,10 +497,17 @@ Let $V,W$ be vector spaces over $\fff$.
 		
 		Let $S\in\Hom(U,W)$ and $T\in\Hom(V,U)$, then $\calM(S)\calM(T)=\calM(ST)$.
 	\end{proposition}
+	\begin{definition}
+		For any $A\in M_{m\times n}$, Let $A_{\bullet,k}$ denote the $k$-th column vector and $A_{k,\bullet}$ denote the $k$-th row vector.	
+	\end{definition}
+	\begin{proposition}
+		$(AB)_{\bullet,k}=A (B_{\bullet,k})$
+	\end{proposition}
 	\begin{theorem}\label{thm:col-row-dim}
-		For any $A\in M_{m\times n}$, Let $A_{\bullet,k}$ denote the $k$-th column vector and $A_{k,\bullet}$ denote the $k$-th row vector. Then
+		For any $A\in M_{m\times n}$, we have
 		\[\dim(\s(A_{1,\bullet},\cdots,A_{m,\bullet}))=\dim(\s(A_{\bullet,1},\cdots,A_{\bullet,n})) \]
 	\end{theorem}
+
 
 	\begin{proposition}
 		The dimension of column span or row span of a matrix equals to its rank (see \Cref{def:rank}).
@@ -500,9 +518,11 @@ Let $V,W$ be vector spaces over $\fff$.
 	\begin{proposition}
 		If a map $T$ is invertible, then its inverse is unique, denote it by $T^{-1}$.
 	\end{proposition}
-	\begin{remark}
-		A map $T$ is invertible iff $\calM(T)$ is non-singular \Cref{def:non-singular}.
-	\end{remark}
+	\begin{proposition}
+		A map $T$ is invertible iff $\calM(T)$ is non-singular \Cref{def:non-singular}. Furthermore, $\calM(T^{-1})=\calM(T)^{-1}$.
+	\end{proposition}
+		
+	
 	
 	\begin{definition}
 		A linear map is an \emph{isomorphism} if it's invertible. Two vectors spaces are \emph{isomorphic} if there exists an isomorphism between them.
@@ -595,7 +615,7 @@ Let $V,W$ be vector spaces over $\fff$.
 		Let $T\in \Hom(V,W)$, and $T^*\in\Hom(W^*,V^*)$. Then $\calM(T)^t=\calM(T^*)$.
 	\end{theorem}
 	\section{Inner Product Spaces}Throughout this section, let $\fff=\rr$ or $\cc$.
-	\subsection{Real Vector Spaces}
+	\subsection{Inner Products and Norms}
 	\begin{definition}
 		The dot product of two vectors in $\rr^n$ is a map from $\rr^n\times \rr^n\to \fff$, defined by
 		\[(x_1,\cdots,x_n)\cdot (y_1,\cdots,y_n)=x_1y_1+\cdots+x_ny_n\]
@@ -642,6 +662,9 @@ Let $V,W$ be vector spaces over $\fff$.
 		\[\langle f,g\rangle =\int_a^bf(x)g(x)\ dx\]
 		defines an inner product on $V$. The norm $\Vert f\Vert=\sqrt{\langle f,g\rangle}$ is called the $L_2$ norm on $C^0(I)$.
 	\end{proposition}
+	\begin{definition}
+		For $z\in\cc$, define the complex modulus to be $|z|= \sqrt{z\overline{z}}$. Note that when $z$ is real (i.e. no imaginary part), then $|z|$ is the absolute value.
+	\end{definition}
 	
 	\begin{theorem}[Cauchy-Schwartz inequality]
 		Let $V$ be an inner product space with inner product $\langle\ ,\ \rangle$ and norm $\Vert\ \Vert$. Then for any $u,v\in V$, we have
@@ -655,6 +678,9 @@ Let $V,W$ be vector spaces over $\fff$.
 	\begin{definition}\label{def:ortho}
 		We say two vectors $u,v$ are orthogonal if $\langle u,v\rangle = 0$.
 	\end{definition}
+	\begin{proposition}
+		If $v,u$ orthogonal in $V$, then $\Vert v\Vert^2+\Vert u\Vert ^2 = \Vert v+u\Vert^2$.
+	\end{proposition}
 	\begin{remark}
 		\Cref{def:ortho} generalizes the usual notion of orthogonality in $\rr^2$ in a sense that when two vectors are orthogonal, then the angle between then is $\theta_{u,v}=\pi/2$.
 	\end{remark}
@@ -662,5 +688,27 @@ Let $V,W$ be vector spaces over $\fff$.
 		$\Vert u+v\Vert\leq \Vert u\Vert +\Vert v\Vert$.
 	\end{theorem}
 	
+	\begin{definition}
+		We can define norms more generally without requiring an inner product. A norm on $V$ is a map $\Vert\cdot \Vert :V\to \mathbb{R}_{\geq 0}$ such that
+		\begin{itemize}
+			\item $\Vert v\Vert\geq 0$ and $\Vert v\Vert =0$ only when $v=0$.
+			\item $\Vert \lambda v \Vert = \vert\lambda\vert \Vert v\Vert$
+			\item $ \Vert v+u\Vert \leq \Vert v\Vert +\Vert u\Vert$
+		\end{itemize}
+	\end{definition}
+	\begin{theorem}
+		Any norm $\Vert \cdot \Vert $ on $\fff^n$ induces a norm on $\End(V)\cong  M_{n\times n}(\fff)\cong \fff^{m n}$.
+		For $T\in\End(V)$, define 
+		\[\Vert T\Vert = \max\{\Vert Tv\Vert :\Vert v\Vert = 1\}\] 
+		called the natural norm.
+	\end{theorem}	
+	\begin{proposition}
+		For $T,S\in\End(V)$ and $v\in V$, we have $\Vert Tv\Vert \leq \Vert T\Vert \Vert v\Vert $.
 	
+	And $\Vert ST\Vert \leq\Vert S\Vert \Vert T\Vert$.
+	\end{proposition}
+	\subsection{Orthonormal Basis}
+	\begin{definition}Let $V$ be a real or complex inner product space.
+		A basis $v_1,\cdots,v_n$ of $V$ is called \emph{orthonormal} if $\langle v_i,v_j\rangle =\delta_{i,j}$ and $\Vert v_i\Vert = 1$ for all $i$. 
+	\end{definition}
 	\end{document}
