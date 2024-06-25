@@ -1,0 +1,115 @@
+\documentclass[12pt]{amsart}
+\input{command.tex}
+\usepackage[margin = 1in]{geometry}
+\theoremstyle{definition}
+\newtheorem{prob}{Problem}
+\begin{document}
+\leftline{{\bf MATH 4242} \hfill Name: \underline{\quad\quad\quad\quad\quad}}
+
+\leftline{{\bf Summer 2024} \hfill Student ID: \underline{\quad\quad\quad\quad\quad}}
+
+\leftline{{\bf Exam 1}}
+\vspace{3em}
+
+\begin{itemize}
+\item Exam 1 contains 8 problems. Please check to see if any page is missing.\vspace{1em}
+\item Time limit: July 27 10:10 am --- 12:05 pm. (115 min)\vspace{1em}
+\item Work individually without reference to a textbook, notes, the internet, or a calculator.\vspace{1em}
+\item The lecture notes available from the course website is allowed. This is the only resource that is allowed during the exam. You are encouraged to refer to the theorem number in the lecture notes when you use them in your solution.\vspace{1em}
+\item Show your work on each problem. Specifically\vspace{0.5em}
+\begin{itemize}
+\item Organize your work, in a reasonably neat and coherent way, in the space provided. Work scattered all over the page without a clear ordering
+will receive very little credit.\vspace{0.5em}
+\item Unsupported answers will not receive credit. A correct answer, unsupported by calculations, explanation, or algebraic work will receive no credit; an incorrect answer supported by substantially correct calculations and explanations will likely receive partial credit.\vspace{0.5em}
+\item Circle your final answer for problems involving a series of computations.\vspace{0.5em}
+\item Do NOT put answers on the back of the pages.
+\end{itemize}
+\end{itemize}
+
+
+
+\vspace{2em}
+\newpage
+
+\begin{prob}[15 pts]
+	Below are 5 statements about $n\times n$ invertible matrices $A$ and $B$ over $\rr$. Circle $T$ for true and $F$ for false statements. Provide a counter-example for the false statements, and a brief explanation for the correct statements (not necessarily a rigorous proof.) \begin{enumerate}
+	\item[1)  {\bf T\ \  F}]\quad $(AB)^{-1}=B^{-1}A^{-1}$
+	
+	\vspace{3cm}
+	\item[2)  {\bf T\ \  F}]\quad  $(A+B)$ must be non-singular. \vspace{4cm}
+	\item[3)  {\bf T\ \  F}]\quad $\ker(A)=0$. \vspace{4cm}
+	\item[4)  {\bf T\ \  F}]\quad The rows of $A$ are linearly independent. \vspace{4cm}
+	\item[5)  {\bf T\ \  F}]\quad $(\lambda A)^{-1}=\lambda (A^{-1})$.
+\end{enumerate}
+\end{prob}
+\newpage
+\begin{prob}[15 pts]
+	Below are 5 statements about finite dimensional vector spaces and linear maps. Circle $T$ for true and $F$ for false statements. Provide a counter-example or a brief explanation.
+	\begin{enumerate}
+		\item[1)  {\bf T\ \  F}]\quad There exists subspaces $U,V$ of $\rr^4$, such that $\dim(U)=3$ and $\dim V=2$ and $U\cap V=\{0\}$. 
+		\vspace{4cm}
+		\item[2)  {\bf T\ \  F}]\quad  There exist linearly independent vectors $v_1,v_2,v_3,v_4$ in $\rr^3$.
+		\vspace{4cm}
+\item[3)  {\bf T\ \  F}]\quad  Every linear map from $\rr^4$ to $\rr^3$ is injective.\vspace{4cm}
+\item[4)  {\bf T\ \  F}]\quad  For any set of vectors $S=\{v_1,\cdots,v_m\}$ in $\rr^n$ with $m\geq n$, there exist a subset of vectors in $S$ which form a basis of $\rr^n$.\vspace{4cm}
+\item[5)  {\bf T\ \  F}]\quad  Let $V_1,V_2$ be subspaces of a finite dimensional vector space $V$. If $\dim(V_1\cap V_2)=0$ then $V_1\oplus V_2$ is a direct sum.
+	\end{enumerate}
+\end{prob}
+\newpage
+
+\begin{prob}[10pts]Answer the following questions with a short answer and a brief explanation.
+	\begin{enumerate}
+		\item If $A$ and $B$ are matrices such that $AB=0$, then either $A=0$ or $B=0$. True or False? \vspace{5cm}
+		
+		\item Does the zero vector belong to the span of any list of vectors? \vspace{5cm}
+		
+		\item Let $U$ be the set of all (real-valued) polynomials of odd degree. Is it a subspace of the vector space of all polynomials over $\rr$?\vspace{5cm}
+		\item Is the set of solutions to $2x+3y+9=-z$ a subspace of $\rr^3$?	\end{enumerate}
+\end{prob}
+
+\newpage
+
+\begin{prob}[15 pts]
+	Let $v,w\in\rr^n$ be non-zero vectors and $A=vw^{t}$. What's the dimension of $\ker(A)$?
+\end{prob}
+
+\newpage
+
+\begin{prob}[15 pts]
+	Let $T\in\text{Hom}(V,W)$ be a linear map between finite dimensional vector spaces $V$ and $W$. Prove that $V\cong \text{Img}(T)$ if and only if $\ker(T)=\{0\}$.
+\end{prob}
+\newpage
+\begin{prob}[15 pts]
+	Let $A=\left[ \begin{array}{cccc} 2 & 1 & 1  \\ 4 & 5 & 2  \\ 2 & -2  & 0 \end{array} \right] .$
+	
+	(a) Find an LU factorization of $A$. [4pts]\vspace{11cm}
+	
+	(b) Describe $\ker(A)$ and $\text{Img}(A)$. [6pts] \vspace{12cm}
+	
+	(c) Solve the system of equations $Ax=b$ where $b^t=[1,2,1]$. [5pts]
+	
+	
+\end{prob}
+
+\newpage
+
+\begin{prob}[15 pts]
+Let $T$ be a map from $\rr^3$ to $\rr^3$ defined by $T(a,b,c)=(a+b,a-c,b+c)$.
+
+(a) Is $T$ linear? [3pts]\vspace{5cm}
+
+(b) Write down the matrix $\mathcal{M}(T)$ of $T$. [7pts]\vspace{8cm}
+
+(c) Find a basis for $\ker(T)$. [5pts]
+	
+\end{prob}
+\newpage
+
+\begin{prob}
+	Let $V=\rr[x]$ the vector space of all real-valued polynomials (of any degree). Show that $$\langle f,g\rangle =f(0)g(0) +\int_{-1}^{1}f'g'$$ 
+	defines an inner product on $V$.
+\end{prob}
+
+
+
+\end{document}
