@@ -1,23 +1,107 @@
 \documentclass{amsart}
 \usepackage{soul}
+\usepackage[margin=1in]{geometry}
 \input{command.tex}
 \begin{document}
 	\leftline{\bf Math 4242 Homework 3}
 	\begin{enumerate}
-		\item 	Let $V=\rr^3$ and $W = \rr_{\leq 2}[x]$. Let $T(a,b,c)=a+b(x-1)+c(x-1)^2$. Is $T$ linear? If so, identify a basis for $V$ and $W$ and write down the matrix $\mathcal{M}(T)$.
+		\item 	Let $V=\rr^3$ and $W = \rr_{\leq 2}[x]$. Let $T(a,b,c)=a+b(x-1)+c(x-1)^2$. Is $T$ linear? If so, identify a basis for $V$ and $W$ and write down the matrix $\mathcal{M}(T)$.\begin{proof}
+			$T$ is linear because $T((a_1,b_1,c_1)+(a_2,b_2,c_2))=(a_1+a_2)+(b_1+b_2)(x-1)+(c_1+c_2)(x-1)^2=T(a_1,b_1,c_1)+T(a_2,b_2,c_2)$. And $T(ka,kb,kc)=k(a+b(x-1)+c(x-1)^2)=kT(a,b,c)$.
+			
+			Consider $e_1,e_2,e_3$ the standard basis for $V$, and let $w_1=1,w_2=(x-1),w_3=(x-1)^2$, which form a basis for $W$. (Can check that they are linearly independent, and the number of vectors is equal to the dimension of $W$, so they must form a basis).
+			
+			Now we calculate $\mathcal M(T)$.
+			
+			$T(e_1)=1=w_1$, $T(e_2)=(x-1)=w_2$, and $T(e_3)=(x-1)^2=w_3$, thus $\mathcal M(T)=\begin{pmatrix}
+				1&0&0\\0&1&0\\0&0&1
+			\end{pmatrix}$.
+			
+			If we use the usual basis $1,x,x^2$ for $W$, then since
+			$T(e_1)=1$, $T(e_2)=x-1$, and $T(e_3)=x^2-2x+1$, we have that 
+			$\mathcal M(T)=\begin{pmatrix}
+				1&-1&1\\
+				0&1&-2\\
+				0&0&1
+			\end{pmatrix}$
+			
+		\end{proof}
 		\item Consider the linear map $T:M_{2,2}(\mathbb{R})\to \mathbb{R}^2$ given by
 		\[T\left(\begin{bmatrix}
 			a&b\\c&d
 		\end{bmatrix}\right)=(a-b,c+d)\] 
 		Find a basis for $\text{Ker}(T)$ and $\text{Img}(T)$.
+		\begin{proof}
+			The kernal is $\ker(T)=\{\begin{bmatrix}
+			a&a\\c&-c
+		\end{bmatrix}: a,c\in \rr\}$ Note that any matrix in $\ker(T)$ can be written uniquely as 
+		\[\begin{bmatrix}
+			a&a\\c&-c
+		\end{bmatrix}=a\begin{bmatrix}
+			1&1\\0&0
+		\end{bmatrix}+c\begin{bmatrix}
+			0&0\\1&-1
+		\end{bmatrix}.\]
+		Therefore $\begin{bmatrix}
+			1&1\\0&0
+		\end{bmatrix}$ and $\begin{bmatrix}
+			0&0\\1&-1
+		\end{bmatrix}$ for a basis for $\ker(T)$.
+		
+		We know that $dim(\text{Img}(T))=\dim(M_{2,2})-\dim(\ker(T))=4-2=2$. Note that this is the same dimension as $\rr^2$, but $\text{img}(T)\subseteq \rr^2$, we must have that $\text{Img}(T)=\rr^2$. Thus a basis is $(1,0),(0,1)$.
+		\end{proof}
 		\item Suppose $T\in \text{End}(V)$ is an invertible map. Prove that if $v_1,\cdots,v_n$ is a basis, then $Tv_1,\cdots,Tv_n$ is also a basis.
-		%\item Suppose $V,W$ are finite dimensional vector spaces. Show that $T=0\iff T^*=0$.
+		
+	\begin{proof}
+		Know that $\dim(V)=n$. It suffices to show that $Tv_1,\cdots,Tv_n$ is linearly independent.
+		
+		Suppose $0=a_1Tv_1+\cdots+a_nTv_n$, we need to show that the only possibility is that $a_1=\cdots=a_n=0$. Left multiply both sides by $T^{-1}$ (since $T$ is invertible), we have
+		\[T^{-1}0=T^{-1}(a_1Tv_1+\cdots+a_nTv_n)\]
+		This is equivalent to
+		\[0=a_1v_1+\cdots+a_n v_n\]
+		Using the fact that $v_1,\cdots,v_n$ are linearly independent, we conclude that the choice of $a_1,\cdots,a_n$ is unique. This completes the proof.
+		
+	\end{proof}
 		\item Prove that (a) $(U+W)^0=U^0\cap W^0 $ (b) $(U\cap W)^0=U^0+W^0$.
+		\begin{proof}
+			(a) A linear function annihilates $U+W$
+ if and only if it annihilates both $U$
+ and $W$.
+ 
+ (b) We first show that $(U\cap W)^0\subset U^0+W^0$. Take any $f\in (U\cap W)^0$, i.e. $f$ satisfy the property $f(v)=0$ for all $v\in U\cap W$. We want to write $f=g+h$ where $g\in U^0$ and $h\in W^0$. We can simply define $g(v)=f(v)$ for all $v\in U$ and $g(v)=0$ otherwise, and $h(v)=f(v)$ for all $v\in W$ and $h(v)=0$ otherwise. It can be easily checked that $f=g+h$ and $g\in U^0,h\in W^0$. Thus $(U\cap W)^0\subset U^0+W^0$.
+ 
+ We next prove the other direction. Suppose $f=g+h$ with $g\in U^0$ and $h\in W^0$, we need to show that $f\in (U\cup W)^0$. It suffices to show that $f(v)=0$ if $v\in U\cup W$. Suppose $v\in U\cup W$, then $f(v)=g(v)+h(v)=0
+ +0=0$, meaning that $f\in (U\cup W)^0$. we are done.
+  \end{proof}
 		\item Let $T:\mathbb{R}^3\to \mathbb{R}^2$ defined by
-$T(x,y,z) = (2x+3y+4x,3x+4y+5z)$. Let $e_1,e_2,e_3$ denote the standard basis of $\mathbb{R}^3$ and $f_1,f_2$ denote the standard basis of $\mathbb{R}^2$.
+$T(x,y,z) = (2x+3y+4z,3x+4y+5z)$. Let $e_1,e_2,e_3$ denote the standard basis of $\mathbb{R}^3$ and $f_1,f_2$ denote the standard basis of $\mathbb{R}^2$.
 (a) Describe the linear functionals $T^*(f_1^*)$ and $T^*(f_2^*)$.
 (b) Write $T^*(f_1^*)$ and $T^*(f_2^*)$ as linear combinations of $e_1^*,e_2^*,e_3^*$.
-\item Suppose $U$ is a subspace of $V$, and $\pi:V\to V/U$ the quotient map. Consider the dual of the quotient map $\pi^*\in \text{Hom}((V/U)^*,V^*)$. Show that $\text{Img}(\pi^*)=U^0$ and $\pi^*$ is an isomorphism $(U/V)^*\cong U^0$.
+
+(Note: There was a typo in the original problem, doing this problem in either way is fine.)
+
+\begin{proof}
+	(a) $T^*(f_1^*)(x,y,z)=f_1^*T(x,y,z)=f_1*(2x+3y+4z,3x+4y+5z)=2x+3y+4z$.
+	
+	$T^*(f_2^*)(x,y,z)=f_2^*T(x,y,z)=f_2*(2x+3y+4z,3x+4y+5z)=3x+4y+5z$.
+	
+	(b) $T^*(f_1^*)(x,y,z)=2x+3y+4z=2e_1^*+3e_2^*+4e_3^*$
+	
+	$T^*(f_2^*)(x,y,z)=3x+4y+5z=3e_1^*+4e_2^*+5e_3^*$
+
+	
+\end{proof}
+\item Suppose $U$ is a subspace of $V$, and $\pi:V\to V/U$ the quotient map. Consider the dual of the quotient map $\pi^*\in \text{Hom}((V/U)^*,V^*)$. Show that $\text{Img}(\pi^*)=U^0$ and $\pi^*$ is an isomorphism $(V/U)^*\cong U^0$.
+
+\begin{proof}
+	Recall that the map $\pi$ is defined as $\pi(v)=v+U$, and $\pi^*(f)=f\circ \pi$ for $f: V/U\to \ff$. Moreover $\pi^*(f)(v)=f\circ \pi(v)=f(v+U)$ which equals to $0$ when $v+U=U$ i.e. $v\in U$. Thus $\text{img}(\pi^*)=U^0$. Therefore $\pi^*$ is surjective map from $(V/U)^*$ to $U^0$.
+	
+	To prove it's an isomorphism, we only need that it's injective, i.e. $\ker(\pi^*)=0$.
+	
+	Let $f$ be a linear functional on $V/U$. Suppose $\pi^*(f)=0$, then $f(v+U)=0$ for all $v$, which means that $f={\bf 0}$ (the zero vector in $(V/U)^*$), therefore $\ker(\pi^*)=\{0\}$, hence $\pi^*$ is injective.
+	
+	Therefore $\pi*$ is a bijective linear map from $(V/U)^*$ and $U^0$, thus an isomorphism.
+	
+\end{proof}
 \item {OS 3.1.9}
 		\item {OS 3.1.17} 
 	 	\end{enumerate}

@@ -709,8 +709,8 @@ Let $V,W$ be vector spaces over $\fff$.
 %	And $\Vert ST\Vert \leq\Vert S\Vert \Vert T\Vert$.
 %	\end{proposition}
 \begin{proposition}
-	Let $K=(k_{ij})$ be the matrix whose entries are the inner product of the basis vectors, i.e. $k_{ij}=\langle e_i,e_j\rangle$. Then for $x=(x_1,\cdots,x_n)$ and $y=(y_1,\cdots,y_n)$ we have
-	\[\langle x,y\rangle=\langle \sum x_ie_i,\sum y_ie_i\rangle = \sum_{i,j} x_iy_j \langle e_i,e_j\rangle=x^tKy\]
+	Let $K=(k_{ij})$ be the matrix whose entries are the inner product of the basis vectors, i.e. $k_{ij}=\left \langle e_i,e_j\right \rangle$. Then for $x=(x_1,\cdots,x_n)$ and $y=(y_1,\cdots,y_n)$ we have
+	\[\langle x,y\rangle=\left \langle \sum_i x_ie_i,\sum_j y_je_j\right \rangle = \sum_{i,j} x_iy_j \langle e_i,e_j\rangle=x^tKy\]
 \end{proposition}
 \begin{definition}
 	A $n\times n$ matrix is positive-definite if $K^t=K$ and satisfy
@@ -731,7 +731,7 @@ Every inner product is given by $\langle x,y\rangle =x^t Ky$ where $K$ is a posi
 	\begin{proposition}
 		Let $A$ be an $m\times n$ matrix ($m\geq n$), then TFAE:
 	\begin{itemize}
-		\item $K=A^TA$ is positive-definite;
+		\item $K=A^tA$ is positive-definite;
 		\item $\Ker(A)=0$;
 		\item $A$ has linearly independent columns;
 		\item $\rank(A)=n$.
@@ -755,13 +755,14 @@ Every inner product is given by $\langle x,y\rangle =x^t Ky$ where $K$ is a posi
 		Let $v_1,\cdots,v_n\in V$ be pair-wise orthogonal, then they form a basis for $\s(v_1,\cdots,v_n)$.
 	\end{corollary}
 	\begin{theorem}
-		Given any basis $w_1,\cdots,w_n$ of $V$, one can construct an orthogonal basis $v_1,\cdots,v_n$ using the Gram-Schmit process:
+		Given any basis $w_1,\cdots,w_n$ of $V$, one can construct an orthogonal basis $v_1,\cdots,v_n$ using the Gram-Schmidt process:
 		\begin{itemize}
 			\item $v_1=w_1$.
 			\item $\displaystyle v_2=w_2-{\langle w_2,v_1\rangle \over \Vert v_1\Vert ^2}v_1$
 			\item $\displaystyle v_3=w_3-{\langle w_3,v_1\rangle \over \Vert v_1\Vert ^2}v_1-{\langle w_3,v_2\rangle \over \Vert v_2\Vert ^2}v_2$
 			\item $\cdots$
 			\item $\displaystyle v_k=w_k-\sum_{i=1}^{k-1}{\langle w_k,v_i\rangle \over \Vert v_i\Vert ^2}v_i$
+			\item $\cdots$.
 		\end{itemize}
 	\end{theorem}
 	\begin{corollary}
