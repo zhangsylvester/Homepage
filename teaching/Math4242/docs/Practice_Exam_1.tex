@@ -21,10 +21,12 @@
 
 (b) Let $W=\{f\in V| \text{deg}(f)\text{ is even}\}$. If $W$ a subspace of $V$?
 \begin{proof}\color{blue}
-	(a) If $f,g\in U$, then $(f+g)(1)=f(1)+g(1)=0+0=0$ and $(kf)(1)=kf(1)=k\cdot 0 =0$, thus $U$ is closed under addition and scalar multiplication. So $U$ is a subspace
+	(a) If $f,g\in U$, then $(f+g)(1)=f(1)+g(1)=0+0=0$ and $(kf)(1)=kf(1)=k\cdot 0 =0$, thus $U$ is closed under addition and scalar multiplication. Furthermore, the $0$ polynomial satisfy the property by default. So $U$ has a zero vector, thus is a subspace.
 	
-	(b) Sums of even degree polynomials are still even degree, and scalar multiplication doesn't change the degree of a polynomial, so $W$ is also a subspace.
-\end{proof}
+	(b) $\deg(f)$ means the highest degree of monomials in a polynomial $f$. Let $f=x^2+x+1$ and $g=-x^2$. We have $\deg(g)=\deg(f)=2$. But $f+g=x+1$ and $\deg(f+g)=1$ is not even. So $W$ is not a subspace.
+	
+	Note that if we consider even degree polynomials, which are polynomials which only contain even degree terms, then they do form a subspace.
+	\end{proof}
 \item Let $V=M_{n\times n}(\rr)$ the vector space of all $n\times n$ matrices. Let $B$ be the set of all upper triangular matrices. Is $B$ a subspace of $V$?
 \begin{proof}
 	\color{blue} Yes.
@@ -102,8 +104,11 @@
 \end{pmatrix}\]
 Does $\langle x,y\rangle =x^TAy$ define an inner product on $\rr^3$?
 \item Find the value for $a,b$ such that the matrix $A$ is orthogonal.
-\[A={1\over 3}\begin{pmatrix}2&-2&b\\1&2&2\\a&1&2
+\[A={1\over 3}\begin{pmatrix}2&-2&b\\1&2&2\\a&1&-2
 \end{pmatrix}\]
+\begin{proof}
+	\color{blue} $a=2,b=3$.
+\end{proof}
 \end{enumerate}
 
 %\noindent Part a (4 pts)
