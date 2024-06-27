@@ -103,7 +103,23 @@ $T(x,y,z) = (2x+3y+4z,3x+4y+5z)$. Let $e_1,e_2,e_3$ denote the standard basis of
 	
 \end{proof}
 \item {OS 3.1.9}
+\begin{proof}
+Done in lecture.
+\end{proof}
 		\item {OS 3.1.17} 
+		\begin{proof}
+	
+			
+			\[\langle A,A\rangle=\text{tr}(A^TA)=\sum_{i=1}^n(A^TA)_{ii}=\sum_{i=1}^n\sum_{j=1}^mA^T_{ij}A_{ji}=\sum_{i=1}^m\sum_{j=1}^nA_{ij}^2 \ge 0\]
+			and
+			\[\langle A,A\rangle=\sum_{i=1}^m\sum_{j=1}^nA_{ij}^2 = 0\iff (A_{ij}=0 \quad \forall i,j) \iff A=0\]
+			Since $\text{tr}(X^T)=\text{tr}(X), \quad \text{tr}(X+Y)=\text{tr}(X)+\text{tr}(Y), \quad \text{tr}(\lambda X)=\lambda\text{tr}(X)$ for every matrix $X,Y$, we have
+			\begin{eqnarray*}
+\langle A,B\rangle&=&\text{tr}(B^TA)=\text{tr}((B^TA)^T)=\text{tr}(A^TB)=\langle B,A\rangle,\\
+\langle \lambda A+B,C\rangle&=&\text{tr}(C^T(\lambda A+B))=\text{tr}(\lambda C^TA+C^TB)=\lambda\text{tr}(C^TA)+\text{tr}(C^TB)\\
+&=&\lambda\langle A,C\rangle+\langle B,C\rangle.
+\end{eqnarray*}
+		\end{proof}
 	 	\end{enumerate}
 	 	
 	
