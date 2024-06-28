@@ -54,98 +54,57 @@ will receive very little credit.\vspace{0.5em}
 		\item[1)  {\bf F}]\quad There exists subspaces $U,V$ of $\rr^4$, such that $\dim(U)=3$ and $\dim V=2$ and $U\cap V=\{0\}$. 
 		
 		\blu{If $U\cap V=\{0\}$, then $\dim(U+V)=\dim(U)+\dim(V)=5$ which is larger than the dimension of $\rr^4$. But no subspace can have larger dimension.}
-\item[2)  {\bf  F}]\quad  Every linear map from $\rr^4$ to $\rr^3$ is injective.
+\item[2)  {\bf T\ \  F}]\quad  Every linear map from $\rr^4$ to $\rr^3$ is injective.
 
-\blu{ Every linear map from $\rr^4$ to $\rr^3$ is non-injective.
-
-For any linear map from $\rr^4\to\rr^3$, $\dim(\ker(T))=\dim(\rr^4)-\dim(\text{Img}(T))=4-\dim(\text{Img}(V))$. Since $\dim(\text{Img}(T))\leq \dim(\rr^3)=3$. We have that $\dim(\ker(T))\geq 4-3=1$. So the kernel will never be $\{0\}$, which means the map $T$ will never be injective.}
-\item[3)  {\bf   F}]\quad  For any set of vectors $S=\{v_1,\cdots,v_m\}$ in $\rr^n$ with $m\geq n$, there exist a subset of vectors in $S$ which form a basis of $\rr^n$.
-
-\blu{This is true only when $\s\{v_1,\cdots,v_m\}=\rr^n$. For a counter example, you can take $v_1=v_2=\cdots=v_m$.}
-\item[4)  {\bf T}]\quad  Let $V_1,V_2$ be subspaces of a finite dimensional vector space $V$. If $\dim(V_1\cap V_2)=0$ then $V_1\oplus V_2$ is a direct sum.
+\blu{ }
+\item[3)  {\bf T\ \  F}]\quad  For any set of vectors $S=\{v_1,\cdots,v_m\}$ in $\rr^n$ with $m\geq n$, there exist a subset of vectors in $S$ which form a basis of $\rr^n$.\vspace{5cm}
+\item[4)  {\bf T\ \  F}]\quad  Let $V_1,V_2$ be subspaces of a finite dimensional vector space $V$. If $\dim(V_1\cap V_2)=0$ then $V_1\oplus V_2$ is a direct sum.
 	\end{enumerate}
 \end{prob}
-
+\newpage
 
 \begin{prob}[$3\times 4 = 12$pts]Answer the following questions with a short answer and a brief explanation.
 	\begin{enumerate}
-		\item If $A$ and $B$ are matrices such that $AB=0$, then either $A=0$ or $B=0$. True or False?
+		\item If $A$ and $B$ are matrices such that $AB=0$, then either $A=0$ or $B=0$. True or False? \vspace{5cm}
 		
-		\blu{False. $ A=[1,0]$ and $B=[0,1]^T$. Then $AB$ is the zero matrix but none of them is zero.}
+		\item Does the zero vector belong to the span of any list of vectors? \vspace{5cm}
 		
-		\item Does the zero vector belong to the span of any list of vectors? 
-		
-		\blu{Yes. For any list of vectors $v_1,\cdots,v_n$, $0=0v_1+\cdots+0v_n $.}
-		
-		\item Let $U$ be the set of all (real-valued) polynomials of odd degree. Is it a subspace of the vector space of all polynomials over $\rr$?
-		
-		\blu{No. A subspace must contain the zero vector. For the polynomial vector space, the zero vector is $0$. But $0$ as a polynomial has degree $0$ (which is even). So odd degree polynomials doesn't include zero, so they can't form a vector space.}
-		\item Is the set of solutions to $2x+3y+9=-z$ a subspace of $\rr^3$?	
-		
-		\blu{No. $(0,0,9)$ is a solution, $(0,-3,0)$ is a solution. But $(0,-3,9)$ is not a solution.}
-		
-		\end{enumerate}
+		\item Let $U$ be the set of all (real-valued) polynomials of odd degree. Is it a subspace of the vector space of all polynomials over $\rr$?\vspace{5cm}
+		\item Is the set of solutions to $2x+3y+9=-z$ a subspace of $\rr^3$?	\end{enumerate}
 \end{prob}
 
-
+\newpage
 
 \begin{prob}[15 pts]
 	Let $v=(a,b,c),w=(d,e,f)\in\rr^3$ be non-zero vectors and $A=vw^{t}$. What's the dimension of $\ker(A)$?
 \end{prob}
-\blu{
-\begin{align*}
-	A=vw^t=\begin{pmatrix}
-		ad&ae&af\\bd&be&bf\\cd&ce&cf
-	\end{pmatrix}
-\end{align*}
 
-So the columns of $A$ are $aw,bw,cw$. Therefore by row operations we can turn $A$ in to row echelon form
-\[\text{row echelon form of } A=\begin{pmatrix}
-		ad&ae&af\\0&0&0\\0&0&0	\end{pmatrix}\]
-Thus $A$ has one pivots, so $rank(A)=1$, Thus $\dim(\ker(A))=\dim(\rr^3)-rank(A)=3-1=2$
-}
+\newpage
 
 \begin{prob}[15 pts]
 	Let $A=\left[ \begin{array}{cccc} 2 & 1 & 1  \\ 4 & 5 & 2  \\ 2 & -2  & 0 \end{array} \right] .$
 	
+	(a) Find an LU factorization of $A$. \vspace{10cm}
 	
-	
-	(a) Find an LU factorization of $A$. 	
 		
 	(b) Solve the system of equations $Ax=b$ where $b^t=[1,2,1]$. 
 	
 	
 \end{prob}
 
-
+\newpage
 
 \begin{prob}[19 pts]
 Let $T$ be a map from $\rr^3$ to $\rr^3$ defined by $T(a,b,c)=(a+b,a-c,b+c)$.
 
-(a) Is $T$ linear? [3 pts]
+(a) Is $T$ linear? [3 pts]\vspace{5cm}
 
-\blu{Yeah}
-
-(b) Write down the matrix $\mathcal{M}(T)$ of $T$. [8 pts]
-
-\blu{$T(e_1)=T(1,0,0)=(1,1,0)=e_1+e_2$
-
-$T(e_2)=T(0,1,0)=(1,0,1)=e_1+e_3$
-
-$T(e_3)=T(0,-1,1)=-e_2+e_3$
-
-So $\mathcal{M}(T)=\begin{pmatrix}
-	1&1&0\\1&0&-1\\0&1&1
-\end{pmatrix}$
-}
+(b) Write down the matrix $\mathcal{M}(T)$ of $T$. [8 pts]\vspace{8cm}
 
 (c) Find a basis for $\ker(T)$. [8 pts]
-
-\blu{
-$\ker(T)=\{(a,b,c)|a+b=a-c=b+c=0\}=\{(a,-a,a)|a\in \rr\}$. So $\ker(T)$ has dimension $1$, with basis $(1,-1,1)$.
-}
+	
 \end{prob}
-
+\newpage
 
 \begin{prob}[15 pts]
 	Let $V=\rr[x]$ the vector space of all real-valued polynomials (of any degree). Show that $$\langle f,g\rangle =f(0)g(0) +\int_{-1}^{1}f'g'$$ 

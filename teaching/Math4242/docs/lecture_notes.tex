@@ -37,7 +37,8 @@
 \newcommand{\miduparrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
 \newcommand{\midrevarrow}{\tikz \draw[-triangle 90] (0,0) -- +(-.1,0);}
 \newcommand{\shiftright}[2]{\makebox[#1][r]{\makebox[0pt][l]{#2}}}
-
+\DeclareMathOperator{\coker}{coKer}
+\DeclareMathOperator{\coimg}{coImg}
 \newcommand{\lhdot}[0]{\adjustbox{lap={\width}{0.6em}}{$\cdot$}\lhd}
 %\renewcommand{\ker}[0]{\textup{Ker}}
 
@@ -93,6 +94,7 @@
 \DeclareMathOperator{\pd}{\textup{\textbf{PD}}}
 \DeclareMathOperator{\rpd}{\textup{\textbf{RPD}}}
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\proj}{Proj}
 
 
 \newcommand{\syl}[1]{{\color{orange}[Sylvester: #1]}}
@@ -328,10 +330,11 @@ For most part of this class, we will take $\fff=\rr $  or $\fff=\cc=\{a+bi|a,b\i
 Let $\fff$ be a field.
 \begin{definition}\label{def:vs}
 	A set $V$ is called a vector space over $\fff$ if there exists an addition map
-	\[add:V\times V\to V\]
+	\[add:V\times V\to V,\]
 	%\[(v_1,v_2)\mapsto v_1+v_2\]
-	and a scalar multiplication map
-	\[mult:\fff\times V\to V\]
+	a scalar multiplication map
+	\[mult:\fff\times V\to V,\]
+	and a zero vector $0$ such that $v+0=v$ for all $v\in V$ and $\lambda 0=0$ for all $\lambda\in\fff$.
 	%\[(a,v)\mapsto av\]
 	(Here $\times$ denote the Cartesian product of sets\footnote{For sets $A$ and $B$, defined $A\times B=\{(a,b)|a\in A,b\in B\}$}.) We will abbreviate them by $a(v_1,v_2)=v_1+v_2$ and $mult(a,v)=av$.
 	
@@ -341,7 +344,7 @@ Let $\fff$ be a field.
 \end{definition}
 
 \begin{definition}\label{def:subspace}
-	Let $V$ be a vector space over $\fff$. A subset $U$ of $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication. (In other words, a subspace is a subset that is a vector space itself.)
+	Let $V$ be a vector space over $\fff$. A subset $U$ of $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication, and contains the zero vector. (In other words, a subspace is a subset that is a vector space itself.)
 \end{definition}
 \begin{definition}\label{def:sum}
 	Let $U_1,\cdots,U_m$ be subspaces of $V$. Then define their sum to be
@@ -610,6 +613,9 @@ Let $V,W$ be vector spaces over $\fff$.
 		\textup{(a)} $(\img T)^0=\ker T^*$ \textup{(b)} $(\ker T)^0=\img T^*$
 	\end{theorem}
 	\begin{corollary}
+		$\ker T^*\cong (V/\img T)^*$ and $\img T^* \cong (V/\ker T)^*$.
+	\end{corollary}
+	\begin{corollary}
 		$T$ is injective iff $T^*$ is surjective. $T$ is surjective iff $T^*$ is injective.
 	\end{corollary}
 	\begin{theorem}
@@ -758,7 +764,7 @@ Every inner product is given by $\langle x,y\rangle =x^t Ky$ where $K$ is a posi
 		If $e_1,\cdots,e_n$ is an orthonormal basis, then for any $v\in V$, we have that
 		\begin{itemize}
 			\item $v=\langle v,e_1\rangle e_1+\cdots+\langle v,e_n\rangle e_n$
-			\item $\Vert v\Vert^2=$
+			\item $\Vert v\Vert^2= |\langle v,e_1\rangle|^2+\cdots+|\langle v,e_n\rangle |^2$
 		\end{itemize}
 	\end{proposition}
 	
@@ -780,6 +786,11 @@ Every inner product is given by $\langle x,y\rangle =x^t Ky$ where $K$ is a posi
 	\begin{corollary}
 		Every finite dimensional inner-product space has an orthonormal basis.
 	\end{corollary}
+	
+	\begin{theorem}
+		Suppose $V$ is finite-dimensional and $T$ is a linear functional on $V$. Then there
+is a unique vector $v\in V$ such that $T(u)=\langle u,v\rangle $for every $u\in V$.
+	\end{theorem}
 	\begin{definition}
 		A matrix $A$ is orthogonal if $A^tA=I=AA^t$, or equivalently $A^t=A^{-1}$.
 	\end{definition}
@@ -787,5 +798,58 @@ Every inner product is given by $\langle x,y\rangle =x^t Ky$ where $K$ is a posi
 		A matrix is orthogonal if and only if its column vectors form an orthonormal basis of $\fff^n$ w.r.t the dot product.
 	\end{proposition}
 	
+	\begin{definition}
+		Let $W\subset V$ be a subspace. A vector $v\in V$ is said to be orthogonal to $W$ is $\langle v,w\rangle =0$ for all $w\in W$. 	\end{definition}
+		
+	
+	\begin{definition}
+		Two subspaces $W,U\subset V$ are said to be orthogonal if $\langle w,u\rangle =0$ for all $w\in W,u\in U$.	\end{definition}
+	
+	\begin{definition}
+		The orthogonal complement of a subset $W\subset V$, denoted $W^\perp$, is the set of all vectors in $V$ that are orthogonal to $W$.
+		\[W^{\perp}=\{v\in V |\langle v,w\rangle =0 \text{ for all }w\in W\}\]
+	\end{definition}
+	
+	\begin{proposition}Let $U^\perp$ be the orthogonal complement of $U\subset V$.
+	\begin{enumerate}
+		\item $U^\perp$ is always a subspace of $V$\footnote{Even if $U$ is not a subspace.}.
+		\item $\{0\}^\perp=V$.
+		\item $V^\perp=\{0\}$
+		\item $U^\perp\cap U\subseteq \{0\}$.
+		\item If $W\subset U\subset V$, then $U^\perp\subset W^\perp$.
+	\end{enumerate} 
+	\end{proposition}
+	\begin{proposition}
+		Let $U$ be a finite dimensional subspace of $V$, then
+		\[V=U^\perp\oplus U\]
+		And $\dim U^\perp=\dim V-\dim U$.
+	\end{proposition}
+	\begin{proposition}
+		 $U=(U^\perp)^\perp$
+	\end{proposition}
+	
+	\begin{definition}
+			The orthogonal projection of $v$ onto $W$, denoted $\proj_W(v)$ is the element $w\in W$ such that $v-w$ is orthogonal to $W$.
+			
+			In other words, if we write $v$ in the direct sum of $V=W^\perp \otimes W$ as $v=w'+w$ with $w\in W$ and $w'\in W^\perp$, then $\proj_W(v)=w'$.
+
+		\end{definition}
+
+	\begin{theorem}
+		Let $w_1,\cdots,w_n$ be an orthogonal basis for a subspace $W\subset V$. Then the orthogonal projection of $v$ onto $W$ is
+		\[\proj_{W}(v)=\langle v,u_1\rangle u_1+\cdots+\langle v,u_n\rangle u_n\]
+		
+	\end{theorem}
+	
+	\begin{definition}
+		Define the cokernel of a linear map $T\in\Hom(V,W)$ to be the quotient space $\coker(T)=W/\img(T)$ and the coimage to be $\coimg(T)=V/\ker(T)$.
+	\end{definition}
+	
+	\begin{theorem}
+		We have $\ker(T)=\coimg(T)^\perp$ and $\img(T)=\coker(T)^\perp$
+	\end{theorem}
+	
+	\begin{proposition}
+		The equation $Ax=b$ has a solution if $b$ is orthogonal to the cokernel of $A$.\end{proposition}
 	
 	\end{document}
