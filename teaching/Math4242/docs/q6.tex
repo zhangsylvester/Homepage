@@ -13,6 +13,39 @@ Let $A=\begin{pmatrix}
 \end{pmatrix}$. 
 
 Is $A$ diagonalizable? If so, find $K$ and $D$ such that $A=K^{-1}DK$ where $D$ is a diagonal matrix.
+
+\begin{proof}
+	The characteristic polynomial is $x^2-x-2=(x+1)(x-2)$. So there are two distinct eigenvalues, thus the matrix is diagonalizable.
+	
+	Next we find the eigenvectors.
+	
+	For $\lambda=2$:
+	
+	$\ker (A-2I)=\ker\begin{pmatrix}
+	3&-3\\6&-6
+\end{pmatrix}=\ker \begin{pmatrix}
+	3&-3\\0&0
+\end{pmatrix}=\{(x,x):x\in\rr\}=\s(1,1)$.
+
+For $\lambda=-1$:
+
+$\ker(A-(-1)I)= \ker\begin{pmatrix}
+	6&-3\\6&-3
+\end{pmatrix}=\ker\begin{pmatrix}
+	6&-3\\0&0
+\end{pmatrix}=\{(x,2x)|x\in\rr\}=\s(1,2)$.
+
+So $A=\begin{pmatrix}
+	1&1\\2&1
+\end{pmatrix}\begin{pmatrix}
+	2&0\\0&-1
+\end{pmatrix}
+\begin{pmatrix}
+	-1&1\\2&-1
+\end{pmatrix}
+$
+	
+\end{proof}
 %\noindent Part a (4 pts)
 
 %Prove that both $U$ and $W$ are subspaces of $V$.

@@ -151,6 +151,13 @@ $\ker(T)=\{(a,b,c)|a+b=a-c=b+c=0\}=\{(a,-a,a)|a\in \rr\}$. So $\ker(T)$ has dime
 	Let $V=\rr[x]$ the vector space of all real-valued polynomials (of any degree). Show that $$\langle f,g\rangle =f(0)g(0) +\int_{-1}^{1}f'g'$$ 
 	defines an inner product on $V$.
 \end{prob}
+\blu{
+(1) $\langle f,f\rangle =f(0)^2 +\int_{-1}^1 (f')^2\geq 0$. The only case when both $\langle f,f\rangle=0$ is when $f(0)=0$ and $f'=0$. In this case $f(x)=0$.
+
+(2) $\langle f+h,g\rangle =(f(0)+h(0))g(0)+\int_{-1}^1(f'+h')g'=f(0)g(0)+\int_{-1}^1f'g'+h(0)g(0)+\int_{-1}^1 h'g'=\langle f,g\rangle +\langle h,g\rangle$.
+
+(3) $\langle kf,g\rangle =kf(0)g(0)+\int_{-1}^{1}kf'g'=k(f(0)g(0)+\int_{-1}^1f'g')=k\langle f,g\rangle$.
+}
 
 
 
