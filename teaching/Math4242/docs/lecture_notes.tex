@@ -913,7 +913,7 @@ is a unique vector $v\in V$ such that $T(u)=\langle u,v\rangle $for every $u\in 
 		where $D$ is the diagonal matrix of eigenvalues of $A$, and $Q$ is an orthogonal matrix whose columns are the orthonormal eigenvectors of $A$.
 	\end{theorem}
 	\begin{corollary}
-		A symmetric real matrix $A$ is positive definite if and only if all of its eigenvalues are positive. (Note that when $A$ is not necessary symmetric, being positive definite implies having positive eigenvalues, but the converse is not always true).
+		A symmetric real matrix $A$ is positive definite if and only if all of its eigenvalues are positive. (Note that when $A$ is not necessary symmetric, being positive definite implies having positive eigenvalues, but the converse is not always true). A symmetric matrix $A$ is positive semi-definite if and only if all of its eigenvalues are non-negative (possibly zero).
 	\end{corollary}
 	\begin{definition}
 	Let $\lambda$ be an eigenvalue of $A$. Then
@@ -946,7 +946,7 @@ is a unique vector $v\in V$ such that $T(u)=\langle u,v\rangle $for every $u\in 
 \end{remark}
 
 \begin{definition}
-	The singular values of a general (non-square) matrix are the square roots of the Gram matrix $K=A^tA$.
+	The singular values of a general (non-square) matrix are the square roots of the eigenvalues of the Gram matrix $K=A^tA$.
 \end{definition}
 \begin{theorem}
 	Every $m\times n$ matrix of rank $r$ can be written as
