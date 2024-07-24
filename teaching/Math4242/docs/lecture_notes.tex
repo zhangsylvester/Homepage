@@ -901,5 +901,61 @@ is a unique vector $v\in V$ such that $T(u)=\langle u,v\rangle $for every $u\in 
 	\begin{remark}
 		We will more often call complete matrices diagonalizable.
 	\end{remark}
+	\begin{theorem}
+		If $A$ is a diagonalizable (complete) matrix, then all the $k$ dimensional complex invariant subspace of $A$ are spanned by linearly independent eigenvectors of $A$.
+	\end{theorem}
+	\begin{proposition}
+		Every real symmetric matrix is diagonalizable.
+	\end{proposition}
+	\begin{theorem}[spectral decomposition]
+		Let $A$ be a symmetric matrix, then
+		$A=Q D Q^t$
+		where $D$ is the diagonal matrix of eigenvalues of $A$, and $Q$ is an orthogonal matrix whose columns are the orthonormal eigenvectors of $A$.
+	\end{theorem}
+	\begin{corollary}
+		A symmetric real matrix $A$ is positive definite if and only if all of its eigenvalues are positive. (Note that when $A$ is not necessary symmetric, being positive definite implies having positive eigenvalues, but the converse is not always true).
+	\end{corollary}
+	\begin{definition}
+	Let $\lambda$ be an eigenvalue of $A$. Then
+		a Jordan chain of $\lambda$ is a list of vectors $w_1,\cdots,w_k$ such that
+		\[A w_1=\lambda w_1,\quad Aw_2=\lambda w_2+w_1,\cdots, A w_k = \lambda w_k+w_{k-1}\]
+	\end{definition}
+	\begin{definition}
+		A non-zero vector $w$ is called a generalized eigenvector of $A$ if $(A-\lambda I)^kw=0$ for some finite number $k$.
+	\end{definition}
+	
+	\begin{definition}
+		A Jordan basis of a square matrix $A$ is a basis of $\cc^n$ (or $\rr^n$) consisting of Jordan chains of $A$.
+	\end{definition}
+	\begin{theorem}
+		Every square matrix has a Jordan basis.
+	\end{theorem}
+	\begin{definition}
+		A Jordan block is a matrix such that the diagonal entries are the same number, the super-diagonal entires are either 1 or 0, and the other entires are zero.
+	\end{definition}
+	
+	\begin{definition}
+		A Jordan canonical form of a square matrix $A$, is the block-diagonal matrix where each diagonal block is a Jordan block with eigenvalues on the diagonal. Denote $J_A$ the Jordan canonical form of $A$.
+	\end{definition}
+	
+	\begin{theorem}
+		Any square matrix $A$ can be written as $A=S J_A S^{-1}$ where $J_A$ is the Jordan canonical form of $A$, and $S$ is the matrix whose columns form the Jordan basis.
+	\end{theorem}
+\begin{remark}
+	The number of Jordan blocks in $J_A$ equals to the number of Jordan chains in the Jordan basis of $A$.
+\end{remark}
+
+\begin{definition}
+	The singular values of a general (non-square) matrix are the square roots of the Gram matrix $K=A^tA$.
+\end{definition}
+\begin{theorem}
+	Every $m\times n$ matrix of rank $r$ can be written as
+	\[A=P \Lambda Q^{t}\]
+where $\Lambda$ is a $r\times r$ diagonal matrix with the singular values of $A$. The columns of $A$ form an orthogonal basis for $\img(A )$ and the columns of $Q$ form an basis for $ \text{coImg}(A)$. In particular, the columns of $Q$ are the normalized eigenvectors of the Gram matrix $K=A^tA$ corresponding to the non-zero eigenvalues.
+\end{theorem}
+\begin{remark}
+	If $A$ has no zero eigenvalue, then the SVD of $A$ is `the same' as the spectral decomposition of $K=A^tA$:
+	$K=A^tA=(Q\Lambda P^t)(P\Lambda Q^t)=Q\Lambda^2 Q^t$.
+\end{remark}
 
 	\end{document}
