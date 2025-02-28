@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sylvester W. Zhang</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 120px;
+            height: 100vh;
+            background: #87CEEB;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding-top: 60px;
+            z-index: 1;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            color: #1C3D5A;
+            background: none;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 0;
+            margin-left: 120px;
+            transition: margin-left 0.3s ease;
+        }
+        .title-section {
+            text-align: center;
+            padding: 15px 10px;
+            background: #ADD8E6;
+            color: #0A2A43;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            transition: transform 0.6s ease-in-out;
+        }
+        .hidden-title {
+            transform: translateY(-100%);
+        }
+        section {
+            padding: 40px 20px;
+            width: 100vw;
+            box-sizing: border-box;
+            margin-top: 0;
+        }
+        section:nth-child(odd) {
+            background: #f0f0f0 !important;
+            color: black;
+            width: 100vw;
+        }
+        section:nth-child(even) {
+            background: white !important;
+            color: black;
+            width: 100vw;
+        }
+        .sidebar a.active {
+            color: #0A2A43;
+            font-weight: bold;
+        }
+        .spacer {
+            height: 40px;
+        }
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .about-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            background: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-section" id="title-section">Sylvester W. Zhang 张文泽</div>
+    <div class="sidebar" id="sidebar">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#papers">Papers</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="main-content" id="main-content">
+        <div class="spacer"></div>
+        <section id="about">
+            <h1>About Me</h1>
+            <div class="about-container">
+                <div class="about-photo"></div>
+                <div>
+                    <p>My name is 张文泽 (Wenze Zhang), and I go by Sylvester. I publish under the name Sylvester W. Zhang.</p>
+                    <p>I am a fifth-year Ph.D. student in Mathematics at the University of Minnesota, where I also completed my undergraduate studies. My current research focuses on algebraic combinatorics under the guidance of Pasha Pylyavskyy.</p>
+                </div>
+            </div>
+        </section>
+        <section id="research">
+            <h1>Research</h1>
+            <p>My research interests include algebraic combinatorics, cluster algebras, and Schubert calculus. I have been working on various projects related to these areas, aiming to contribute to the understanding and development of combinatorial structures and their applications.</p>
+        </section>
+        <section id="papers">
+            <h1>Papers</h1>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2109.00001">An Expansion Formula for Decorated Super-Teichmüller Spaces</a> (with Gregg Musiker and Nicholas Ovenhouse)</li>
+                <li><a href="https://arxiv.org/abs/2110.00002">Double Dimer Covers on Snake Graphs from Super Cluster Expansions</a> (with Gregg Musiker and Nicholas Ovenhouse)</li>
+                <li><a href="https://arxiv.org/abs/1912.00003">Arborescences of Covering Graphs</a> (with Esther Banaian, Sunita Chepuri, and Elizabeth Kelley)</li>
+            </ul>
+        </section>
+        <section id="teaching">
+            <h1>Teaching</h1>
+            <p>As a teaching assistant at the University of Minnesota, I have led discussions and labs for various mathematics courses, including Calculus and Linear Algebra. I strive to create an engaging learning environment and help students develop a deep understanding of mathematical concepts.</p>
+        </section>
+        <section id="contact">
+            <h1>Contact</h1>
+            <p>Email: <a href="mailto:swzhang@umn.edu">swzhang@umn.edu</a></p>
+            <p>Office: Vincent Hall 426</p>
+            <p>Address: 206 Church Street SE, Minneapolis, MN 55455, USA</p>
+            <p>Office Hours: Spring 2022 - TBD</p>
+        </section>
+    </div>
+    <script>
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", () => {
+            let title = document.getElementById("title-section");
+            let scrollTop = window.scrollY;
+            if (scrollTop > lastScrollTop) {
+                title.classList.add("hidden-title");
+            } else {
+                title.classList.remove("hidden-title");
+            }
+            lastScrollTop = scrollTop;
+
+            let sections = document.querySelectorAll("section");
+            let sidebarLinks = document.querySelectorAll(".sidebar a");
+            let currentSection = "";
+
+            sections.forEach(section => {
+                let sectionTop = section.offsetTop;
+                if (scrollTop >= sectionTop - 100) {
+                    currentSection = section.getAttribute("id");
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").substring(1) === currentSection) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
