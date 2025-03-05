@@ -1,307 +1,760 @@
 <!DOCTYPE html>
-<html>
-
-       
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Sylvester Zhang</title>
-    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://twin-cities.umn.edu/sites/twin-cities.umn.edu/files/favicon.ico" /> -->
-    <link rel="icon" type="image/x-icon" href="/images/zhang.ico">
-
-    <!-- Bootstrap CSS CDN -->
-    <link rel="icon" href="files/u_of_m_logos/Block M/Block M-print/uncoated/Msol201u.eps" type="image/eps" sizes="16x16">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-
-
-    <!-- Font Awesome JS -->
-    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sylvester W. Zhang</title>
+  <link rel="shortcut icon" type="image/x-icon" href="https://twin-cities.umn.edu/sites/twin-cities.umn.edu/files/favicon.ico" />
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-    <!-- BS icon-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <!-- Acadamicon -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-
-    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-    <script>
-		window.addEventListener('resize', function(event){
-			var textHeight = document.querySelector('.text-block').clientHeight;
-			var imageHeight = document.querySelector('.image-block img').naturalHeight;
-			var aspectRatio = imageHeight / textHeight;
-			var maxWidth = window.innerWidth - 40; /* Account for padding */
-			var newWidth = Math.min(maxWidth, textHeight * aspectRatio);
-			document.querySelector('.image-block img').style.maxWidth = newWidth + 'px';
-		});
-	</script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      "HTML-CSS": { linebreaks: { automatic: true, width: "75% container" } }, 
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+<!-- Font Awesome JS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     
+
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+<!-- BS icon-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+<!-- Acadamicon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<!--Google icon-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<!-- colors -->
+<script>
+  document.documentElement.style.setProperty("--color1", "#1d4c87");
+  document.documentElement.style.setProperty("--color2", "#85b8db");
+  document.documentElement.style.setProperty("--color3", "#ff5733");
+</script>
+
+<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .main-content {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      box-sizing: border-box;
+      width: 100%;
+      margin: 0;
+      padding: 20px 20px;
+      scroll-margin-top: 105px; /* Adjust based on your navbar height */
+    }
+    section:nth-child(odd) {
+      background: #f0f0f0;
+      color: black;
+    }
+    section:nth-child(even) {
+      background: white;
+      color: black;
+    }
+    .skip {
+      background: white;
+    }
+
+    #content a:link{
+    color:var(--color1);
+    }
+    #content a:active {
+        color:#3f4042;
+    }
+    #content a:hover {
+        text-shadow: 0.618px 0.618px var(--color2);
+        text-decoration: none;
+    }
+    #content a:hover i{
+        text-shadow: none;
+        
+    }
+    #content a:visited{
+        color:#7A0019;
+    }
+    #content a i{
+        color: black;
+    }
+    #content h1 {
+      font-size: 18pt;
+    }
+    #content h2 {
+      font-size: 14pt;
+      text-decoration: italic;
+    }
+
+ul.papers li.title a:link{
+    color: black;
+}
+
+    #intro {
+      position: sticky;
+      top:0;
+      overflow: hidden;
+      padding-top: 20px;
+      padding-bottom: 0 px;
+      /*min-height: 35vh;*/
+      transition: height 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: #ffffff;
+    }
+    #intro.stuck .main-name{
+      font-size: 1.7em;
+      margin: 0.05em 0;
+      font-family: Times, "Times New Roman", serif;
+      font-weight: 200;
+      color: #1d4c87;
+    }
+
+    #intro2 {
+      overflow: hidden;
+      padding-top: 0px;
+      padding-bottom: 20px;
+      /*min-height: 35vh;*/
+      transition: height 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: #ffffff;
+    }
+    
+    .main-name {
+      font-size: 2em;
+      margin: 0.05em 0;
+      font-family: Times, "Times New Roman", serif;
+      color: #1d4c87;
+      transition: all 1s ease;
+    }
+
+    .secondary-name {
+      font-size: 1.6em;
+      margin: 0.3em 0 8px 0;
+      font-weight: 400;
+      color: #1d4c87;
+    }
+    .details {
+      margin: 0.25em 0;
+      font-size: 1em;
+      color: #1d4c87;
+    }
+    .bottom-nav {
+      display: flex;
+      position: sticky;
+      top: 55px;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 10px 0 15px 0;
+      margin: 0;
+      transition: all 0.5s ease;
+      height: 45px;
+    }
+    .bottom-nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 0.9em;
+      color: #85b8db;
+      font-weight: 200;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .bottom-nav a:hover, .bottom-nav a.active {
+      text-decoration: none;
+      color: #1d4c87;
+      font-weight: bold;
+    }
+    #about {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .about-content {
+      flex: 1;
+      padding-right: 20px;
+    }
+    .about-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      background: gray;
+      flex-shrink: 0;
+    }
+
+  /*  Papers*/
+
+.abs .card p {
+    font-size: 11pt;
+    margin-bottom:0px;
+    padding:0px;
+}
+.papers a.abs-btn {
+    padding-left: 0px;
+    background: none;
+}
+
+.papers a {
+    background: none; 
+    padding: 0px;
+}
+
+.papers a.abs-btn[aria-expanded="true"] {
+    color:black;
+    background: none;
+}
+
+
+.papers a.abs-btn[aria-expanded="true"] i {
+  display: inline-block;
+  transform: rotate(90deg);
+}
+
+.papers a.collapse_all[data-transformed="true"] i {
+
+    transform: rotate(45deg);
+}
+
+
+a.collapse_all span{
+    display: none;
+}
+a.collapse_all {
+    cursor: pointer;
+}
+a.collapse_all:hover span{
+    display: inline-block;
+    font-size:15px;
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+ul.papers{
+    padding-left: 0px;
+    list-style-position: inside;
+    list-style:none;
+}
+
+ul.papers li.details {
+    list-style-type: none;
+    padding-left: 15px;
+
+}
+
+ul.papers li.details a.abs-btn{
+    display:inline-block;
+    width: 100px;
+    font-size: 11pt;
+}
+
+ul.papers li.details a.arxiv{
+    display:inline-block;
+    width: 145px;
+    font-size: 11pt;
+}
+
+ul.papers li.details a.journal{
+    display:inline-block;
+    width: flex;
+    font-size: 11pt;
+}
+
+
+
+ul.papers li.title{
+    /* padding-left: 15px; */
+    list-style-type: disc;
+}
+/* ul.papers li.title:before{
+content: "\f02d"; 
+font-family: FontAwesome;
+display: inline-block;
+margin-left: -15px;
+width: 15px; 
+}*/
+
+ul.papers li.hide{
+    list-style-type:none;
+    padding-bottom:10px;
+    margin:0px;
+}
+</style>
+
 </head>
 
 <body>
-
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div>
-            <div class="sidebar-header" >
-                <h4>Sylvester W. Zhang</h4>
-                <h3 style="font-family: STFangsong;">张文泽</h3>
-                <strong>SZ</strong>
-            </div>
-
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="index.html">
-                        <span><i class="fas fa-home"></i></span>
-                        Home</a>
-                </li>
-                <li>
-                    <a href="research.html">
-                    <span><i class="fas fa-dna"></i></span>
-                    Research
-                    </a>
-                </li>
-                <li>
-                    <a href="publication.html">
-                    <span><i class="fas fa-book"></i></span>
-                    Papers
-                    </a>
-                </li>
-                <li>
-                    <a href="teaching.html">
-                        <span><i class="fas fa-chalkboard-teacher"></i></span>
-                        Teaching
-                    </a>
-                </li>
-                <li>
-                    <a href="CV/CV.pdf">
-                        <span><i class="fas fa-id-badge"></i></span>
-                        <span class="hide">Curriculum</span> Vitae
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <span><a target="_blank" class="ico ai ai-google-scholar-square ai-lg" href="https://scholar.google.com/citations?hl=en&user=Hw78W00AAAAJ&view_op=list_works&sortby=pubdate"></a></span>
-                    <span><a target="_blank" class="ico ai ai-orcid-square ai-lg" href="https://orcid.org/0000-0002-4617-5901"></a></span>
-                    <span><a target="_blank" class="ico ai ai-arxiv-square ai-lg" href="https://arxiv.org/a/0000-0002-4617-5901.html"></a></span>
-                    <span><a target="_blank" class="ico ai ai-researchgate-square ai-lg" href="https://www.researchgate.net/profile/Sylvester-Zhang"></a></span>
-                    <span><a target="_blank" class="ico ai ai-semantic-scholar-square ai-lg" href="https://www.semanticscholar.org/author/Sylvester-W.-Zhang/2107901800"></a></span>
-                </li>
-            </ul>
-        </div>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="content" class="alt-grid">
-            <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-                <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
-                    <div class="small-screen">
-                        <strong>Sylvester W. Zhang</strong>
-                    </div>
-
-
-
-                    <div class="big-screen">
-                        <!--
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
-                        </button>
-                        -->
-                        
-
-                        <div class="collapse navbar-collapse ">
-                            <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#about">About Me</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#contact">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-<!--
-            <h2 class="big-screen">Welcome to my homepage.</h2>
-            <div class="line big-screen"></div>-->
-
-            <div class="container" >
-                <!--
-                <div class="row big-screen">
-                    <div class="col-8" style="padding-right:6pt;">
-                        <h3 id="about">About me</h3>
-                        <br>
-                        <p>
-                            I am a second year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>, the same place where I did my undergraduate studies.
-                        </p>
-                        <p>
-                            I am currently working on algebraic combinatorics under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. 
-                        </p>
-                    </div>
-               
-                    <div class="col-4 my-auto" style="padding-left:6pt;">
-                        <img src="images/no-headshot.png" alt=" " height="auto" width="100%" style="margin-left:0px; margin-right:0px" data-position="center center center center"/>
-                    </div>
-                </div>
-                -->
-                <div class="row big-screen">
-                    <div class="col-12" style="padding-right:6pt;">
-                        <h3 id="about">About me</h3>
-                        <br>
-                        <p>My name is 张文泽 (Wenze Zhang) and I go by Sylvester. I publish under <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1459948">Sylvester W. Zhang</a>.</p>
-                        <p>
-                            I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>, the same place where I did my undergraduate studies.
-                        </p>
-                        <p>
-                            I am currently working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. 
-                        </p>
-                    </div>
-                   
-               
-                </div>
-                
-                  
-                <!-- -->
-
-                <div class="row small-screen">
-                    <div class="col-12">
-                        <h3 id="about">About me</h3>
-                        <br>
-                        <p>My name is 张文泽 (Wenze Zhang) and I go by Sylvester. I publish under <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1459948">Sylvester W. Zhang</a>.</p>
-                        <p>
-                            I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>, the same place where I did my undergraduate studies.
-                        </p>
-                        <p>
-                            I am currently working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            
-            
-            <div class="line"></div>
-
-            <div class="container">
-                <div class="row big-screen">
-                    <div class="col-4">
-                        <h3>Contact Info</h3>
-                        <ul class="ul">
-                            <li><strong>Email</strong><br/> <a href="mailto:swzhang@umn.edu" target="_blank">swzhang@umn.edu</a></li>
-                            <li><strong>Office</strong><br/>
-                            Vincent Hall 426</li>
-                            <li><strong>Virtual Office</strong><br/>  
-                                &bull; <a href="https://umn.zoom.us/my/sylvesterzhang" target="_blank" onclick="return confirm('Join Zoom meeting?')" >Zoom Link.</a>
-                                <br> 
-                                &bull; <a href="https://umn.zoom.us/j/93633622071?pwd=dnI4S2Q5cTZpMkpjMkhjZ3Z4ZFEzdz09"target="_blank" onclick="return confirm('This meeting is for Math 2263 students only.')">Math 2263.</a>
-                            </li>
-                            <li><strong>Address</strong><br/>
-                                206 Church Street SE<br/>
-                                Minneapolis, MN 55455<br />
-                                USA</li>
-                            <li><strong>Office Hours</strong> <br>Spring 2022<br>
-                            TBD<br>
-                            </li>
-                          </ul>
-                    </div>
-                    <div class="col-8" style="position: relative;">
-                        <iframe src="https://calendar.google.com/calendar/b/1/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FChicago&amp;src=emhhbjUxMDJAdW1uLmVkdQ&amp;color=%23039BE5&amp;showTitle=0;showDate=1&amp;showPrint=0&amp;showTabs=1&amp;showCalendars=0&amp;showWeekends=0&amp;showTz=1&amp;mode=WEEK" style="border:solid 0px;position: relative; top:0; left: 0;right:0;bottom:0; width: 100%; height: 100%;" frameborder="0" scrolling="no"></iframe>
-                    </div>
-                </div>
-                <br>
-                <div class="row small-screen">
-                    <div class="col-12">
-                        <h3>Contact Info</h3>
-                    
-                        <ul class="ul">
-                            <li><strong>Email</strong> <a href="mailto:swzhang@umn.edu" target="_blank">swzhang@umn.edu</a></li>
-                            <li><strong>Office</strong>  &bull; <a href="https://umn.zoom.us/my/sylvesterzhang" target="_blank" onclick="return confirm('Join Zoom meeting?')" >Zoom.</a>&bull; <a href="https://umn.zoom.us/j/93633622071?pwd=dnI4S2Q5cTZpMkpjMkhjZ3Z4ZFEzdz09"target="_blank" onclick="return confirm('This meeting is for Math 2263 students only.')">Math 2263.</a> </li>
-                            <li><strong>Address</strong>
-                                VinH 426,
-                                206 Church Street SE,
-                                Minneapolis, MN 55455</li>
-                            <li><strong>Office Hours</strong>  TBD</li>
-                          </ul>
-                    </div>
-                    
-                </div>
-
-                <div class="row small-screen">
-                    <div class="col-12" style="position: relative; ">
-                        <iframe src="https://calendar.google.com/calendar/b/1/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FChicago&amp;src=emhhbjUxMDJAdW1uLmVkdQ&amp;color=%23039BE5&amp;showTitle=0;showDate=1&amp;showPrint=0&amp;showTabs=1&amp;showCalendars=0&amp;showWeekends=0&amp;showTz=1&amp;mode=WEEK" style="border:solid 0px;position: relative; top:0; left: 0;right:0;bottom:0; width: 100%; height: 300px;" frameborder="0" scrolling="no"></iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="line"></div>
-            <h3>Combinatorics at Univ. of MN</h3>
-            <ul>
-                <li style="background:none;"><a href="http://www-users.math.umn.edu/~reiner/combinatorics_group.html" target="_blank">Combinatorics Group</a></li>
-                <li style="background:none;"><a href="https://www.daojihuang.me/seminar" target="_blank">Combinatorics Seminar</a></li>
-                <li style="background:none;"><a href="https://sites.google.com/umn.edu/umn-scas-seminar/home" target="_blank">Student Seminar</a></li>	
-                <li style="background:none;"><a href="http://www-users.math.umn.edu/~reiner/REU/REU.html" target="_blank">Summmer REU</a></li>
-                <li style="background:none;"><a href="http://www.samuelfhopkins.com/OPAC/opac.html" target="_blank">OPAC</a></li>
-                <li style="background:none;"><a href="MRWAC/index.html" target="_blank">MRWAC</a></li>	
-            </ul>
-            <div class="line"></div>
-            <p style="color:#999; font-size: 10px;">&copy; Wenze Zhang. All rights reserved.<br> The views and opinions expressed in this page are strictly those of the page author. The contents of this page have not been reviewed or approved by the University of Minnesota.</p>
-        </div>
+  <div class="main-content">
+    <div id="skip1"></div>
+    <div id="intro">  
+      <h1 class="main-name">Sylvester W Zhang</h1>
     </div>
-    
+    <div id="intro2">
+      <h2 class="secondary-name">张文泽</h2>
+      <p class="details">Ph.D. Candidate in Mathematics</p>
+      <p class="details">University of Minnesota</p>
+    </div>
+    <div id="skip2"></div>
+    <nav class="bottom-nav">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#papers">Papers</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#mentoring">Mentoring</a>
+    </nav>
+    <div id="content">
+    <section id="about">
+      <div class="about-content">
+        <h1>About Me</h1>
+        <p>My name is 张文泽 (Wenze Zhang) and I go by Sylvester. I publish under <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1459948">Sylvester W. Zhang</a>.</p>
+                        <p>
+                            I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>, the same place where I did my undergraduate studies. Starting <!--Fall 2025, I will be a postdoc (Hedrick assistand professor) at UCLA.-->
+                        </p>
+                        <p>
+                            I am currently working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. 
+                        </p>
+        </div>
+      <div class="about-photo"></div>
+    </section>
+    <section id="research">
+      <h1>Research</h1>
+      <p>My research interest is in algebraic combinatorics, often among the intersection of total positivity, geometry of the flag variety, and representation theory of linear groups. Specifically, I work on <ul style="margin-top:-1em;"><li>Schubert Calculus</li><li>combinatorial representation theory</li> <li>cluster algebras</li> 
+      </ul>
+      </p>
+      <h2>Collaborators</h2>
+       <p> Gregg Musiker (4),  Nick Ovenhouse (4), Sunita Chepuri (2), Calvin Yost-Wolff (2), Valerie Zhang (2), Esther Banaian, Michael Curran, Quang Dao, Claire Frechette, Elizabeth Kelley, Greg Michel, Ralf Schiffler, Julian Wellman.
+      </p>
+    </section>
+    <section id="papers">
+      <h1>Papers
+        <a id="collapse-all" class="collapse_all" role="button" data-transformed="false" onclick="openAll()">
+                    <i class="fas fa-plus"></i>
+                    <span>Show Abstracts</span>
+                </a>
+              </h1>
+      <h2>Preprints</h2> 
 
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!--Popper + Bootstrap JS Bundle-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>-->
+      <ul class="papers">
+        <li class="title">
+            <strong>Higer Dimer Covers on Snake Graphs.</strong> with G. Musiker, N. Ovenhouse, and R. Schiffler. (2023)
+        </li>
+        <li class="details">
+            
+            <a class="abs-btn" data-bs-toggle="collapse" href="#MOSZ23" role="button" aria-expanded="false" aria-controls="MOSZ23"><i class="bi bi-caret-right-fill"></i>
+            Abstract.
+            </a>
+            
+            <a class="arxiv" href="https://arxiv.org/abs/2306.14389"><i class="ai ai-arxiv ai-1x"></i> arXiv 2306.14389</a>   
+        </li>
+        <li class="hide">
+            <div class="collapse abs" id="MOSZ23">
+                <div class="card card-body" ><p>
+                    Snake graphs are a class of planar graphs that are important in the theory of cluster algebras. Indeed, the Laurent expansions of the cluster variables in cluster algebras from surfaces are given as weight generating functions for 1-dimer covers (or perfect matchings) of snake graphs. 
+                    Moreover, the enumeration of 1-dimer covers of snake graphs provides a combinatorial interpretation of continued fractions. In particular, the number of 1-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the numerator of the continued fraction $[a_1,\ldots,a_n]$. This number is equal to the top left entry of the matrix product $\left(\begin{smallmatrix} a_1&1\\1&0 \end{smallmatrix}\right)
+                    \cdots \left(\begin{smallmatrix} a_n&1\\1&0 \end{smallmatrix}\right)$.
+                    
+                    In this paper, we give enumerative results on $m$-dimer covers of snake graphs. We show that the number of $m$-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the top left entry of a product of analogous $(m+1)$-by-$(m+1)$ matrices. 
+                    We discuss how our enumerative results are related to other known combinatorial formulas,
+                    and we suggest a generalization of continued fractions based on our methods. 
+                    These generalized continued fractions provide some interesting open questions and
+                    a possibly novel approach towards Hermite's problem for cubic irrationals.</p>
+                </div>
+              </div>
+        </li>
+      </ul>
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $('#content').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-        });
-    </script>
-    <script>
-		window.addEventListener('resize', function(event){
-			if (window.innerWidth < 1000) {
-				document.getElementById('sidebarCollapse').click();
-			}
-		});
-	</script>
-    <script>
-        var prevScrollpos = window.pageYOffset;
-        window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-          if (prevScrollpos > currentScrollPos) {
-            document.getElementById("navbar").style.top = "0";
-          } else {
-            document.getElementById("navbar").style.top = "-80px";
-          }
-          prevScrollpos = currentScrollPos;
+
+      <h2>Published Articles.</h2>
+        
+      <ul class="papers">
+          <li class="title">
+              <strong>A Lattice Model for Super LLT Polynomials.</strong> with M. Curran, C. Frechette, C. Yost-Wolff, and V. Zhang. (2021)
+          </li>
+          <li class="details">
+              
+              <a class="abs-btn" data-bs-toggle="collapse" href="#CFYWZZ21" role="button" aria-expanded="false" aria-controls="CFYWZZ21"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              
+              <a class="arxiv" href="https://arxiv.org/pdf/2110.07597.pdf"><i class="ai ai-arxiv ai-1x"></i> arXiv 2110.07597</a>
+              
+              <a class="journal" href="https://doi.org/10.5070/C63261979"><i class="ai ai-doi ai-1x"></i>  Comb. Theory 3(2). 2023.</a>
+
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="CFYWZZ21">
+                  <div class="card card-body" ><p>
+                      We introduce a solvable lattice model for supersymmetric LLT polynomials, also known as super LLT polynomials, based upon particle interactions in super n-ribbon tableaux. Using operators on a Fock space, we prove a Cauchy identity for super LLT polynomials, simultaneously generalizing the Cauchy and dual Cauchy identities for LLT polynomials. Lastly, we construct a solvable semi-infinite Cauchy lattice model with a surprising Yang-Baxter equation and examine its connections to the Cauchy identity.</p>
+                  </div>
+                </div>
+          </li>
+
+          <li class="title">
+              <strong>Matrix Formulae for Decorated Super Teichm&uuml;ller Spaces.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2022)
+          </li>
+          <li class="details">
+              
+              <a class="abs-btn" data-bs-toggle="collapse" href="#MOZ22b" role="button" aria-expanded="false" aria-controls="MOZ22b"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              
+              <a class="arxiv" href="https://arxiv.org/pdf/2208.13664.pdf"><i class="ai ai-arxiv ai-1x"></i> arXiv 2208.13664</a> 
+               
+              <a class="journal" href="https://doi.org/10.1016/j.geomphys.2023.104828"><i class="ai ai-doi ai-1x"></i> J. Geom. Phys. 2023, Vol.189.</a>
+
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="MOZ22b">
+                  <div class="card card-body" ><p>
+                      For an arc on a bordered surface with marked points, we associate a holonomy matrix using a product of elements of the supergroup OSp(1|2), which defines a flat OSp(1|2)-connection on the surface. We show that our matrix formulas of an arc yields its super $\lambda$-length in Penner-Zeitlin’s decorated super Teichm¨uller space. This generalizes the matrix formulas of Fock-Goncharov and Musiker-Williams. We also prove that our matrix formulas agree with the combinatorial formulas given in the authors’ previous works. As an application, we use our matrix formula in the case of an annulus to obtain new results on super Fibonacci numbers.</p>
+                  </div>
+                </div>
+          </li>
+          
+          <li class="title">
+              <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, <a id='chepuri'></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0">E. Kelley</a>. (2021)
+          </li>
+          <li class="details">
+              
+              <a class="abs-btn" data-bs-toggle="collapse" href="#BCKZ21" role="button" aria-expanded="false" aria-controls="BCKZ21"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              
+              <a class="arxiv" href=" https://arxiv.org/pdf/2107.14785.pdf"><i class="ai ai-arxiv ai-1x"></i> arXiv 2107.14785</a>
+               
+              <a class="journal" href="https://www.emis.de/journals/SIGMA/2022/089/"><i class="ai ai-doi ai-1x"></i> SIGMA <strong>18</strong> (2022) 089</a>    
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="BCKZ21">
+                  <div class="card card-body" ><p>
+                      LP algebras, introduced by Lam and Pylyavskyy, are a generalization of cluster algebras. These algebras are known to have the Laurent phenomenon, but positivity remains conjectural. Graph LP algebras are finite LP algebras encoded by a graph. For the graph LP algebra defined by a tree, we define a family of clusters called <i>rooted clusters</i>. We prove positivity for these clusters by giving explicit formulas for each cluster variable. We also give a combinatorial interpretation for these expansions using a generalization of $T$-paths.</p>
+                  </div>
+                </div>
+          </li>
+          <li class="title">
+              <strong>Double Dimer Covers on Snake Graphs from Super Cluster Expansions.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2021)
+          </li>
+          <li class="details">
+              
+              <a class="abs-btn" data-bs-toggle="collapse" href="#MOZ21b" role="button" aria-expanded="false" aria-controls="MOZ21b"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              
+              <a class="arxiv" href="https://arxiv.org/pdf/2110.06497.pdf"><i class="ai ai-arxiv ai-1x"></i> arXiv 2110.06497</a>
+              
+              <a class="journal" href="https://doi.org/10.1016/j.jalgebra.2022.05.033"><i class="ai ai-doi ai-1x"></i> J. Algebra Vol. 608 (2022)</a>   
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="MOZ21b">
+                  <div class="card card-body" ><p>
+                      In a recent paper, the authors gave combinatorial formulas for the Laurent expansions of super $\lambda$-lengths in a marked disk, generalizing Schiffler’s $T$-path formula. In the present paper, we give an alternate combinatorial expression for these super $\lambda$-lengths in terms of double dimer covers on snake graphs. This generalizes the dimer formulas of Musiker, Schiffler, and Williams.</p>
+                  </div>
+                </div>
+          </li>
+
+
+          <li class="title">
+              <strong>Rowmotion Orbits of Trapezoid Posets.</strong> with Q. Dao, J. Wellman and C. Yost-Wolff. (2020)
+          </li>
+          <li class="details">
+              <a class="abs-btn" data-bs-toggle="collapse" href="#Row2020" role="button" aria-expanded="false" aria-controls="Row2020">
+              <i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              
+              <a class="arxiv" href="https://arxiv.org/pdf/2002.04810.pdf"><i class="ai ai-arxiv ai-1x"></i>arXiv 2002.04810</a>
+             
+              <a class="journal" href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v29i2p29"> <i class="ai ai-doi ai-1x"></i> Electron. J. Comb. 29-2 (2022)</a>
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="Row2020">
+                  <div class="card card-body">
+                      <p>Rowmotion is an invertible operator on the order ideals of a poset which has been extensively studied and is well understood for the rectangle poset. In this paper, we show that rowmotion is equivariant with respect to a bijection of Hamaker, Patrias, Pechenik and Williams between order ideals of rectangle and trapezoid posets, thereby affirming a conjecture of Hopkins that the rectangle and trapezoid posets have the same rowmotion orbit structures. Our main tools in proving this are $K$-jeu-de-taquin and (weak) $K$-Knuth equivalence of increasing tableaux. We define <i>almost minimal tableaux</i> as a family of tableaux naturally arising from order ideals and show for any $\lambda$, the almost minimal tableaux of shape $\lambda$ are in different (weak) $K$-Knuth equivalence classes. We also discuss and make some progress on related conjectures of Hopkins on down-degree homomesy.</p>
+                  </div>
+              </div>
+          </li>
+          <li class="title">
+              <strong>Arborescences of Covering Graphs.</strong> with <a id='chepuri'></a>, CJ Dowd, A. Hardt, G. Michel, and V. Zhang. (2019)
+          </li>
+          <li class="details">  
+              <a class="abs-btn" data-bs-toggle="collapse" href="#Arb2019" role="button" aria-expanded="false" aria-controls="Arb2019">
+                  <i class="bi bi-caret-right-fill"></i>
+                  Abstract.
+                  </a>
+               <a class="arxiv" href="https://arxiv.org/pdf/1912.01060.pdf"><i class="ai ai-arxiv ai-1x"></i> arXiv 1912.01060</a>
+              
+              <a class="journal" href="https://alco.centre-mersenne.org/item/ALCO_2022__5_2_319_0/"><i class="ai ai-doi ai-1x"></i> Algebr. Comb. Vol. 5 (2022)</a>
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="Arb2019">
+                  <div class="card card-body">
+                      <p>An <i>arborescence</i> of a directed graph $\Gamma$ is a spanning tree directed toward a particular vertex $v$. The arborescences of a graph rooted at a particular vertex may be encoded as a polynomial $A_v(\Gamma)$ representing the sum of the weights of all such arborescences. The arborescences of a graph and the arborescences of a covering graph $\tilde{\Gamma}$ are closely related. Using <i>voltage graphs</i> to construct arbitrary regular covers, we derive a novel explicit formula for the ratio of $A_v(\Gamma)$ to the sum of arborescences in the lift $A_{\tilde{v}}(\tilde{\Gamma})$ in terms of the determinant of Chaiken's voltage Laplacian matrix, a generalization of the Laplacian matrix. Chaiken's results on the relationship between the voltage Laplacian and vector fields on $\Gamma$ are reviewed, and we provide a new proof of Chaiken's results via a deletion-contraction argument.</p>
+                  </div>
+              </div>
+          </li>
+          <li class="title">
+              <strong>An Expansion Formula for Decorated Super-Teichm&uuml;ller Spaces.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2021)
+          </li>
+          <li class="details">
+              
+              <a class="abs-btn" data-bs-toggle="collapse" href="#MOZ21" role="button" aria-expanded="false" aria-controls="MOZ21"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              
+              <a class="arxiv" href="https://arxiv.org/pdf/2102.09143.pdf"><i class="ai ai-arxiv ai-1x"></i> arXiv 2102.09143</a> 
+              
+              <a class="journal" href="https://www.emis.de/journals/SIGMA/2021/080/"> <i class="ai ai-doi ai-1x"></i> SIGMA <strong>17</strong> (2021) 080</a>
+
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="MOZ21">
+                  <div class="card card-body" ><p>
+                      Motivated by the definition of super Teichm&uuml;ller spaces, and Penner-Zeitlin's recent extension of this definition to decorated super Teichm&uuml;ller space, as examples of super Riemann surfaces, we use the super Ptolemy relations to obtain formulas for super $\lambda$-lengths associated to arcs in a borderded surface.  In the special case of a disk, we are able to give combinatorial expansion formulas for the super $\lambda$-lengths associated to diagonals of a polygon in the spirit of Ralf Schiffler's 
+                      $T$-path formulas for type $A$ cluster algebras. We further connect our formulas to the super-friezes of Morier-Genoud, Ovsienko, and Tabachnikov, and obtain partial progress towards defining super cluster algebras of type $A_n$.  In particular, followinTg Penner-Zeitlin, we are able to get formulas (up to signs) for the $\mu$-invariants associated to triangles in a triangulated polygon, and explain how these provide a step towards understanding odd variables of a super cluster algebra.</p>
+                  </div>
+                </div>
+          </li>
+      </ul>
+            
+            
+
+            <!--<h5>Extended Abstracts.</h5> 
+            <ul class="papers">
+                <li class="title">
+                <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, S. Chepuri, and E. Kelley. (2022)
+                </li>
+                <li class="details"><i class="bi bi-caret-right-fill"></i> <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2022/52.pdf">Séminaire Lotharingien de Combinatoire 86B.52</a>, proceedings for FPSAC 2022.</li>
+            </ul>-->
+            
+            <h2>Other Writings.</h2>
+            <ul class="papers">
+                <!--p-->
+                <li class="title">
+                    <strong>Double Dimers and Super Ptolemy Relations.</strong> with G. Musiker and N. Ovenhouse. <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2023/79.pdf">FPSAC Abstract.</a> (2023)
+                </li>
+                <li class="title">
+                    <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, <a id='chepuri'></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0">E. Kelley</a>. <a href="files/FPSAC2022-52.pdf">FPSAC Abstract.</a> (2022)
+                </li>
+                <li class="title">
+                    
+                    <strong>A Lattice Model for LLT Polynomials.</strong> with M. Curran, C. Yost-Wolff, and V. Zhang. <a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report.</a> (2019)
+                </li>
+                <!-- <li class="details">
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#LLT19" role="button" aria-expanded="false" aria-controls="LLT19">
+                    <i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="far fa-file-pdf"></i><a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report</a> 
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="LLT19">
+                        <div class="card card-body" ><p>
+                            We construct a family of $2$ dimensional lattice models depending on a positive integer $n$ whose partition functions are equal to the LLT polynomials of Lascoux, Leclerc and Thibon (originally named $n$-ribbon Schur functions). We conjecture that our lattice model is solvable for all $n$, and compute the Yang-Baxter equations for up to $n=3$.</p>
+                        </div>
+                      </div>
+                </li> -->
+                <!--p-->
+            </ul>
+
+
+
+            <p>You can also find my papers on my <a href=" https://arxiv.org/a/0000-0002-4617-5901.html">arXiv author page</a>, <a href="https://scholar.google.com/citations?user=Hw78W00AAAAJ&hl=en">Google scholar profile</a> and <a href="https://zbmath.org/?q=ia%3Azhang.sylvester-w">zbMATH</a>.</p>
+
+      </section>
+    <section id="teaching">
+      <h1>Teaching</h1>
+      <p>Current cources.</p>
+      <ul>
+        <li>I am not teaching in this school year.</li>
+      </ul>
+      <p>Cources I've taught at the University of Minnesota.</p>
+      <ul>
+        <li>Math 4242 applied linear algebra</li>
+        <li>Math 2263 multivariable calculus</li>
+        <li>Math 1272 Calculus II</li>
+        <li>Math 1271 Calculus I</li>
+      </ul>
+
+    </section>
+    <section id="mentoring">
+      <h1>Mentoring</h1>
+      <p>
+        
+      </p>
+    </section>
+  </div>
+</div>
+<script>
+    function adjustHeights() {
+      const about = document.getElementById('about');
+      const intro = document.getElementById('intro');
+      const intro2 = document.getElementById('intro2');
+      const nav = document.querySelector('.bottom-nav');
+      const skip1 = document.getElementById('skip1');
+      const skip2 = document.getElementById('skip2');
+      const aboutPx = about.offsetHeight + nav.offsetHeight + intro.offsetHeight + intro2.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const x = (aboutPx / windowHeight) * 100;
+      const calculatedHeight = (100 - x) / 2;
+      skip1.style.height = Math.max(calculatedHeight, 0) + 'vh';
+      skip2.style.height = Math.max(calculatedHeight, 0) + 'vh';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      adjustHeights();
+      window.addEventListener('resize', adjustHeights);
+    });
+
+</script>
+
+<script>
+    const nav = document.querySelector(".bottom-nav");
+    const intro = document.getElementById('intro');
+    const skip2 = document.getElementById('skip2');
+
+
+    const observer1 = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          intro.classList.add("stuck");
+        } else {
+          intro.classList.remove("stuck");
         }
-    </script>
-</body>
+      },
+      { root: null, threshold: 1 }
+    );
 
+    observer1.observe(skip2);
+
+</script>
+
+<script>
+    const navLinks = document.querySelectorAll('.bottom-nav a');
+    const sections = document.querySelectorAll('section');
+
+    function updateActiveNavLink() {
+      const scrollY = window.scrollY;
+      let activeSection = null;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        if (scrollY >= sectionTop-110 && scrollY < sectionTop -110 + sectionHeight) {
+          activeSection = section;
+        }
+      });
+
+      navLinks.forEach(link => link.classList.remove('active'));
+
+      if (activeSection) {
+        const activeLinkId = activeSection.id;
+        const activeLink = document.querySelector(`.bottom-nav a[href="#${activeLinkId}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveNavLink);
+    updateActiveNavLink(); // Initial call on page load
+
+    //Handle clicks
+    navLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+</script>
+
+<script type="text/javascript">
+
+for (let i = 0; i < 5; i++){
+    var GM = document.getElementById("musiker")
+    GM.innerHTML = 'G. Musiker'
+    GM.href = 'https://www-users.cse.umn.edu/~musiker/'
+    GM.target = "_blank"
+    GM.setAttribute('id','')
+
+    var NO = document.getElementById("ovenhouse")
+    NO.innerHTML = 'N. Ovenhouse'
+    NO.href="https://www-users.cse.umn.edu/~ovenh001/"
+    NO.target = "_blank"
+    NO.setAttribute('id','') 
+    
+    var SC = document.getElementById('chepuri')
+    SC.innerHTML = 'S. Chepuri'
+    SC.href='https://sites.google.com/view/sunita-chepuri'
+    SC.target = '_blank'
+    SC.setAttribute('id','')
+}
+
+for (let j = 0; j < 3; j++){
+    var ek = document.getElementById("kelly")
+    ek.innerHTML = 'E. Kelly'
+    ek.href='https://sites.google.com/view/elizabeth-kelley/home'
+    ek.target = '_blank'
+    ek.setAttribute('id','')
+
+    var eb = document.getElementById('banaian')
+    eb.innerHTML = 'E. Banaian'
+    eb.href='https://sites.google.com/umn.edu/estherbanaian/home'
+    eb.target = '_blank'
+    eb.setAttribute('id','')
+}
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    
+
+
+   
+
+<script>
+    var elems = document.getElementsByClassName("collapse");
+
+    function openAll() {
+        $('.collapse').collapse('show');
+        document.getElementById("collapse-all").setAttribute( "onClick", "javascript: closeAll();" );
+        document.getElementById("collapse-all").setAttribute( "data-transformed", "true" );
+        document.getElementById("collapse-all").innerHTML = "<i  style='transform:rotate(45deg); transition: all 0.6s;' class='fas fa-plus'></i> <span>Hide Abstracts</span>";
+    }
+    function closeAll() {
+        $('.collapse').collapse('hide');
+        document.getElementById("collapse-all").setAttribute( "onClick", "javascript: openAll();" );
+        document.getElementById("collapse-all").innerHTML = "<i class='fas fa-plus'></i> <span>Show Abstracts</span>";
+        document.getElementById("collapse-all").setAttribute( "data-transformed", "false" );
+    }	
+</script>
+
+
+
+  
+
+</body>
 </html>
