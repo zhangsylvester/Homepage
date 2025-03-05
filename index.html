@@ -58,7 +58,7 @@
       width: 100%;
       margin: 0;
       padding: 20px 40px;
-      scroll-margin-top: 105px; /* Adjust based on your navbar height */
+      scroll-margin-top: 100px; /* Adjust based on your navbar height */
     }
     section:nth-child(odd) {
       background: #f0f0f0;
@@ -131,7 +131,6 @@ ul.papers li.title a:link{
       overflow: hidden;
       padding-top: 0px;
       padding-bottom: 20px;
-      /*min-height: 35vh;*/
       transition: height 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -661,7 +660,7 @@ ul.papers li.hide{
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
-        if (scrollY >= sectionTop-110 && scrollY < sectionTop -110 + sectionHeight) {
+        if (scrollY >= sectionTop-107 && scrollY < sectionTop -107 + sectionHeight) {
           activeSection = section;
         }
       });
