@@ -87,7 +87,7 @@
         
     }
     #content a:visited{
-        color:#7A0019;
+        color: #00008B;
     }
     #content a i{
         color: black;
@@ -110,7 +110,6 @@ ul.papers li.title a:link{
       overflow: hidden;
       padding-top: 20px;
       padding-bottom: 0 px;
-      /*min-height: 35vh;*/
       transition: height 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -145,7 +144,7 @@ ul.papers li.title a:link{
       margin: 0.05em 0;
       font-family: Times, "Times New Roman", serif;
       color: #1d4c87;
-      transition: all 1s ease;
+      transition: all 1.5s ease;
     }
 
     .secondary-name {
@@ -286,53 +285,132 @@ ul.papers li.title{
     /* padding-left: 15px; */
     list-style-type: disc;
 }
-/* ul.papers li.title:before{
-content: "\f02d"; 
-font-family: FontAwesome;
-display: inline-block;
-margin-left: -15px;
-width: 15px; 
-}*/
 
 ul.papers li.hide{
     list-style-type:none;
     padding-bottom:10px;
     margin:0px;
 }
+
+<!--Top Nav-->
+
+.mobile-container {
+  max-width: 500px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  /*position: relative;*/
+  position: sticky;
+  top: 0;
+
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+@media (max-width: 500px) {
+    .large-screen { 
+        display: none; 
+    }
+
+  
+    #intro {
+        padding-top: 0px;
+    }
+
+    #intro2 {
+        padding-bottom: 0px;
+    }
+}
+@media (min-width: 500px) {
+    .small-screen { 
+        display: none; 
+    }
+
+}
 </style>
 
 </head>
 
-<body>
-  <div class="main-content">
-    <div id="skip1"></div>
-    <div id="intro">  
-      <h1 class="main-name">Sylvester W Zhang</h1>
-    </div>
-    <div id="intro2">
-      <h2 class="secondary-name">张文泽</h2>
-      <p class="details">Ph.D. Candidate in Mathematics</p>
-      <p class="details">University of Minnesota</p>
-    </div>
-    <div id="skip2"></div>
-    <nav class="bottom-nav">
+<body>   
+
+    <!-- Top Navigation Menu -->
+<div class="topnav small-screen">
+  <a href="#home" class="active">Sylvester W Zhang</a>
+    <div id="myLinks">
       <a href="#about">About</a>
       <a href="#research">Research</a>
       <a href="#papers">Papers</a>
       <a href="#teaching">Teaching</a>
       <a href="#mentoring">Mentoring</a>
-    </nav>
+    </div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+
+  <div id="skip1" class = "large-screen"></div>
+  <div id="intro" class = "large-screen">  
+    <h1 class="main-name large-screen">Sylvester W Zhang</h1>
+  </div>
+  <div id="intro2" class = "large-screen">
+    <h2 class="secondary-name large-screen" >张文泽</h2>
+    <p class="details large-screen" >Ph.D. Candidate in Mathematics</p>
+    <p class="details large-screen">University of Minnesota</p>
+  </div>
+  <div id="skip2" class = "large-screen"></div>
+  <nav class="bottom-nav large-screen">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#papers">Papers</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#mentoring">Mentoring</a>
+  </nav>
+    
+
+
+    
+  
+  
     <div id="content">
     <section id="about">
       <div class="about-content">
         <h1>About Me</h1>
         <p>My name is 张文泽 (Wenze Zhang) and I go by Sylvester. I publish under <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1459948">Sylvester W. Zhang</a>.</p>
                         <p>
-                            I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>, the same place where I did my undergraduate studies. <!--Starting Fall 2025, I will be a postdoc (Hedrick assistand professor) at UCLA.-->
+                            I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>,  working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. Previously, I received my bachelor's degrees also at the University of Minnesota.
                         </p>
-                        <p>
-                            I am currently working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. 
-                        </p>
+                        <p>Contact me at: <span id="email" style="cursor: pointer; color: var(--color1);"></span>.</p>
         </div>
       <div class="about-photo"></div>
     </section>
@@ -342,7 +420,7 @@ ul.papers li.hide{
       </ul>
       </p>
       <h2>Collaborators</h2>
-       <p> Gregg Musiker (4),  Nick Ovenhouse (4), Sunita Chepuri (2), Calvin Yost-Wolff (2), Valerie Zhang (2), Esther Banaian, Michael Curran, Quang Dao, Claire Frechette, Elizabeth Kelley, Greg Michel, Ralf Schiffler, Julian Wellman.
+       <p> Nick Ovenhouse (5), Gregg Musiker (4), Sunita Chepuri (3), Esther Banaian (2), Elizabeth Kelley (2), Ralf Schiffler (2), Calvin Yost-Wolff (2), Valerie Zhang (2),  Michael Curran, Quang Dao, Claire Frechette, Greg Michel, Julian Wellman.
       </p>
     </section>
     <section id="papers">
@@ -538,14 +616,6 @@ ul.papers li.hide{
       </ul>
             
             
-
-            <!--<h5>Extended Abstracts.</h5> 
-            <ul class="papers">
-                <li class="title">
-                <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, S. Chepuri, and E. Kelley. (2022)
-                </li>
-                <li class="details"><i class="bi bi-caret-right-fill"></i> <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2022/52.pdf">Séminaire Lotharingien de Combinatoire 86B.52</a>, proceedings for FPSAC 2022.</li>
-            </ul>-->
             
             <h2>Other Writings.</h2>
             <ul class="papers">
@@ -560,21 +630,7 @@ ul.papers li.hide{
                     
                     <strong>A Lattice Model for LLT Polynomials.</strong> with M. Curran, C. Yost-Wolff, and V. Zhang. <a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report.</a> (2019)
                 </li>
-                <!-- <li class="details">
-                    <a class="abs-btn" data-bs-toggle="collapse" href="#LLT19" role="button" aria-expanded="false" aria-controls="LLT19">
-                    <i class="bi bi-caret-right-fill"></i>
-                    Abstract.
-                    </a>
-                    <i class="far fa-file-pdf"></i><a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report</a> 
-                </li>
-                <li class="hide">
-                    <div class="collapse abs" id="LLT19">
-                        <div class="card card-body" ><p>
-                            We construct a family of $2$ dimensional lattice models depending on a positive integer $n$ whose partition functions are equal to the LLT polynomials of Lascoux, Leclerc and Thibon (originally named $n$-ribbon Schur functions). We conjecture that our lattice model is solvable for all $n$, and compute the Yang-Baxter equations for up to $n=3$.</p>
-                        </div>
-                      </div>
-                </li> -->
-                <!--p-->
+                
             </ul>
 
 
@@ -599,6 +655,17 @@ ul.papers li.hide{
     </section>
     <section id="mentoring">
       <h1>Mentoring</h1>
+      <h2><a href="http://faculty.bicmr.pku.edu.cn/~gaoyibo/reu.html">PACE</a></h2>
+      <p>
+        I am a mentor at <a href="http://faculty.bicmr.pku.edu.cn/~gaoyibo/reu.html">PACE</a> &ndash;&ndash; PKU Algebraic Combinatorics Experience, and REU program at Peiking University. Below is a list of projects I mentored.
+      </p>
+      <p>[To be added.]</p>
+
+      <h2><a href="https://www-users.cse.umn.edu/~reiner/REU/REU.html">Twin Cities REU</a></h2>
+      I participated in the UMN Algebra and Combinatorics REU (see this <a href="https://cse.umn.edu/math/news/another-successful-year-reu-program-highlights-student-achievements-mathematics">newsletter</a>) in 2019, and was a graduate TA in 2021 and 2022. 
+    </section>
+    <section id="misc">
+      <h1>Miscelleny</h1>
       <p>
         
       </p>
@@ -751,6 +818,36 @@ for (let j = 0; j < 3; j++){
     }	
 </script>
 
+<!--Top Nav function-->
+<script>
+  function myFunction() {
+    var x = document.getElementById("myLinks");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+  </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var user = "swzhang";
+      var domain = "umn.com";
+      var email = user + "@" + domain;
+      var emailElement = document.getElementById("email");
+
+      emailElement.textContent = email;
+
+      emailElement.addEventListener("click", function() {
+          navigator.clipboard.writeText(email).then(function() {
+              alert("Email copied to clipboard!");
+          }).catch(function(err) {
+              console.error("Failed to copy email: ", err);
+          });
+      });
+  });
+</script>
 
 
   
