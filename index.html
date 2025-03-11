@@ -7,7 +7,9 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://twin-cities.umn.edu/sites/twin-cities.umn.edu/files/favicon.ico" />
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    
+  <!--google font-->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;200;300;400&display=swap" rel="stylesheet">
+
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       "HTML-CSS": { linebreaks: { automatic: true, width: "75% container" } }, 
@@ -72,6 +74,18 @@
     .skip {
       background: white;
     }
+    a.email span {
+      display:none;
+    }
+
+    a.email:hover span {
+    display: inline-block;
+    font-size:12px;
+    color:red;
+    vertical-align: middle;
+    padding-bottom: 1.8px;
+    padding-left:2px;
+    }
 
     #content a:link{
     color:var(--color1);
@@ -121,9 +135,10 @@ ul.papers li.title a:link{
     }
     #intro.stuck .main-name{
       font-size: 1.7em;
-      margin: 0.05em 0;
-      font-family: Times, "Times New Roman", serif;
-      font-weight: 200;
+      margin: 0.05em 0; 
+      /*font-family: Times, "Times New Roman", serif;*/
+      font-family: 'Source Serif Pro', serif;
+      font-weight: 100;
       color: #1d4c87;
     }
 
@@ -144,8 +159,10 @@ ul.papers li.title a:link{
       font-size: 2em;
       margin: 0.05em 0;
       font-family: Times, "Times New Roman", serif;
+      
       color: #1d4c87;
       transition: all 1.5s ease;
+      font-weight: 400; 
     }
 
     .secondary-name {
@@ -196,11 +213,10 @@ ul.papers li.title a:link{
       padding-right: 20px;
     }
     .about-photo {
-      width: 150px;
-      height: 150px;
+      width: 200px;
+      height: 200px;
       border-radius: 10px;
-      background: gray;
-      flex-shrink: 0;
+      flex-shrink: 2;
     }
 
   /*  Papers*/
@@ -339,23 +355,23 @@ ul.papers li.hide{
 }
 
 @media (max-width: 500px) {
-    .large-screen { 
-        display: none; 
-    }
+  .large-screen { 
+      display: none; 
+  }
 
-  
-    #intro {
-        padding-top: 0px;
-    }
 
-    #intro2 {
-        padding-bottom: 0px;
-    }
+  #intro {
+      padding-top: 0px;
+  }
+
+  #intro2 {
+      padding-bottom: 0px;
+  }
 }
 @media (min-width: 500px) {
-    .small-screen { 
-        display: none; 
-    }
+  .small-screen { 
+      display: none; 
+  }
 
 }
 </style>
@@ -407,14 +423,21 @@ ul.papers li.hide{
     <section id="about">
       <div class="about-content">
         <h1>About Me</h1>
-        <p>My name is 张文泽 (Wenze Zhang) and I go by Sylvester. I publish under <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1459948">Sylvester W. Zhang</a>.</p>
-                        <p>
-                            I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>,  working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. Previously, I received my bachelor's degrees also at the University of Minnesota.
-                        </p>
-                        <p>Contact me at: <span id="email" style="cursor: pointer; color: var(--color1);"></span>.</p>
-        </div>
-      <div class="about-photo"><img src="files/head.jpeg" alt="Headshot" style="width: 100%; height: 100%; border-radius: 6%; object-fit: cover;">
+        <p>
+          My name is 张文泽 (Wenze Zhang) and I go by Sylvester. I publish under <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1459948">Sylvester W. Zhang</a>.
+        </p>
+        <p>
+          I am a fifth year Ph.D student in <a href="https://math.umn.edu/" target="black">Mathematics</a> at the <a href="https://twin-cities.umn.edu/" target="blank">University of Minnesota</a>,  working on <a href="https://www-users.cse.umn.edu/~reiner/combinatorics_group.html">algebraic combinatorics</a> under the guidance of <a target="_blank" href="https://sites.google.com/site/pylyavskyy/">Pasha Pylyavskyy</a>. Previously, I received my bachelor's degrees also at the University of Minnesota.
+        </p>
+        <p>
+          Contact me at: <a id="email" class="email" style="cursor: pointer; color: var(--color1);"></a>
+        </p>
       </div>
+
+      <div class="about-photo">
+          <img src="files/head.jpeg" alt="Headshot" style="max-width: 100%; max-height: 100%; border-radius: 5%; object-fit: cover;">
+      </div>    
+      
     </section>
     <section id="research">
       <h1>Research</h1>
@@ -637,21 +660,21 @@ ul.papers li.hide{
 
 
 
-            <p>You can also find my papers on my <a href=" https://arxiv.org/a/0000-0002-4617-5901.html">arXiv author page</a>, <a href="https://scholar.google.com/citations?user=Hw78W00AAAAJ&hl=en">Google scholar profile</a> and <a href="https://zbmath.org/?q=ia%3Azhang.sylvester-w">zbMATH</a>.</p>
+            <p>You can also find my papers on <a href=" https://arxiv.org/a/0000-0002-4617-5901.html">arXiv</a>, <a href="https://scholar.google.com/citations?user=Hw78W00AAAAJ&hl=en">Google scholar</a> and <a href="https://zbmath.org/?q=ia%3Azhang.sylvester-w">zbMATH</a>.</p>
 
       </section>
     <section id="teaching">
       <h1>Teaching</h1>
-      <p>Current cources.</p>
+      <p>Current courses.</p>
       <ul>
         <li>I am not teaching in this school year.</li>
       </ul>
-      <p>Cources I've taught at the University of Minnesota.</p>
+      <p>Courses I've taught at the University of Minnesota.</p>
       <ul>
-        <li>Math 4242 applied linear algebra</li>
-        <li>Math 2263 multivariable calculus</li>
-        <li>Math 1272 Calculus II</li>
-        <li>Math 1271 Calculus I</li>
+        <li>Math 4242 applied linear algebra.</li>
+        <li>Math 2263 multivariable calculus.</li>
+        <li>Math 1272 Calculus II.</li>
+        <li>Math 1271 Calculus I.</li>
       </ul>
 
     </section>
@@ -839,11 +862,12 @@ for (let j = 0; j < 3; j++){
       var email = user + "@" + domain;
       var emailElement = document.getElementById("email");
 
-      emailElement.textContent = email;
+      emailElement.innerHTML = email +'' + '<span> click to copy</span>';
+      
 
       emailElement.addEventListener("click", function() {
           navigator.clipboard.writeText(email).then(function() {
-              alert("Email copied to clipboard!");
+              alert("Email copied to clipboard.");
           }).catch(function(err) {
               console.error("Failed to copy email: ", err);
           });
