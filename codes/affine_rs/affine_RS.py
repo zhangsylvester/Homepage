@@ -400,8 +400,8 @@ class GrowthDiagram:
         return result
 
     def Q_tabloid_list(self):
-        # The call to display_colored_shadow in run_app ensures auto_color_left_sequence is attempted.
-        # If color_list or seg_color are empty after that, it's a valid state (e.g., C=0).
+        if not self.color_list or not self.seg_color:
+            raise ValueError("Call auto_color_left_sequence first.")
         data = self.extract_final_window(); segs,cols = data['segments'], data['seg_color']
         result = []
         for col in range(1, self.n+1):
@@ -423,8 +423,8 @@ class GrowthDiagram:
         return Tabloid(rows)
 
     def Q_tabloid(self):
-        rows = self.list_2_tabloid(self.Q_tabloid_list())
-        return Tabloid(rows)
+        rows = self.list_2_tabloid(self.Q_tabloid_list())##
+        return Tabloid(rows[::-1])
 
     def display_P_tabloid(self):
         print("P-tabloid:")
