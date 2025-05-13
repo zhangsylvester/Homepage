@@ -423,8 +423,8 @@ class GrowthDiagram:
         return Tabloid(rows)
 
     def Q_tabloid(self):
-        rows = self.list_2_tabloid(self.Q_tabloid_list())##
-        return Tabloid(rows[::-1])
+        rows = self.list_2_tabloid(self.Q_tabloid_list()[::-1])##
+        return Tabloid(rows)
 
     def display_P_tabloid(self):
         print("P-tabloid:")
