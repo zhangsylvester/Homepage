@@ -45,6 +45,9 @@
   </style>
 </head>
 <body>
+  <div id="password-prompt-message" style="text-align:center; padding: 50px 20px; font-size: 1.5em; color: #dc3545; display:none; font-family: Arial, sans-serif;">
+    Access Denied.
+  </div>
   <div class="container-fluid">
     <h1 class="mb-3">Affine Growth Diagram</h1>
 
@@ -77,4 +80,69 @@
   </div>
   <script type="py" src="./affine_RS.py"></script>
 </body>
+<script>
+  (function() {
+    const correctPassword = "schensted101"; // <<< CHANGE THIS!
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    const pageWrapper = document.getElementById('page-wrapper');
+    const accessDeniedMessageDiv = document.getElementById('password-prompt-message');
+
+    function showContent() {
+      if (pageWrapper) {
+        pageWrapper.style.display = 'block';
+      }
+      if (accessDeniedMessageDiv) {
+        accessDeniedMessageDiv.style.display = 'none';
+      }
+    }
+
+    function showAccessDenied(message) {
+      if (pageWrapper) {
+        pageWrapper.style.display = 'none';
+      }
+      if (accessDeniedMessageDiv) {
+        accessDeniedMessageDiv.textContent = message || 'Access Denied. Incorrect password.';
+        accessDeniedMessageDiv.style.display = 'block';
+      } else {
+        // Fallback if the div isn't found
+        document.body.innerHTML = '<h1 style="text-align:center; margin-top:50px; color:red;">Access Denied</h1>';
+      }
+    }
+
+    function promptForPassword() {
+      if (attempts >= maxAttempts) {
+        showAccessDenied("Maximum password attempts reached. Access denied.");
+        return;
+      }
+
+      const enteredPassword = prompt("Please enter the password to view this page:", "");
+      attempts++;
+
+      if (enteredPassword === correctPassword) {
+        showContent();
+      } else if (enteredPassword === null || enteredPassword === "") {
+        // User cancelled or entered nothing
+        showAccessDenied("Password entry cancelled. Access denied.");
+      } else {
+        // Incorrect password
+        const remainingAttempts = maxAttempts - attempts;
+        showAccessDenied("Incorrect password. " + (remainingAttempts > 0 ? remainingAttempts + " attempts remaining." : "No attempts remaining. Access denied."));
+        if (remainingAttempts > 0) {
+          // Optionally, you could re-prompt or offer a retry button here
+          // For simplicity, this version denies access after a wrong attempt.
+          // To re-prompt automatically: promptForPassword();
+        }
+      }
+    }
+
+    // Run the prompt when the script executes
+    if (pageWrapper) { // Only run if the main wrapper exists
+        promptForPassword();
+    } else {
+        console.error("Page wrapper div not found. Password protection script cannot run effectively.");
+    }
+  })();
+</script>
 </html>
