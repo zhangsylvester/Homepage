@@ -472,12 +472,14 @@ def run_app(evt=None):
     res_elem.textContent = ''
 
     try:
-        perm_input = document.getElementById('perm').value.strip()
-        if not perm_input:
+        perm_input_value = document.getElementById('perm').value.strip() # Renamed for clarity
+        if not perm_input_value:
             res_elem.textContent = "Please enter an affine permutation."
             return
 
-        L = [int(x) for x in perm_input.split(',') if x.strip()]
+        L = [int(x) for x in perm_input_value.split(',') if x.strip()]
+
+        w_display_string = f'w = [{perm_input_value}]\n\n' # Format the string to display w
 
         gd = GrowthDiagram(L)
 
@@ -512,9 +514,9 @@ def run_app(evt=None):
         out_P_rows = [' '.join(map(str, row)) for row in P_tab.rows] if P_tab.rows else ["(empty)"]
         out_Q_rows = [' '.join(map(str, row)) for row in Q_tab.rows] if Q_tab.rows else ["(empty)"]
 
-        output_text = "P-tabloid:\n" + "\n".join(out_P_rows) + \
+        output_text = w_display_string + "P-tabloid:\n" + "\n".join(out_P_rows) + \
                       "\n\nQ-tabloid:\n" + "\n".join(out_Q_rows) + \
-                      f"\n\nλ :\n{lam_list}"
+                      f"\n\nλ:\n{lam_list}"
         res_elem.textContent = output_text
 
     except ValueError as e:

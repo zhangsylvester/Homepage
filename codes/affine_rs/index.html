@@ -17,22 +17,28 @@
       /* Bootstrap handles font-family. Add any global overrides here if needed. */
       padding-top: 1rem; /* Add some space at the top */
     }
+    .sticky-result-column {
+        position: -webkit-sticky; /* For Safari */
+        position: sticky;
+        top: 50px; /* Adjust this for desired sticky offset from viewport top */
+    }
     /* Custom styles for the result pre tag */
     #result {
       white-space: pre-wrap; /* Allow text to wrap within the pre tag */
       overflow-x: auto; /* Add horizontal scroll if content is too wide */
       background-color: #f4f4f4; /* Optional: light background for readability */
-      padding-top: 0; /* Align text content with the top of the diagram box */
-      padding-right: 10px; padding-bottom: 10px; padding-left: 10px; /* Keep other paddings */
+      padding-top: 10px; /* Align text content with the top of the diagram box */
+      padding-right: 30px; padding-bottom: 10px; padding-left: 10px; /* Keep other paddings */
       border: 1px solid #ddd;
       min-height: 200px; /* Ensure it has some height even when empty */
       max-height: 600px; /* Limit height and make it scrollable if content exceeds */
       overflow-y: auto;
+      
     }
     /* Ensure plots within columns don't cause overflow issues if too wide */
     #diagram-output-area img {
-        width: 100%; /* Force image to take full width of its container */
-        height: auto;
+        width: 100%; /* Make image responsive within its column */
+        height: auto; /* Maintain aspect ratio */
         display: block; /* Removes any extra space below the image if it's inline */
         object-fit: contain; /* Ensures the entire image is visible, scaled down if necessary, maintaining aspect ratio */
     }
@@ -44,8 +50,8 @@
 
     <div class="row mb-3 align-items-end">
       <div class="col-md-auto">
-        <label for="perm" class="form-label">Affine permutation (comma-separated):</label>
-        <input id="perm" class="form-control" style="width: 280px;" placeholder="e.g. 3,7,0,-1,6" />
+        <label for="perm" class="form-label">Affine permutation:</label>
+        <input id="perm" class="form-control" style="width: 250px;" value="0,3,5,-2" />
       </div>
       <div class="col-md-auto">
         <button id="run" class="btn btn-primary" py-click="run_app">Run</button>
@@ -64,7 +70,7 @@
       <div class="col-lg-8 col-md-7" id="diagram-output-area">
         <!-- Plots will be dynamically inserted here by PyScript -->
       </div>
-      <div class="col-lg-4 col-md-5" style="padding-top:-20px">
+      <div class="col-lg-4 col-md-5 sticky-result-column">
         <pre id="result" ></pre>
       </div>
     </div>
