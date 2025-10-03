@@ -1,0 +1,83 @@
+\documentclass{amsart}
+
+\usepackage{stmaryrd}
+\usepackage[inline]{showlabels}
+%Title Style
+\usepackage{mathtools}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@settitle}{\uppercasenonmath\@title}{}{}{}
+\patchcmd{\@setauthors}{\MakeUppercase}{}{}{}
+\patchcmd{\section}{\scshape}{}{}{}
+\makeatother
+\makeatletter
+\patchcmd{\@maketitle}
+  {\ifx\@empty\@dedicatory}
+  {\ifx\@empty\@date \else {\vskip2ex %vertical position of date
+  \centering\footnotesize\@date\par\vskip1ex}\fi
+   \ifx\@empty\@dedicatory}
+  {}{}
+\patchcmd{\@adminfootnotes}
+  {\ifx\@empty\@date\else \@footnotetext{\@setdate}\fi}
+  {}{}{}
+\makeatother
+
+
+%Page Style
+\usepackage{mathabx}
+\usepackage[colorlinks,backref=page,citecolor=blue]{hyperref}
+\usepackage{accents}
+\renewcommand{\familydefault}{ppl}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\marginparwidth}{0in}
+\setlength{\marginparsep}{0in}
+\setlength{\marginparpush}{0in}
+\setlength{\topmargin}{0.3in}
+\setlength{\headsep}{14pt}
+\setlength{\footskip}{.3in}
+\setlength{\textheight}{8.0in}
+\setlength{\textwidth}{5.8in}
+\setlength{\parskip}{4pt}
+\linespread{1.2}
+
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{restate}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\todo}[1]{{\color{red}[To Do: #1]}}
+\newcommand{\syl}[1]{{\color{orange}[S: #1]}}
+\DeclareMathOperator{\zz}{\mathbb{Z}}
+
+
+
+\title{Symmetric Functions and Young Tableaux}
+\author{Sylvester W. Zhang$^\sharp$}
+\thanks{$^\sharp$\href{mailto:sylvesterzhang@math.ucla.edu}{sylvesterzhang@math.ucla.edu} UCLA}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	These are lecture notes for Math 206a (Algebraic combinatorics), UCLA Fall 2025.
+\end{abstract}
+\tableofcontents
+\section{Partitions and their ordering}
+
+
+	
+\end{document}

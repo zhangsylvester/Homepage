@@ -1,0 +1,117 @@
+\documentclass{amsart}
+
+\usepackage{stmaryrd}
+\usepackage[inline]{showlabels}
+%Title Style
+\usepackage{mathtools}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@settitle}{\uppercasenonmath\@title}{}{}{}
+\patchcmd{\@setauthors}{\MakeUppercase}{}{}{}
+\patchcmd{\section}{\scshape}{}{}{}
+\makeatother
+\makeatletter
+\patchcmd{\@maketitle}
+  {\ifx\@empty\@dedicatory}
+  {\ifx\@empty\@date \else {\vskip2ex %vertical position of date
+  \centering\footnotesize\@date\par\vskip1ex}\fi
+   \ifx\@empty\@dedicatory}
+  {}{}
+\patchcmd{\@adminfootnotes}
+  {\ifx\@empty\@date\else \@footnotetext{\@setdate}\fi}
+  {}{}{}
+\makeatother
+
+
+%Page Style
+\usepackage{mathabx}
+\usepackage[colorlinks,backref=page,citecolor=blue]{hyperref}
+\usepackage{accents}
+\renewcommand{\familydefault}{ppl}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\marginparwidth}{0in}
+\setlength{\marginparsep}{0in}
+\setlength{\marginparpush}{0in}
+\setlength{\topmargin}{0.3in}
+\setlength{\headsep}{14pt}
+\setlength{\footskip}{.3in}
+\setlength{\textheight}{8.0in}
+\setlength{\textwidth}{5.8in}
+\setlength{\parskip}{4pt}
+\linespread{1.2}
+
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{restate}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\DeclareMathOperator{\YY}{\mathbb{Y}}
+\DeclareMathOperator{\Y}{\bf{Y}}
+\DeclareMathOperator{\id}{id}
+\title{Math 206A Problem Sets}
+
+\begin{document}
+	\maketitle
+	\section{Homework Assignment 1 (Due Oct 10 F)}
+	
+	\begin{problem}
+		Recall that $\mathbb{Y} = \mathbb{Q}\text{-span}(\bf{Y})$, where $\bf{Y}$ is the Young's lattice, and the up/down operators $U,D$ defined by $U(\lambda)=\sum_{\lambda\lessdot \mu}\mu$ and  $D(\lambda)=\sum_{\mu\lessdot \lambda}\mu$. Prove that 
+		\[[D,U]=\text{id}\]
+	\end{problem}
+	
+	\begin{problem}
+		Recall the Weyl algebra $\mathcal{W}$ is the $\mathbb{Z}$-algebra with unit $1$ and generators $U,D$ with relations $[D,U]=1$. Rewrite $D^nU^n$ as an $\mathcal{W}$-element such that no $D$ appears before an $U$. What is the identity coefficient?
+		
+		For example, $D^2U^2=D(UD+1)U=DUDU+DU=(UD+1)(UD+1)+(UD+1)=UDUD+3UD+2=U(UD+1)D+3UD+2=U^2D^2+4UD+2$. The identity coefficient is $2$.
+	\end{problem}
+	
+	\begin{problem}
+		Prove that
+		\[\sum_{k\geq 0} h_k t^k = \prod_{i\geq0}{1\over 1-x_it}\]
+	\end{problem}
+	
+	\begin{problem}
+		Is the power series $f=\prod_{i\geq 1}(1+x_i+x_i^2)$ symmetric? If so, expand in the $e$-basis.
+	\end{problem}
+		\begin{problem}
+		Expand $h_3e_4$ in the Schur basis. 	
+	\end{problem}
+	\begin{problem}
+		[Bonus] Expand $h_me_n$ in the Schur basis. You may start experimenting with {\tt{SageMath}} to make a conjecture.
+	\end{problem}
+	
+	
+	\section{Homework Assignment 2 (Due Oct 20 M)}
+	\begin{problem}
+		Prove that if $K_{\lambda\mu}\neq 0$, then $\lambda\trianglelefteq \mu$ (the dominance order).
+	\end{problem}
+
+	
+	\section{Homework Assignment 3 (Due Oct 29 W)}
+	\section{Homework Assignment 4 (Due Nov 7 F)}
+	\section{Homework Assignment 5 (Due Nov 17 M)}
+	\section{Homework Assignment 6 (Due Nov 26 W)}
+	\section{Homework Assignment 7 (Due Dec 8 F)}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}
