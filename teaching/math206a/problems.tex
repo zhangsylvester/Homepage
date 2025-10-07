@@ -68,10 +68,11 @@
 \begin{document}
 	\maketitle
 \begin{itemize}
-\item Submit a genuine attempt for each assigned problem. Perfect solutions are not required for full credit, but your work must be clearly typesetted.
+\item Submit a genuine attempt for each assigned problem set. Perfect solutions are not required for full credit, but your work must be clearly typesetted.
 \item Printed submissions are preferred. Email submissions are allowed in special circumstances.
 \item Collaboration is encouraged. However, write up your solutions independently and acknowledge any collaborators.
 \item \textbf{AI policy:} You may use LLMs to find references or write codes. Do not use AI to directly solve or write solutions for this problem set.
+\item  {\color{red}Add. Here's a more rigorous definition of a genuine attempt  $:\geq$ perfect solutions for half of each problem set. } 
 \end{itemize}
 	
 	
@@ -81,44 +82,80 @@
 		
 		\section{Homework Assignment 1 (Due Oct 10 F)}
 	
-	\begin{problem}
+	\begin{problem}[2+]
 		Recall that $\mathbb{Y} = \mathbb{Q}\text{-span}(\bf{Y})$, where $\bf{Y}$ is the Young's lattice, and the up/down operators $U,D$ defined by $U(\lambda)=\sum_{\lambda\lessdot \mu}\mu$ and  $D(\lambda)=\sum_{\mu\lessdot \lambda}\mu$. Prove that 
 		\[[D,U]=\text{id}\]
 	\end{problem}
 	
-	\begin{problem}
+	\begin{problem}[2-]
 		Recall the Weyl algebra $\mathcal{W}$ is the $\mathbb{Z}$-algebra with unit $1$ and generators $U,D$ with relations $[D,U]=1$. Rewrite $D^nU^n$ as an $\mathcal{W}$-element such that no $D$ appears before an $U$. What is the identity coefficient?
 		
 		For example, $D^2U^2=D(UD+1)U=DUDU+DU=(UD+1)(UD+1)+(UD+1)=UDUD+3UD+2=U(UD+1)D+3UD+2=U^2D^2+4UD+2$. The identity coefficient is $2$.
 	\end{problem}
 	
-	\begin{problem}
+	\begin{problem}[2]
 		Prove that $\lambda\trianglelefteq \mu$ if and only if $\mu'\trianglelefteq \lambda'$. Here $\lambda'$ is the conjugate of $\lambda$.
 	\end{problem}
 	
-	\begin{problem}
+	\begin{problem}[2]
 		Prove that
 		\[\sum_{k\geq 0} h_k t^k = \prod_{i\geq0}{1\over 1-x_it}\]
 	\end{problem}
 	
-	\begin{problem}
-		Is the power series $f=\prod_{i\geq 1}(1+x_i+x_i^2)$ symmetric? If so, expand in the $e$-basis.
+	\begin{problem}[2+]
+		Is the power series $f=\prod_{i\geq 1}(1+x_i+x_i^2)$ symmetric? If so, expand in the $e$-basis. [Hint: You can use (without proof) the change of basis matrix between $m_\lambda$ and $e_\lambda$.]
 	\end{problem}
-		\begin{problem}
+		\begin{problem}[2]
 		Expand $h_3e_4$ in the Schur basis. 	
 	\end{problem}
-	\begin{problem}
+	\begin{problem}[2+]
 		[Bonus] Expand $h_me_n$ in the Schur basis. You may start experimenting with {\tt{SageMath}} to make a conjecture.
 	\end{problem}
 	
 	
 	\section{Homework Assignment 2 (Due Oct 20 M)}
-	\begin{problem}
-		Prove that if $K_{\lambda\mu}\neq 0$, then $\lambda\trianglelefteq \mu$.
+	\begin{problem} {\color{red} changed}
+		Prove that if $\lambda,\mu\vdash n$ and $\lambda\trianglelefteq \mu$, then $K_{\lambda\mu}\neq 0$.
 	\end{problem}
+\begin{problem}
+	
+\end{problem}
+
+\begin{problem}[3+]
+	Let $u_i:\YY\to \YY$ be the operator of adding a box to the $i$-th row when possible. Define 
+	\[H_k=h_k(u_1,u_2,\cdots)=\sum_{1\leq i_1\leq i_2\leq\cdots\leq i_k}u_{i_1}u_{i_2}\cdots u_{i_k}\]
+	The operators $u_i$ satisfy the relations 
+	\begin{align*}
+	u_iu_j&=u_ju_i\text{\quad if}|i-j|\geq 2\\
+	u_iu_{i+1}u_i&=u_{i+1}u_iu_i\\
+	u_{i+1}u_{i+1}u_i&=u_{i+1}u_iu_{i+1}\\
+	u_{i+1}u_{i+2}u_{i+1}u_i&=u_{i+1}u_{i+2}u_iu_{i+1}	
+	\end{align*}
+	Classify the relations of $\{H_i|i\in\mathbb{N}\}$. 
+	
+	
+[Hint: How does $H_k$ act on $\YY$? You may or may not need to use the relations of the $u_i$'s.] 
+\end{problem}
+\begin{problem}[Bonus] What about 
+	$$E_k=e_k(u_1,u_2,\cdots)=\sum_{1\leq i_1<i_2<\cdots<i_k}u_{i_1}u_{i_2}\cdots u_{i_k}$$
+\end{problem}
+
 
 	
 	\section{Homework Assignment 3 (Due Oct 29 W)}
+	\begin{problem}
+	
+\end{problem}
+\begin{problem}
+	
+\end{problem}
+\begin{problem}
+	
+\end{problem}
+
+\begin{problem}
+	Recall that a permutation is an involution, i.e. $w=w^{-1}$, if and only if $P(w)=Q(w)$. The Bruhat order on $S_n$ induces a partial order on involutions, thus a partial order on SYT's. Give a description of this partial order on SYT's.
+\end{problem}
 	\section{Homework Assignment 4 (Due Nov 7 F)}
 	\section{Homework Assignment 5 (Due Nov 17 M)}
 	\section{Homework Assignment 6 (Due Nov 26 W)}
