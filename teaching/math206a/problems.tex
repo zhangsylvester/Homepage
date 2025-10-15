@@ -72,7 +72,8 @@
 \item Printed submissions are preferred. Email submissions are allowed in special circumstances.
 \item Collaboration is encouraged. However, write up your solutions independently and acknowledge any collaborators.
 \item \textbf{AI policy:} You may use LLMs to find references or write codes. Do not use AI to directly solve or write solutions for this problem set.
-\item  {\color{red}Add. Here's a more rigorous definition of a genuine attempt  $:\geq$ perfect solutions for half of each problem set. } 
+\item  {\color{red}[Add.] Here's a more rigorous definition of a genuine attempt  $:\geq$ perfect solutions for half of each problem set. } 
+\item {\color{red}[Add.] Numbers after each problem shows difficulty, $3+>3>3->2+>\cdots$. Grades don't depend on difficulty.} 
 \end{itemize}
 	
 	
@@ -120,7 +121,9 @@
 	Prove that $s_\lambda\cdot s_{\square}=\sum_{\lambda \lessdot \mu}{s_\mu}$. Here $s_{\square}=m_1=x_1+x_2+\cdots$, and $\lessdot$ denotes the covering relation in Young's lattice.
 \end{problem}
 
-\begin{problem}[3+]
+{\color{blue}Rmk: Can you define a $\mathcal{W}$-action on $\Lambda_{\mathbb{Q}}$? By P 2.2, we define the action of $U$ on $\Lambda$ via multiplication by $s_{\square}$. What should be the action of $D$ on $\Lambda_{\mathbb{Q}}$ such that the map $ \lambda \mapsto s_\lambda$ is an isomorphism from $\mathbb{Y}$ to $\Lambda_{\mathbb{Q}}$ as $\mathcal{W}$-modules?}
+
+\begin{problem}[2+]
 	Let $u_i:\YY\to \YY$ be the operator of adding a box to the $i$-th row when possible. Define 
 	\[H_k=h_k(u_1,u_2,\cdots)=\sum_{1\leq i_1\leq i_2\leq\cdots\leq i_k}u_{i_1}u_{i_2}\cdots u_{i_k}\]
 	The operators $u_i$ satisfy the relations 
@@ -132,11 +135,15 @@
 	\end{align*}
 	Classify the relations of $\{H_i|i\in\mathbb{N}\}$.
 	
+	(Bonus) What about 
+	$$E_k=e_k(u_1,u_2,\cdots)=\sum_{1\leq i_1<i_2<\cdots<i_k}u_{i_1}u_{i_2}\cdots u_{i_k}$$
+	
 	
 [Hint: How does $H_k$ act on $\YY$? You may or may not need to use the relations of the $u_i$'s.] 
 \end{problem}
-\begin{problem}[Bonus] What about 
-	$$E_k=e_k(u_1,u_2,\cdots)=\sum_{1\leq i_1<i_2<\cdots<i_k}u_{i_1}u_{i_2}\cdots u_{i_k}$$
+\begin{problem}[3+]
+	
+	Define $H'_k=h_k(d_1,d_2,\cdots)$. What relations do $\{H_i,H'_j:i,j\in\mathbb{N}\}$ satisfy?
 \end{problem}
 \begin{problem}[3]
 	Let $P(w)$ denote the row-insertion tableau, and $P'(w)$ denote the column-insertion tableau. Prove that $P(w)=P'(w_0w)$, where $w_0w=(w_n,w_{n-1},\cdots,w_2,w_1)$.
@@ -146,7 +153,8 @@
 	
 	\section{Homework Assignment 3 (Due Oct 29 W)}
 	\begin{problem}
-	
+	Define $A(x)=\cdots (1+x u_3)(1+x u_2)(1+x u_1)$ and $B(x)=\cdots (1+x d_3)(1+x d_2)(1+x d_1)$. Prove that $B(y)A(x)=A(x)B(y)(1-xy)^{-1}$. 
+	[Hint: first show that $(1+a)(1-ba)^{-1}(1+b)=(1+b)(1-ab)^{-1}(1+a)$ for any non-commutative $a,b$.]
 \end{problem}
 \begin{problem}
 	
