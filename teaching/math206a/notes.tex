@@ -60,10 +60,11 @@
 \newcommand{\todo}[1]{{\color{red}[To Do: #1]}}
 \newcommand{\syl}[1]{{\color{orange}[S: #1]}}
 \DeclareMathOperator{\zz}{\mathbb{Z}}
+\DeclareMathOperator{\nn}{\mathbb{N}}
 
 
 
-\title{Symmetric Functions and Young Tableaux}
+\title{Young Tableaux and Symmetric Functions}
 \author{Sylvester W. Zhang$^\sharp$}
 \thanks{$^\sharp$\href{mailto:sylvesterzhang@math.ucla.edu}{sylvesterzhang@math.ucla.edu} UCLA}
 \date{\today}
@@ -76,7 +77,10 @@
 	These are lecture notes for Math 206a (Algebraic combinatorics), UCLA Fall 2025.
 \end{abstract}
 \tableofcontents
-\section{Partitions and their ordering}
+\section{Partitions and Young Diagrams}
+An integer partition of $n\in\nn $ is a sequence of integers $\lambda=(\lambda_1,\lambda_2,\cdots,\lambda_k)$ such that $\sum_{i}\lambda_i=n$ and $\lambda_1\geq\lambda_2\geq\cdots \geq \lambda_k$. We denote $\lambda\vdash n$, and $\ell(\lambda)=k$.
+
+We will represent an integer partition using a \emph{Young diagram}, which is a stack of boxes so that the $i$-th row has $\lambda_i$ boxes. 
 
 
 	
