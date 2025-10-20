@@ -61,6 +61,8 @@
 \DeclareMathOperator{\YY}{\mathbb{Y}}
 \DeclareMathOperator{\Y}{\bf{Y}}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sh}{shape}
+\DeclareMathOperator{\SYT}{SYT}
 
 
 \title{Math 206A Problem Sets}
@@ -152,18 +154,35 @@
 
 	
 	\section{Homework Assignment 3 (Due Oct 29 W)}
-	\begin{problem}
+	\begin{problem}[2]
 	Define $A(x)=\cdots (1+x u_3)(1+x u_2)(1+x u_1)$ and $B(x)=\cdots (1+x d_3)(1+x d_2)(1+x d_1)$. Prove that $B(y)A(x)=A(x)B(y)(1-xy)^{-1}$. 
 	[Hint: first show that $(1+a)(1-ba)^{-1}(1+b)=(1+b)(1-ab)^{-1}(1+a)$ for any non-commutative $a,b$.]
 \end{problem}
-\begin{problem}
-	
+\begin{problem}[2+]
+	Let $P$ be a finite poset, and $a_k(P)$ the size of maximal $k$-antichain of $P$. Prove that
+	\[a_k(P)=a_1(P\times[k])\]
+	where $[k]$ is the chain of $k$ elements.
 \end{problem}
-\begin{problem}
+\begin{problem}[Bonus, 3+]
+	Let $P$ be a finite poset. Let $C=(C_1,C_2,\cdots,C_l)$ be a partition of $P$ into chains. 
 	
+	(i) Show that for any $C$, we have
+	\[a_k\leq \sum_i \min(|C_i|,k)\]
+	
+	A chain-partition $C$ is called \emph{$k$-saturated} if the equality  holds. 
+	
+	(ii) Prove that for any $P$ there exists a $k$-saturated chain partition for all $k$. 
+	
+	[Hints: (1) The case $k=1$ is the Dilworth theorem, which you can use without proving (2) use Problem 3.3]
 \end{problem}
+\begin{problem}[2+]
+		Denote $\SYT_{\lambda\setminus \mu}$ the set of all skew standard Young tableaux of shape $\lambda\setminus \mu$. Fix a $\mu\in\Y$ and define	\(D_\mu=\{(T_1,T_2)\in \SYT_{\lambda\setminus \mu}:|\lambda\setminus \mu|=n\}\).
+		What is $\# D_\mu$? Note that the RS bijection implies that $\# D_{\emptyset}=n!$.
+	
+	[Hint: use growth diagram.]
+	\end{problem}
 
-\begin{problem}[4]
+\begin{problem}[Bonus, 5]
 	Recall that a permutation is an involution, i.e. $w=w^{-1}$, if and only if $P(w)=Q(w)$. The Bruhat order on $S_n$ induces a partial order on involutions, thus a partial order on SYT's. Give a description of this partial order on SYT's.
 \end{problem}
 	\section{Homework Assignment 4 (Due Nov 7 F)}
