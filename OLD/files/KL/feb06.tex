@@ -1,0 +1,24 @@
+\begin{proof}[Proof of \Cref{thm:R-formula}]
+	We employ induction on $\ell(v)$. Let $\rho=s_1,\cdots,s_r$ and $s_r=s$.
+	\paragraph{Case (1)} Suppose $s\in D_R(u)$. Define a map
+	\(\varphi:D(\rho)_u\to D(s_1,\cdots,s_{r-1})_{us}\) by
+	\[\varphi((a_1,\cdots,a_r))=(a_1,\cdots,a_r)\]
+	We can see that $||\varphi(\xi)||=||\xi||-1$ and that $a_r$ has to be $s_r$. This map $\varphi$ is a bijection.
+	Therefore,
+	\[\sum_{\xi\in D(\rho)_u} q^{\ell(v)-||\xi||}=\sum_{\eta\in D(s_1,\cdots,s_{r-1})_{us}}q^{\ell(v)-||\eta||-1}=\sum_{\eta\in D(s_1,\cdots,s_{r-1})_{us}}q^{\ell(vs)-||\eta||}=\tilde R_{us,vs}\]
+	\paragraph{Case (2)} Suppose $s\notin D_R(u)$. Define
+	\[D^+(\rho)_u=\{(a_1,\cdots,a_r)\in D(\rho)_u | a_r=s_r\}\]
+	\[D^-(\rho)_u=\{(a_1,\cdots,a_r)\in D(\rho)_u|a_r=e\}\]
+	Define a map $\varphi:D(\rho)_u\to D(s_1,\cdots,s_{r-1})_{us}\cup D(s_1,\cdots,s_{r-1})_u$ by
+	\[\varphi((a_1,\cdots,a_r))=(a_1,\cdots,a_{r-1})\]
+	
+	This map is a bijection between $\varphi(D^-(\rho)_u)=D(s_1,\cdots,s_{r-1})_u$ and $\varphi(D^+(\rho)_u)=D(s_1,\cdots,s_{r-1})_{us}$.
+	
+	Applying this map we get
+	\[
+	\sum_{\xi\in D(\rho)_u}q^{\ell(u)-||\xi||}=\underbrace{\sum_{\eta\in D(s_1,\cdots,s_{r-1})_{us}}q^{\ell(v)-||\eta||-1}}_{\tilde R_{us,vs}}+\underbrace{\sum_{\eta\in D(s_1,\cdots,s_{r-1})_u}q^{\ell(v)-||\eta||}}_{q\tilde R_{u,vs}}\]
+	This completes the proof.
+\end{proof}
+
+We will next look at another combinatorial formula by Brenti, which can be used to prove the combinatorial invariance conjecture for intervals like $[\id,w]$.
+

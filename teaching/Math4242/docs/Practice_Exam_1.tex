@@ -1,0 +1,123 @@
+\documentclass{amsart}
+\usepackage{color}
+\input{command.tex}
+\usepackage[margin = 1in]{geometry}
+\begin{document}
+\leftline{\bf MATH 4242 Exam 1 Practice Problems}
+	
+\vspace{2em}
+
+\begin{enumerate}
+\item Compute the LU factorization of the following matrix. (Hint: Use Gaussian elimination)
+\[\begin{bmatrix}
+	1&5&0\\3&7&11\\0&-4&2
+\end{bmatrix}\]
+\begin{proof}{\color{blue}
+	Use Gaussian elimination to turn the matrix in to $U$, and $L$ is the product of the matrices corresponding to the elementary row operations.}
+\end{proof}
+\item Let $V=\ff_{\leq m}[x]$ be the vector space of polynomials with degree at most $m$. 
+
+(a) Let $U=\{f\in V|f(1)=0\}$. Is $U$ a subspace of $V$?
+
+(b) Let $W=\{f\in V| \text{deg}(f)\text{ is even}\}$. If $W$ a subspace of $V$?
+\begin{proof}\color{blue}
+	(a) If $f,g\in U$, then $(f+g)(1)=f(1)+g(1)=0+0=0$ and $(kf)(1)=kf(1)=k\cdot 0 =0$, thus $U$ is closed under addition and scalar multiplication. Furthermore, the $0$ polynomial satisfy the property by default. So $U$ has a zero vector, thus is a subspace.
+	
+	(b) $\deg(f)$ means the highest degree of monomials in a polynomial $f$. Let $f=x^2+x+1$ and $g=-x^2$. We have $\deg(g)=\deg(f)=2$. But $f+g=x+1$ and $\deg(f+g)=1$ is not even. So $W$ is not a subspace.
+	
+	Note that if we consider even degree polynomials, which are polynomials which only contain even degree terms, then they do form a subspace.
+	\end{proof}
+\item Let $V=M_{n\times n}(\rr)$ the vector space of all $n\times n$ matrices. Let $B$ be the set of all upper triangular matrices. Is $B$ a subspace of $V$?
+\begin{proof}
+	\color{blue} Yes.
+\end{proof}
+\item Suppose $v_1,\cdots,v_4$ are some vectors in $\rr^4$, and $A$ is the matrix whose columns are $v_1,\cdots,v_4$. Suppose the row echelon form of $A$ is
+\[\begin{bmatrix}
+	3&1&7&1\\0&-4&8&3\\0&0&0&4\\0&0&0&0
+\end{bmatrix}\]
+
+(a) Does $v_1,\cdots,v_4$ form a basis of $\rr^4$?
+
+(b) Is $v_3$ in $\s(v_1,v_2,v_4)$? If so, write $v_3$ as a linear combination of them.
+
+(Hint: You may use: permuted LU factorization; some properties about matrix multiplication and invertible maps. )
+
+\begin{proof}
+	\color{blue} 
+	(a) No, the rank of the matrix is $3$ (from the number of pivots), therefore the column span has dimension $3$ which is smaller than $\dim(\rr^4)=4$.
+	
+	(b) Let $w_1,\cdots,w_4$ be the column vector of the row echelon form $U$ of $A$. 
+	Use LU factorization, we know that $PA=LU$, where $U$ is the row echelon form above. In other words, $A=P^{-1}LU$, and set $P^{-1}L=K$. We know that $P$ and $L$ are all products of invertible matrices so $K$ must be also invertible. By properties of matrix product, we have that $w_i=K v_i$. Since $w_1,\cdots,w_4$ are in row echelon form, we know that $w_1,w_2,w_4$ (the columns that contain a pivot) form a basis of the column space. Therefore, by invertibility of $K$, $v_1=K^{-1}w_1,v_2=K^{-1}w_2,v_4=K^{-1}w_4$ also form a basis of the column space, thus $v_3\in \s(v_1,v_2,v_4)$. 
+	
+	From the row echelon form matrix, we know that $w_3=3w_1-2w_2$, thus $K^{-1}w_3=3K^{-1}w_1-2K^{-1}w_2$, thus $v_3=3v_1-2v_2$.
+\end{proof}
+\item Let $V=\rr^2$ with basis $v_1 = (1,2)$ and $v_2= (0,1)$. Let $T$ be the map $T(a,b)=(b,a)$ for all $a,b\in\rr$.
+
+(a) Show that $T$ is linear;
+
+(b) Find the matrix of $T$;
+
+(c) Find a basis for $\ker(T)$. (Hint: use row echelon form of $\mathcal{M}(T)$. 
+\begin{proof}
+	\color{blue}
+	(a) omitted
+	(b) $T(v_1)=T(1,2)=(2,1)=2v_1-3v_2$ and 
+	
+	$T(v_2)=T(0,1)=T(1,0)= v_1-2v_2$. Thus $\mathcal{M}(T)=\begin{pmatrix}
+		2&1\\-3&-2
+	\end{pmatrix}$.
+	
+	(c) A row echelon form of $M(T)$ is $\begin{pmatrix}
+		2&1\\0&7/2
+	\end{pmatrix}$ thus $rank(T)=2$ and thus $\dim\ker(T)=2-2=0$, therefore $\ker(T)=\{0\}$\end{proof}
+\item Let $V=\text{End}({\rr^2})$. Let $W$ be the set of non-invertible linear maps in $V$. Show that $W$ is not a vector space.
+
+(Hint: give an example of two non-invertible maps that sums to an invertible map. You might try to use some theorems to do this in terms of matrices).
+
+\begin{proof}\color{blue}
+	Consider $A=\begin{pmatrix}
+		1&0\\0&0
+	\end{pmatrix}$ and $B=\begin{pmatrix}
+		0&0\\0&1
+	\end{pmatrix}$. Both $A,B$ are singular (non-invertible), but $A+B=I$ is invertible.
+	
+	So the set of non-invertible maps is not closed under addition.
+\end{proof}
+
+\item Let $V=\rr^2$ under the standard basis and $U=\{(x,0):x\in\rr\}$ a subspace of $V$. Describe the quotient space $V/U$. 
+
+\begin{proof}\color{blue}
+	Suppose $v,u\in\rr^2$ such that $v+U=u+U$, i.e. $\{(x+v_1,v_2)|x,v_1,v_2\in\rr\}=\{(x+u_1,u_2)|x,u_1,u_2\in\rr\}$ which is true iff $v_2=w_2$. Therefore two vectors in $V$ belong to the same coset in $V/U$ if they have the same second entry. Therefore the elements of $V/U$ are parametrized by $\rr$ according the  second entry of the vectors.
+	
+	In particular, $V/U=\{U(k)|k\in\rr \}\cong \rr$ where $U(k):=\{(x,k)|x\in \rr\}$.
+\end{proof}
+
+(Hint: What is the map whose kernel is $U$?)
+%\item Consider $\rr^4$ with the usual inner product and norm. Let $v_1=(1,0,0,-1)$, $v_2=(2,0,0,0)$, $v_3=(1,2,2,1)$. And $W=\s(v_1,v_2,v_3)$.
+%
+%(a) Find an orthonormal basis of $W$.
+%
+%(b) Find a basis for the orthogonal complement of $W$.
+\item Is the following matrix positive definite?
+\[A=\begin{pmatrix}
+	1&-1&3\\-1&3&-1\\3&-1&12
+\end{pmatrix}\]
+Does $\langle x,y\rangle =x^TAy$ define an inner product on $\rr^3$?
+\item Find the value for $a,b$ such that the matrix $A$ is orthogonal.
+\[A={1\over 3}\begin{pmatrix}2&-2&b\\1&2&2\\a&1&-2
+\end{pmatrix}\]
+\begin{proof}
+	\color{blue} $a=2,b=3$.
+\end{proof}
+\end{enumerate}
+
+%\noindent Part a (4 pts)
+
+%Prove that both $U$ and $W$ are subspaces of $V$.
+%\vspace{6cm}
+%
+%\noindent Part 2 (6 pts)
+%
+%Describe their sum $U+W$. Is it a direct sum?
+
+\end{document}

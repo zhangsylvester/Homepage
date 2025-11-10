@@ -1,0 +1,39 @@
+\begin{proof}
+	Proof by induction on $\ell(w)$
+	
+	\underline{Base case} $\ell(w)\leq 2$
+	
+	\underline{Induction Step} Find $s$ s.t. $sw<w$. Set $v= sw$.
+	
+	Define $C_w= C_sC_v-\sum_{z<v,sz<z}\mu(z,v)C_z$.
+	
+	It's clear that $\eta(C_w)=C_w$ and $C_w $ is a linear combination of $T_x$ for $x\leq w$. We need to know what is the coefficient of $T_x$.
+	
+	Case (1). $x<sx$.
+	
+	\[T_s T_{sx} = qT_x+(q-1)T_{sx} \]
+	This implies that coefficient of $T_x$ in $q^{-{1\over 2}} T_s C_v$ is $q^{-{1\over 2}}q \alpha(sx,v)\bar P_{sx,v}$.
+	And the coefficient of $T_x$ in $q^{-{1\over 2}} T_1 C_v$ is $-q^{1\over 2}\alpha(x,v)\bar P_{x,v}$.
+	And summing up, the coefficient of $T_x$ in $C_sC_v$ is
+	\[q^{-1}\alpha(x,w)\bar P_{sx,v} + \alpha(x,w)\bar P_{x,w}\]
+	
+	Case (2). $x>sx$.
+	
+	Coefficient of $T_x$ is $C_sC_v$ is
+	\[\alpha(x,w)\bar P_{sx,v}+q^{-1}\alpha(x,w)\bar P_{x,v}\]
+	Therefore
+	\[P_{x,w}=q^{1-c}\underbrace{P_{sx,v}}_{\deg\leq {1\over 2}(\ell(sx,v)-1)}+q^cP_{x,v}-\sum_{x<v}\mu(z,v) q_z^{-{1\over 2}}q_w^{1\over 2} P_{x,z}\]
+	where $c=0$ if $sx>x$ and $c=1$ if $sx<x$.
+	
+	We want that $\deg(P_{x,w})\leq {1\over 2}(\ell(x,w)-1)$.
+	
+	what if $x=z$? impossible. [??]
+	
+	If $c=0$, 
+	%
+	\[\leq {1\over 2}(\ell(x,z)-1)+{1\over 2}\ell(z,w)={1\over 2}(\ell(x,w)-1)\]	
+	
+	If $c=1$,
+	\[\deg(q^1 P_{x,v})\leq 1+{q\over 2}(\ell(x,w)-2)={1\over 2}\ell(x,w)\]	
+	
+\end{proof}

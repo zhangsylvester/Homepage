@@ -1,0 +1,279 @@
+% --- LaTeX CV Template - S. Venkatraman ---
+
+% Set document class and font size
+\documentclass[A4paper, 11pt, utf8, AutoFakeBold]{ctexart}
+\usepackage[utf8]{inputenc}
+\newcommand{\mycolor}[0]{\color{RoyalBlue}}
+
+
+% Package imports
+\usepackage{setspace, longtable, graphicx, hyphenat, hyperref, fancyhdr, ifthen, everypage, enumitem, amsmath, setspace, comment}
+
+% --- Page layout settings ---
+
+% Set page margins
+\usepackage[left=0.8in, right=0.8in, bottom=0.7in, top=0.7in]{geometry}
+
+% Set line spacing
+\renewcommand{\baselinestretch}{1.15}
+
+% --- Page formatting --- \color{OliveGreen}
+
+% Set link colors
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{colorlinks=true, linkcolor=OliveGreen, urlcolor=OliveGreen}
+
+% Set font to Libertine, including math support
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+
+% Remove page numbering
+\pagenumbering{gobble}
+
+% --- Document starts here ---
+
+\begin{document}
+\kaishu
+
+% Name and date of last update to this document
+\noindent{{\Huge{Sylvester W. Zhang}}
+\hfill{\it\footnotesize Updated April 9, 2020}}\vspace{0.2cm}\\
+\hspace{1.5cm}{\Huge 张文泽 }
+
+
+% --- Contact information and other items ---
+
+\vspace{0.5cm} 
+% --- Start the two-column table storing the main content ---
+
+% Set spacing between columns
+\setlength{\tabcolsep}{8pt}
+
+% Set the width of each column
+\begin{longtable}{p{1.5in}p{4.9in}}
+% --- Personal info
+
+\nohyphens{\mycolor{Personal Information}}& \textbf{Email}: \href{mailto:swzhang@umn.edu}{swzhang@umn.edu}\\
+&\textbf{Homepage}: \href{http://www.umn.edu/~swzhang}{http://www.umn.edu/$\sim$swzhang}\\
+&\\
+
+
+% --- Section: Research interests ---
+
+\nohyphens{\mycolor{Research Interests}}
+& Algebraic combinatorics. \\
+& \\
+
+% --- Section: Education ---
+
+\mycolor{Education} 
+& \textbf{University of Minnesota, Twin Cities} \hfill Minneapolis, MN \\ 
+&\ \ \ Ph.D. in Mathematics \hfill Sep 2020 -- Present \\
+&\ \ \ Advisor: Pavlo Pylyavskyy\\ 
+%\vspace{cm}
+%& \\
+%& \textbf{University of Minnesota, Twin Cities} \hfill City, State \\
+& \textbf{University of Minnesota, Twin Cities} \hfill Minneapolis, MN \\ 
+&\ \ \ B.S. in Mathematics \hfill Sep 2016 -- May 2020\\
+%& Mentors: Professors C, D. {\it GPA: X.YZ.}\\
+%& \\
+%& \textbf{University 3} \hfill City, State\\
+&\ \ \ B.A. in Quantitative Economics %\hfill Sep 2016 -- May 2020 
+\\
+%& Mentors: Professors E, F. {\it GPA: X.YZ.}\\
+%& \\
+% --- Uncomment the next few lines if you want to include some courses ---
+%& \textbf{Selected coursework}
+%\begin{itemize}[noitemsep,leftmargin=*]
+%\item \underline{Relevant subject 1}: Course 1, Course 2, Course 3, Course 4
+%\item \underline{Relevant subject 2}: Course 1, Course 2, Course 3, Course 4
+%\end{itemize} \\
+
+% --- Section: Awards, scholarships, etc. ---
+% --- Note: section title is spread over two lines ---
+\begin{comment}
+{\mycolor{Awards and}} 
+& UROP Scholarship (University of Minnesota) \hfill 2020\\
+{\mycolor{scholarships}} 
+& Name of award 2 (Organization that gave you the award)\hfill 2019 \\
+& Name of award 3 (Organization that gave you the award) \hfill 2018 \\
+\end{comment}
+& \\
+
+
+% --- Section: Publications ---
+%\nohyphens{\mycolor{Preprints}}
+%&\begin{enumerate}
+%\item {J. Wellman, Q. V. Dao, S. Zhang, C. Yost-Wolff. Rowmotion Orbits of Trapezoid Posets. arXiv preprint \href{https://arxiv.org/abs/2002.04810}{arXiv:2002.04810}, 2020.}
+%\item {S. Chepuri, CJ Dowd, A. Hardt, G. Michel, \textbf{S. Zhang}, V. Zhang. Arborescence of Covering Graphs. arXiv preprint \href{https://arxiv.org/abs/1912.01060}{arXiv:1912.01060}, 2019.}
+%\end{enumerate}
+
+\nohyphens{\mycolor{Preprints}} 
+&\textbf{An Expansion Formula for Decorated Super-Teichm\"uler Spaces.} \\
+&\ \ \ with  G. Musiker \& N. Ovenhouse. \\
+&\ \ \ arXiv preprint \href{https://arxiv.org/abs/2102.09143}{arXiv:2102.09143}, 2021.\\
+
+& {\textbf{Rowmotion Orbits of Trapezoid Posets.} } \\
+&\ \ \ with J. Wellman, Q. Dao, \& C. Yost-Wolff.\\
+&\ \ \ arXiv preprint \href{https://arxiv.org/abs/2002.04810}{arXiv:2002.04810}, 2020.\\
+
+&\textbf{Arborescence of Covering Graphs.} \\
+&\ \ \ with S. Chepuri, C. Dowd, A. Hardt, G. Michel, \& V. Zhang.\\
+&\ \ \  arXiv preprint \href{https://arxiv.org/abs/1912.01060}{arXiv:1912.01060}, 2019.\\
+%& \textbf{Title of your third most recent research paper} \\
+& \\
+\nohyphens{\mycolor{Work in Progress}} 
+&\textbf{A Lattice Model for LLT Polynomials.}\\
+&\ \ \ with M. Curran, C. Yost-Wolff \& V. Zhang. \\
+& \\
+% --- Section: Talks and tutorials ---
+
+{\mycolor{Talks}} 
+& \textbf{Schur and LLT Polynomials from Lattice Models.} \hfill March 2021 \\
+&\ \ \ Graduate Online Combinatorics Colloquium (GOCC) \\
+& \textbf{$T$-paths Formula for Decorated Super-Teichm\"uller Spaces.} \hfill Feb 2021 \\
+&\ \ \ Combinatorics Seminar, University of Minnesota \\
+
+%& \\
+& \\
+
+
+
+% --- Section: Teaching experience ---
+
+{\mycolor{Teaching Experience}} 
+& \textbf{Teaching assistant, University of Minnesota}  \\
+&\ \ \ Math 1271: Fall 2020 Spring 2021\\
+&\ \ \ Math 1051: Fall 2019 Spring 2020 \\
+
+& \\
+
+
+% --- Section: Various skills (programming, software, languages, etc.) ---
+
+{\mycolor{Skills}} 
+& \textbf{Programming}\\
+&\ \ \ Python, SageMath, Mathematica. \\
+& \textbf{Languages} \\
+&\ \ \ Chinese Mandarin (native), English (fluent) \\
+%& \\
+
+% --- Section: Service and outreach ---
+
+%\mycolor{Service and outreach}
+%& \textbf{Title of organization you were in} \hfill Month Year -- Month Year \\
+%& Description of your responsibilities. Integer pretium semper justo. Proin risus. Aliquam volutpat est vel massa. \\
+%& \\
+
+% --- Section: Professional society memberships ---
+% --- Note: section title is spread over two lines ---
+
+%{\mycolor{Professional}} 
+%& {\textbf{Name of professional society.}} \hfill Month Year -- Present \\
+%{\mycolor{memberships}} 
+%& Some things you did or conferences you attended. Aliquam volutpat est vel massa. Sed dolor lacus, imperdiet non, ornare non, commodo eu, neque. \\
+%& \\
+
+% --- Section: Other interests/hobbies ---
+
+%\nohyphens{\mycolor{Other interests}} & Some of your hobbies etc.\\
+
+% --- End of CV! ---
+\end{longtable}
+
+\newpage
+
+%\noindent{{\Huge{Sylvester W. Zhang}}\\
+\noindent{{\Huge{张文泽的个人简历}}
+\hfill{\it\footnotesize 更新于 \today}}\vspace{0.4cm}\\
+\hspace{2cm}{\huge 中文副本}
+
+
+% --- Contact information and other items ---
+
+\vspace{0.5cm} 
+% --- Start the two-column table storing the main content ---
+
+% Set spacing between columns
+\setlength{\tabcolsep}{8pt}
+
+% Set the width of each column
+\begin{longtable}{p{1.5in}p{4.9in}}
+% --- Personal info
+
+\mycolor{\bfseries 个人信息} & {\bfseries 邮箱}: \href{mailto:swzhang@umn.edu}{swzhang@umn.edu}\\
+&{\bfseries 主页}: \href{http://www.umn.edu/~swzhang}{http://www.umn.edu/$\sim$swzhang}\\
+&\\
+
+
+% --- Section: Research interests ---
+
+\mycolor{\bfseries 研究兴趣} 
+& {代数组合学}. \\
+& \\
+
+% --- Section: Education ---
+
+\mycolor{\bfseries 教育经历}
+& \textbf{明尼苏达大学} \hfill {明尼阿波利斯, 美国} \\ 
+&\ \ \ {数学博士(在读)} \hfill {2020年9月} -- {2024(预计)} \\
+&\ \ \ 导师: Pavlo Pylyavskyy\\ 
+%\vspace{cm}
+%& \\
+%& \textbf{University of Minnesota, Twin Cities} \hfill City, State \\
+& \textbf{明尼苏达大学} \hfill {明尼阿波利斯, 美国} \\ 
+&\ \ \ 数学学士 \hfill 2016年9月 -- 2020年5月\\
+
+&\ \ \ 计量经济学学士 
+\\
+
+& \\
+\mycolor{\bfseries 学术论文}
+
+\mycolor{\bfseries 论文(预印)}
+&\textbf{An Expansion Formula for Decorated Super-Teichm\"uler Spaces.} \\
+&\ \ \ 共同作者: G. Musiker \& N. Ovenhouse. \\
+&\ \ \ arXiv preprint \href{https://arxiv.org/abs/2102.09143}{arXiv:2102.09143}, 2021.\\
+
+& {\textbf{Rowmotion Orbits of Trapezoid Posets.} } \\
+&\ \ \ 共同作者: J. Wellman, Q. Dao, \& C. Yost-Wolff.\\
+&\ \ \ arXiv preprint \href{https://arxiv.org/abs/2002.04810}{arXiv:2002.04810}, 2020.\\
+
+&\textbf{Arborescence of Covering Graphs.} \\
+&\ \ \ 共同作者: S. Chepuri, C. Dowd, A. Hardt, G. Michel, \& V. Zhang.\\
+&\ \ \  arXiv preprint \href{https://arxiv.org/abs/1912.01060}{arXiv:1912.01060}, 2019.\\
+%& \textbf{Title of your third most recent research paper} \\
+& \\
+% --- Section: Talks and tutorials ---
+
+{\mycolor{\bfseries 会议和讲座}} 
+& \textbf{Schur and LLT Polynomials from Lattice Models.} \hfill 2021年3月 \\
+&\ \ \ Graduate Online Combinatorics Colloquium (GOCC) \\
+& \textbf{$T$-paths Formula for Decorated Super-Teichm\"uller Spaces.} \hfill 2021年2月 \\
+&\ \ \ Combinatorics Seminar, University of Minnesota \\
+
+%& \\
+& \\
+
+
+
+% --- Section: Teaching experience ---
+
+{\mycolor{\bfseries 教学经验}} 
+& \textbf{助理教师, 明尼苏达大学}  \\
+&\ \ \ 微积分: 2020-21学年\\
+&\ \ \ 微积分预科: 2019-20学年 \\
+
+& \\
+
+
+% --- Section: Various skills (programming, software, languages, etc.) ---
+
+{\mycolor{\bfseries 技能}} 
+& \textbf{语言} \\
+&\ \ \ 汉语普通话 (母语), 英语 \\
+& \textbf{编程语言}\\
+&\ \ \ Python, SageMath, Mathematica. \\
+
+\end{longtable}
+\end{document}
