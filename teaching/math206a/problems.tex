@@ -233,7 +233,19 @@ And let $E_A=\langle A_1\rangle \subset \langle A_1,A_2\rangle\subset \langle A_
 	Can you construct a permutation representation for the dihedral group $D_{2n}=\{s^2=r^n=1,srs=r^{-1}\}$. Is it faithful?
 \end{problem}
 \begin{problem}[Bonus, 2]
-	Can you describe the action of divided difference operator $\partial_i$ on ${\bf Y}_{k \times (n-k)}\cong GP_{k,n}\subset S_n$. Here ${\bf Y}_{k \times (n-k)}$ is the set of all partitions that fit inside a $k\times (n-k)$ rectangle.
+Recall the action of the (right) divided difference operator on the vector space $\text{span}\langle S_n\rangle $:
+\[\partial_i(w)=\begin{cases}
+	ws_i & \text{ if }ws_i<w\\
+	0& \text{ otherwise}
+\end{cases}\]
+We also define the left divided difference operator $\sigma_i$:
+ \[\sigma_i(w)=\begin{cases}
+	s_i w & \text{ if }s_i w<w\\
+	0& \text{ otherwise}
+\end{cases}\]
+Note that both of these operators satisfy the Nil-Coxeter relations.
+
+Can you describe the action of these operators on (the vector space of) ${\bf Y}_{k \times (n-k)}\cong GP_{k,n}\subset S_n$. Here ${\bf Y}_{k \times (n-k)}$ is the set of all partitions that fit inside a $k\times (n-k)$ rectangle.
 \end{problem}
 
 
