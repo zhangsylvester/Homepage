@@ -1,0 +1,19 @@
+\section{Billey-Warrington Theorem}
+\begin{theorem}
+$C'_w$ is tight if and only if $w$ avoids $321$ and
+	\[46718235,46781235,56718234,56781234.\]
+\end{theorem}
+
+
+\begin{definition}[Heap]
+	Represent $s_i$ by 
+\end{definition}
+
+\begin{lemma}[BJS]
+	A permutation $w$ is $321$-avoiding if and only if no reduced word for $w$ contains consecutive subword $\cdots s_is_{i\pm 1}s_i\cdots$.
+\end{lemma}
+\begin{proof}
+	It's easy to see that, if a permutation contains $s_is_{i\pm 1}s_i$ as a subword, then it contains $321$. This proves one direction of the lemma.
+	
+	For the other direction, assume $w=\cdots c\cdots b\cdots a\cdots$ where $a<b<c$. Then use some wiring diagram argument.
+\end{proof}

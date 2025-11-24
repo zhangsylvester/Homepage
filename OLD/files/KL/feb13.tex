@@ -1,0 +1,43 @@
+We want to find a basis $\{C_w\}$ which is fixed by this involution $\eta$.
+\begin{example}
+	Recall that $T_s^{-1}=q^{-1}T_s-(1-q^{-1})T_1$, and
+	\[\eta(T_s-qT_1)=q^{-1}T_s-(1-q^{-1})T_1-q^{-1}T_S=q^{-1}(T_s-qT_1)\]
+	Therefore $\eta(q^{-{1\over 2}}T_s-qT_1)=q^{-{1\over 2}}(T_s-qT_1)$, and we get
+	\[ C_s=q^{-{1\over 2}}(T_s-qT_1)\]
+\end{example}
+The previous example gives us KL basis for $s\in S$. To obtain other $C_w$'s, one may try to simply multiply the $C_s$'s. However this doesn't work because different reduced words might give different product of $C_s$'s.
+\begin{example}
+	Take $w=sts=tst$. Let's calculate $C_sC_tC_s$, the naive way one would define $C_w$.
+	\begin{align*}C_sC_tC_s&=q^{-{3\over 2}}(T_s-qT_1)(T_t-qT_1)(T_s-qT_1)\\
+	&=q^{-{3\over 2}}\left(T_{sts}-qT_{st}-qT_{ts}+q(q+1)T_s+q^2T_t-(q^3+q^2)T_1\right)
+		\end{align*}
+		Note that this is not the same as $C_tC_sC_t$. To fix this, we let $C_w=C_sC_tC_s-C_s$, so that
+		\[C_sC_tC_s-C_s=q^{-{3\over 2}}(T_{sts}-qT_{st}-qT_{ts}+q^2T_s+q^2T_t-q^3 T_1)\]
+		Note that this equals to $C_tC_sC_t-C_t$.
+\end{example}
+We want a basis $\{C_w\}$ such that
+\begin{itemize}
+    \item $\eta(C_w)=C_w$
+	\item $C_w$ is a linear combination of $T_x$ for $x\leq w$.
+	\item The coefficients of $C_w$'s in $T_x$ are as simple as possible.
+\end{itemize}
+
+\begin{theorem}
+\label{thm:KL_basis}
+	There exist unique $C_w$'s fixed by the involution $\eta$ such that
+%
+	\[C_w=\varepsilon_wq_w^{1\over 2}\sum_{x\leq w}\varepsilon_xq_x^{-1}\overline{P}_{x,w} T_x\]
+	where $\overline{P}=P(q^{-1})$, such that $P_{x,w}\in\mathbb{Z}[q]$ satisfy
+	\begin{itemize}
+		\item $P_{w,w}=1$
+		\item $ \deg(P_{x,w})\leq  {1\over 2} (\ell(w)-\ell(x)-1)$ 
+	\end{itemize}
+	\end{theorem}
+	One important feature of $KL$ polynomials is that they have positive integer coefficients, which was conjectured by Kazhdan and Luztig, and later was proved by Elias and Williamson using Soergel Bimodules to arbitrary Coxeter groups.
+	\begin{theorem}
+		$P_{x,w}(q)\in \mathbb{Z}_{\geq 0}[q]$ for any Coxeter group.
+	\end{theorem}
+	It is often more convenient to work with a slightly modified version of the KL basis
+	\[C_w'=\varepsilon_w \sigma(C_w)\]
+	where $\sigma(q)\mapsto q^{-1}$ and $\sigma(T_w)=\varepsilon_w q_w^{-1} T_w$. These new basis satisfy
+	\[C'_w=q_w^{-{1\over 2}}\sum_{x\leq w}P_{x,w}T_x\]

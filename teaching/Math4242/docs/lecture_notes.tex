@@ -1,0 +1,961 @@
+\documentclass[12pt]{amsart}
+%\usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
+%\input{command}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+%\input{tikzsetup.tex}
+\usepackage{ytableau}
+\usepackage{mathtools, amssymb, old-arrows}
+\usepackage[margin = 1in]{geometry}
+%\input{theorems}
+\usepackage{tikz-cd}
+
+\renewcommand{\leq}{\leqslant}
+
+\usepackage{mathbbol}
+\usepackage{amssymb}            % AMS Math
+
+\DeclareSymbolFontAlphabet{\amsmathbb}{AMSb}
+
+
+\newlength\friezelen 
+\settowidth{\friezelen}{$\xi_{m}$} % calculate width of widest element
+
+\usepackage{array} % for "\newcolumntype" macro
+\newcolumntype{Q}{>{\centering}p{\friezelen}<{}}
+
+\usepackage{mathrsfs} 
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{comment}
+\usetikzlibrary{arrows}
+\tikzset {->-/.style={decoration={markings, mark=at position .5 with {\arrow{latex}}}, postaction={decorate}}}
+\tikzset {-->-/.style={decoration={markings, mark=at position .5 with {\arrow[scale=2]{latex}}}, postaction={decorate}}}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\newcommand{\miduparrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\newcommand{\midrevarrow}{\tikz \draw[-triangle 90] (0,0) -- +(-.1,0);}
+\newcommand{\shiftright}[2]{\makebox[#1][r]{\makebox[0pt][l]{#2}}}
+\DeclareMathOperator{\coker}{coKer}
+\DeclareMathOperator{\coimg}{coImg}
+\newcommand{\lhdot}[0]{\adjustbox{lap={\width}{0.6em}}{$\cdot$}\lhd}
+%\renewcommand{\ker}[0]{\textup{Ker}}
+
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{etoolbox}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,graphicx,tikz,tikz-cd}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    citecolor = orange,%
+}
+\usepackage[noabbrev]{cleveref}
+\usepackage{subcaption}
+
+\makeatletter
+\patchcmd{\@settitle}{\uppercasenonmath\@title}{}{}{}
+\patchcmd{\@setauthors}{\MakeUppercase}{}{}{}
+\patchcmd{\section}{\scshape}{}{}{}
+\makeatother
+\makeatletter
+\patchcmd{\@maketitle}
+  {\ifx\@empty\@dedicatory}
+  {\ifx\@empty\@date \else {\vskip2ex %vertical position of date
+  \centering\footnotesize\@date\par\vskip1ex}\fi
+   \ifx\@empty\@dedicatory}
+  {}{}
+\patchcmd{\@adminfootnotes}
+  {\ifx\@empty\@date\else \@footnotetext{\@setdate}\fi}
+  {}{}{}
+\makeatother
+
+\DeclareMathOperator{\fH}{\mathfrak{H}}
+\renewcommand{\l}[2]{\lambda_{#1,#2}}
+
+
+\DeclareMathOperator{\fA}{\mathfrak{A}}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\fC}{\mathfrak{C}}
+\DeclareMathOperator{\spin}{spin}
+\newcommand{\fh}[0]{\mathfrak{h}}
+\newcommand{\fhh}[0]{\mathfrak{\tilde h}}
+\newcommand{\fc}[0]{\mathfrak{C}}
+\newcommand{\fcc}[0]{\mathfrak{\tilde C}}
+\newcommand{\fff}[0]{\mathbb{F}}
+\newcommand{\bbb}[0]{\mathbb{B}}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\ker}{\Ker}
+\DeclareMathOperator{\inv}{inv}
+
+\DeclareMathOperator{\pd}{\textup{\textbf{PD}}}
+\DeclareMathOperator{\rpd}{\textup{\textbf{RPD}}}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\proj}{Proj}
+
+
+\newcommand{\syl}[1]{{\color{orange}[Sylvester: #1]}}
+\newcommand{\new}[1]{{#1}}
+%\newcommand{\calP}[0]{\mathcal{P}}
+\newcommand{\calPn}[0]{\mathcal{P}^{(n)}}
+\newcommand{\fa}[1]{\mathfrak{a}_{#1}}
+\newcommand{\cal}[1]{\mathcal{#1}}
+\newcommand{\zsharp}[0]{\mathbb{Z}_{\sharp}}
+\newcommand{\bS}[0]{\overleftarrow{\mathfrak{S}}}
+\renewcommand{\ss}[0]{\mathfrak{S}}
+\newcommand{\sz}[0]{S_{\mathbb{Z}}}
+\DeclareMathOperator{\des}{Des}
+\DeclareMathOperator{\bb}{{\bf B}}
+\DeclareMathOperator{\ff}{{\bf F}}
+\DeclareMathOperator{\qq}{\mathbb{Q}}
+\DeclareMathOperator{\rr}{\mathbb{R}}
+\DeclareMathOperator{\cc}{\mathbb{C}}
+\DeclareMathOperator{\xx}{{\bf{x}}}
+\DeclareMathOperator{\ms}{\mathfrak{S}}
+\DeclareMathOperator{\mf}{\mathfrak{F}}
+\DeclareMathOperator{\bR}{\overleftarrow{R}}
+\DeclareMathOperator{\s}{span}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\img}{Img}
+\newcommand{\calM}[0]{\mathcal{M}}
+\DeclareMathOperator{\id}{id}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\rtile}[0]{
+\begin{tikzpicture}[scale=0.6, tikzfig, baseline = -0.5 em]
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (204) at (15.25, -1) {};
+		\node [style=none] (205) at (15.25, 0.25) {};
+		\node [style=none] (206) at (16.5, 0.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red, rounded corners=0.2cm] (204.center) to (205.center)  to (206.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\jtile}[0]{
+\begin{tikzpicture}[scale=0.6, tikzfig, baseline = 0.5 em]
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (201) at (14.25, 0.25) {};
+		\node [style=none] (202) at (14.25, 1.5) {};
+		\node [style=none] (203) at (13, 0.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red, rounded corners=0.2cm] (203.center) to (201.center) to (202.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+
+
+%%augmented matrix
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\numberwithin{equation}{section}
+
+
+\title{MATH 4242 Applied Linear Algebra}
+%\author[M. Shimozono]{Mark Shimozono$^\flat$}
+%\thanks{$^\flat$\url{mshimo@math.vt.edu} Virginia Tech.}
+\author[S. Zhang]{Sylvester W. Zhang$^\natural$}
+\thanks{$^\natural$\url{swzhang@umn.edu} University of Minnesota.}
+
+\date{Summer 2024}
+
+\begin{document}
+\maketitle	
+
+\tableofcontents
+
+\section{Systems of Linear Equations}
+A $m\times n$ system of linear equation is of the form
+\begin{align*}
+	a_{11}x_1+\cdots +a_{n1}x_n&=b_1\\
+	a_{21}x_1+\cdots +a_{n2}x_n&=b_n\\
+	\cdots\quad \cdots \quad\cdots&\\
+	a_{m1}x_1+\cdots+a_{mn}x_n&=b_n
+\end{align*}
+Such equation can be represented using product of matrices.
+\[\begin{bmatrix}
+	a_{11}&a_{21}&\cdots &a_{m1}\\
+	a_{21}&a_{22}&\cdots &a_{m2}\\
+	\cdots&\cdots&\cdots &\cdots\\
+	a_{m1}&a_{m2}&\cdots &a_{mn}
+\end{bmatrix} \begin{bmatrix}
+	x_1\\x_2\\\vdots\\x_n
+\end{bmatrix} = \begin{bmatrix} b_1\\b_2\\ \vdots \\b_n \end{bmatrix}\]
+or by an augmented matrix.
+
+\[\begin{bmatrix}[cccc|c]
+	a_{11}&a_{21}&\cdots &a_{m1}&b_1\\
+	a_{21}&a_{22}&\cdots &a_{m2}&b_2\\
+	\cdots&\cdots&\cdots &\cdots&\\
+	a_{m1}&a_{m2}&\cdots &a_{mn}&b_n
+\end{bmatrix} \]
+\begin{definition}
+	We have three types of elementary row operations.
+	\begin{enumerate}
+		\item Multiply the $i$-th equation (or the $i$-th row of the augmented matrix), then add it to the $j$-th equation (or the $j$-th row of the augmented matrix).
+		\item Permute the equations (or the rows of the augmented matrix)
+		\item Multiply one equation (or one row of the augmented matrix) by a non-zero number.
+	\end{enumerate}
+\end{definition}
+
+\subsection{Systems of $n\times n$ Equations.}
+Matrices considered in this sections are all $n\times n$.
+\begin{definition}
+	A matrix is \emph{regular} if it can be turned into a upper triangular matrix such that every entry on the diagonal is non-zero.
+\end{definition}
+%\begin{definition}
+%	Define an \emph{elementary lower-triangular matrix} to be a matrix with $1$'s on the diagonal and only one non-zero entry in the lower triangular part.
+%\end{definition}
+\begin{proposition}
+	Let $E$ be the matrix with $1$'s on the diagonal and $E_{ij}=k\neq 0$ is the only other non-zero entry in the lower triangular part. Then for any matrix $M$, $EM$ is the matrix obtained by multiplying the $j$-th row of $M$ then adding to the $i$-th row of $M$.
+\end{proposition}
+
+\begin{proposition}
+	A matrix $A$ is regular if and only if it has an $LU$ factorization, i.e.
+	\[A=LU\]
+	where $L$ is a lower uni-triangular matrix, and $U$ is a upper triangular matrix with non-zero diagonal entries.
+\end{proposition}
+
+\begin{definition}
+	Let $w\in S_n$ be a permutation, then define $P_w=\{a_{ij}\}$ to be the matrix such that $$a_{i,j}=\begin{cases}
+		1&j=w(i) \\ 0&  \text{otherwise.}
+	\end{cases}$$
+\end{definition}
+
+\begin{proposition}
+	For any matrix $M$, $P_wM$ is the matrix obtained by permuting the rows of $M$ according to the permutation $w$.
+\end{proposition}
+
+\begin{definition}\label{def:non-singular}
+	A matrix $A$ is called \emph{non-singular} if it can be turned into a upper triangular matrix without non-zero diagonal entry via row operations of the first two types.
+\end{definition}
+\begin{proposition}
+	A matrix $A$ is non-singular if and only if it has a permuted LU factorization:
+	$PA=LU$ where $P$ is some permutation matrix.
+\end{proposition}
+\begin{definition}\label{def:transpose}
+	Let $A=(a_{ij})$, defined transpose of $A$ to be $A^t:=(a_{ji})$.
+\end{definition}
+\begin{proposition}	Denote $A^t$ the transpose of $A$. We have that $AB = (BA)^t$.
+\end{proposition}
+
+\begin{proposition}
+	A matrix $A$ is regular iff it admits an LDV factorization, $A=LDU$ where $L$ is lower-unitriangular matrix, $D$ is a diagonal matrix, and $U$ is a uni-upper triangular matrix.
+\end{proposition}
+\begin{definition}
+	Let $A$ be an $n\times n$ matrix. Suppose $X$ is a matrix such that $XA=AX=I$ where $I$ is the identity matrix. Then $X$ is called the inverse of $A$ and denoted by $A^{-1}$. A matrix is called \emph{invertible} if $A^{-1}$ exists.
+\end{definition}
+\begin{proposition}
+	A matrix is invertible if and only if it is non-singular.
+\end{proposition}
+\begin{remark}
+	Inverse of a matrix can be found using Gauss–-Jordan Elimination --- see chapter 1 of Olver-Shakiban.
+\end{remark}
+	
+
+\subsection{Systems of $m\times n$ Equations.}
+\begin{definition}
+A matrix is in row echelon form if it looks like,
+	\[
+\begin{pmatrix}
+\bullet & * & * & * & * & * \\
+0 & \bullet & * & * & * & * \\
+0 & 0 & 0 & \bullet & * & * \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+\end{pmatrix}
+\]
+where $\bullet$'s are non-zero entries (called \emph{pivots}) and $*$ represent generic entries. The pivots are the first non-zero entries in each rows. We require the pivots occupy the first several rows consecutively.
+\end{definition}
+\begin{proposition}
+	Every matrix can be turned into a row echelon form using elementary row operations of type I and II. In other words, every matrix $A$ has a factorization $PA=LU$ where $P$ is a permutation matrix, $L$ is a lower uni-triangular matrix, and $U$ a matrix in row-echelon form.
+\end{proposition}
+\begin{definition}\label{def:rank}
+	Since every matrix can be turned in to row-echelon form using elementary row operations, we define its \emph{rank} to be the number of pivots.
+\end{definition}
+\begin{proposition}
+	A square $n\times n$ matrix is non-singular if its rank is $n$ (full-rank).
+\end{proposition}
+
+
+
+\section{Vector Spaces}
+\subsection{Some Basic Setup}
+\begin{definition}\footnote{You don't need to worry too much about the abstract structures of a field. The purpose of this definition is to make everything self-contained. You can basically think of a field as a set on which you can do some sort of arithmetic.}
+	A field is a set $\fff$ with two binary operations $\times$ (multiplication) and $+$ (addition), satisfying the following axioms.
+	\begin{itemize}
+	    \item $a+b=b+a$ and $a\times b = b\times a$ for all $a,b\in\fff$.
+		\item There exists an additive identity $0$ such that $0+a=a+0 = a$ for all $a\in\fff$.
+		\item There exists a multiplication identity $1$ such that $1\times a= a\times 1=a$ for all $a\in\fff$.
+		\item For every $a\in\fff$, there exists an element denoted $-a$, such that $a+(-a)=0$.
+		\item $0\neq 1$.
+		\item For every $a\in\fff$ and $a\neq 0$, there exists an element denoted $a^{-1}$, such that $a\times (a^{-1})=1$.
+		\item For every $a,b,c\in\fff$, $a\times (b+c)=ab+ac$.
+	\end{itemize}
+For most part of this class, we will take $\fff=\rr $  or $\fff=\cc=\{a+bi|a,b\in\rr\text{ and }i^2 = -1\}$.
+\end{definition}
+\begin{definition}
+	For a field $\fff$, denote $\fff[x]$ the ring\footnote{A ring is a field, where multiplication need not to be commutative, and multiplicative identity ($0$) need not exists.}of polynomials over $\fff$. 
+	\[\fff[x]=\{a_0+a_1x+a_2x^2+\cdots a_nx^n|a_0,\cdots,a_n\in \fff,n\geq 0, x^mx^n=x^{m+n}\}\]\end{definition} 
+\begin{proposition}\label{prop:C_alg_close}
+	Every polynomial $a_0+a_1x+a_2x^2+\cdots+a_nx^n = 0$ with complex coefficient has at least one complex solution. Note that this is not true for real polynomials.
+\end{proposition}
+\begin{definition}
+	A field $\fff$ is called \emph{algebraically closed} if every polynomial in $\fff[x]$ has a solution in $\fff$. (By \Cref{prop:C_alg_close}, $\cc$ is algebraically closed).
+\end{definition}
+\begin{proposition}
+	The field of complex numbers $\cc$ is the algebraic closure of $\rr$. In other words, $\cc$ is the smallest algebraically closed field that contains $\rr$.
+\end{proposition}
+\subsection{Vector Spaces and Subspaces}
+Let $\fff$ be a field.
+\begin{definition}\label{def:vs}
+	A set $V$ is called a vector space over $\fff$ if there exists an addition map
+	\[add:V\times V\to V,\]
+	%\[(v_1,v_2)\mapsto v_1+v_2\]
+	a scalar multiplication map
+	\[mult:\fff\times V\to V,\]
+	and a zero vector $0$ such that $v+0=v$ for all $v\in V$ and $\lambda 0=0$ for all $\lambda\in\fff$.
+	%\[(a,v)\mapsto av\]
+	(Here $\times$ denote the Cartesian product of sets\footnote{For sets $A$ and $B$, defined $A\times B=\{(a,b)|a\in A,b\in B\}$}.) We will abbreviate them by $a(v_1,v_2)=v_1+v_2$ and $mult(a,v)=av$.
+	
+	Note that this definition (implicitly) requires that a vector space $V$ is closed under addition and scalar multiplication, i.e. $v_1+v_2=add(v_1,v_2)\in V$ and $av = mult(a,v)\in V$.
+	
+	Elements of a vector spaces are called \emph{vectors.}
+\end{definition}
+
+\begin{definition}\label{def:subspace}
+	Let $V$ be a vector space over $\fff$. A subset $U$ of $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication, and contains the zero vector. (In other words, a subspace is a subset that is a vector space itself.)
+\end{definition}
+\begin{definition}\label{def:sum}
+	Let $U_1,\cdots,U_m$ be subspaces of $V$. Then define their sum to be
+	\[U_1+\cdots+U_m = \{u_1+\cdots+u_m|u_1\in U_1,\cdots,u_m\in U_m\}\]
+\end{definition}
+\begin{proposition}
+	Let $U_1,\cdots,U_m$ be subspaces of $V$. Then $U_1+\cdots+U_m$ is also a subspace of $V$, furthermore, it's the smallest subspace of $V$ that contain all of $U_1,\cdots,U_m$.
+\end{proposition}
+\begin{definition}
+	A sum of subspaces $U_1+\cdots+U_m$ of $V$ is a \emph{direct sum} if every vector $v\in U_1+\cdots+U_m$ can be uniquely written as $v=u_1+\cdots+u_m$ where $u_i\in U_i$ for each $i$. When a summation is direct, we denote it as $U_1\oplus\cdots\oplus U_m$.
+\end{definition}
+\subsection{Linear Combination, Span, and Dimension}
+Let $V$ be a vector space over $\fff$.
+\begin{definition}
+	Let $v_1,v_2,\cdots,v_n\in V $, a vector $v\in V$ is a linear combination of $\{v_1,\cdots,v_n\}$ if there exists $a_1,\cdots,a_n\in\fff$ such that 
+	\[v=a_1v_1+\cdots+a_nv_n\]
+\end{definition}
+\begin{definition}\label{def:lin_comb}
+	Let $v_1,v_2,\cdots,v_n$ be a list of vectors in $V$, define their span to be the set of all linear combinations of $v_1,\cdots, v_n$.
+	\[ \s(v_1,\cdots,v_n)=\{a_1 v_1+\cdots+a_nv_n|a_1,\cdots,a_n\in\fff \}\]
+\end{definition}
+\begin{proposition}
+	For a list of vectors $v_1,\cdots,v_n\in V$, $\s(v_1,\cdots,v_n)$ is a subspace of $V$. Furthermore, it's the smallest subspace containing all of $v_1,\cdots,v_n$.
+\end{proposition}
+\begin{definition}
+	A vector space $V$ is said to be \emph{finite dimensional} it it is the span of a finitely many vectors.
+\end{definition}
+
+\begin{definition}\label{def:linear_ind}
+	$v_1,\cdots,v_m\in V$ are \emph{linearly independent} if the only way to write $0$ as a linear combination of $v_1,\cdots,v_n$ is
+	\[0=0v_1+0v_2+\cdots+0v_n.\]
+\end{definition}
+
+\begin{proposition}
+	$v_1,\cdots,v_m\in V$ are \emph{linearly independent} if and only if any vector $v\in \s(v_1,\cdots,v_m)$ can be uniquely written as a linear combination of $v_1,\cdots,v_n$.
+\end{proposition}
+\begin{definition}
+	A list of vectors $v_1,\cdots,v_n$ is a basis of $V$ if
+	\begin{itemize}
+		\item $V=\s(v_1,\cdots,v_n)$
+		\item $v_1,\cdots,v_n$ are linearly independent.
+	\end{itemize}
+\end{definition}
+\begin{proposition}
+	$v_1,\cdots,v_n$ is a basis of $V$ iff every vector $v\in V$ can be uniquely written as a linear combination of $v_1,\cdots,v_n$.
+\end{proposition}
+\begin{lemma}Let $v_1,\cdots,v_m\in V$ be a list of vectors that spans $V$, i.e. $\s (v_1,\cdots,v_m)=V$. Then $\{v_1,\cdots,v_m\}$ can be reduced to  a basis of $V$. In other words, there exists a basis $\{w_1,\cdots,w_n\}$ of $V$ such that $w_i\in \{v_1,\cdots,v_m\}$ for all $i$ and $n\leq m$.
+\end{lemma}
+\begin{lemma}
+	Let $v_1,\cdots,v_k\in V$ be linearly independent. Then there exists a basis of $V$ in the form
+	\[\{v_1,\cdots,v_k,w_1,\cdots,w_m\}\]
+	Note that it's possible that $m=0$, in the case when $\{v_1\cdots v_k\}$ is already a basis.
+\end{lemma}
+\begin{corollary}
+	If $U$ is a subspace of $V$, then there exists another subspace $W$ such that $V=U\oplus W$.
+\end{corollary}
+\begin{proposition}
+	If $v_1,\cdots,v_n$ is a basis of $V$ and $w_1,\cdots,w_m$ is another basis of $V$. Then $n=m$.
+\end{proposition}
+\begin{definition}
+	Define the dimension of a vector space to be the size of its basis.
+\end{definition}
+\begin{proposition}
+	If $\{v_1,\cdots,v_n\}$ linearly independent and $n=\dim(V)$, then $\{v_1,\cdots,v_n\}$ is a basis.
+\end{proposition}
+\begin{proposition}
+	If $U$ is a subspace of $V$, then $\dim(U)\leq \dim(V)$. Furthermore, $\dim(U)=\dim(V)$ iff $U=V$.
+\end{proposition}
+\begin{proposition}
+	If $\s(v_1,\cdots,v_n)=V$ and $n=\dim(V)$, then $\{v_1,\cdots,v_n\}$ is a basis.
+\end{proposition}
+\begin{theorem}
+	Let $V$ be a finite dimensional vector space and $V_1,V_2$ subspaces. Then
+	\[\dim(V_1+V_2)=\dim(V_1)+\dim(V_2)-\dim(V_1\cap V_2)\]
+\end{theorem}
+\begin{corollary}
+	If $V_1+V_2$ is a direct sum, then $\dim(V_1\oplus V_2)=\dim(V_1)+\dim(V_2)$.\footnote{We will see later that the converse is also true.}
+\end{corollary}
+
+\section{Linear Maps and Matrices}
+\subsection{Linear Maps}
+Let $V,W$ be vector spaces over $\fff$.
+
+\begin{definition}
+	A map $T:V\to W$ is linear if
+	\begin{enumerate}
+		\item $T(u+v)=T(u)+T(v)$ for all $u,v\in V$.
+		\item $T(\lambda v)=\lambda T(v)$ for all $\lambda\in\fff$ and $v\in V$.
+	\end{enumerate}
+\end{definition}
+\begin{definition}
+	We denote the set of all linear maps from $V\to W$ by $\Hom(V,W)$. And define $\End(V)=\Hom(V,V)$. \end{definition}
+	\begin{lemma}
+		Let $v_1,\cdots,v_n$ be a basis for $V$ and $w_1,\cdots,w_n$ a basis for $W$ (i.e. $V,W$ same dimension). Then there exists a unique linear map $T\in\Hom(V,W)$ such that $T(v_i)=w_i$ for all $i$. The map is given by $T(a_1 v_1+\cdots+a_n v_n)=a_1w_1+\cdots+a_nw_n$.
+	\end{lemma}
+	\begin{proposition}
+		The set $\Hom(V,W)$ is a vector space over $\fff$, with addition and scalar multiplication given as follows.
+		\[(\varphi+\psi)(v):=\varphi(v)+\psi(v)\]
+		\[(\lambda \varphi)(v):=\lambda \varphi(v)\]
+	\end{proposition}
+%	\begin{proposition}
+%		Compositions of linear maps have the following properties. 
+%		\[(T_1T_2)T_3 = T_1(T_2T_3)\]
+%		\[(T_1+T_2)T_3=T_1T_3+T_1T_2\]
+%	\end{proposition}
+	\begin{lemma}
+		Let $T\in\Hom(V,W)$, then $T(0_V)=0_W$.
+	\end{lemma}
+	%\subsection{Fundamental Subspaces}
+	Let $T\in\Hom(V,W)$.
+	
+	\begin{definition}
+		The \emph{kernal} (or null space) of $T$ is $\ker(T)=\{v\in V:Tv=0\}$
+	\end{definition}
+	\begin{proposition}
+		$\ker(T)$ is a subspace of $V$.
+	\end{proposition}
+	\begin{proposition}
+		$\ker(T)=\{0\}$ if and only if $T$ is injective. 
+	\end{proposition}
+	\begin{definition}
+		The \emph{image} (or range) of $T$ is $\img(T)=\{Tv|v\in V\}$
+	\end{definition}
+	\begin{proposition}
+		$\img(T)$ is a subspace of $W$.
+	\end{proposition}
+	\begin{proposition}
+		$T$ is surjective iff $\img(T)=W$.
+	\end{proposition}
+	\begin{theorem}
+		$\dim(V)=\dim(\ker(T))+\dim(\img(T))$.
+	\end{theorem}
+	\begin{proposition}
+		\begin{enumerate}
+			\item if $\dim(V)>\dim(W)$, then any $T\in\Hom(V,W)$ is not injective.
+			\item if $\dim(V)<\dim(W)$, then any $T\in \Hom(V,W)$ is not surjective.
+			\item if there exists a bijective $T\in\Hom (V,W)$, then $\dim(V)=\dim(W)$.
+		\end{enumerate}
+	\end{proposition}
+	\subsection{Matrices from Linear Maps}Denote the set of all $m\times n$ matrix with entries in $\fff$ by $M_{m\times n}(\fff)$.
+	Let $V,W$ be finite dimensional vector spaces over $\fff$.
+	
+	\begin{definition}
+	Suppose $V$ has basis $v_1,\cdots,v_n$ and $W$ has basis $w_1,\cdots,w_m$.
+		Let $T\in\Hom(V,W)$. Then define $\calM(T)$ to be the matrix $[a_{ij}]$
+		such that $$T(v_k)=a_{1k}w_1+a_{2k}w_2+\cdots+a_{m,k}w_m.$$%
+	\end{definition}
+	\begin{remark}
+		Note that the usage of $\calM$ requires a choice of basis for $V$ and $W$. In general we shall denote $\calM_{B_1,B_2}(T)$ where $B_1$ is the basis for $V$ and $B_2$ the basis for $W$. However in most case we will omit the subscript when the context is clear.
+	\end{remark}
+	\begin{proposition}
+		Let $S,T\in\Hom(V,W)$, 
+		\(\calM(S)+\calM(T)=\calM(S+T)\)
+		
+		Let $S\in\Hom(U,W)$ and $T\in\Hom(V,U)$, then $\calM(S)\calM(T)=\calM(ST)$.
+	\end{proposition}
+	\begin{definition}
+		For any $A\in M_{m\times n}$, Let $A_{\bullet,k}$ denote the $k$-th column vector and $A_{k,\bullet}$ denote the $k$-th row vector.	
+	\end{definition}
+	\begin{proposition}
+		$(AB)_{\bullet,k}=A (B_{\bullet,k})$
+	\end{proposition}
+	\begin{theorem}\label{thm:col-row-dim}
+		For any $A\in M_{m\times n}$, we have
+		\[\dim(\s(A_{1,\bullet},\cdots,A_{m,\bullet}))=\dim(\s(A_{\bullet,1},\cdots,A_{\bullet,n})) \]
+	\end{theorem}
+
+
+	\begin{proposition}
+		The dimension of column span or row span of a matrix equals to its rank (see \Cref{def:rank}).
+	\end{proposition}
+	\begin{definition}
+		A linear map $T\in \Hom(V,W)$ is invertible if there exists an linear map $S\in\Hom(W,V)$ such that $TS=\id_W$ and $ST=\id_V$.
+	\end{definition}
+	\begin{proposition}
+		If a map $T$ is invertible, then its inverse is unique, denote it by $T^{-1}$.
+	\end{proposition}
+	\begin{proposition}
+		A map $T$ is invertible iff $\calM(T)$ is non-singular \Cref{def:non-singular}. Furthermore, $\calM(T^{-1})=\calM(T)^{-1}$.
+	\end{proposition}
+		
+	
+	
+	\begin{definition}
+		A linear map is an \emph{isomorphism} if it's invertible. Two vectors spaces are \emph{isomorphic} if there exists an isomorphism between them.
+	\end{definition}
+	\begin{theorem}
+		Two vector spaces over $\fff$ is isomorphic if and only if they have the same dimension. (In other words, vector spaces are classified by $\mathbb{N}$)
+	\end{theorem}
+	\begin{corollary}Let $\dim V=n$ and $\dim W=m$.
+		The vector space $\Hom(V,W)\cong M_{m\times n}(\fff)$ are isomorphic, with the map $\calM$  being the isomorphism.
+	\end{corollary}
+	\begin{theorem} Let $V$ be a vector space with basis $B_1=\{v_1,\cdots,v_n\}$. Suppose it has another basis $B_2=\{w_1,\cdots,w_n\}$. Let $C=\calM_{B_1,B_2}(\id)$ where $\id\in\Hom(V,V)$ is the identity map. Then change of basis corresponds to conjugation by $C$.
+	
+	In particular, let $T\in\Hom(V,V)$ and $A=\calM_{B_1,B_1}(T)$ and $B=\calM_{B_2,B_2}(T)$. Then we have
+	\[A=C^{-1}BC\]
+	\end{theorem}
+	\subsection{Quotient and Dual spaces}
+	\begin{definition}
+		Let $v\in V$ and $U\subseteq V$. Define  $v+U := \{v+u|u\in U\}$. This is called a \emph{coset}.
+	\end{definition}
+	\begin{definition}\label{def:quotient_1}
+		Let $U\subseteq V$. Define the quotient space $V/U$ to be $\{v+U|v\in V\}$, with addition and scalar multiplication given by
+		\[(v_1+U)+(v_2+U) = (v_1+v_2)+U\]
+		\[\lambda(v+U)=\lambda v+U\]
+	\end{definition}
+	\begin{definition}[alternative definition]\label{def:quotient_2} Let $\sim$ be an equivalence relation on $V$. Define $[v]_\sim:=\{u\in V|u\sim v\}$ the equivalence class generated by $v$. Then we can define quotient space $V/\sim:=\{[v]_\sim|v\in V\}$.
+	\end{definition}
+	\begin{remark}
+		For $U\subset V$, define an equivalence relation $\sim_U$ by $v\sim_U u \iff v-u\in U$. Then \Cref{def:quotient_1,def:quotient_2} agree, i.e. $V/U = V/\sim_U$.
+	\end{remark}
+	\begin{definition}
+		For $U\subset V$, define the quotient map $\pi: V\to V/U$ by $\pi(v)=v+U$. Note that $\ker(\pi)=U$.
+	\end{definition}
+	\begin{proposition}
+		$\dim V/U = \dim V-\dim U$.
+	\end{proposition}
+	\begin{theorem}
+		For any $T\in\Hom(V,W)$, define $\tilde T\in\Hom(V/\ker(T),W)$ by  $\tilde T(v+\ker(T))=Tv$. Then $\tilde T\pi = T$, and defines an isomorphism between $V/\ker(T)$ and $\img(T)$.
+	\end{theorem}
+	
+	\begin{definition}
+		A linear map from $V$ to $\fff$ is called a \emph{linear functional}. Denote $\Hom(V,\fff)$ the set of all linear functionals on $V$.
+	\end{definition}
+	\begin{proposition}
+		$\Hom(V,\fff)$ is a vector space, with addition and multiplication given by $(f+g)(v)=f(v)+g(v)$ and $(\lambda f)(v)=\lambda f(v)$. This is called the \emph{dual space} of $V$, and is denoted by $T^*$. 
+	\end{proposition}
+	\begin{proposition}
+		$\dim V=\dim V^*$.
+	\end{proposition}
+	\begin{definition}
+		Let $v_1,\cdots,v_n$ be a basis of $V$. Then define $v_i^*\in V^*$ to be the linear functional $v_i^*(v_j)=\delta_{i,j}$\footnote{Here $\delta_{i,j}$ is the Kronecker delta symbol: $\delta_{i,j}=1$ if $i=j$ and $0$ otherwise.}. For any $v=a_1v_1+\cdots a_nv_n\in V$, define $v^*=a_1v_1^*+\cdots+a_nv_n^*$.
+	\end{definition}
+	\begin{proposition}Let $v_1,\cdots,v_n$ be a basis. Then
+		$v=v_1^*(v)v_1+\cdots+v_n^*(v)v_n$ for all $v\in V$.
+	\end{proposition}
+	\begin{proposition}
+		$v_1^*,\cdots,v_n^*$ is a basis for $V^*$.
+	\end{proposition}
+	\begin{definition}
+		Suppose $T\in \Hom(V,W)$. Define the \emph{dual linear map} $T^*\in\Hom(W^*,V^*)$ to be
+		\[T^*(f) = f\circ T\]
+	\end{definition}
+	\begin{proposition}
+	\begin{itemize}
+		\item $(S+T)^* = S^*+T^*$
+		\item $(\lambda T)^*=\lambda T^*$.
+		\item $(ST)^*=T^*S^*$.
+	\end{itemize}
+		
+	\end{proposition}
+	\begin{definition}
+		For any subspace $U\subseteq V$, define its annihilator $U^0:=\{f\in V^*: f(u)=0\text{ for all } u\in U\}$.
+	\end{definition}
+	\begin{proposition}
+		$U^0$ is a subspace of $V^*$.
+	\end{proposition}
+	\begin{proposition}
+		$\dim U^0=\dim V-\dim U$. Recall that this is also the dimension of $V/U$. In particular, there is an isomorphism $(V/U)^*\cong U^0$ given by $\pi^*$.
+	\end{proposition}
+	
+	\begin{proposition}
+		\textup{(a)} $U^0=\{0\}\iff U=V$ \textup{(b)} $U^0=V^*\iff U=\{0\}$.
+	\end{proposition}
+	\begin{theorem}
+		\textup{(a)} $(\img T)^0=\ker T^*$ \textup{(b)} $(\ker T)^0=\img T^*$
+	\end{theorem}
+	\begin{corollary}
+		$\ker T^*\cong (V/\img T)^*$ and $\img T^* \cong (V/\ker T)^*$.
+	\end{corollary}
+	\begin{corollary}
+		$T$ is injective iff $T^*$ is surjective. $T$ is surjective iff $T^*$ is injective.
+	\end{corollary}
+	\begin{theorem}
+		Let $T\in \Hom(V,W)$, and $T^*\in\Hom(W^*,V^*)$. Then $\calM(T)^t=\calM(T^*)$.
+	\end{theorem}
+	\section{Inner Product Spaces}Throughout this section, let $\fff=\rr$ or $\cc$.
+	\subsection{Inner Products and Norms}
+	\begin{definition}
+		The dot product of two vectors in $\rr^n$ is a map from $\rr^n\times \rr^n\to \fff$, defined by
+		\[(x_1,\cdots,x_n)\cdot (y_1,\cdots,y_n)=x_1y_1+\cdots+x_ny_n\]
+	\end{definition}
+	
+%	\begin{definition}
+%		A
+%	\end{definition}
+	
+	
+	\begin{definition}
+		The dot product of two vectors in $\cc^n$ is a map from $\cc^n\times \cc^n\to \fff$, defined by
+		\[(x_1,\cdots,x_n)\cdot (y_1,\cdots,y_n)=x_1\overline y_1+\cdots+x_n\overline y_n\]
+		where $\overline{a+bi}=a-bi$ is the complex conjugate.
+	\end{definition}
+	\begin{definition}\label{def:inner_product}Let $V$ be vector space over $\fff$ ($\cc$ or $\rr$).
+		A inner product on $V$ is a map $V\times V\to \fff$ which sends $(v,u)$ to $\langle v,u\rangle$ such that
+		\begin{enumerate}
+			\item $\langle v,v\rangle\geq 0$.
+			\item $\langle v,v\rangle=0\iff v=0$.
+			\item $\langle u+v,w\rangle=\langle u,w\rangle+\langle v,w\rangle$
+			\item $\langle \lambda u,v\rangle=\lambda \langle u,v\rangle$.
+			\item $\langle u,v\rangle=\overline{\langle v,u\rangle }$\footnote{When $\fff=\rr$, the `complex' conjugate of a real number is just itself.}
+		\end{enumerate}
+	\end{definition}
+	\begin{proposition}[Bilinearity]\label{prop:bilinear} A inner product $\langle\ ,\ \rangle$ satisfy $\langle u,v+w\rangle = \langle u,v\rangle + \langle u,w\rangle$ and $\langle u,\lambda v\rangle =\overline{\lambda}\langle u,v\rangle$.
+	\end{proposition}
+	\begin{remark}
+		A pairing satisfying (4) and (6) of \Cref{def:inner_product} and \Cref{prop:bilinear} together is known as being \emph{bilinear}. Usually a inner product is defined to be bilinear, however, as we see here one-sided linearity is enough to imply bilinearity.
+	\end{remark}
+	\begin{proposition}
+		An inner product $\langle\ , \ \rangle$ on $V$ satisfy
+		\begin{enumerate}
+			\item Fix any $u\in V$, the map $v\mapsto \langle u,v\rangle$ is a linear functional.
+			\item $\langle v,0\rangle =0= \langle 0,v\rangle $ for any $v\in V$.
+		\end{enumerate}
+	\end{proposition}
+	\begin{definition}
+		Given an inner product $\langle \ ,\ \rangle$, define the norm $\Vert\ \Vert$ to be the positive square-root $\Vert v\Vert=\sqrt{\langle v,v\rangle}$.
+	\end{definition}
+	
+	\begin{proposition}
+		Let $I=[a,b]\subset \rr$ be an closed interval on $\rr$. Let $V=C^0(I)$ denote all continuous $\rr$-valued functions defined on $I$ (domain is $I$). Then
+		\[\langle f,g\rangle =\int_a^bf(x)g(x)\ dx\]
+		defines an inner product on $V$. The norm $\Vert f\Vert=\sqrt{\langle f,g\rangle}$ is called the $L_2$ norm on $C^0(I)$.
+	\end{proposition}
+	\begin{definition}
+		For $z\in\cc$, define the complex modulus to be $|z|= \sqrt{z\overline{z}}$. Note that when $z$ is real (i.e. no imaginary part), then $|z|$ is the absolute value.
+	\end{definition}
+	
+	\begin{theorem}[Cauchy-Schwartz inequality]
+		Let $V$ be an inner product space with inner product $\langle\ ,\ \rangle$ and norm $\Vert\ \Vert$. Then for any $u,v\in V$, we have
+		\[|\langle u,v\rangle| \leq  \Vert u\Vert \Vert v\Vert\]
+		Moreover, the equality occurs only when $u,v$ are linearly independent.
+	\end{theorem}
+	\begin{remark}
+		The Cauchy-Schwartz inequality tells us that the ratio $|\langle u,v\rangle |\over \Vert u\Vert \Vert v\Vert$ is in between $-1$ and $1$. Therefore we can define the `abstract' angle between two vectors $v,u$ to be
+		\[\theta_{u,v}=\arccos {|\langle u,v\rangle |\over \Vert u\Vert \Vert v\Vert}\]
+	\end{remark}
+	\begin{definition}\label{def:ortho}
+		We say two vectors $u,v$ are orthogonal if $\langle u,v\rangle = 0$.
+	\end{definition}
+	\begin{proposition}
+		If $v,u$ orthogonal in $V$, then $\Vert v\Vert^2+\Vert u\Vert ^2 = \Vert v+u\Vert^2$.
+	\end{proposition}
+	\begin{remark}
+		\Cref{def:ortho} generalizes the usual notion of orthogonality in $\rr^2$ in a sense that when two vectors are orthogonal, then the angle between then is $\theta_{u,v}=\pi/2$.
+	\end{remark}
+	\begin{theorem}Let $V$ be an inner product space, and $u,v\in V$. Then
+		$\Vert u+v\Vert\leq \Vert u\Vert +\Vert v\Vert$.
+	\end{theorem}
+	
+	\begin{definition}
+		We can define norms more generally without requiring an inner product. A norm on $V$ is a map $\Vert\cdot \Vert :V\to \mathbb{R}_{\geq 0}$ such that
+		\begin{itemize}
+			\item $\Vert v\Vert\geq 0$ and $\Vert v\Vert =0$ only when $v=0$.
+			\item $\Vert \lambda v \Vert = \vert\lambda\vert \Vert v\Vert$
+			\item $ \Vert v+u\Vert \leq \Vert v\Vert +\Vert u\Vert$
+		\end{itemize}
+	\end{definition}
+%	\begin{theorem}
+%		Any norm $\Vert \cdot \Vert $ on $\fff^n$ induces a norm on $\End(V)\cong  M_{n\times n}(\fff)\cong \fff^{m n}$.
+%		For $T\in\End(V)$, define 
+%		\[\Vert T\Vert = \max\{\Vert Tv\Vert :\Vert v\Vert = 1\}\] 
+%		called the natural norm.
+%	\end{theorem}	
+%	\begin{proposition}
+%		For $T,S\in\End(V)$ and $v\in V$, we have $\Vert Tv\Vert \leq \Vert T\Vert \Vert v\Vert $.
+%	
+%	And $\Vert ST\Vert \leq\Vert S\Vert \Vert T\Vert$.
+%	\end{proposition}
+\begin{proposition}
+	Let $K=(k_{ij})$ be the matrix whose entries are the inner product of the basis vectors, i.e. $k_{ij}=\left \langle e_i,e_j\right \rangle$. Then for $x=(x_1,\cdots,x_n)$ and $y=(y_1,\cdots,y_n)$ we have
+	\[\langle x,y\rangle=\left \langle \sum_i x_ie_i,\sum_j y_je_j\right \rangle = \sum_{i,j} x_iy_j \langle e_i,e_j\rangle=x^tKy\]
+\end{proposition}
+\begin{definition}
+	A $n\times n$ matrix is positive-definite if $K^t=K$ and satisfy
+	$x^tKx>0$ for all $0\neq x\in\fff^n$. More generally, we say $K$ is positive semi-definite if $K^t=K$ and $x^tKx\geq 0$ for all $x$.
+\end{definition}
+\begin{theorem}
+Every inner product is given by $\langle x,y\rangle =x^t Ky$ where $K$ is a positive-definite matrix.
+	\end{theorem}
+	\begin{proposition}
+		Positive-definite matrices are non-singular (invertible).
+	\end{proposition}
+	\begin{definition}
+		Given any $v_1,\cdots,v_n\in V$, we define the Gram matrix to be $K=(k_{ij})$ where $k_{ij}=\langle v_i,v_j\rangle$. In particular, Let $A$ be the matrix whose column vectors are $v_1,\cdots,v_n$, then the Gram matrix is $K=A^tCA$, where $C$ is the symmetric positive definite matrix defining the inner product.
+	\end{definition}
+	\begin{proposition}
+		A Gram matrix is always positive semi-definite. A Gram matrix is positive-definite if and only if $v_1,\cdots,v_n$ are linearly independent.
+	\end{proposition}
+	\begin{proposition}
+		Let $A$ be an $m\times n$ matrix ($m\geq n$), then TFAE:
+	\begin{itemize}
+		\item $K=A^tA$ is positive-definite;
+		\item $\Ker(A)=0$;
+		\item $A$ has linearly independent columns;
+		\item $\rank(A)=n$.
+	\end{itemize}
+	\end{proposition}
+	\begin{theorem}
+		Suppose $A\in M_{m\times n}$ and $K=A^TA$ is positive-definite. Then for any symmetric positive definite matrix $C\in M_{m\times m}$, the matrix $K'=A^tCA$ is also positive-definite.
+	\end{theorem}
+	\begin{proposition}
+		For $K=A^tCA$, we have $\Ker (K)=\Ker(A)$, and hence $\rank(K)=\rank(A)$.
+	\end{proposition}
+	
+	\subsection{Orthonormal Basis}
+	\begin{definition}Let $V$ be a real or complex inner product space.
+		A basis $v_1,\cdots,v_n$ of $V$ is called \emph{orthogonal} if $\langle v_i,v_j\rangle =\delta_{i,j}$ for all $i$. An orthogonal basis of unit vectors is called \emph{orthonormal}.
+	\end{definition}
+	\begin{proposition}
+		Let $v_1,\cdots,v_n\in V$ be pair-wise orthogonal, then they must be linearly independent. 
+	\end{proposition}
+	\begin{corollary}
+		Let $v_1,\cdots,v_n\in V$ be pair-wise orthogonal, then they form a basis for $\s(v_1,\cdots,v_n)$.
+	\end{corollary}
+	\begin{proposition}
+		If $e_1,\cdots,e_n$ is an orthonormal basis, then for any $v\in V$, we have that
+		\begin{itemize}
+			\item $v=\langle v,e_1\rangle e_1+\cdots+\langle v,e_n\rangle e_n$
+			\item $\Vert v\Vert^2= |\langle v,e_1\rangle|^2+\cdots+|\langle v,e_n\rangle |^2$
+		\end{itemize}
+	\end{proposition}
+	
+	\begin{proposition}
+		If $e_1,\cdots,e_n$ is an orthonormal basis, then
+		\[\]
+	\end{proposition}
+	\begin{theorem}
+		Given any basis $w_1,\cdots,w_n$ of $V$, one can construct an orthogonal basis $v_1,\cdots,v_n$ using the Gram-Schmidt process:
+		\begin{itemize}
+			\item $v_1=w_1$.
+			\item $\displaystyle v_2=w_2-{\langle w_2,v_1\rangle \over \Vert v_1\Vert ^2}v_1$
+			\item $\displaystyle v_3=w_3-{\langle w_3,v_1\rangle \over \Vert v_1\Vert ^2}v_1-{\langle w_3,v_2\rangle \over \Vert v_2\Vert ^2}v_2$
+			\item $\cdots$
+			\item $\displaystyle v_k=w_k-\sum_{i=1}^{k-1}{\langle w_k,v_i\rangle \over \Vert v_i\Vert ^2}v_i$
+			\item $\cdots$.
+		\end{itemize}
+	\end{theorem}
+	\begin{corollary}
+		Every finite dimensional inner-product space has an orthonormal basis.
+	\end{corollary}
+	
+	\begin{theorem}
+		Suppose $V$ is finite-dimensional and $T$ is a linear functional on $V$. Then there
+is a unique vector $v\in V$ such that $T(u)=\langle u,v\rangle $for every $u\in V$.
+	\end{theorem}
+	\begin{definition}
+		A matrix $A$ is orthogonal if $A^tA=I=AA^t$, or equivalently $A^t=A^{-1}$.
+	\end{definition}
+	\begin{proposition}
+		A matrix is orthogonal if and only if its column vectors form an orthonormal basis of $\fff^n$ w.r.t the dot product.
+	\end{proposition}
+	
+	\begin{definition}
+		Let $W\subset V$ be a subspace. A vector $v\in V$ is said to be orthogonal to $W$ is $\langle v,w\rangle =0$ for all $w\in W$. 	\end{definition}
+		
+	
+	\begin{definition}
+		Two subspaces $W,U\subset V$ are said to be orthogonal if $\langle w,u\rangle =0$ for all $w\in W,u\in U$.	\end{definition}
+	
+	\begin{definition}
+		The orthogonal complement of a subset $W\subset V$, denoted $W^\perp$, is the set of all vectors in $V$ that are orthogonal to $W$.
+		\[W^{\perp}=\{v\in V |\langle v,w\rangle =0 \text{ for all }w\in W\}\]
+	\end{definition}
+	
+	\begin{proposition}Let $U^\perp$ be the orthogonal complement of $U\subset V$.
+	\begin{enumerate}
+		\item $U^\perp$ is always a subspace of $V$\footnote{Even if $U$ is not a subspace.}.
+		\item $\{0\}^\perp=V$.
+		\item $V^\perp=\{0\}$
+		\item $U^\perp\cap U\subseteq \{0\}$.
+		\item If $W\subset U\subset V$, then $U^\perp\subset W^\perp$.
+	\end{enumerate} 
+	\end{proposition}
+	\begin{proposition}
+		Let $U$ be a finite dimensional subspace of $V$, then
+		\[V=U^\perp\oplus U\]
+		And $\dim U^\perp=\dim V-\dim U$.
+	\end{proposition}
+	\begin{proposition}
+		 $U=(U^\perp)^\perp$
+	\end{proposition}
+	
+	\begin{definition}
+			The orthogonal projection of $v$ onto $W$, denoted $\proj_W(v)$ is the element $w\in W$ such that $v-w$ is orthogonal to $W$.
+			
+			In other words, if we write $v$ in the direct sum of $V=W^\perp \otimes W$ as $v=w'+w$ with $w\in W$ and $w'\in W^\perp$, then $\proj_W(v)=w'$.
+
+		\end{definition}
+
+	\begin{theorem}
+		Let $w_1,\cdots,w_n$ be an orthogonal basis for a subspace $W\subset V$. Then the orthogonal projection of $v$ onto $W$ is
+		\[\proj_{W}(v)=\langle v,u_1\rangle u_1+\cdots+\langle v,u_n\rangle u_n\]
+		
+	\end{theorem}
+	
+	\begin{definition}
+		Define the cokernel of a linear map $T\in\Hom(V,W)$ to be the quotient space $\coker(T)=W/\img(T)$ and the coimage to be $\coimg(T)=V/\ker(T)$.
+	\end{definition}
+	
+	\begin{theorem}
+		We have $\ker(T)=\coimg(T)^\perp$ and $\img(T)=\coker(T)^\perp$
+	\end{theorem}
+	
+	\begin{proposition}
+		The equation $Ax=b$ has a solution if $b$ is orthogonal to the cokernel of $A$.\end{proposition}
+	\section{Eigenvalues and Eigenvectors}
+	
+	\begin{definition}
+		Let $A$ be an $n\times n$ complex or real matrix, then $\lambda$ is an eigenvalue of $A$ if there exists a non-zero vector $v$, called an eigenvector, such that $Av=\lambda v$.
+	\end{definition}
+	\begin{proposition}
+		$\lambda$ is an eigenvalue of $A$ if and only if $A-\lambda I$ is singular, i.e. there exist solutions to the equation $(A-\lambda I)v=0$.
+	\end{proposition}
+	\begin{definition}
+		The characteristic polynomial of $A$, denoted $P_A(x)$, is defined to be
+		\[P_A(x)=\det(A-x I)\]
+	\end{definition}
+	\begin{remark}
+		A matrix $A$ and its transpose $A^t$ have the same characteristic polynomial.
+	\end{remark}
+	
+	\begin{proposition}
+		Over the complex numbers, the characteristic polynomial can be factored into
+		\[P_A(x)=(-1)^n(x-\lambda_1)(x-\lambda_2)\cdots(x-\lambda_n)\]
+		where $\lambda_1,\cdots,\lambda_n$ are the complex eigenvalues of $A$.
+	\end{proposition}
+	\begin{proposition}
+		$\lambda_1+\cdots+\lambda_n=\textup{tr}(A)$ and $\lambda_1\lambda_2\cdots \lambda_n=\det(A)$.
+	\end{proposition}
+	\begin{definition}
+		The algebraic multiplicity of an eigenvalue $\lambda$ is its multiplicity as a root of $P_A(x)$. 	
+		\end{definition}
+	
+	\begin{proposition}
+		If $v_1,\cdots,v_k$ are eigenvectors corresponding to distinct eigenvalues $\lambda_1,\cdots,\lambda_k$, then $v_1,\cdots,v_k$ are linearly independent.
+	\end{proposition}
+	
+	\begin{definition}
+		Let $\lambda$ be an eigenvalue of $A$, then the eigenspace corresponding to $\lambda$, denoted by $V_\lambda$ is the space $\ker(A-\lambda I)$. The dimension of $V_\lambda$ is called the geometric multiplicity of $\lambda$.
+	\end{definition}
+	
+	\begin{definition}
+		A matrix $A$ is called complete if the algebraic multiplicity and geometric multiplicity of all eigenvalues equal.
+	\end{definition}
+	\begin{proposition}
+		A $n\times n$ matrix with $n$ distinct eigenvalues is complete.
+	\end{proposition}
+	\begin{theorem}
+		Every complete matrix $A$ can be diagonalized as follows
+		\[A=S D S^{-1}\]
+		where $D=\textup{diag}{(\lambda_1,\cdots,\lambda_n)}$ and $S$ is the matrix whose columns are linearly independent eigenvectors $v_1,\cdots,v_n$.
+	\end{theorem}
+	\begin{remark}
+		We will more often call complete matrices diagonalizable.
+	\end{remark}
+	\begin{theorem}
+		If $A$ is a diagonalizable (complete) matrix, then all the $k$ dimensional complex invariant subspace of $A$ are spanned by linearly independent eigenvectors of $A$.
+	\end{theorem}
+	\begin{proposition}
+		Every real symmetric matrix is diagonalizable.
+	\end{proposition}
+	\begin{theorem}[spectral decomposition]
+		Let $A$ be a symmetric matrix, then
+		$A=Q D Q^t$
+		where $D$ is the diagonal matrix of eigenvalues of $A$, and $Q$ is an orthogonal matrix whose columns are the orthonormal eigenvectors of $A$.
+	\end{theorem}
+	\begin{corollary}
+		A symmetric real matrix $A$ is positive definite if and only if all of its eigenvalues are positive. (Note that when $A$ is not necessary symmetric, being positive definite implies having positive eigenvalues, but the converse is not always true). A symmetric matrix $A$ is positive semi-definite if and only if all of its eigenvalues are non-negative (possibly zero).
+	\end{corollary}
+	\begin{definition}
+	Let $\lambda$ be an eigenvalue of $A$. Then
+		a Jordan chain of $\lambda$ is a list of vectors $w_1,\cdots,w_k$ such that
+		\[A w_1=\lambda w_1,\quad Aw_2=\lambda w_2+w_1,\cdots, A w_k = \lambda w_k+w_{k-1}\]
+	\end{definition}
+	\begin{definition}
+		A non-zero vector $w$ is called a generalized eigenvector of $A$ if $(A-\lambda I)^kw=0$ for some finite number $k$.
+	\end{definition}
+	
+	\begin{definition}
+		A Jordan basis of a square matrix $A$ is a basis of $\cc^n$ (or $\rr^n$) consisting of Jordan chains of $A$.
+	\end{definition}
+	\begin{theorem}
+		Every square matrix has a Jordan basis.
+	\end{theorem}
+	\begin{definition}
+		A Jordan block is a matrix such that the diagonal entries are the same number, the super-diagonal entires are either 1 or 0, and the other entires are zero.
+	\end{definition}
+	
+	\begin{definition}
+		A Jordan canonical form of a square matrix $A$, is the block-diagonal matrix where each diagonal block is a Jordan block with eigenvalues on the diagonal. Denote $J_A$ the Jordan canonical form of $A$.
+	\end{definition}
+	
+	\begin{theorem}
+		Any square matrix $A$ can be written as $A=S J_A S^{-1}$ where $J_A$ is the Jordan canonical form of $A$, and $S$ is the matrix whose columns form the Jordan basis.
+	\end{theorem}
+\begin{remark}
+	The number of Jordan blocks in $J_A$ equals to the number of Jordan chains in the Jordan basis of $A$.
+\end{remark}
+
+\begin{definition}
+	The singular values of a general (non-square) matrix are the square roots of the eigenvalues of the Gram matrix $K=A^tA$.
+\end{definition}
+\begin{theorem}
+	Every $m\times n$ matrix of rank $r$ can be written as
+	\[A=P \Lambda Q^{t}\]
+where $\Lambda$ is a $r\times r$ diagonal matrix with the singular values of $A$. The columns of $A$ form an orthogonal basis for $\img(A )$ and the columns of $Q$ form an basis for $ \text{coImg}(A)$. In particular, the columns of $Q$ are the normalized eigenvectors of the Gram matrix $K=A^tA$ corresponding to the non-zero eigenvalues.
+\end{theorem}
+\begin{remark}
+	If $A$ has no zero eigenvalue, then the SVD of $A$ is can give us the spectral decomposition of $K=A^tA$ in the following way
+	$K=A^tA=(Q\Lambda P^t)(P\Lambda Q^t)=Q\Lambda^2 Q^t$.
+\end{remark}
+
+	\end{document}

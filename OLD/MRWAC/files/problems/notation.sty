@@ -1,0 +1,226 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{notation}[11/07/2019 My Custom Math Package]
+
+\newif\ifnotation@nobeamer   \notation@nobeamertrue
+\DeclareOption{beamer}{\notation@nobeamerfalse}
+\ProcessOptions\relax
+
+\RequirePackage[dvipsnames]{xcolor} % for colors
+\RequirePackage{xfrac}
+\RequirePackage{amscd}
+\RequirePackage{dsfont} % only for \kk
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{environ}
+\RequirePackage{tikz-cd}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{graphicx}
+\RequirePackage{lastpage}
+\RequirePackage{mathtools}
+\RequirePackage{asymptote}
+\RequirePackage{extramarks}
+%\RequirePackage[mathscr]{eucal}
+
+\ifnotation@nobeamer
+\RequirePackage{fullpage}
+\RequirePackage[shortlabels]{enumitem}
+%\setlist{nosep} % or \setlist{noitemsep} to leave space around whole list. See enumitem
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\everymath{\displaystyle}
+\numberwithin{equation}{section}
+
+\ifnotation@nobeamer
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+
+\newtheorem{theoremalpha}{Theorem}
+\newtheorem{corollaryalpha}[theoremalpha]{Corollary}
+\renewcommand{\thetheoremalpha}{\Alph{theoremalpha}}
+
+\theoremstyle{definition}
+%\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{procedure}[theorem]{Procedure}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{\bf Remark}
+\newtheorem{caution}[theorem]{\bf Caution}
+\newtheorem{problem}[theorem]{\bf Problem}
+
+\newenvironment{proofsketch}{%
+  \renewcommand{\proofname}{Proof sketch.}\proof}{\endproof}
+\else
+% missing environments in beamer
+\theoremstyle{theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Backups
+\let\slasho\o % e.g. Fløystad
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Rings and Fields
+\newcommand{\FF}{\mathds{F}}
+\newcommand{\NN}{\mathds{N}}
+\newcommand{\ZZ}{\mathds{Z}}
+\newcommand{\QQ}{\mathds{Q}}
+\newcommand{\RR}{\mathds{R}}
+\newcommand{\CC}{\mathds{C}}
+\newcommand{\kk}{\mathds{k}}
+
+% Algebraic Spaces
+\newcommand{\A}{\mathds{A}}
+\newcommand{\V}{\mathds{V}}
+\newcommand{\PP}[1]{{\mathds{P}^{#1}\!}}
+\newcommand{\PPn}{{\mathds{P}^n}}
+
+% Prime Ideals
+\newcommand{\p}{\mathfrak{p}}
+%\newcommand{\q}{\mathfrak{q}}
+\newcommand{\m}{\mathfrak{m}}
+
+% Commutative Algebra
+\newcommand{\ann}{\operatorname{Ann}}
+\newcommand{\ass}{\operatorname{Ass}}
+\newcommand{\syz}{\text{Syz}}
+\newcommand{\supp}{\operatorname{Supp}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\codim}{\operatorname{codim}}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\length}{\operatorname{Length}}
+%\newcommand{\betti}{\beta}
+
+% Sheaf
+%\newcommand{\G}{\Gamma}
+\newcommand{\f}{\mathscr{F}}
+\newcommand{\g}{\mathscr{G}}
+\renewcommand{\i}{\mathscr{I}}
+\renewcommand{\l}{\mathscr{L}}
+\renewcommand{\o}{\mathcal{O}}
+\renewcommand{\hom}{\mathscr{H}\!\operatorname{om}}
+\renewcommand{\tilde}{\widetilde}
+
+% Morphisms
+\newcommand{\xto} {\xrightarrow}
+\newcommand{\xgets}{\xleftarrow}
+\newcommand{\dto}[2]{\substack{\\[-0.4em]#1 \\ \xto{\quad} \\[-1.1em] \xto{\quad} \\ #2\\}} % Equalizer
+
+% Homological algebra
+\newcommand{\HH}{H}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\renewcommand{\ker}{\operatorname{ker}}
+
+% Category
+\newcommand{\op} {\mathrm{op}}    % Opposite category
+\newcommand{\ob} {\operatorname{Ob}}    % objects
+\newcommand{\mor}{\operatorname{Mor}}    % morphisms
+\newcommand{\sch}{\mathfrak{Sch}}
+\newcommand{\rng}{\mathfrak{Rng}}
+\newcommand{\ens}{\mathscr{E}\!n\!s}
+\newcommand{\colim[2]}{\lim_{\overrightarrow{#2}}}
+\renewcommand{\b}{\bullet}
+%\renewcommand{\C}{\mathscr{C}}
+
+% Derived categories
+\newcommand{\D}{\operatorname{\mathcal D}}
+\newcommand{\Db} [1]{\D^\mathrm{b}(#1)}
+\newcommand{\Dbs}[1]{\D^\mathrm{b}_{\operatorname{Sing}}(#1)}
+\renewcommand{\mod}{\operatorname{mod}}
+\newcommand{\qcoh}[1]{\mathbf{Qcoh}(#1)}
+\newcommand {\coh}[1]{\mathbf {Coh}(#1)}
+\newcommand{\cone}{\operatorname{Cone}}
+\newcommand{\Tot}{\operatorname{Tot}}
+
+% Derived functors
+\newcommand{\Lotimes}{\otimes^\mathbf{L}}     % \stackrel{\mathbf{L}}\otimes
+\newcommand{\Lboxtimes}{\boxtimes^\mathbf{L}} % \stackrel{\mathbf{L}}\boxtimes
+\newcommand{\RHom}{\mathbf{R}\Hom}
+
+% Toric varieties
+\newcommand{\Cox}[1]{\operatorname{Cox}#1}
+\newcommand{\Div}[1]{\operatorname{Div}(#1)}
+\newcommand{\CDiv}[1]{\operatorname{CDiv}(#1)}
+\newcommand{\Pic}[1]{\operatorname{Pic}#1}
+\newcommand{\Nef}[1]{\operatorname{Nef}#1}
+\newcommand{\Eff}[1]{\operatorname{Eff}(#1)}
+\newcommand{\PEff}[1]{\operatorname{\overline{Eff}}(#1)}
+
+% Et cetra
+%\newcommand{\WHY}  {{\color{red}{\bf WHY}}}
+%\newcommand{\NOTE} {{\color{red}{\bf NOTE}}}
+%\newcommand{\FIXME}{{\color{red}{\bf FIXME}}}
+\newcommand{\WHY}  {\marginpar{\color{red}\textbf{WHY}}}
+\newcommand{\TODO} {\marginpar{\color{red}\textbf{TODO}}}
+\newcommand{\FIXME}{\marginpar{\color{red}\textbf{FIXME}}}
+\newcommand{\DO}[1]{\marginpar{\color{red}\tiny#1}}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\renewcommand{\Im}{\text{Im}}
+\renewcommand{\Re}{\text{Re}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NewEnviron{eq}{%
+ \begin{equation*}\begin{split}
+  \BODY
+ \end{split}\end{equation*}\ignorespacesafterend}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iftrue
+
+\NewEnviron{cd}[1][small]{%
+ \begin{center}\begin{tikzcd}[ampersand replacement=\&, column sep=#1, row sep=small, column sep=small]
+  \BODY
+ \end{tikzcd}\end{center}\ignorespacesafterend}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\trunk}{\arrow[d, phantom, ""{coordinate, name=Z}]}
+\newcommand{\snake}[2]{
+  \arrow[#1, "#2", rounded corners=7pt, to path=
+  { -- ([xshift=3ex] \tikztostart.east)
+    |- (Z) [near start]\tikztonodes
+    -| ([xshift=-3ex]\tikztotarget.west)
+    -- (\tikztotarget)
+  }]}
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% fix for extra spacing around \left( and \right)
+\let\originalleft\left
+\let\originalright\right
+\def\left#1{\mathopen{}\originalleft#1}
+\def\right#1{\originalright#1\mathclose{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\endinput

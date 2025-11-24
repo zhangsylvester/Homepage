@@ -1,0 +1,50 @@
+\begin{proof}[Proof of uniqueness]
+We will first prove the uniqueness part of \Cref{thm:KL_basis}. Denote $\alpha(x,w)=\varepsilon_w\varepsilon_x q_w^{1\over 2}q_x^{-1}$. Assume%
+\begin{enumerate}[(a),noitemsep]
+	\item $\eta(C_w)=C_w$
+	\item $P_{w,w}=1$
+	\item $P_{x,w}(q)\in\mathbb{Z}[q]$ of degree $\leq {1\over 2}(\ell(x,w)-1)$ for $x\leq w$.
+\end{enumerate}
+
+where $\ell(x,w)=\ell(w)-\ell(x)$. We will employ induction on $\ell(x,w)$.
+
+\underline{Base Case.} $x=w$ so that $P_{x,w}=1$.
+
+\underline{Induction Step.}	Assume unique for $x<y\leq w$
+\[C_w=\sum_{y\leq w}\alpha(y,w)\bar P_{y,w} T_y.\]
+Apply $\eta$ we get
+\begin{align*}\label{eq:uniq_proof}
+C_w&=\sum_{y\leq w}\varepsilon_w\varepsilon_y q^{-{1\over 2} }q_yP_{y,w}(T_{y^{-1}})^{-1}\\&=\sum_{y\leq w} \varepsilon_w\varepsilon_y q^{-{1\over 2} } q_yP_{y,w}\varepsilon_yq_y^{-1}\sum_{x\leq y}\varepsilon_x R_{x,y} T_x\\
+&=\varepsilon_xq_w^{-{1\over 2}}\sum_{x\leq y\leq w}\varepsilon_x R_{x,y} P_{y,w} T_x
+\end{align*}
+Comparing coefficients of $T_x$, we have
+\begin{align}
+\nonumber\varepsilon_w\varepsilon_xq_w^{1\over 2}q^{-1}\bar P_{x,w}&=\varepsilon_x q_w^{-{1\over 2}}\sum_{x\leq y\leq w}\varepsilon_x R_{x,y} P_{y,w}\\
+	q_w^{1\over 2} q_x^{-{1\over 2}}\bar P_{x,w}-q_w^{-{1\over 2}} q_x^{1\over 2} P_{x,w}&=q_w^{-{1\over 2}}q_x^{1\over 2}\sum_{x<y\leq w}R_{x,y}P_{y,w}
+\end{align}
+By induction hypothesis the right hand side is unique. It can be seen that, assumption (c) implies that
+\begin{itemize}
+	\item $q_w{1\over 2}q_x^{-{1\over 2}}\bar P_{x,w}$ is a polynomial in $q^{1\over 2}$ without constant term.
+	\item $q_w^{-{1\over 2}}q_x^{{1\over 2}} P_{x,w}$ is a polynomial in $-q^{1\over 2}$ without constant term.
+\end{itemize}
+Therefore there is no cancellation in the left hand side of \Cref{eq:uniq_proof}, thus $P_{x,w}$ can be uniquely recovered from the right hand side.\footnote{Note that in general, the uniqueness of $f(q)-f(1/q)$ does not imply the uniqueness of $f$, without the degree constraint.
+}
+
+\end{proof}
+\begin{exercise}
+	Prove that $P_{x,w}=1$ if $\ell(x,w)=1$.
+\end{exercise}
+
+\begin{theorem}
+	$P_{x,w}(0)=1$.
+\end{theorem}
+\begin{proof}Recall that the mobius inversion formula for a poset is
+	$$g(y)=\sum_{\hat 0\leq x\leq y}f(x)\iff f(y)=\sum_{\hat 0\leq x\leq y}\mu g(x)$$
+
+\[q^{\ell(x,w)}\bar P_{x,w} = \sum_{y\in[x,w]}R_{x,y}P_{y,w}\]
+Recall that $R_{x,y}(0)=(-1)^{\ell(x,w)}$.
+So set $q=0$ we get
+\[0=\sum_{y\in[x,w]} (-1)^{\ell(x,y)} P_{y,w}(0)\]
+Then by Mobius inversion
+\[P_{x,w}(0)=-\sum_{x<y\leq w}(-1)^{\ell(x,y)}\cdot 1=-\sum_{x<y\leq w}\mu (x,y)=\mu(x,x)=1\qedhere\]
+\end{proof}

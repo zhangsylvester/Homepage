@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<!--
+	Make sure MathJax works
+-->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      "HTML-CSS": { linebreaks: { automatic: true, width: "75% container" } }, 
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Sylvester's Homepage</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://twin-cities.umn.edu/sites/twin-cities.umn.edu/files/favicon.ico" />
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!--
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    -->
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <!-- BS icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    <!-- Acadamicon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!--Google icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div>
+            <div class="sidebar-header" >
+                <h4>Sylvester W. Zhang</h4>
+                <h3 style="font-family: STFangsong;">张文泽</h3>
+                <strong>SZ</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="index.html">
+                        <span><i class="fas fa-home"></i></span>
+                        Home</a>
+                </li>
+
+                <li class="active">
+                    <a href="research.html">
+                    <span><i class="fas fa-dna"></i></span>
+                    Research
+                    </a>
+                </li>
+                <li>
+                    <a href="publication.html">
+                    <span><i class="fas fa-book"></i></span>
+                    Papers
+                    </a>
+                </li>
+                <li>
+                    <a href="teaching.html">
+                        <span><i class="fas fa-chalkboard-teacher"></i></span>
+                        Teaching
+                    </a>
+                </li>
+                <li>
+                    <a href="CV/CV.pdf">
+                        <span><i class="fas fa-id-badge"></i></span>
+                        <span class="hide">Curriculum</span> Vitae
+                    </a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <span><a target="_blank" class="ico ai ai-google-scholar-square ai-lg" href="https://scholar.google.com/citations?hl=en&user=Hw78W00AAAAJ&view_op=list_works&sortby=pubdate"></a></span>
+                    <span><a target="_blank" class="ico ai ai-orcid-square ai-lg" href="https://orcid.org/0000-0002-4617-5901"></a></span>
+                    <span><a target="_blank" class="ico ai ai-arxiv-square ai-lg" href="https://arxiv.org/a/0000-0002-4617-5901.html"></a></span>
+                    <span><a target="_blank" class="ico ai ai-researchgate-square ai-lg" href="https://www.researchgate.net/profile/Sylvester-Zhang"></a></span>
+                    <span><a target="_blank" class="ico ai ai-semantic-scholar-square ai-lg" href="https://www.semanticscholar.org/author/Sylvester-W.-Zhang/2107901800"></a></span>
+                </li>
+            </ul>
+        </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top " style="margin-top: 10px;">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <div class="small-screen">
+                        <strong>Sylvester W. Zhang</strong>
+                    </div>
+                    
+                    <div class="big-screen">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#intro">My Research</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#pub">Publications</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#talks">Talks</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#programs">Codes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#misc">Miscellany</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            
+
+            <h3 id="intro">Research Interests</h3>
+            <p>My research interest is in algebraic combinatorics. Specifically, I am interested in <ul style="margin-top:-1em;"><li>combinatorial representation theory,</li> <li>cluster algebras,</li> <li> integrable systems,</li><li>Schubert Calculus.</li>
+            </ul>
+            </p>
+            <div class="line"></div>
+            <h3 id="intro">Papers</h3>
+            <p>See <a href="publication.html">this page</a> for an annotated list of my publications. You can also find my papers on <a href=" https://arxiv.org/a/0000-0002-4617-5901.html">arXiv</a>, <a href="https://scholar.google.com/citations?user=Hw78W00AAAAJ&hl=en">Google scholar</a> and <a href="https://zbmath.org/?q=ia%3Azhang.sylvester-w">zbMATH</a>.</p>
+            
+            <!-- <p>
+            <ul style="padding-top: 0px;">
+                <li><a><strong>An Expansion Formula for Decorated Super-Teichm&uuml;ller Spaces.</strong></a> with G. Musiker and N. Ovenhouse, <i>SIGMA 17 080.</i> (2021)</li> 
+                <li><a><strong>Double Dimer Covers on Snake Graphs from Super Cluster Expansions.</strong></a> with G. Musiker and N. Ovenhouse, <i>Journal of Algebra.</i> (2022)</li>
+                
+            </ul>
+            </p> -->
+
+          
+
+            
+            <h5>Collaborators</h6>
+                Gregg Musiker (4),  Nick Ovenhouse (4), Sunita Chepuri (2), Calvin Yost-Wolff (2), Valerie Zhang (2), Esther Banaian, Michael Curran, Quang Dao, Claire Frechette, Elizabeth Kelley, Greg Michel, Ralf Schiffler, Julian Wellman.
+            <div class="line"></div>
+
+            <h3>Talks</h3>
+            <div class="inner">
+                <ul>
+                    <li><a href="files/slides/Higher_D.pdf">Higher Dimer Covers on Snake Graphs and Multi-dimensional Continued Fractions.</a> UC Daivs Algebra and Discrete Math Seminar. June 2023.</li>
+                    <li><a>The Greene-Kleitman Correspondence.</a> Rutgers Graduate Algebra and Representation Theory Seminar. (Nov 2022)</li>
+                    <li><a href="files/slides/UMN20220923.pdf">Super Cluster Algebras from Surfaces. </a>UMN Combinatorics Seminar. (Sep 2022)</li>
+                    <li> Combinatorial Formulas for Graph LP Algebras. <a>UMN Student Combinatorics Seminar.</a> (April 2022) </li>
+                    <li> <a href="files/slides/RibbonTalk.pdf">Schur and LLT Polynomials from Lattice Models.</a> <i><a href="https://sites.google.com/view/gocc-combinatorics/abstract-sylvester-zhang">Graduate Online Combinatorics Colloquium.</a></i> (Mar 2021) </li>
+                    <li> <a href="files/slides/umnFeb19talk.pdf">$T$-path Formula for Decorated Super-Teichm&uuml;ller Spaces.</a> <i><a href="https://www-users.cse.umn.edu/~ovenh001/seminar_spring2021.html">UMN Combinatorics Seminar.</a></i>  (Feb 2021)</li>
+                    <li> Decorated Super-Teichm&uuml;ller Spaces and Cluster Superalgebras. <i><a href="https://www-users.cse.umn.edu/~webst390/StudentCombinatoricsSeminar/Abstracts/1-30.html">UMN Student Combinatorics Seminar.</a></i>  (Jan 2020)</li>
+                </ul>
+            </div>
+            <div class="line"></div>
+            <h3 id="talks">Activities</h3>
+            <ul><li>FPSAC. UC Davis. 2023</li>
+                <li>Schuber Calculus Summer School. UIUC. (June 12 - 22, 2023) </li>
+                <li><a href="https://www-users.cse.umn.edu/~swzhang/MRWAC/index.html">Minnesota Research Workshop in Algebra and Combinatorics</a>, UMN, Minneapolis (May 14 - 19 2022) </li>
+                <li><a>AMS Sectional Meeting</a> University of Cincinnati. (April 15-16, 2023)</li>
+                <li><a href="https://scgp.stonybrook.edu/archives/35652">Workshop: Supergeometry and Supermoduli.</a> Simons Center. (March 27-31, 2023)</li>
+                <li><a href="https://sites.google.com/view/gscc2023/home?authuser=0">Graduate Student Combinatorics Conference.</a> Washington University at St. Louis. (Mar 17-19, 2023)</li>
+                
+               
+                
+                
+                <li><a href="https://sites.google.com/view/caac2023/home">Combinatorial Algebra meets Algebraic Combinatorics.</a> University of Waterloo, (Jan 2023)</li>
+                <li><a href="http://www.fields.utoronto.ca/activities/22-23/symmetric-spaces">Workshop on Symmetric Spaces.</a> University of Ottawa, (Aug 2022)</li>
+                <li><a href="https://sites.google.com/view/lawrge2022/home">The LA Workshop on Representation Theory and Geometry.</a> USC, LA (June 2022)</li>
+                <li><a href="https://www-users.cse.umn.edu/~swzhang/MRWAC/index.html">Minnesota Research Workshop in Algebra and Combinatorics</a>, UMN, Minneapolis (May 2022) </li>
+                <li><a href="http://www.samuelfhopkins.com/OPAC/opac.html">Open Problems in Algebraic Combinatorics</a>, UMN, Minneapolis (May 2022)</li><li><a href="https://sites.google.com/view/gpcc2020/">Great Plains Combinatorics Conference</a>, NDSU, North Dakota (April 2022)</li>
+                <li><a href="http://www.fields.utoronto.ca/activities/21-22/supergeometry">Workshop on Supergeometry and Bracket Structures</a>, Fields Institute, Toronto (March 2022)</li>
+                <li><a href="http://www.birs.ca/events/2021/5-day-workshops/21w5514/schedule">Dynamical Algebraic Combinatorics</a>, BIRS, virtual (Nov 2021)</li>
+            </ul>
+            <div class="line"></div>
+            <h3 id="programs">Codes</h3>
+            <ul>
+                <li><a href="codes/Graff.html">Arborescences of covering graphs</a>  &nbsp; <i>SageMath 9</i></li>
+                <li><a href="https://colab.research.google.com/drive/13a7LXhIjG0hOUBmMbqKWADW6shhSQ7-N#offline=true&sandboxMode=true" target="_blank">LLT polynomials</a>  &nbsp; <i>Python 3 + SymPy</i></li>
+                <li>Birational Rowmotion  &nbsp;  <i><a href="https://colab.research.google.com/drive/1g1maR6IVZDZg0GW8tA_b22C2Xf11xpC6#offline=true&sandboxMode=true" target="_blank">Python 3 + SymPy</a></i></li>
+                <li><a href="https://arxiv.org/pdf/math/0608422.pdf">Kenyon-Wilson</a> Groves &nbsp;  <i><a href="codes/Grove.html">  SageMath 9 </a></i> </li>
+                <li><a href="https://www.wolframcloud.com/obj/swzhang/Published/LinearLP.nb" target="_blank"> Graph LP Algebras </a>  &nbsp; <i>Wolfram Mathematica</i></li>
+            </ul>
+            <div class="line"></div>
+            <h3 id="misc">Miscellany</h3>
+            
+            <p>Combinatorics at Minnesota
+            <ul>
+                <li style="background:none;"><a href="http://www-users.math.umn.edu/~reiner/combinatorics_group.html" target="_blank">Combinatorics Group</a></li>
+                <li style="background:none;"><a href="http://www-users.math.umn.edu/~ovenh001/seminar.html" target="_blank">Combinatorics Seminar</a></li>
+                <li style="background:none;"><a href="https://www-users.cse.umn.edu/~pevzn002/SCAS/student_seminar_f21.html" target="_blank">Student Seminar</a></li>	
+                <li style="background:none;"><a href="http://www-users.math.umn.edu/~reiner/REU/REU.html" target="_blank">Summmer REU</a></li>	
+            </ul>
+            </p>
+            <div class="line"></div>
+            <p style="color:#999; font-size: 10px;">&copy; Wenze Zhang. All rights reserved.<br> The views and opinions expressed in this page are strictly those of the page author. The contents of this page have not been reviewed or approved by the University of Minnesota.</p>
+        </div>
+
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#content').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+
+    <script>
+        var elems = document.getElementsByClassName("collapse");
+
+        function openAll() {
+            $('.collapse').collapse('show');
+            document.getElementById("collapse-all").setAttribute( "onClick", "javascript: closeAll();" );
+            document.getElementById("collapse-all").setAttribute( "data-transformed", "true" );
+            document.getElementById("collapse-all").innerHTML = "<i  style='transform:rotate(45deg); transition: all 0.6s;' class='fas fa-plus'></i> <span>Hide Abstracts</span>";
+        }
+        function closeAll() {
+            $('.collapse').collapse('hide');
+            document.getElementById("collapse-all").setAttribute( "onClick", "javascript: openAll();" );
+            document.getElementById("collapse-all").innerHTML = "<i class='fas fa-plus'></i> <span>Show Abstracts</span>";
+            document.getElementById("collapse-all").setAttribute( "data-transformed", "false" );
+        }	
+    </script>
+    <script>
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+          if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+          } else {
+            document.getElementById("navbar").style.top = "-80px";
+          }
+          prevScrollpos = currentScrollPos;
+        }
+    </script>
+    <script type="text/javascript">
+
+        for (let i = 0; i < 5; i++){
+            var GM = document.getElementById("musiker")
+            GM.innerHTML = 'G. Musiker'
+            GM.href = 'https://www-users.cse.umn.edu/~musiker/'
+            GM.target = "_blank"
+            GM.setAttribute('id','')
+
+            var NO = document.getElementById("ovenhouse")
+            NO.innerHTML = 'N. Ovenhouse'
+            NO.href="https://www-users.cse.umn.edu/~ovenh001/"
+            NO.target = "_blank"
+            NO.setAttribute('id','') 
+            
+            var SC = document.getElementById('chepuri')
+            SC.innerHTML = 'S. Chepuri'
+            SC.href='https://sites.google.com/view/sunita-chepuri'
+            SC.target = '_blank'
+            SC.setAttribute('id','')
+        }
+
+        for (let j = 0; j < 3; j++){
+            var ek = document.getElementById("kelly")
+            ek.innerHTML = 'E. Kelly'
+            ek.href='https://sites.google.com/view/elizabeth-kelley/home'
+            ek.target = '_blank'
+            ek.setAttribute('id','')
+ 
+            var eb = document.getElementById('banaian')
+            eb.innerHTML = 'E. Banaian'
+            eb.href='https://sites.google.com/umn.edu/estherbanaian/home'
+            eb.target = '_blank'
+            eb.setAttribute('id','')
+        }
+        
+        
+    </script>
+
+</body>
+
+</html>
+
