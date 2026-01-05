@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chomp!</title>
+<style>
+  body {
+    font-family: sans-serif;
+    text-align: center;
+  }
+
+  #board {
+    display: inline-grid;
+    gap: 4px;
+    margin-top: 20px;
+  }
+
+  .cell {
+    width: 48px;
+    height: 48px;
+    background: #8b5a2b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+
+  .poison {
+    background: #b00020;
+  }
+
+  .removed {
+    visibility: hidden;
+    cursor: default;
+  }
+
+  #status {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Poisoned Chocolate (Chomp)</h2>
+<p>
+Click a square. Everything <b>above AND to the right</b> disappears.<br>
+Taking the red square loses.
+</p>
+
+<div id="board"></div>
+<div id="status"></div>
+
+<script>
+const ROWS = 5;
+const COLS = 7;
+
+let board = [];
+let currentPlayer = 1;
+let gameOver = false;
+
+// initialize full board
+function initBoard() {
+  board = Array.from({ length: ROWS }, () =>
+    Array.from({ length: COLS }, () => true)
+  );
+}
+
+function renderBoard() {
+  const boardDiv = document.getElementById("board");
+  boardDiv.innerHTML = "";
+  boardDiv.style.gridTemplateRows = `repeat(${ROWS}, 48px)`;
+  boardDiv.style.gridTemplateColumns = `repeat(${COLS}, 48px)`;
+
+  for (let i = ROWS - 1; i >= 0; i--) {
+    for (let j = 0; j < COLS; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+
+      if (!board[i][j]) {
+        cell.classList.add("removed");
+      } else {
+        if (i === 0 && j === 0) {
+          cell.classList.add("poison");
+          cell.textContent = "☠";
+        }
+        cell.onclick = () => makeMove(i, j);
+      }
+
+      boardDiv.appendChild(cell);
+    }
+  }
+
+  updateStatus();
+}
+
+function makeMove(i, j) {
+  if (gameOver || !board[i][j]) return;
+
+  // poison loses
+  if (i === 0 && j === 0) {
+    document.getElementById("status").textContent =
+      `Player ${currentPlayer} took the poison and loses!`;
+    gameOver = true;
+    return;
+  }
+
+  // remove everything above AND to the right
+  for (let r = i; r < ROWS; r++) {
+    for (let c = j; c < COLS; c++) {
+      board[r][c] = false;
+    }
+  }
+
+  currentPlayer = currentPlayer === 1 ? 2 : 1;
+  renderBoard();
+}
+
+function updateStatus() {
+  document.getElementById("status").textContent =
+    `Player ${currentPlayer}'s turn`;
+}
+
+initBoard();
+renderBoard();
+</script>
+
+</body>
+</html>

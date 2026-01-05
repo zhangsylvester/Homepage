@@ -1,0 +1,150 @@
+\documentclass{amsart}
+\usepackage{parskip}
+\usepackage{ytableau}
+\DeclareMathOperator{\Ind}{Ind}
+
+\usepackage{stmaryrd}
+\usepackage[inline]{showlabels}
+%Title Style
+\usepackage{mathtools}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@settitle}{\uppercasenonmath\@title}{}{}{}
+\patchcmd{\@setauthors}{\MakeUppercase}{}{}{}
+\patchcmd{\section}{\scshape}{}{}{}
+\makeatother
+\makeatletter
+\patchcmd{\@maketitle}
+  {\ifx\@empty\@dedicatory}
+  {\ifx\@empty\@date \else {\vskip2ex %vertical position of date
+  \centering\footnotesize\@date\par\vskip1ex}\fi
+   \ifx\@empty\@dedicatory}
+  {}{}
+\patchcmd{\@adminfootnotes}
+  {\ifx\@empty\@date\else \@footnotetext{\@setdate}\fi}
+  {}{}{}
+\makeatother
+
+
+%Page Style
+\usepackage{mathabx}
+\usepackage[colorlinks,backref=page,citecolor=blue]{hyperref}
+\usepackage{accents}
+\renewcommand{\familydefault}{ppl}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\marginparwidth}{0in}
+\setlength{\marginparsep}{0in}
+\setlength{\marginparpush}{0in}
+\setlength{\topmargin}{0.3in}
+\setlength{\headsep}{14pt}
+\setlength{\footskip}{.3in}
+\setlength{\textheight}{8.0in}
+\setlength{\textwidth}{5.8in}
+\setlength{\parskip}{4pt}
+\linespread{1.2}
+
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{restate}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\DeclareMathOperator{\YY}{\mathbb{Y}}
+\DeclareMathOperator{\Y}{\bf{Y}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sh}{shape}
+\DeclareMathOperator{\SYT}{SYT}
+
+
+\title{Math 206A Final Exam}
+
+\begin{document}
+	\maketitle
+\begin{itemize}
+    
+    \item The exam is take-home and due on  \textbf{December 12th at 11:59 PM} (Submit via email).
+    \item Open-book/open-note; you may use any resources (including online) \textbf{except} for \textbf{AI tools} or \textbf{human consultation/collaboration}.
+    \item Any external result or theorem used \textbf{must be properly cited}.
+    \item  Your solution must be \textbf{self-contained}. Any theorem not proven in class \textbf{must be proven} in your submission.
+    \item  Your Final Score $= \min(100, \text{Your Total Score})$, where $0 \leq \text{Your Total Score} \leq 200$.\footnote{This means you don't need to submit all problems, but I do think each of the problems is very interesting to work out :)} 
+\end{itemize}
+	
+	
+	
+	
+	
+		
+		\begin{problem}[20pts]
+			Let $\lambda(w)$ denote the corresponding partition of a Grassmanian permutation $w$. Prove that the reduced words of $w$ are in bijection with Standard Young Tableaux of shape $\lambda(w)$.
+		\end{problem}
+		
+		
+		\begin{problem}[40 pts]
+			Given a partition $\lambda$ and $j\geq 1$, let $m_j$ denote the multiplicity of the parts of $j$ in $\lambda$, so that $\lambda = (1^{m_1(\lambda)},2^{m_2(\lambda)},\dots)$
+			
+			(a) For each $j\in[n]$, prove that			
+			\[	\tag{$*$}		\sum_{\lambda} q^{|\lambda|}m_j(\lambda) = {q^j\over 1-q^j}\prod_{i=1}^{\infty}{1\over 1-q^i}\]
+			
+			
+			\[\tag{$**$}\sum_{\lambda\vdash n} q^{|\lambda|}\cdot\#\{k:m_k\geq j\}={q^j\over 1-q^j}\prod_{i=1}^{\infty}{1\over 1-q^i}\]
+			
+			(b) Deduce that for fixed $j$, one has 
+			\[\sum_{\lambda\vdash n}m_j(\lambda)=\sum_{\lambda\vdash n}\#\{k:m_k\geq j\}\]
+			
+			(c) From (b), deduce that for any $n\geq 0$, one has
+			\[\prod_{\lambda \vdash n}\prod_{i=1}^{\ell(\lambda)}\lambda_i=\prod_{\lambda\vdash n}\prod_{j=1}^{\infty}m_j(\lambda)!\]
+			(d) From (c), deduce that
+			\[\prod_{\lambda\vdash n}z_\lambda = \left(\prod_{\lambda\vdash n}\prod_{i=1}^{\ell(\lambda)}\lambda_i\right)^2\]
+			
+		\end{problem}
+		
+		\begin{problem}[40pts]
+			Consider the basis $b_{\lambda}=\sum_{\mu\trianglelefteq\lambda,|\mu|=|\lambda|}m_{\mu}$ of $\Lambda$. Does each Schur function $s_{\lambda}$ expand non-negatively into this basis? 
+		\end{problem}
+		
+		\begin{problem}[40pts]
+			Consider the generating function $$H(t)={1\over \sum_{n\geq 0} (-1)^ne_n(x) t^n}.$$ Expand $H(t)$ in $e_n, h_n$ and usual $x_i$ variables. (Hint: use the Cauchy identity $\prod_{\lambda} s_\lambda(x) s_{\lambda}(y)=\prod_{i,j} {1\over 1-x_iy_j}$.)
+		\end{problem}
+		
+		\begin{problem}[60pts] Denote the trivial representation of $S_4$ by $\rho_{(4)}$ and the sign representation by $\rho_{(1,1,1,1)}$.
+		
+		(a) Show that the defining representation (which permutes the coordinates in $\mathbb{C}^4$) decomposes
+		\[\rho_{def}=\rho_{(4)}\oplus \rho_{(1,1,1,1)}\]
+		
+		(b) Show that the representation $\rho_p$ which permutes all unordered pairs $(i,j)\in {[4]\choose 2}$ decomposes
+		\[\rho_{p}=\rho_{(4)}\oplus \rho_{(1,1,1,1)}\oplus \rho_{(2,2)}\]
+		where $\rho_{(2,2)}$ is an irreducible representation of degree $2$. 
+		
+		(e) Set $\rho_{(2,1,1)}=\rho_{(1,1,1,1)}\otimes\rho_{(3,1)}$. Show that it's irreducible, and that $\rho_{(4)},\rho_{(3,1,1)}
+,\rho_{(2,2)},\rho_{(2,1,1)}
+,\rho_{(1,1,1,1)}$ give a complete list of irreducible representations of $S_4$.
+
+(f) Write down the conjugacy classes and character table for $S_4$.
+			
+		\end{problem}
+	
+		
+		
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}

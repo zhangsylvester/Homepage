@@ -1,0 +1,42 @@
+\documentclass{amsart}
+\usepackage{soul}
+\input{command.tex}
+\begin{document}
+	\leftline{\bf Math 4242 Homework 2}
+	\begin{enumerate}
+		\item Let $V$ be a vector space over $\ff$, and $v_1,\cdots,v_n\in V$. Show that $\s (v_1,\cdots,v_n)$ is the  smallest subspace of $V$ that contains all of $v_1,\cdots,v_n$.
+		\begin{proof}
+		 Let $W$ be any vector space containing $v_1,\cdots,v_n$. We need to show that $\s(v_1,\cdots,v_n)\subseteq W$, i.e. $v\in W$ for all $v\in \s(v_1,\cdots,v_n)$. By definition of span an arbitrary element of $\s(v_1,\cdots,v_n)$ looks like $v=a_1v_1+\cdots+a_n v_n$. Since $W$ is a subspace, it's closed under linear combination, so $v\in W$, thus $\s(v_1,\cdots,v_n)\subseteq W$.
+		\end{proof}
+		\item Let $V$ be a vector space, and $U_1,\cdot,U_m$ subspaces of $V$. Prove that
+		\[\s(U_1\cup \cdots \cup U_m) = U_1+\cdots+U_m\]
+		\begin{proof}
+			Since $U_1+\cdots+U_m$ contains $U_1\cup\cdots\cup U_m$, by previous problem, we know that $\s(U_1\cup\cdots\cup U_m)\subseteq U_1+\cdots+U_m$. To show they are equal, we still need that $U_1+\cdots+U_m\subseteq \s(\bigcup_{i=1}^{m} U_i)$.
+			
+			Take any $u\in U_1+\cdots+U_m$, it can be written as $u_1+\cdots+u_m$ where $u_i\in U_i$. This is automatically in $\s(U_1\cup \cdots \cup U_m)$ because it's a linear combination of vectors in the union. Thus $U_1+\cdots+U_m\subset U_1\cup \cdots \cup U_m$, we are done.
+		\end{proof}
+		\item Prove that $\s(v_1,\cdots,v_n) = \s(v_1)\oplus \cdots \oplus \s(v_n)$ if and only if $v_1,\cdots,v_n$ are linearly independent. 
+		\begin{proof}
+			($\implies$) Suppose $\s(v_1,\cdots,v_n) = \s(v_1)\oplus \cdots \oplus \s(v_n)$. Then $0\in\s(v_1,\cdots,v_n)$ can be uniquely written as a sum $0=w_1+\cdots+w_n$ where $w_i\in\s(v_i)$ (i.e. $w_i=k_ia_i$ for some $k_i\in\ff$.) That is to say $0=k_1 v_1+\cdots k_n v_n$ for unique $k_1,\cdots,k_n$, thus by definition $v_1,\cdots,v_n$ are linearly independent.
+			
+			($\impliedby$) If $v_1,\cdots,v_n$ linearly independent, then any $v\in\s(v_1,\cdots,v_n)$ can be uniquely written as $v=a_1v_1+\cdots+a_nv_n$ for some $a_1,\cdots,a_n\in\ff$. Now since $a_i v_i\in \s(v_i)$, and this is the only way to write $v$ as sum of vectors in $\s(v_i)$. Hence $\s(v_1)\oplus \cdots \oplus \s(v_n)$ must be a direct sum.
+		\end{proof}
+		\item OS 2.1.12
+		\item OS 2.1.13
+		\item OS 2.2.29
+		\item OS 2.3.3
+		\item OS 2.3.18
+		\item OS 2.4.22
+		\item OS 2.4.27
+		\item \st{OS 3.1.9}
+		\item \st{OS 3.1.17}
+	
+	 	\end{enumerate}
+	 	Optional (do not submit)
+	 	\begin{itemize}
+	 		\item 2.4.23
+	 		\item 2.4.27
+	 		\item 3.1.27
+	 	\end{itemize}
+	
+\end{document}

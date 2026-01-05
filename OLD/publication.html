@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<!--
+	Make sure MathJax works
+-->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      "HTML-CSS": { linebreaks: { automatic: true, width: "75% container" } }, 
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Sylvester's Homepage</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://twin-cities.umn.edu/sites/twin-cities.umn.edu/files/favicon.ico" />
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   
+    
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <!-- BS icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    <!-- Acadamicon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!--Google icon-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div>
+            <div class="sidebar-header" >
+                <h4>Sylvester W. Zhang</h4>
+                <h3 style="font-family: STFangsong;">张文泽</h3>
+                <strong>SZ</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="index.html">
+                        <span><i class="fas fa-home"></i></span>
+                        Home</a>
+                </li>
+
+                <li>
+                    <a href="research.html">
+                    <span><i class="fas fa-dna"></i></span>
+                    Research
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="publication.html">
+                    <span><i class="fas fa-book"></i></span>
+                    Papers
+                    </a>
+                </li>
+                <li>
+                    <a href="teaching.html">
+                        <span><i class="fas fa-chalkboard-teacher"></i></span>
+                        Teaching
+                    </a>
+                </li>
+                <li>
+                    <a href="CV/CV.pdf">
+                        <span><i class="fas fa-id-badge"></i></span>
+                        <span class="hide">Curriculum</span> Vitae
+                    </a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <span><a target="_blank" class="ico ai ai-google-scholar-square ai-lg" href="https://scholar.google.com/citations?hl=en&user=Hw78W00AAAAJ&view_op=list_works&sortby=pubdate"></a></span>
+                    <span><a target="_blank" class="ico ai ai-orcid-square ai-lg" href="https://orcid.org/0000-0002-4617-5901"></a></span>
+                    <span><a target="_blank" class="ico ai ai-arxiv-square ai-lg" href="https://arxiv.org/a/0000-0002-4617-5901.html"></a></span>
+                    <span><a target="_blank" class="ico ai ai-researchgate-square ai-lg" href="https://www.researchgate.net/profile/Sylvester-Zhang"></a></span>
+                    <span><a target="_blank" class="ico ai ai-semantic-scholar-square ai-lg" href="https://www.semanticscholar.org/author/Sylvester-W.-Zhang/2107901800"></a></span>
+                </li>
+            </ul>
+        </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top " style="margin-top: 10px;">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <div class="small-screen">
+                        <strong>Sylvester W. Zhang</strong>
+                    </div>
+                    
+                    <div class="big-screen">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" href="#intro">My Research</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#pub">Publications</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#talks">Talks</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#programs">Codes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#misc">Miscellany</a> -->
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+            </nav>
+
+            
+
+            <!-- <h3 id="intro">My Research</h3>
+            <p>My research interest is in algebraic combinatorics. Specifically, I am interested in combinatorial representation theory, cluster algebras, discrete dynamical systems, and integrable models.</p> 
+
+            
+            <div class="line"></div>-->
+
+            <h3 id="pub" style="margin-bottom: 0.4cm;">Annotated List of Publications
+                <a id="collapse-all" class="collapse_all" role="button" data-transformed="false" onclick="openAll()">
+                    <i class="fas fa-plus"></i>
+                    <span>Show Abstracts</span>
+                </a>
+            </h3> 
+            <h5>Preprints and Submitted Papers.</h5> 
+
+            <ul class="papers">
+                <!-- https://arxiv.org/abs/2306.14389 -->
+                <li class="title">
+                    <strong>Higer Dimer Covers on Snake Graphs.</strong> with G. Musiker, N. Ovenhouse, and R. Schiffler. (2023)
+                </li>
+                <li class="details">
+                    
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#MOSZ23" role="button" aria-expanded="false" aria-controls="MOSZ23"><i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href="https://arxiv.org/abs/2306.14389"> arXiv 2306.14389</a>   
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="MOSZ23">
+                        <div class="card card-body" ><p>
+                            Snake graphs are a class of planar graphs that are important in the theory of cluster algebras. Indeed, the Laurent expansions of the cluster variables in cluster algebras from surfaces are given as weight generating functions for 1-dimer covers (or perfect matchings) of snake graphs. 
+                            Moreover, the enumeration of 1-dimer covers of snake graphs provides a combinatorial interpretation of continued fractions. In particular, the number of 1-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the numerator of the continued fraction $[a_1,\ldots,a_n]$. This number is equal to the top left entry of the matrix product $\left(\begin{smallmatrix} a_1&1\\1&0 \end{smallmatrix}\right)
+                            \cdots \left(\begin{smallmatrix} a_n&1\\1&0 \end{smallmatrix}\right)$.
+                            
+                            In this paper, we give enumerative results on $m$-dimer covers of snake graphs. We show that the number of $m$-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the top left entry of a product of analogous $(m+1)$-by-$(m+1)$ matrices. 
+                            We discuss how our enumerative results are related to other known combinatorial formulas,
+                            and we suggest a generalization of continued fractions based on our methods. 
+                            These generalized continued fractions provide some interesting open questions and
+                            a possibly novel approach towards Hermite's problem for cubic irrationals.</p>
+                        </div>
+                      </div>
+                </li>
+               
+                
+                <!--p-->
+                
+
+                <!--p-->
+                
+                
+                <!--p-->
+                
+                
+            </ul>
+
+
+
+            <h5>Published Articles.</h5>
+            <!---->
+            <ul class="papers">
+                <li class="title">
+                    <strong>A Lattice Model for Super LLT Polynomials.</strong> with M. Curran, C. Frechette, C. Yost-Wolff, and V. Zhang. (2021)
+                </li>
+                <li class="details">
+                    
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#CFYWZZ21" role="button" aria-expanded="false" aria-controls="CFYWZZ21"><i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href="https://arxiv.org/pdf/2110.07597.pdf"> arXiv 2110.07597</a>
+                    <i class="ai ai-doi ai-1x"></i> 
+                    <a class="journal" href="https://doi.org/10.5070/C63261979"> Comb. Theory 3(2). 2023.</a>
+   
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="CFYWZZ21">
+                        <div class="card card-body" ><p>
+                            We introduce a solvable lattice model for supersymmetric LLT polynomials, also known as super LLT polynomials, based upon particle interactions in super n-ribbon tableaux. Using operators on a Fock space, we prove a Cauchy identity for super LLT polynomials, simultaneously generalizing the Cauchy and dual Cauchy identities for LLT polynomials. Lastly, we construct a solvable semi-infinite Cauchy lattice model with a surprising Yang-Baxter equation and examine its connections to the Cauchy identity.</p>
+                        </div>
+                      </div>
+                </li>
+
+                <li class="title">
+                    <strong>Matrix Formulae for Decorated Super Teichm&uuml;ller Spaces.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2022)
+                </li>
+                <li class="details">
+                    
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#MOZ22b" role="button" aria-expanded="false" aria-controls="MOZ22b"><i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href="https://arxiv.org/pdf/2208.13664.pdf"> arXiv 2208.13664</a> 
+                    <i class="ai ai-doi ai-1x"></i> 
+                    <a class="journal" href="https://doi.org/10.1016/j.geomphys.2023.104828"> J. Geom. Phys. 2023, Vol.189.</a>
+
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="MOZ22b">
+                        <div class="card card-body" ><p>
+                            For an arc on a bordered surface with marked points, we associate a holonomy matrix using a product of elements of the supergroup OSp(1|2), which defines a flat OSp(1|2)-connection on the surface. We show that our matrix formulas of an arc yields its super $\lambda$-length in Penner-Zeitlin’s decorated super Teichm¨uller space. This generalizes the matrix formulas of Fock-Goncharov and Musiker-Williams. We also prove that our matrix formulas agree with the combinatorial formulas given in the authors’ previous works. As an application, we use our matrix formula in the case of an annulus to obtain new results on super Fibonacci numbers.</p>
+                        </div>
+                      </div>
+                </li>
+                
+                <li class="title">
+                    <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, <a id='chepuri'></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0">E. Kelley</a>. (2021)
+                </li>
+                <li class="details">
+                    
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#BCKZ21" role="button" aria-expanded="false" aria-controls="BCKZ21"><i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href=" https://arxiv.org/pdf/2107.14785.pdf"> arXiv 2107.14785</a>
+                    <i class="ai ai-doi ai-1x"></i> 
+                    <a class="journal" href="https://www.emis.de/journals/SIGMA/2022/089/"> SIGMA <strong>18</strong> (2022) 089</a>    
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="BCKZ21">
+                        <div class="card card-body" ><p>
+                            LP algebras, introduced by Lam and Pylyavskyy, are a generalization of cluster algebras. These algebras are known to have the Laurent phenomenon, but positivity remains conjectural. Graph LP algebras are finite LP algebras encoded by a graph. For the graph LP algebra defined by a tree, we define a family of clusters called <i>rooted clusters</i>. We prove positivity for these clusters by giving explicit formulas for each cluster variable. We also give a combinatorial interpretation for these expansions using a generalization of $T$-paths.</p>
+                        </div>
+                      </div>
+                </li>
+                <li class="title">
+                    <strong>Double Dimer Covers on Snake Graphs from Super Cluster Expansions.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2021)
+                </li>
+                <li class="details">
+                    
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#MOZ21b" role="button" aria-expanded="false" aria-controls="MOZ21b"><i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href="https://arxiv.org/pdf/2110.06497.pdf"> arXiv 2110.06497</a>
+                    <i class="ai ai-doi ai-1x"></i>
+                    <a class="journal" href="https://doi.org/10.1016/j.jalgebra.2022.05.033"> J. Algebra Vol. 608 (2022)</a>   
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="MOZ21b">
+                        <div class="card card-body" ><p>
+                            In a recent paper, the authors gave combinatorial formulas for the Laurent expansions of super $\lambda$-lengths in a marked disk, generalizing Schiffler’s $T$-path formula. In the present paper, we give an alternate combinatorial expression for these super $\lambda$-lengths in terms of double dimer covers on snake graphs. This generalizes the dimer formulas of Musiker, Schiffler, and Williams.</p>
+                        </div>
+                      </div>
+                </li>
+
+
+                <li class="title">
+                    <strong>Rowmotion Orbits of Trapezoid Posets.</strong> with Q. Dao, J. Wellman and C. Yost-Wolff. (2020)
+                </li>
+                <li class="details">
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#Row2020" role="button" aria-expanded="false" aria-controls="Row2020">
+                    <i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href="https://arxiv.org/pdf/2002.04810.pdf">arXiv 2002.04810</a>
+                    <i class="ai ai-doi ai-1x"></i>
+                    <a class="journal" href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v29i2p29"> Electron. J. Comb. 29-2 (2022)</a>
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="Row2020">
+                        <div class="card card-body">
+                            <p>Rowmotion is an invertible operator on the order ideals of a poset which has been extensively studied and is well understood for the rectangle poset. In this paper, we show that rowmotion is equivariant with respect to a bijection of Hamaker, Patrias, Pechenik and Williams between order ideals of rectangle and trapezoid posets, thereby affirming a conjecture of Hopkins that the rectangle and trapezoid posets have the same rowmotion orbit structures. Our main tools in proving this are $K$-jeu-de-taquin and (weak) $K$-Knuth equivalence of increasing tableaux. We define <i>almost minimal tableaux</i> as a family of tableaux naturally arising from order ideals and show for any $\lambda$, the almost minimal tableaux of shape $\lambda$ are in different (weak) $K$-Knuth equivalence classes. We also discuss and make some progress on related conjectures of Hopkins on down-degree homomesy.</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="title">
+                    <strong>Arborescences of Covering Graphs.</strong> with <a id='chepuri'></a>, CJ Dowd, A. Hardt, G. Michel, and V. Zhang. (2019)
+                </li>
+                <li class="details">  
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#Arb2019" role="button" aria-expanded="false" aria-controls="Arb2019">
+                        <i class="bi bi-caret-right-fill"></i>
+                        Abstract.
+                        </a>
+                    <i class="ai ai-arxiv ai-1x"></i> <a class="arxiv" href="https://arxiv.org/pdf/1912.01060.pdf">arXiv 1912.01060</a>
+                    <i class="ai ai-doi ai-1x"></i>
+                    <a class="journal" href="https://alco.centre-mersenne.org/item/ALCO_2022__5_2_319_0/"> Algebr. Comb. Vol. 5 (2022)</a>
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="Arb2019">
+                        <div class="card card-body">
+                            <p>An <i>arborescence</i> of a directed graph $\Gamma$ is a spanning tree directed toward a particular vertex $v$. The arborescences of a graph rooted at a particular vertex may be encoded as a polynomial $A_v(\Gamma)$ representing the sum of the weights of all such arborescences. The arborescences of a graph and the arborescences of a covering graph $\tilde{\Gamma}$ are closely related. Using <i>voltage graphs</i> to construct arbitrary regular covers, we derive a novel explicit formula for the ratio of $A_v(\Gamma)$ to the sum of arborescences in the lift $A_{\tilde{v}}(\tilde{\Gamma})$ in terms of the determinant of Chaiken's voltage Laplacian matrix, a generalization of the Laplacian matrix. Chaiken's results on the relationship between the voltage Laplacian and vector fields on $\Gamma$ are reviewed, and we provide a new proof of Chaiken's results via a deletion-contraction argument.</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="title">
+                    <strong>An Expansion Formula for Decorated Super-Teichm&uuml;ller Spaces.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2021)
+                </li>
+                <li class="details">
+                    
+                    <a class="abs-btn" data-bs-toggle="collapse" href="#MOZ21" role="button" aria-expanded="false" aria-controls="MOZ21"><i class="bi bi-caret-right-fill"></i>
+                    Abstract.
+                    </a>
+                    <i class="ai ai-arxiv ai-1x"></i>
+                    <a class="arxiv" href="https://arxiv.org/pdf/2102.09143.pdf"> arXiv 2102.09143</a> 
+                    <i class="ai ai-doi ai-1x"></i>
+                    <a class="journal" href="https://www.emis.de/journals/SIGMA/2021/080/">SIGMA <strong>17</strong> (2021) 080</a>
+
+                </li>
+                <li class="hide">
+                    <div class="collapse abs" id="MOZ21">
+                        <div class="card card-body" ><p>
+                            Motivated by the definition of super Teichm&uuml;ller spaces, and Penner-Zeitlin's recent extension of this definition to decorated super Teichm&uuml;ller space, as examples of super Riemann surfaces, we use the super Ptolemy relations to obtain formulas for super $\lambda$-lengths associated to arcs in a borderded surface.  In the special case of a disk, we are able to give combinatorial expansion formulas for the super $\lambda$-lengths associated to diagonals of a polygon in the spirit of Ralf Schiffler's 
+                            $T$-path formulas for type $A$ cluster algebras. We further connect our formulas to the super-friezes of Morier-Genoud, Ovsienko, and Tabachnikov, and obtain partial progress towards defining super cluster algebras of type $A_n$.  In particular, followinTg Penner-Zeitlin, we are able to get formulas (up to signs) for the $\mu$-invariants associated to triangles in a triangulated polygon, and explain how these provide a step towards understanding odd variables of a super cluster algebra.</p>
+                        </div>
+                      </div>
+                </li>
+            </ul>
+            
+            
+
+         
+            <h5>Other Writings.</h5> 
+            <ul class="papers">
+                <!--p-->
+                <li class="title">
+                    <strong>Double Dimers and Super Ptolemy Relations.</strong> with G. Musiker and N. Ovenhouse. <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2023/79.pdf">FPSAC Abstract.</a> (2023)
+                </li>
+                <li class="title">
+                    <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, <a id='chepuri'></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0">E. Kelley</a>. <a href="files/FPSAC2022-52.pdf">FPSAC Abstract.</a> (2022)
+                </li>
+                <li class="title">
+                    
+                    <strong>A Lattice Model for LLT Polynomials.</strong> with M. Curran, C. Yost-Wolff, and V. Zhang. <a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report.</a> (2019)
+                </li>
+       
+            </ul>
+
+
+
+            <p>You can also find my papers on my <a href=" https://arxiv.org/a/0000-0002-4617-5901.html">arXiv author page</a>, <a href="https://scholar.google.com/citations?user=Hw78W00AAAAJ&hl=en">Google scholar profile</a> and <a href="https://zbmath.org/?q=ia%3Azhang.sylvester-w">zbMATH</a>.</p>
+            </p>
+            <div class="line"></div>
+            <p style="color:#999; font-size: 10px;">&copy; Wenze Zhang. All rights reserved.<br> The views and opinions expressed in this page are strictly those of the page author. The contents of this page have not been reviewed or approved by the University of Minnesota.</p>
+        </div>
+
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#content').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+
+    <script>
+        var elems = document.getElementsByClassName("collapse");
+
+        function openAll() {
+            $('.collapse').collapse('show');
+            document.getElementById("collapse-all").setAttribute( "onClick", "javascript: closeAll();" );
+            document.getElementById("collapse-all").setAttribute( "data-transformed", "true" );
+            document.getElementById("collapse-all").innerHTML = "<i  style='transform:rotate(45deg); transition: all 0.6s;' class='fas fa-plus'></i> <span>Hide Abstracts</span>";
+        }
+        function closeAll() {
+            $('.collapse').collapse('hide');
+            document.getElementById("collapse-all").setAttribute( "onClick", "javascript: openAll();" );
+            document.getElementById("collapse-all").innerHTML = "<i class='fas fa-plus'></i> <span>Show Abstracts</span>";
+            document.getElementById("collapse-all").setAttribute( "data-transformed", "false" );
+        }	
+    </script>
+    <script>
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+          if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+          } else {
+            document.getElementById("navbar").style.top = "-80px";
+          }
+          prevScrollpos = currentScrollPos;
+        }
+    </script>
+    <script type="text/javascript">
+
+        for (let i = 0; i < 5; i++){
+            var GM = document.getElementById("musiker")
+            GM.innerHTML = 'G. Musiker'
+            GM.href = 'https://www-users.cse.umn.edu/~musiker/'
+            GM.target = "_blank"
+            GM.setAttribute('id','')
+
+            var NO = document.getElementById("ovenhouse")
+            NO.innerHTML = 'N. Ovenhouse'
+            NO.href="https://www-users.cse.umn.edu/~ovenh001/"
+            NO.target = "_blank"
+            NO.setAttribute('id','') 
+            
+            var SC = document.getElementById('chepuri')
+            SC.innerHTML = 'S. Chepuri'
+            SC.href='https://sites.google.com/view/sunita-chepuri'
+            SC.target = '_blank'
+            SC.setAttribute('id','')
+        }
+
+        for (let j = 0; j < 3; j++){
+            var ek = document.getElementById("kelly")
+            ek.innerHTML = 'E. Kelly'
+            ek.href='https://sites.google.com/view/elizabeth-kelley/home'
+            ek.target = '_blank'
+            ek.setAttribute('id','')
+ 
+            var eb = document.getElementById('banaian')
+            eb.innerHTML = 'E. Banaian'
+            eb.href='https://sites.google.com/umn.edu/estherbanaian/home'
+            eb.target = '_blank'
+            eb.setAttribute('id','')
+        }
+        
+        
+    </script>
+
+</body>
+
+</html>

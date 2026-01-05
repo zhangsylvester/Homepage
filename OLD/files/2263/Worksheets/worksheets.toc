@@ -1,0 +1,21 @@
+\babel@toc {english}{}
+\contentsline {section}{\tocsection {}{1}{Vectors and the Three-Dimensional Space}}{2}{section.1}%
+\contentsline {section}{\tocsection {}{2}{Cross Product, Lines and Planes}}{4}{section.2}%
+\contentsline {section}{\tocsection {}{3}{Multivariable Functions, Limits and Partial Derivatives}}{6}{section.3}%
+\contentsline {section}{\tocsection {}{4}{Chain Rule and Directional Derivatives}}{9}{section.4}%
+\contentsline {section}{\tocsection {}{A}{Additional Problems I}}{11}{appendix.a.A}%
+\contentsline {section}{\tocsection {}{5}{Maxima and Minima}}{12}{appendix.5}%
+\contentsline {section}{\tocsection {}{6}{Lagrange Multipliers}}{15}{appendix.6}%
+\contentsline {section}{\tocsection {}{7}{Basic Double Integrals}}{17}{appendix.7}%
+\contentsline {section}{\tocsection {}{8}{More on Double Integrals}}{18}{appendix.8}%
+\contentsline {section}{\tocsection {}{9}{Double Integral with Polar Coordinates}}{19}{appendix.9}%
+\contentsline {section}{\tocsection {}{10}{Triple integrals}}{20}{appendix.10}%
+\contentsline {section}{\tocsection {}{11}{Cylindrical, spherical coordinates, and change of variables.}}{22}{appendix.11}%
+\contentsline {section}{\tocsection {}{12}{Vector Fields and Line Integral}}{23}{appendix.12}%
+\contentsline {section}{\tocsection {}{13}{Conservative vector fields and fundamental theorem of path integrals.}}{25}{appendix.13}%
+\contentsline {section}{\tocsection {}{14}{ Green's Theorem}}{26}{appendix.14}%
+\contentsline {section}{\tocsection {}{15}{Curl and Divergence}}{27}{appendix.15}%
+\contentsline {section}{\tocsection {}{16}{Parametric surface and surface integrals}}{28}{appendix.16}%
+\contentsline {section}{\tocsection {}{17}{Flux integral}}{30}{appendix.17}%
+\contentsline {section}{\tocsection {}{18}{Stokes' theorem and divergence theorem}}{31}{appendix.18}%
+\contentsline {section}{\tocsection {}{}{References}}{33}{section*.18}%

@@ -1,0 +1,63 @@
+\begin{proof}[Proof of \Cref{thm:def_R_poly}]
+We employ induction on $\ell(w)$.
+
+$w=sv,s\in S$, $\ell(v)<\ell(w)$.
+\begin{align*}
+	(T_{w^{-1}})^{-1}&=(T_{v^{-1}}T_s)^{-1}=T_s^{-1}(T_{v^{-1}})^{-1}\\
+	&=q^{-1}(T_s-(q-1)T_1)\cdot \left[\varepsilon_v q_v^{-1}\sum_{y\leq v}\varepsilon_y R_{y,v}T_y\right]\\
+	&=\varepsilon_w q_w^{-1}\bigg[(q-1)\sum_{y\leq v}\varepsilon_y R_{y,v} T_y-\underbrace{\sum_{y\leq v}\varepsilon_y R_{y,v}T_sT_y}_{X}\bigg]\tag{$*$}
+\end{align*}
+In $X$, there are two possibilities for $y$'s, either $sy>y$ or $sy<y$.
+\begin{enumerate}
+	\item If $sy>y$, we have terms like
+	\[\varepsilon_y R_{y,v}T_{sy}\]
+	\item If $sy<y$, we have
+	\[(q-1)\varepsilon_yR_{y,v}T_y+q\varepsilon_yR_{y,v}T_{sy}\]
+\end{enumerate}
+
+	Therefore ($*$) will be a sum of
+	\begin{align*}
+		\tag{i}(q-1)\varepsilon_y R_{y,v}T_y\quad\quad&y\leq v,sy>y\\
+		\tag{ii}-\varepsilon_yR_{y,v}T_{s,y}\quad\quad&y\leq v,sy>y\\
+		\tag{iii}-q\varepsilon_y R_{y,v} T_{sy}\quad\quad&y\leq v,sy<y
+	\end{align*}
+	Recall the previous lemma that, for $sw<w$, we know that $y<w\implies sy\leq w$. So we have $y\leq v<w$, by lemma $sy\leq w$.
+	
+	Each $x\leq w$ occurs either as $y\leq v$ or as $sy$ with $y\leq v$, or both. We want the coefficient of $T_x$.
+	
+	\begin{enumerate}
+\item If $x\leq w$, $sx<x$. Only have coefficient in (ii). Since $x=sy$, we know that the coefficient is $-\varepsilon_yR_{y,v}=\varepsilon_x R_{x,w}$. This implies that \begin{equation}R_{x,w}=R_{sx,sw}\end{equation}.
+\item If $x<w,x\leq sx$, we have two sub-cases.
+\begin{enumerate}
+\item If $sx<v$, we get coefficients of $T_x$ from (i) and (iii), which will look like $(q-1)\varepsilon_x R_{x,v}+q\varepsilon_x R_{sx,v}$. Therefore we get
+\begin{equation}\label{eq:R_rec_2}
+	R_{x,w}=(q-1)R_{x,sw}+qR_{sx,sw}
+\end{equation}
+\item If $sx\not\leq v$, then we get coefficient $(q-1)\varepsilon_xR_x,v$. But since $R_{u,v}=0$ for $u\leq v$, we still get the same recurrence \Cref{eq:R_rec_2}.
+\end{enumerate}
+\end{enumerate}
+\end{proof}
+From the above proof we also obtain a recurrence for $R$-polynomials.
+\begin{corollary}\label{thm:R-recurrence}$R$-polynomials can be computed via the following recurrence.
+	\begin{enumerate}
+		\item $R_{u,v}(q)=0$ if $u\leq v$.
+		\item $R_{v,v}(q)=1$.
+		\item for $s\in D_L(v)$, we have
+		\[R_{u,v}(q)=\begin{cases}
+R_{su,sv}&\text{ if }s\in D_L(u)\\
+(q-1)R_{u,sv}+qR_{su,sv}&\text{ if }s\notin D_L(u)	
+\end{cases}
+\]
+\end{enumerate}
+\end{corollary}
+\begin{example}{\color{red}Caution: left-right convention might be wrong in the example.}
+	\[R_{123,132}=(q-1)\underbrace{R_{123,123}}_{1}+q\underbrace{R_{132,123}}_{0}=q-1\]
+	\[R_{123,231}=(q-1)\underbrace{R_{123,213}}_{q-1}+q\underbrace{R_{132,213}}_{0}=(q-1)^2\]
+	\[R_{132,312}=(q-1)\underbrace{R_{132,312}}_{1}+q\underbrace{R_{312,132}}_{0}=q-1\]
+	\[R_{123,321}=(q-1)\underbrace{R_{123,312}}_{(q-1)^2}+q\underbrace{R_{132,312}}_{q-1}=(q-1)(q^2-q
+	+1)\]
+		\end{example}
+
+	
+
+
