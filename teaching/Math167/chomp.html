@@ -9,6 +9,10 @@
     text-align: center;
   }
 
+  #controls {
+    margin-top: 10px;
+  }
+
   #board {
     display: inline-grid;
     gap: 4px;
@@ -51,22 +55,31 @@ Click a square. Everything <b>above AND to the right</b> disappears.<br>
 Taking the red square loses.
 </p>
 
+<div id="controls">
+  Rows (m):
+  <input type="number" id="rowsInput" value="4" min="1" max="20">
+  Columns (n):
+  <input type="number" id="colsInput" value="5" min="1" max="20">
+  <button onclick="resetGame()">Start / Reset</button>
+</div>
+
 <div id="board"></div>
 <div id="status"></div>
 
 <script>
-const ROWS = 5;
-const COLS = 7;
+let ROWS = 4;
+let COLS = 5;
 
 let board = [];
 let currentPlayer = 1;
 let gameOver = false;
 
-// initialize full board
 function initBoard() {
   board = Array.from({ length: ROWS }, () =>
     Array.from({ length: COLS }, () => true)
   );
+  currentPlayer = 1;
+  gameOver = false;
 }
 
 function renderBoard() {
@@ -100,7 +113,6 @@ function renderBoard() {
 function makeMove(i, j) {
   if (gameOver || !board[i][j]) return;
 
-  // poison loses
   if (i === 0 && j === 0) {
     document.getElementById("status").textContent =
       `Player ${currentPlayer} took the poison and loses!`;
@@ -108,7 +120,6 @@ function makeMove(i, j) {
     return;
   }
 
-  // remove everything above AND to the right
   for (let r = i; r < ROWS; r++) {
     for (let c = j; c < COLS; c++) {
       board[r][c] = false;
@@ -121,7 +132,19 @@ function makeMove(i, j) {
 
 function updateStatus() {
   document.getElementById("status").textContent =
-    `Player ${currentPlayer}'s turn`;
+    gameOver ? "" : `Player ${currentPlayer}'s turn`;
+}
+
+function resetGame() {
+  const r = parseInt(document.getElementById("rowsInput").value, 10);
+  const c = parseInt(document.getElementById("colsInput").value, 10);
+
+  if (r >= 1 && c >= 1) {
+    ROWS = r;
+    COLS = c;
+    initBoard();
+    renderBoard();
+  }
 }
 
 initBoard();
