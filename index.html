@@ -49,7 +49,8 @@
 <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: #222;
     }
     .main-content {
       width: 100%;
@@ -60,17 +61,24 @@
       box-sizing: border-box;
       width: 100%;
       margin: 0;
-      padding: 20px 40px;
-      scroll-margin-top: 100px; /* Adjust based on your navbar height */
+      padding: 32px 56px;
+      scroll-margin-top: 100px;
+    }
+    section p, section li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
     }
     section:nth-child(odd) {
-      background:#F0FFFF;
-     
-      color: black;
+      background: #ffffff;
+      color: #222;
     }
     section:nth-child(even) {
-      background: white;
-      color: black;
+      background: #ffffff;
+      color: #222;
+    }
+    #content section {
+      border-top: 1px solid #efefef;
     }
     .skip {
       background: white;
@@ -95,8 +103,9 @@
         color:#3f4042;
     }
     #content a:hover {
-        text-shadow: 0.618px 0.618px var(--color2);
-        text-decoration: none;
+        text-shadow: none;
+        text-decoration: underline;
+        text-underline-offset: 2px;
     }
     #content a:hover i{
         text-shadow: none;
@@ -109,11 +118,21 @@
         color: black;
     }
     #content h1 {
-      font-size: 18pt;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1a1a2e;
+      margin-bottom: 1.2em;
     }
     #content h2 {
-      font-size: 14pt;
-      text-decoration: italic;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-top: 1.6em;
+      margin-bottom: 0.8em;
     }
 
 ul.papers li.title a:link{
@@ -167,15 +186,16 @@ ul.papers li.title a:link{
     }
 
     .secondary-name {
-      font-size: 1.8em;
+      font-size: 1.5em;
       margin: 0.3em 0 8px 0;
       font-weight: 400;
-      color: #1d4c87;
+      color: #7a8fa6;
     }
     .details {
       margin: 0.25em 0;
-      font-size: 1em;
-      color: #1d4c87;
+      font-size: 0.9em;
+      color: #999;
+      letter-spacing: 0.04em;
     }
     .bottom-nav {
       display: flex;
@@ -192,17 +212,20 @@ ul.papers li.title a:link{
     .bottom-nav a {
       margin: 0 15px;
       text-decoration: none;
-      font-size: 0.9em;
-      color: #85b8db;
-      font-weight: 200;
+      font-size: 0.72em;
+      color: #bbb;
+      font-weight: 400;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
       transition: color 0.3s ease;
+      padding-bottom: 3px;
     }
 
     .bottom-nav a:hover, .bottom-nav a.active {
       text-decoration: none;
-      color: #1d4c87;
-      font-weight: bold;
+      color: #1a1a2e;
+      font-weight: 400;
+      border-bottom: 1.5px solid #1a1a2e;
     }
     #about {
       display: flex;
@@ -262,9 +285,19 @@ a.collapse_all {
 }
 a.collapse_all:hover span{
     display: inline-block;
-    font-size:15px;
+    font-size: 11px;
     vertical-align: middle;
     padding-bottom: 5px;
+}
+
+#content h1 a.collapse_all {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    color: #999;
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
 ul.papers{
@@ -282,32 +315,58 @@ ul.papers li.details {
 ul.papers li.details a.abs-btn{
     display:inline-block;
     width: 100px;
-    font-size: 11pt;
+    font-size: 12px;
 }
 
 ul.papers li.details a.arxiv{
     display:inline-block;
     width: 145px;
-    font-size: 11pt;
+    font-size: 12px;
 }
 
 ul.papers li.details a.journal{
     display:inline-block;
-    width: flex;
-    font-size: 11pt;
+    font-size: 12px;
 }
 
-
-
 ul.papers li.title{
-    /* padding-left: 15px; */
-    list-style-type: disc;
+    list-style-type: none;
+    padding-top: 18px;
+    padding-bottom: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #222;
+}
+
+ul.papers li.hide + li.title {
+    border-top: 1px solid #efefef;
+    margin-top: 6px;
+}
+
+ul.papers li.details {
+    padding-left: 0px;
+    padding-bottom: 2px;
 }
 
 ul.papers li.hide{
-    list-style-type:none;
-    padding-bottom:10px;
-    margin:0px;
+    list-style-type: none;
+    padding-bottom: 4px;
+    margin: 0px;
+}
+
+.coauthor {
+    cursor: pointer;
+}
+.coauthor:hover {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+}
+ul.papers li.title {
+    transition: opacity 0.2s;
+}
+ul.papers li.title.co-dimmed {
+    opacity: 0.2;
 }
 
 <!--Top Nav-->
@@ -451,7 +510,7 @@ ul.papers li.hide{
       </ul>
       </p>
       <h2>Collaborators</h2>
-       <p> Nick Ovenhouse (5), Gregg Musiker (4), Sunita Chepuri (3), Esther Banaian (2), Elizabeth Kelley (2), Ralf Schiffler (2), Calvin Yost-Wolff (2), Valerie Zhang (2),  Michael Curran, Quang Dao, Claire Frechette, Greg Michel, Julian Wellman.
+       <p> Daoji Huang, Nick Ovenhouse (6), Gregg Musiker (4), Sunita Chepuri (3), Ralf Schiffler (3), Esther Banaian (2), Elizabeth Kelley (2), Calvin Yost-Wolff (2), Valerie Zhang (2), Amanda Burcroff, Michael Curran, Quang Dao, Claire Frechette, Greg Michel, Julian Wellman.
       </p>
     </section>
     <section id="papers">
@@ -464,41 +523,74 @@ ul.papers li.hide{
       <h2>Preprints</h2> 
 
       <ul class="papers">
-        <li class="title">
-            <strong>Higer Dimer Covers on Snake Graphs.</strong> with G. Musiker, N. Ovenhouse, and R. Schiffler. (2023)
+        <li class="title" data-coauthors="huang">
+            <strong>Dual Affine Robinson-Schensted Correspondence.</strong> with <span class="coauthor" data-key="huang">D. Huang</span>. (2026)
         </li>
         <li class="details">
-            
-            <a class="abs-btn" data-bs-toggle="collapse" href="#MOSZ23" role="button" aria-expanded="false" aria-controls="MOSZ23"><i class="bi bi-caret-right-fill"></i>
+            <a class="abs-btn" data-bs-toggle="collapse" href="#HZ26" role="button" aria-expanded="false" aria-controls="HZ26"><i class="bi bi-caret-right-fill"></i>
             Abstract.
             </a>
-            
-            <a class="arxiv" href="https://arxiv.org/abs/2306.14389"><i class="ai ai-arxiv ai-1x"></i> arXiv 2306.14389</a>   
+            <a class="arxiv" href="https://arxiv.org/abs/2605.20383"><i class="ai ai-arxiv ai-1x"></i> arXiv 2605.20383</a>
+            <a class="journal" href="https://github.com/zhangsylvester/dual-affine-RS"><i class="bi bi-github"></i> Code</a>
+            <a class="journal" href="codes/dars/index.html"><i class="bi bi-window"></i> Applet</a>
         </li>
         <li class="hide">
-            <div class="collapse abs" id="MOSZ23">
-                <div class="card card-body" ><p>
-                    Snake graphs are a class of planar graphs that are important in the theory of cluster algebras. Indeed, the Laurent expansions of the cluster variables in cluster algebras from surfaces are given as weight generating functions for 1-dimer covers (or perfect matchings) of snake graphs. 
-                    Moreover, the enumeration of 1-dimer covers of snake graphs provides a combinatorial interpretation of continued fractions. In particular, the number of 1-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the numerator of the continued fraction $[a_1,\ldots,a_n]$. This number is equal to the top left entry of the matrix product $\left(\begin{smallmatrix} a_1&1\\1&0 \end{smallmatrix}\right)
-                    \cdots \left(\begin{smallmatrix} a_n&1\\1&0 \end{smallmatrix}\right)$.
-                    
-                    In this paper, we give enumerative results on $m$-dimer covers of snake graphs. We show that the number of $m$-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the top left entry of a product of analogous $(m+1)$-by-$(m+1)$ matrices. 
-                    We discuss how our enumerative results are related to other known combinatorial formulas,
-                    and we suggest a generalization of continued fractions based on our methods. 
-                    These generalized continued fractions provide some interesting open questions and
-                    a possibly novel approach towards Hermite's problem for cubic irrationals.</p>
-                </div>
-              </div>
+            <div class="collapse abs" id="HZ26">
+                <div class="card card-body"><p>
+                    We introduce the dual affine Robinson-Schensted correspondence that gives a bijection between the extended affine symmetric group and tuples $(\bar{P},\bar{Q},\lambda,N)$, where $\bar{P}$ and $\bar{Q}$ are tabloids, $\lambda$ is a partition, and $N$ is an integer, subject to compatibility conditions. The construction generalizes Fomin's growth diagrams and Viennot's shadow lines for the classical Robinson-Schensted correspondence on the symmetric group, and is dual to the affine matrix ball construction as well as Shi's correspondence, in the sense that the $P$-tabloids are the same, and the $Q$-tabloids are related by affine evacuation. As a consequence, our construction also parametrizes Kazhdan-Lusztig cells in affine type $A$. We conjecture that the growth diagrams we construct admit a natural geometric realization in terms of relative positions of affine flags, similar to the interpretation given by Steinberg and van Leeuwen in the classical case.
+                </p></div>
+            </div>
         </li>
       </ul>
 
 
 
       <h2>Published Articles.</h2>
-        
+
       <ul class="papers">
-          <li class="title">
-              <strong>A Lattice Model for Super LLT Polynomials.</strong> with M. Curran, C. Frechette, C. Yost-Wolff, and V. Zhang. (2021)
+          <li class="title" data-coauthors="burcroff ovenhouse schiffler">
+              <strong>Higher $q$-Continued Fractions.</strong> with <span class="coauthor" data-key="burcroff">A. Burcroff</span>, <span class="coauthor" data-key="ovenhouse">N. Ovenhouse</span>, and <span class="coauthor" data-key="schiffler">R. Schiffler</span>. (2024)
+          </li>
+          <li class="details">
+              <a class="abs-btn" data-bs-toggle="collapse" href="#BOSZ24" role="button" aria-expanded="false" aria-controls="BOSZ24"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              <a class="arxiv" href="https://arxiv.org/abs/2408.06902"><i class="ai ai-arxiv ai-1x"></i> arXiv 2408.06902</a>
+              <a class="journal" href="https://doi.org/10.1016/j.ejc.2025.104244"><i class="ai ai-doi ai-1x"></i> Eur. J. Combin. 2025.</a>
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="BOSZ24">
+                  <div class="card card-body"><p>
+                      We introduce a $q$-analog of the higher continued fractions introduced by the last three authors in a previous work (together with Gregg Musiker), which are simultaneously a generalization of the $q$-rational numbers of Morier-Genoud and Ovsienko. They are defined as ratios of generating functions for $P$-partitions on certain posets. We give matrix formulas for computing them, which generalize previous results in the $q=1$ case. We also show that certain properties enjoyed by the $q$-rationals are also satisfied by our higher versions.
+                  </p></div>
+              </div>
+          </li>
+          <li class="title" data-coauthors="musiker ovenhouse schiffler">
+              <strong>Higher Dimer Covers on Snake Graphs.</strong> with <span class="coauthor" data-key="musiker">G. Musiker</span>, <span class="coauthor" data-key="ovenhouse">N. Ovenhouse</span>, and <span class="coauthor" data-key="schiffler">R. Schiffler</span>. (2023)
+          </li>
+          <li class="details">
+              <a class="abs-btn" data-bs-toggle="collapse" href="#MOSZ23" role="button" aria-expanded="false" aria-controls="MOSZ23"><i class="bi bi-caret-right-fill"></i>
+              Abstract.
+              </a>
+              <a class="arxiv" href="https://arxiv.org/abs/2306.14389"><i class="ai ai-arxiv ai-1x"></i> arXiv 2306.14389</a>
+              <a class="journal" href="https://alco.centre-mersenne.org/articles/10.5802/alco.464/"><i class="ai ai-doi ai-1x"></i> Algebr. Comb. 9(1), 2026.</a>
+          </li>
+          <li class="hide">
+              <div class="collapse abs" id="MOSZ23">
+                  <div class="card card-body"><p>
+                      Snake graphs are a class of planar graphs that are important in the theory of cluster algebras. Indeed, the Laurent expansions of the cluster variables in cluster algebras from surfaces are given as weight generating functions for 1-dimer covers (or perfect matchings) of snake graphs.
+                      Moreover, the enumeration of 1-dimer covers of snake graphs provides a combinatorial interpretation of continued fractions. In particular, the number of 1-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the numerator of the continued fraction $[a_1,\ldots,a_n]$. This number is equal to the top left entry of the matrix product $\left(\begin{smallmatrix} a_1&1\\1&0 \end{smallmatrix}\right)
+                      \cdots \left(\begin{smallmatrix} a_n&1\\1&0 \end{smallmatrix}\right)$.
+                      In this paper, we give enumerative results on $m$-dimer covers of snake graphs. We show that the number of $m$-dimer covers of the snake graph $\mathscr{G}[a_1,\ldots,a_n]$ is the top left entry of a product of analogous $(m+1)$-by-$(m+1)$ matrices.
+                      We discuss how our enumerative results are related to other known combinatorial formulas,
+                      and we suggest a generalization of continued fractions based on our methods.
+                      These generalized continued fractions provide some interesting open questions and
+                      a possibly novel approach towards Hermite's problem for cubic irrationals.
+                  </p></div>
+              </div>
+          </li>
+          <li class="title" data-coauthors="curran frechette yostwolff vzhang">
+              <strong>A Lattice Model for Super LLT Polynomials.</strong> with <span class="coauthor" data-key="curran">M. Curran</span>, <span class="coauthor" data-key="frechette">C. Frechette</span>, <span class="coauthor" data-key="yostwolff">C. Yost-Wolff</span>, and <span class="coauthor" data-key="vzhang">V. Zhang</span>. (2021)
           </li>
           <li class="details">
               
@@ -519,8 +611,8 @@ ul.papers li.hide{
                 </div>
           </li>
 
-          <li class="title">
-              <strong>Matrix Formulae for Decorated Super Teichm&uuml;ller Spaces.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2022)
+          <li class="title" data-coauthors="musiker ovenhouse">
+              <strong>Matrix Formulae for Decorated Super Teichm&uuml;ller Spaces.</strong> with <a id="musiker" class="coauthor" data-key="musiker"></a> and <a id='ovenhouse' class="coauthor" data-key="ovenhouse"></a>. (2022)
           </li>
           <li class="details">
               
@@ -541,8 +633,8 @@ ul.papers li.hide{
                 </div>
           </li>
           
-          <li class="title">
-              <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, <a id='chepuri'></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0">E. Kelley</a>. (2021)
+          <li class="title" data-coauthors="banaian chepuri kelley">
+              <strong>Rooted Clusters for Graph LP Algebras.</strong> with <span class="coauthor" data-key="banaian">E. Banaian</span>, <a id='chepuri' class="coauthor" data-key="chepuri"></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0" class="coauthor" data-key="kelley">E. Kelley</a>. (2021)
           </li>
           <li class="details">
               
@@ -561,8 +653,8 @@ ul.papers li.hide{
                   </div>
                 </div>
           </li>
-          <li class="title">
-              <strong>Double Dimer Covers on Snake Graphs from Super Cluster Expansions.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2021)
+          <li class="title" data-coauthors="musiker ovenhouse">
+              <strong>Double Dimer Covers on Snake Graphs from Super Cluster Expansions.</strong> with <a id="musiker" class="coauthor" data-key="musiker"></a> and <a id='ovenhouse' class="coauthor" data-key="ovenhouse"></a>. (2021)
           </li>
           <li class="details">
               
@@ -583,8 +675,8 @@ ul.papers li.hide{
           </li>
 
 
-          <li class="title">
-              <strong>Rowmotion Orbits of Trapezoid Posets.</strong> with Q. Dao, J. Wellman and C. Yost-Wolff. (2020)
+          <li class="title" data-coauthors="dao wellman yostwolff">
+              <strong>Rowmotion Orbits of Trapezoid Posets.</strong> with <span class="coauthor" data-key="dao">Q. Dao</span>, <span class="coauthor" data-key="wellman">J. Wellman</span> and <span class="coauthor" data-key="yostwolff">C. Yost-Wolff</span>. (2020)
           </li>
           <li class="details">
               <a class="abs-btn" data-bs-toggle="collapse" href="#Row2020" role="button" aria-expanded="false" aria-controls="Row2020">
@@ -603,8 +695,8 @@ ul.papers li.hide{
                   </div>
               </div>
           </li>
-          <li class="title">
-              <strong>Arborescences of Covering Graphs.</strong> with <a id='chepuri'></a>, CJ Dowd, A. Hardt, G. Michel, and V. Zhang. (2019)
+          <li class="title" data-coauthors="chepuri dowd hardt michel vzhang">
+              <strong>Arborescences of Covering Graphs.</strong> with <a id='chepuri' class="coauthor" data-key="chepuri"></a>, <span class="coauthor" data-key="dowd">CJ Dowd</span>, <span class="coauthor" data-key="hardt">A. Hardt</span>, <span class="coauthor" data-key="michel">G. Michel</span>, and <span class="coauthor" data-key="vzhang">V. Zhang</span>. (2019)
           </li>
           <li class="details">  
               <a class="abs-btn" data-bs-toggle="collapse" href="#Arb2019" role="button" aria-expanded="false" aria-controls="Arb2019">
@@ -622,8 +714,8 @@ ul.papers li.hide{
                   </div>
               </div>
           </li>
-          <li class="title">
-              <strong>An Expansion Formula for Decorated Super-Teichm&uuml;ller Spaces.</strong> with <a id="musiker"></a> and <a id='ovenhouse'></a>. (2021)
+          <li class="title" data-coauthors="musiker ovenhouse">
+              <strong>An Expansion Formula for Decorated Super-Teichm&uuml;ller Spaces.</strong> with <a id="musiker" class="coauthor" data-key="musiker"></a> and <a id='ovenhouse' class="coauthor" data-key="ovenhouse"></a>. (2021)
           </li>
           <li class="details">
               
@@ -651,15 +743,14 @@ ul.papers li.hide{
             <h2>Other Writings.</h2>
             <ul class="papers">
                 <!--p-->
-                <li class="title">
-                    <strong>Double Dimers and Super Ptolemy Relations.</strong> with G. Musiker and N. Ovenhouse. <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2023/79.pdf">FPSAC Abstract.</a> (2023)
+                <li class="title" data-coauthors="musiker ovenhouse">
+                    <strong>Double Dimers and Super Ptolemy Relations.</strong> with <span class="coauthor" data-key="musiker">G. Musiker</span> and <span class="coauthor" data-key="ovenhouse">N. Ovenhouse</span>. <a href="https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2023/79.pdf">FPSAC Abstract.</a> (2023)
                 </li>
-                <li class="title">
-                    <strong>Rooted Clusters for Graph LP Algebras.</strong> with E. Banaian, <a id='chepuri'></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0">E. Kelley</a>. <a href="files/FPSAC2022-52.pdf">FPSAC Abstract.</a> (2022)
+                <li class="title" data-coauthors="banaian chepuri kelley">
+                    <strong>Rooted Clusters for Graph LP Algebras.</strong> with <span class="coauthor" data-key="banaian">E. Banaian</span>, <a id='chepuri' class="coauthor" data-key="chepuri"></a>, and <a href="https://sites.google.com/view/elizabeth-kelley/home?authuser=0" class="coauthor" data-key="kelley">E. Kelley</a>. <a href="files/FPSAC2022-52.pdf">FPSAC Abstract.</a> (2022)
                 </li>
-                <li class="title">
-                    
-                    <strong>A Lattice Model for LLT Polynomials.</strong> with M. Curran, C. Yost-Wolff, and V. Zhang. <a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report.</a> (2019)
+                <li class="title" data-coauthors="curran yostwolff vzhang">
+                    <strong>A Lattice Model for LLT Polynomials.</strong> with <span class="coauthor" data-key="curran">M. Curran</span>, <span class="coauthor" data-key="yostwolff">C. Yost-Wolff</span>, and <span class="coauthor" data-key="vzhang">V. Zhang</span>. <a class="arxiv" href="files/CurranYostWolffZhangZhang2019.pdf"> REU Report.</a> (2019)
                 </li>
                 
             </ul>
@@ -905,6 +996,26 @@ for (let j = 0; j < 3; j++){
   });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.coauthor').forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+            var key = this.getAttribute('data-key');
+            document.querySelectorAll('ul.papers li.title[data-coauthors]').forEach(function(li) {
+                var authors = li.getAttribute('data-coauthors').split(' ');
+                if (authors.indexOf(key) < 0) {
+                    li.classList.add('co-dimmed');
+                }
+            });
+        });
+        el.addEventListener('mouseleave', function() {
+            document.querySelectorAll('ul.papers li.title').forEach(function(li) {
+                li.classList.remove('co-dimmed');
+            });
+        });
+    });
+});
+</script>
 
 </body>
 </html>

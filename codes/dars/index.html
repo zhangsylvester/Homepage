@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dual Affine Robinson–Schensted — interactive</title>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#15171a; --muted:#6b7280; --line:#e6e7ea;
+    --card:#fbfbfc; --accent:#0072B2; --good:#0a7d33; --bad:#b00020;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+  h1{font-size:20px;margin:0 0 2px;font-weight:700}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .sub a{color:var(--accent)}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
+  input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);border-radius:8px;
+    width:260px;background:#fff;color:var(--ink)}
+  input[type=text]:focus{outline:2px solid #cfe6f3;border-color:var(--accent)}
+  button{font:inherit;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;
+    color:var(--ink);cursor:pointer}
+  button:hover{background:#f3f4f6}
+  .chip{padding:5px 9px;font-size:12px;border-radius:999px;background:#f1f3f5;border:1px solid var(--line)}
+  .chip:hover{background:#e7eaee}
+  label.opt{font-size:12px;color:var(--muted);display:inline-flex;gap:5px;align-items:center;cursor:pointer}
+  .msg{min-height:20px;font-size:13px;margin:4px 0 14px}
+  .msg.err{color:var(--bad)}
+  .msg.ok{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start}
+  @media(max-width:880px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:16px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 12px}
+  .row{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+  .blk{margin-bottom:14px}
+  .blk .t{font-size:12px;color:var(--muted);margin-bottom:5px}
+  .tabloid{display:inline-block}
+  .trow{display:flex;gap:0;margin-bottom:3px}
+  .cell{width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+    border:1.6px solid #999;border-right:none;font-weight:700;background:#fff}
+  .trow .cell:last-child{border-right:1.6px solid #999}
+  .young{display:inline-block}
+  .yrow{display:flex}
+  .yc{width:15px;height:15px;border:1px solid #c2c4c8;background:#eef0f2}
+  .kv{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;margin-top:2px}
+  .kv b{font-weight:700}
+  .pill{padding:2px 8px;border-radius:6px;background:#eef2f5;font-size:12px}
+  .pill.good{background:#e7f6ec;color:var(--good)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 10px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .diagwrap{position:relative;overflow:auto;max-height:620px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .diagram{display:block}
+  .sl{transition:opacity .08s,stroke-width .08s;cursor:pointer}
+  .diagram.hovering .sl{opacity:.13}
+  .diagram.hovering .sl.hl{opacity:1;stroke-width:3.6}
+  .tip{position:fixed;pointer-events:none;background:#15171a;color:#fff;padding:5px 8px;border-radius:6px;
+    font-size:12px;opacity:0;transition:opacity .1s;z-index:9;white-space:nowrap}
+  .foot{margin-top:18px;font-size:12px;color:var(--muted)}
+  .selftest{font-size:12px}
+  .selftest.ok{color:var(--good)} .selftest.bad{color:var(--bad)}
+  .lambdatab{font-size:12px;border-collapse:collapse;margin-top:6px}
+  .lambdatab td,.lambdatab th{padding:2px 8px;text-align:left;border-bottom:1px solid var(--line)}
+  .lambdatab tr.stable td{font-weight:700;color:var(--accent)}
+  code{background:#f1f3f5;padding:1px 5px;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Dual Affine Robinson–Schensted</h1>
+  <div class="sub">An interactive calculator for the map
+    <code>w &#8614; (P&#772;, Q&#772;, &#955;, N&#8320;)</code> of Huang &amp; Zhang
+    (<a href="https://arxiv.org/abs/2605.20383" target="_blank" rel="noopener">arXiv:2605.20383</a>).
+    Type the window of an extended affine permutation.</div>
+
+  <div class="controls">
+    <input id="win" type="text" value="10, 3, -3, 12" autocomplete="off" spellcheck="false"
+           aria-label="affine permutation window">
+    <button id="rand">Random</button>
+    <span style="width:8px"></span>
+    <button class="chip" data-ex="10, 3, -3, 12">paper [10,3,&#8722;3,12]</button>
+    <button class="chip" data-ex="4, 1, -2, 7">[4,1,&#8722;2,7]</button>
+    <button class="chip" data-ex="3, 1, 4, 2">finite [3,1,4,2]</button>
+    <button class="chip" data-ex="2, 0, 6, 4, -2">[2,0,6,4,&#8722;2]</button>
+    <button class="chip" data-ex="5">[5]</button>
+    <span style="flex:1"></span>
+    <label class="opt"><input type="checkbox" id="optBoundary" checked> west labels</label>
+    <label class="opt"><input type="checkbox" id="optEdges"> edge labels</label>
+  </div>
+  <div id="msg" class="msg ok"></div>
+
+  <div class="grid">
+    <div class="card" id="result"></div>
+    <div class="card">
+      <h2>Affine growth diagram</h2>
+      <div class="legend" id="legend"></div>
+      <div class="diagwrap" id="diagwrap"><div id="diag"></div></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px">
+        Hover a shadow line to highlight it. Marks <b>&#9679;</b> are tiles with <code>w(j)=i</code>;
+        the bold box is the first stable window <code>&#937;<sub>N&#8320;</sub></code>.</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    Tabloid row <i>r</i> is drawn in the colour of shadow-line colour <i>r</i> — the same colour as in
+    the diagram. <span id="selftest" class="selftest"></span>
+  </div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+/* Dual Affine Robinson--Schensted correspondence -- browser/jsc port.
+ *
+ * A faithful JavaScript port of dual_affine_rs.py (Huang--Zhang, arXiv:2605.20383).
+ * No DOM dependencies: this file only computes and returns SVG strings, so it can
+ * be unit-tested under `jsc`.  Conventions and algorithm match the Python exactly.
+ */
+(function (root) {
+  "use strict";
+
+  // ---- partitions -------------------------------------------------------
+  function trim(a) { a = a.slice(); while (a.length && a[a.length - 1] === 0) a.pop(); return a; }
+  function eqArr(a, b) { a = trim(a); b = trim(b); if (a.length !== b.length) return false; for (var i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
+  function isPartition(seq) { var s = trim(seq); for (var i = 0; i < s.length; i++) { if (s[i] < 0) return false; if (i + 1 < s.length && s[i] < s[i + 1]) return false; } return true; }
+  function conjugate(part) { var p = trim(part); if (!p.length) return []; var out = []; for (var c = 1; c <= p[0]; c++) { var cnt = 0; for (var i = 0; i < p.length; i++) if (p[i] >= c) cnt++; out.push(cnt); } return out; }
+  function partFromColumnHeights(h) { return conjugate(trim(h)); }
+  function diffComposition(big, small) { var L = Math.max(big.length, small.length), o = []; for (var k = 0; k < L; k++) o.push((big[k] || 0) - (small[k] || 0)); return trim(o); }
+  function sum(a) { var s = 0; for (var i = 0; i < a.length; i++) s += a[i]; return s; }
+
+  // ---- classical RSK (row insertion) ------------------------------------
+  function bisectLeft(arr, x) { var lo = 0, hi = arr.length; while (lo < hi) { var mid = (lo + hi) >> 1; if (arr[mid] < x) lo = mid + 1; else hi = mid; } return lo; }
+  function rskTableau(word) {
+    var rows = [];
+    for (var t = 0; t < word.length; t++) {
+      var cur = word[t], r = 0;
+      while (true) {
+        if (r === rows.length) { rows.push([cur]); break; }
+        var row = rows[r], pos = bisectLeft(row, cur);
+        if (pos === row.length) { row.push(cur); break; }
+        var tmp = row[pos]; row[pos] = cur; cur = tmp; r++;
+      }
+    }
+    return rows;
+  }
+  function rskShape(word) { return rskTableau(word).map(function (r) { return r.length; }); }
+
+  // ---- extended affine symmetric group ----------------------------------
+  function AffinePerm(window) {
+    if (!(this instanceof AffinePerm)) return new AffinePerm(window);
+    this.w = window.slice(); this.n = window.length; this._validate();
+  }
+  AffinePerm.prototype._validate = function () {
+    var n = this.n;
+    if (n === 0) throw new Error("empty window");
+    var res = this.w.map(function (v) { return ((v % n) + n) % n; }).sort(function (a, b) { return a - b; });
+    for (var i = 0; i < n; i++) if (res[i] !== i)
+      throw new Error("[" + this.w.join(", ") + "] is not a valid affine window (entries must hit each residue mod " + n + " once)");
+  };
+  AffinePerm.prototype.call = function (j) { var n = this.n, q = Math.floor((j - 1) / n), r = (j - 1) - q * n; return this.w[r] + n * q; };
+  AffinePerm.prototype.index = function () { var s = 0; for (var j = 1; j <= this.n; j++) s += this.w[j - 1] - j; return s / this.n; };
+  AffinePerm.prototype.windowStr = function () { return "[" + this.w.join(", ") + "]"; };
+  AffinePerm.prototype.inverse = function () {
+    var n = this.n, D = 0;
+    for (var k = 0; k < n; k++) D = Math.max(D, Math.abs(this.w[k] - (k + 1)));
+    var spread = D + 1, inv = [];
+    for (var i = 1; i <= n; i++) { var found = null; for (var j = i - spread; j <= i + spread; j++) if (this.call(j) === i) { found = j; break; } if (found === null) throw new Error("inverse search failed"); inv.push(found); }
+    return new AffinePerm(inv);
+  };
+
+  // ---- lambda^m and the first stable window N0 --------------------------
+  function windowWordBelow(ap, threshold) {
+    var n = ap.n, word = [], k = n + 1, misses = 0;
+    while (misses < n) { var v = ap.call(k); if (v <= threshold) { word.push(v); misses = 0; } else misses++; k++; }
+    return word;
+  }
+  function lambdaM(ap, m) { return rskShape(windowWordBelow(ap, ap.n * (m - 1))); }
+  function firstFullWindow(ap) { var Wmax = Math.max.apply(null, ap.w); return Math.ceil(Wmax / ap.n) + 1; }
+  function findFirstStableWindow(ap, search) {
+    var n = ap.n, Nfull = firstFullWindow(ap);
+    if (search == null) search = 6 * n + 40;
+    var lam = {};
+    for (var m = Nfull; m <= Nfull + search + 2; m++) lam[m] = lambdaM(ap, m);
+    for (var mm = Nfull; mm < Nfull + search; mm++) {
+      var mu1 = diffComposition(lam[mm + 1], lam[mm]);
+      var mu2 = diffComposition(lam[mm + 2], lam[mm + 1]);
+      if (isPartition(mu1) && eqArr(mu1, mu2)) return { N0: mm, lam: trim(lam[mm]), mu: trim(mu1) };
+    }
+    throw new Error("no stable window found within search range");
+  }
+
+  // ---- the affine growth diagram with colored shadow lines --------------
+  function UF() { this.p = {}; }
+  UF.prototype.find = function (x) { if (!(x in this.p)) this.p[x] = x; var root = x; while (this.p[root] !== root) root = this.p[root]; while (this.p[x] !== root) { var nx = this.p[x]; this.p[x] = root; x = nx; } return root; };
+  UF.prototype.union = function (a, b) { var ra = this.find(a), rb = this.find(b); if (ra !== rb) this.p[ra] = rb; };
+
+  function GrowthDiagram(ap, N0) { this.ap = ap; this.N0 = N0; this.H = {}; this.V = {}; }
+  function key(i, j) { return i + "," + j; }
+
+  GrowthDiagram.build = function (ap, N0) {
+    var n = ap.n, D = new GrowthDiagram(ap, N0);
+    var Wmin = Math.min.apply(null, ap.w);
+    D.i_top = Wmin - 1;
+    D.i_bot = N0 * n + n;
+    var j_right = (N0 + 2) * n;
+    while (true) { var tmin = Infinity; for (var b = j_right; b < j_right + n; b++) tmin = Math.min(tmin, ap.call(b)); if (tmin > D.i_bot) break; j_right += n; }
+    D.j_right = j_right;
+    D._fill(); D._components(); D._color();
+    return D;
+  };
+
+  GrowthDiagram.prototype._fill = function () {
+    var ap = this.ap, n = ap.n, H = this.H, V = this.V;
+    var i_top = this.i_top, i_bot = this.i_bot, j_right = this.j_right;
+    for (var j = 1; j <= j_right; j++) H[key(i_top - 1, j)] = 0;
+    for (var i = i_top; i <= i_bot; i++) V[key(i, j_right)] = 0;
+    for (i = i_top; i <= i_bot; i++) {
+      for (j = j_right; j >= 1; j--) {
+        var north = H[key(i - 1, j)], east = V[key(i, j)];
+        var marked = (ap.call(j) === i), south, west;
+        if (marked) { if (north !== 0 || east !== 0) throw new Error("marked tile (" + i + "," + j + ") N=" + north + " E=" + east); south = 1; west = 1; }
+        else if (north !== east) { south = north; west = east; }
+        else { var a = north; if (a === 0) { south = 0; west = 0; } else { south = a + 1; west = a + 1; } }
+        H[key(i, j)] = south; V[key(i, j - 1)] = west;
+      }
+    }
+  };
+
+  GrowthDiagram.prototype._tileEdges = function (i, j) {
+    return { north: "H," + (i - 1) + "," + j, south: "H," + i + "," + j, west: "V," + i + "," + (j - 1), east: "V," + i + "," + j };
+  };
+  GrowthDiagram.prototype.labelOfEdge = function (e) { var p = e.split(","), kind = p[0], r = +p[1], c = +p[2]; return kind === "H" ? this.H[key(r, c)] : this.V[key(r, c)]; };
+
+  GrowthDiagram.prototype._components = function () {
+    var ap = this.ap, H = this.H, V = this.V, uf = new UF();
+    this.uf = uf;
+    var i, j;
+    for (i = this.i_top; i <= this.i_bot; i++) for (j = 1; j <= this.j_right; j++) {
+      var ed = this._tileEdges(i, j);
+      var nL = H[key(i - 1, j)], eL = V[key(i, j)], sL = H[key(i, j)], wL = V[key(i, j - 1)];
+      var marked = (ap.call(j) === i);
+      if (nL === 0 && eL === 0 && sL === 0 && wL === 0) continue;
+      if (marked) uf.union(ed.south, ed.west);
+      else if (nL === eL) { uf.union(ed.north, ed.east); uf.union(ed.south, ed.west); }
+      else { if (nL !== 0) uf.union(ed.north, ed.south); if (eL !== 0) uf.union(ed.east, ed.west); }
+    }
+    // members & component labels
+    this.members = {}; this.compLabel = {};
+    var self = this;
+    function lab(e) { return self.labelOfEdge(e); }
+    for (var e in uf.p) { var rt = uf.find(e); (this.members[rt] || (this.members[rt] = [])).push(e); this.compLabel[rt] = lab(e); }
+    // crossing pairs (two shadow lines that actually cross, at a cross tile)
+    var crossing = {};
+    for (i = this.i_top; i <= this.i_bot; i++) for (j = 1; j <= this.j_right; j++) {
+      var nL2 = H[key(i - 1, j)], eL2 = V[key(i, j)];
+      var marked2 = (ap.call(j) === i);
+      if (!marked2 && nL2 !== eL2 && nL2 !== 0 && eL2 !== 0) {
+        var e2 = this._tileEdges(i, j);
+        var vroot = uf.find(e2.north), hroot = uf.find(e2.east);
+        crossing[[vroot, hroot].sort().join("|")] = true;
+      }
+    }
+    // repelling parents at bump tiles (only for non-crossing pairs)
+    this.repelParent = {};
+    for (i = this.i_top; i <= this.i_bot; i++) for (j = 1; j <= this.j_right; j++) {
+      var nL3 = H[key(i - 1, j)], eL3 = V[key(i, j)];
+      var marked3 = (ap.call(j) === i);
+      if (!marked3 && nL3 === eL3 && nL3 !== 0) {
+        var e3 = this._tileEdges(i, j);
+        var ne = uf.find(e3.north), sw = uf.find(e3.south);
+        if (crossing[[ne, sw].sort().join("|")]) continue;
+        if (sw in this.repelParent && this.repelParent[sw] !== ne) throw new Error("non-unique repeller");
+        this.repelParent[sw] = ne;
+      }
+    }
+  };
+
+  GrowthDiagram.prototype._color = function () {
+    var uf = this.uf, crossings = [], seen = {};
+    for (var i = this.i_top; i <= this.i_bot; i++) {
+      if (this.V[key(i, 0)] === 1) {
+        var root = uf.find("V," + i + ",0");
+        if (this.compLabel[root] === 1 && !(root in seen)) { seen[root] = true; crossings.push([i, root]); }
+      }
+    }
+    crossings.sort(function (a, b) { return a[0] - b[0]; });
+    this.N = crossings.length;
+    this.colorOfRoot_ = {};
+    for (var c = 0; c < crossings.length; c++) this.colorOfRoot_[crossings[c][1]] = c + 1;
+  };
+
+  GrowthDiagram.prototype.colorOfRoot = function (root) {
+    if (root in this.colorOfRoot_) return this.colorOfRoot_[root];
+    var chain = [root], cur = root;
+    while (this.compLabel[cur] !== 1) {
+      if (!(cur in this.repelParent)) throw new Error("no repelling parent for label " + this.compLabel[cur]);
+      cur = this.repelParent[cur]; chain.push(cur);
+    }
+    var col = this.colorOfRoot_[cur];
+    for (var k = 0; k < chain.length; k++) this.colorOfRoot_[chain[k]] = col;
+    return col;
+  };
+  GrowthDiagram.prototype.colorOfEdge = function (e) { return this.colorOfRoot(this.uf.find(e)); };
+  GrowthDiagram.prototype.lineIdOfEdge = function (e) { return this.uf.find(e); };
+
+  GrowthDiagram.prototype.eastEdges = function (m) { var n = this.ap.n, out = []; for (var t = 1; t <= n; t++) out.push("V," + ((m - 1) * n + t) + "," + n); return out; };
+  GrowthDiagram.prototype.northEdges = function (m) { var n = this.ap.n, out = []; for (var t = 1; t <= n; t++) out.push("H," + ((m - 1) * n) + "," + (n - t + 1)); return out; };
+  GrowthDiagram.prototype.lambdaAt = function (m) {
+    var n = this.ap.n, top = (m - 1) * n, heights = {};
+    for (var t = this.i_top; t <= top; t++) { var c = this.V[key(t, n)] || 0; if (c > 0) heights[c] = (heights[c] || 0) + 1; }
+    var ks = Object.keys(heights).map(Number); if (!ks.length) return [];
+    var maxc = Math.max.apply(null, ks), arr = []; for (var cc = 1; cc <= maxc; cc++) arr.push(heights[cc] || 0);
+    return partFromColumnHeights(arr);
+  };
+
+  // ---- forward map ------------------------------------------------------
+  function dualAffineRS(ap) {
+    var n = ap.n, fs = findFirstStableWindow(ap), N0 = fs.N0, lam = fs.lam, mu = fs.mu;
+    var D = GrowthDiagram.build(ap, N0);
+    var lamDiag = D.lambdaAt(N0);
+    if (!eqArr(lamDiag, lam)) throw new Error("lambda mismatch diagram " + lamDiag + " vs " + lam);
+    var eastRows = {}, northRows = {}, t, e, r;
+    var ee = D.eastEdges(N0), ne = D.northEdges(N0);
+    for (t = 0; t < n; t++) { r = D.colorOfEdge(ee[t]); (eastRows[r] || (eastRows[r] = [])).push(t + 1); }
+    for (t = 0; t < n; t++) { r = D.colorOfEdge(ne[t]); (northRows[r] || (northRows[r] = [])).push(t + 1); }
+    function tab(rows) { var mx = 0; for (var k in rows) mx = Math.max(mx, +k); var out = []; for (var i = 1; i <= mx; i++) out.push((rows[i] || []).slice().sort(function (a, b) { return a - b; })); return out; }
+    var Pbar = tab(eastRows), Qbar = tab(northRows);
+    var shapeP = Pbar.map(function (x) { return x.length; }), shapeQ = Qbar.map(function (x) { return x.length; });
+    if (!eqArr(shapeP, shapeQ)) throw new Error("Pbar/Qbar shape mismatch");
+    if (!eqArr(shapeP, mu)) throw new Error("shape != mu");
+    if (sum(lam) !== n * (N0 - 2) - ap.index()) throw new Error("index relation failed");
+    return { Pbar: Pbar, Qbar: Qbar, lam: lam, N0: N0, mu: mu, diagram: D, index: ap.index() };
+  }
+
+  // ---- lambda-looparrow + reverse map -----------------------------------
+  function looparrow(lam, tabRows) {
+    var mu = tabRows.map(function (x) { return x.length; });
+    var L = Math.max(lam.length, mu.length), l = lam.slice(), m = mu.slice();
+    while (l.length < L) l.push(0); while (m.length < L) m.push(0);
+    var cells = {}; // "r,c" -> value, 0-based
+    for (var r = 0; r < L; r++) { var content = (tabRows[r] || []).slice().sort(function (a, b) { return a - b; }); for (var k = 0; k < content.length; k++) cells[r + "," + (l[r] + k)] = content[k]; }
+    return { cells: cells, colOf: function (v) { for (var rc in cells) if (cells[rc] === v) return (+rc.split(",")[1]) + 1; throw new Error("missing " + v); } };
+  }
+
+  function dualAffineRSInverse(Pbar, Qbar, lam, N0, n) {
+    var shapeP = Pbar.map(function (x) { return x.length; });
+    if (!eqArr(shapeP, Qbar.map(function (x) { return x.length; }))) throw new Error("shapes differ");
+    if (sum(shapeP) !== n) throw new Error("shape not a partition of n");
+    var P = looparrow(lam, Pbar), Q = looparrow(lam, Qbar);
+    var colP = [], colQ = [];
+    for (var i = 1; i <= n; i++) { colP.push(P.colOf(i)); colQ.push(Q.colOf(i)); }
+    var H = {}, V = {}, base = (N0 - 1) * n;
+    for (var t = 1; t <= n; t++) H[key(base, n - t + 1)] = colQ[t - 1];
+    for (t = 1; t <= n; t++) V[key(base + t, n)] = colP[t - 1];
+    var marks = {}, m = N0 - 1, guard = 0;
+    while (true) {
+      var top = (m - 1) * n, bottom = m * n, ii, jj;
+      for (ii = top + 1; ii <= bottom; ii++) V[key(ii, 0)] = V[key(ii + n, n)] || 0;
+      var anyNonzero = false;
+      for (ii = bottom; ii > top; ii--) for (jj = 1; jj <= n; jj++) {
+        var south = H[key(ii, jj)] || 0, west = V[key(ii, jj - 1)] || 0, north, east;
+        if (south !== west) { north = south; east = west; }
+        else if (south === 0) { north = 0; east = 0; }
+        else if (south === 1) { north = 0; east = 0; marks[jj] = ii; }
+        else { north = south - 1; east = south - 1; }
+        H[key(ii - 1, jj)] = north; V[key(ii, jj)] = east;
+        if (north || east || south || west) anyNonzero = true;
+      }
+      if (!anyNonzero && Object.keys(marks).length >= n) break;
+      m--; guard++;
+      if (guard > 4 * n + 200) throw new Error("reverse did not terminate");
+    }
+    var win = [];
+    for (var j = 1; j <= n; j++) { if (!(j in marks)) throw new Error("no mark in column " + j); win.push(marks[j]); }
+    return new AffinePerm(win);
+  }
+
+  // ---- SVG rendering (returns a string; mirrors render.py) ---------------
+  var PALETTE = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#117733", "#882255", "#999999", "#440154"];
+  function colorHex(c) { return PALETTE[(c - 1) % PALETTE.length]; }
+
+  function svgDiagram(ap, opts) {
+    opts = opts || {};
+    var scale = opts.scale || 22, showLabels = opts.showLabels !== false, showEdges = !!opts.showEdges;
+    var res = dualAffineRS(ap), D = res.diagram, N0 = res.N0, n = ap.n;
+    var imin = D.i_top, imax = (N0 + 1) * n, jmax = 1;
+    for (var i = imin; i <= imax; i++) for (var j = 0; j <= D.j_right; j++) if ((D.V[key(i, j)] || 0) || (D.H[key(i, j)] || 0)) jmax = Math.max(jmax, j);
+    var jmin = 0; jmax = jmax + 1;
+    var padLeft = 4, pad = 1.2;
+    var W = (jmax - jmin + padLeft + pad) * scale, Hh = (imax - imin + 2 * pad) * scale;
+    function X(j) { return (j - jmin + padLeft) * scale; }
+    function Y(i) { return (i - imin + pad) * scale; }
+    var out = [];
+    out.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W.toFixed(0) + '" height="' + Hh.toFixed(0) + '" viewBox="0 0 ' + W.toFixed(0) + ' ' + Hh.toFixed(0) + '" font-family="ui-monospace,Menlo,monospace">');
+    out.push('<rect width="' + W.toFixed(0) + '" height="' + Hh.toFixed(0) + '" fill="var(--bg,#fff)"/>');
+    for (j = jmin; j <= jmax; j++) out.push('<line x1="' + X(j).toFixed(1) + '" y1="' + Y(imin).toFixed(1) + '" x2="' + X(j).toFixed(1) + '" y2="' + Y(imax).toFixed(1) + '" stroke="#e8e8e8"/>');
+    for (i = imin; i <= imax; i++) out.push('<line x1="' + X(jmin).toFixed(1) + '" y1="' + Y(i).toFixed(1) + '" x2="' + X(jmax).toFixed(1) + '" y2="' + Y(i).toFixed(1) + '" stroke="#e8e8e8"/>');
+    // windows
+    var mlo = Math.floor(imin / n), mhi = N0 + 1;
+    for (var m = mlo; m <= mhi; m++) {
+      var top = (m - 1) * n, bot = m * n; if (bot <= imin || top >= imax) continue;
+      var stable = (m === N0), col = stable ? "#111" : "#9aa0a6", swd = stable ? 2 : 1;
+      var yT = Y(Math.max(top, imin)), yB = Y(Math.min(bot, imax));
+      out.push('<rect x="' + X(0).toFixed(1) + '" y="' + yT.toFixed(1) + '" width="' + (X(n) - X(0)).toFixed(1) + '" height="' + (yB - yT).toFixed(1) + '" fill="none" stroke="' + col + '" stroke-width="' + swd + '"/>');
+      if (top >= imin && top + n <= imax + 1)
+        out.push('<text x="' + (X(0) - 6).toFixed(1) + '" y="' + (Y((top + bot) / 2) + 4).toFixed(1) + '" text-anchor="end" font-size="' + (0.62 * scale).toFixed(0) + '" fill="' + col + '">Ω' + sub(m) + (stable ? "★" : "") + '</text>');
+    }
+    var r = 0.5, swl = 2.2;
+    function seg(x1, y1, x2, y2, c, lid) { out.push('<line class="sl" data-line="' + lid + '" x1="' + x1.toFixed(2) + '" y1="' + y1.toFixed(2) + '" x2="' + x2.toFixed(2) + '" y2="' + y2.toFixed(2) + '" stroke="' + colorHex(c) + '" stroke-width="' + swl + '" stroke-linecap="round"/>'); }
+    function arc(x1, y1, x2, y2, cx, cy, c, lid) { var sweep = ((x2 - x1) * (cy - y1) - (y2 - y1) * (cx - x1)) < 0 ? 1 : 0; out.push('<path class="sl" data-line="' + lid + '" d="M ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A ' + (r * scale).toFixed(2) + ' ' + (r * scale).toFixed(2) + ' 0 0 ' + sweep + ' ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + '" fill="none" stroke="' + colorHex(c) + '" stroke-width="' + swl + '" stroke-linecap="round"/>'); }
+    for (i = imin + 1; i <= imax; i++) for (j = 1; j <= jmax; j++) {
+      var nL = D.H[key(i - 1, j)] || 0, sL = D.H[key(i, j)] || 0, wL = D.V[key(i, j - 1)] || 0, eL = D.V[key(i, j)] || 0;
+      var marked = (ap.call(j) === i);
+      if (!(nL || sL || wL || eL) && !marked) continue;
+      var nmx = X(j - 0.5), nmy = Y(i - 1), smx = X(j - 0.5), smy = Y(i), wmx = X(j - 1), wmy = Y(i - 0.5), emx = X(j), emy = Y(i - 0.5), cx = X(j - 0.5), cy = Y(i - 0.5);
+      if (marked) {
+        var lid0 = D.lineIdOfEdge("H," + i + "," + j);
+        arc(wmx, wmy, smx, smy, cx, cy, D.colorOfEdge("H," + i + "," + j), lid0);
+        out.push('<circle cx="' + cx.toFixed(2) + '" cy="' + cy.toFixed(2) + '" r="' + (0.13 * scale).toFixed(2) + '" fill="var(--ink,#111)"/>');
+      } else if (nL === eL && nL !== 0) {
+        arc(nmx, nmy, emx, emy, cx, cy, D.colorOfEdge("H," + (i - 1) + "," + j), D.lineIdOfEdge("H," + (i - 1) + "," + j));
+        arc(wmx, wmy, smx, smy, cx, cy, D.colorOfEdge("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
+      } else if (nL !== eL) {
+        if (nL) seg(nmx, nmy, smx, smy, D.colorOfEdge("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
+        if (eL) seg(wmx, wmy, emx, emy, D.colorOfEdge("V," + i + "," + j), D.lineIdOfEdge("V," + i + "," + j));
+      }
+      if (showEdges) {
+        if (sL) out.push('<text x="' + smx.toFixed(1) + '" y="' + (smy - 1).toFixed(1) + '" text-anchor="middle" font-size="' + (0.32 * scale).toFixed(0) + '" fill="#888">' + sL + '</text>');
+      }
+    }
+    if (showLabels) {
+      for (i = imin + 1; i <= imax; i++) { var lab = D.V[key(i, 0)] || 0; if (lab) out.push('<text x="' + (X(0) - 22).toFixed(1) + '" y="' + (Y(i - 0.5) + 4).toFixed(1) + '" text-anchor="end" font-size="' + (0.42 * scale).toFixed(0) + '" fill="' + colorHex(D.colorOfEdge("V," + i + ",0")) + '">' + lab + '</text>'); }
+    }
+    out.push('</svg>');
+    // per-shadow-line info (constant label + colour) keyed by line id
+    var lineInfo = {};
+    for (var rootk in D.members) { try { lineInfo[rootk] = { label: D.compLabel[rootk], color: D.colorOfRoot(rootk) }; } catch (e) { } }
+    return { svg: out.join("\n"), res: res, region: { imin: imin, imax: imax, jmax: jmax }, lineInfo: lineInfo };
+  }
+  var SUB = "₀₁₂₃₄₅₆₇₈₉";
+  function sub(k) { return String(k).split("").map(function (d) { return d === "-" ? "₋" : SUB[+d]; }).join(""); }
+
+  function partStr(p) { p = trim(p); return p.length ? "(" + p.join(", ") + ")" : "∅"; }
+
+  root.DARS = {
+    AffinePerm: AffinePerm, dualAffineRS: dualAffineRS, dualAffineRSInverse: dualAffineRSInverse,
+    findFirstStableWindow: findFirstStableWindow, firstFullWindow: firstFullWindow, lambdaM: lambdaM,
+    GrowthDiagram: GrowthDiagram, svgDiagram: svgDiagram, partStr: partStr, colorHex: colorHex,
+    PALETTE: PALETTE, sub: sub, trim: trim, diffComposition: diffComposition, isPartition: isPartition, eqArr: eqArr
+  };
+})(typeof globalThis !== "undefined" ? globalThis : this);
+
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s){return document.querySelector(s);};
+  var winEl=$("#win"), msg=$("#msg"), result=$("#result"), diag=$("#diag"),
+      legend=$("#legend"), tip=$("#tip"), diagram=null, lineInfo=null;
+
+  function parseWindow(s){
+    var parts=s.trim().split(/[\s,]+/).filter(function(x){return x.length;});
+    if(!parts.length) throw new Error("enter a window, e.g. 10, 3, -3, 12");
+    return parts.map(function(x){
+      if(!/^-?\d+$/.test(x)) throw new Error("not an integer: \""+x+"\"");
+      return parseInt(x,10);
+    });
+  }
+
+  function cell(v,color){ return '<div class="cell" style="border-color:'+color+';color:'+color+'">'+v+'</div>'; }
+  function tabloidHTML(rows){
+    if(!rows.length) return '<span style="color:var(--muted)">&#8709;</span>';
+    var h='<div class="tabloid">';
+    for(var r=0;r<rows.length;r++){
+      var color=DARS.colorHex(r+1);
+      h+='<div class="trow">'+rows[r].map(function(v){return cell(v,color);}).join("")+'</div>';
+    }
+    return h+'</div>';
+  }
+  function youngHTML(lam){
+    if(!lam.length) return '<span style="color:var(--muted)">&#8709;</span>';
+    var h='<div class="young">';
+    for(var r=0;r<lam.length;r++){ h+='<div class="yrow">'; for(var c=0;c<lam[r];c++) h+='<div class="yc"></div>'; h+='</div>'; }
+    return h+'</div>';
+  }
+  function lambdaTable(w,N0){
+    var Nf=DARS.firstFullWindow(w), lam={}, rows="";
+    for(var m=Nf;m<=N0+1;m++) lam[m]=DARS.lambdaM(w,m);
+    for(var m2=Nf;m2<=N0;m2++){
+      var mu=DARS.diffComposition(lam[m2+1],lam[m2]);
+      var mu2=DARS.diffComposition(lam[m2+2]||DARS.lambdaM(w,m2+2),lam[m2+1]);
+      var stable=DARS.isPartition(mu)&&DARS.eqArr(mu,mu2);
+      rows+='<tr class="'+(m2===N0?'stable':'')+'"><td>'+m2+'</td><td>'+DARS.partStr(lam[m2])+
+            '</td><td>'+DARS.partStr(mu)+'</td><td>'+(stable?'yes &#9664;':'no')+'</td></tr>';
+    }
+    return '<table class="lambdatab"><tr><th>m</th><th>&#955;<sup>m</sup></th>'+
+           '<th>&#956;<sup>m</sup>=&#955;<sup>m+1</sup>&#8722;&#955;<sup>m</sup></th><th>stable?</th></tr>'+rows+'</table>';
+  }
+
+  function renderResult(w,res){
+    var n=w.n, ok=true, back="";
+    try{ var b=DARS.dualAffineRSInverse(res.Pbar,res.Qbar,res.lam,res.N0,n); ok=(JSON.stringify(b.w)===JSON.stringify(w.w)); back=b.windowStr(); }
+    catch(e){ ok=false; back="error"; }
+    var idxRel=DARS.partStr(res.lam)+', |&#955;|='+res.lam.reduce(function(a,b){return a+b;},0)+
+      ' = n(N&#8320;&#8722;2)&#8722;i = '+n+'&#183;'+(res.N0-2)+'&#8722;'+res.index+' = '+(n*(res.N0-2)-res.index);
+    result.innerHTML=
+      '<h2>RS('+w.windowStr().replace(/-/g,'&#8722;')+')</h2>'+
+      '<div class="kv" style="margin-bottom:14px"><span class="pill">index i = '+res.index+'</span>'+
+        '<span class="pill">&#956; = shape = '+DARS.partStr(res.mu)+'</span>'+
+        '<span class="pill">N&#8320; = '+res.N0+'</span></div>'+
+      '<div class="row">'+
+        '<div class="blk"><div class="t">P&#772; (east boundary)</div>'+tabloidHTML(res.Pbar)+'</div>'+
+        '<div class="blk"><div class="t">Q&#772; (north boundary)</div>'+tabloidHTML(res.Qbar)+'</div>'+
+      '</div>'+
+      '<div class="blk"><div class="t">&#955; = '+DARS.partStr(res.lam)+'</div>'+youngHTML(res.lam)+'</div>'+
+      '<div class="blk"><div class="t">stable-window search</div>'+lambdaTable(w,res.N0)+'</div>'+
+      '<div class="kv"><span class="pill">'+idxRel+'</span></div>'+
+      '<div class="kv" style="margin-top:8px"><span class="pill '+(ok?'good':'')+'">'+
+        'RS&#8224; recovers w: '+back.replace(/-/g,'&#8722;')+(ok?' &#10003;':' &#10007;')+'</span></div>';
+  }
+
+  function renderLegend(N){
+    var h="";
+    for(var c=1;c<=N;c++) h+='<span><i style="background:'+DARS.colorHex(c)+'"></i>colour '+c+'</span>';
+    legend.innerHTML=h||'<span>(no shadow lines)</span>';
+  }
+
+  function compute(){
+    var s=winEl.value, w;
+    try{ w=new DARS.AffinePerm(parseWindow(s)); }
+    catch(e){ msg.className="msg err"; msg.textContent=e.message; return; }
+    // guard against pathologically large diagrams
+    try{
+      var fs=DARS.findFirstStableWindow(w);
+      var Wmin=Math.min.apply(null,w.w);
+      var rows=(fs.N0+1)*w.n-(Wmin-1);
+      if(rows>320){ msg.className="msg err"; msg.textContent="diagram too large to draw interactively (N₀="+fs.N0+"); try smaller shifts."; return; }
+    }catch(e){ msg.className="msg err"; msg.textContent=e.message; return; }
+
+    var out;
+    try{ out=DARS.svgDiagram(w,{scale:20,showLabels:$("#optBoundary").checked,showEdges:$("#optEdges").checked}); }
+    catch(e){ msg.className="msg err"; msg.textContent="error: "+e.message; return; }
+    msg.className="msg ok"; msg.textContent="w ∈ Ŝ"+sub(w.n)+"^("+out.res.index+"),  N₀ = "+out.res.N0+",  "+out.res.diagram.N+" shadow-line colour(s).";
+    diagram=out.res.diagram; lineInfo=out.lineInfo;
+    renderResult(w,out.res);
+    renderLegend(out.res.diagram.N);
+    diag.innerHTML=out.svg;
+    var svg=diag.querySelector("svg"); if(svg){ svg.classList.add("diagram"); wireHover(svg); }
+  }
+  function sub(k){ return DARS.sub(k); }
+
+  function wireHover(svg){
+    svg.addEventListener("mousemove",function(ev){
+      var t=ev.target, lid=t&&t.getAttribute&&t.getAttribute("data-line");
+      if(lid){
+        if(svg.__lid!==lid){
+          svg.classList.add("hovering");
+          var all=svg.querySelectorAll(".sl");
+          for(var i=0;i<all.length;i++) all[i].classList.toggle("hl",all[i].getAttribute("data-line")===lid);
+          svg.__lid=lid;
+        }
+        var inf=lineInfo&&lineInfo[lid];
+        if(inf){ tip.style.opacity="1"; tip.textContent="shadow line · colour "+inf.color+" · label "+inf.label;
+          tip.style.left=(ev.clientX+12)+"px"; tip.style.top=(ev.clientY+12)+"px"; }
+      }else{ clearHover(svg); }
+    });
+    svg.addEventListener("mouseleave",function(){ clearHover(svg); });
+  }
+  function clearHover(svg){ svg.classList.remove("hovering"); svg.__lid=null; tip.style.opacity="0";
+    var all=svg.querySelectorAll(".sl.hl"); for(var i=0;i<all.length;i++) all[i].classList.remove("hl"); }
+
+  // events
+  var timer=null;
+  winEl.addEventListener("input",function(){ clearTimeout(timer); timer=setTimeout(compute,120); });
+  $("#optBoundary").addEventListener("change",compute);
+  $("#optEdges").addEventListener("change",compute);
+  document.querySelectorAll(".chip").forEach(function(b){ b.addEventListener("click",function(){ winEl.value=b.getAttribute("data-ex"); compute(); }); });
+  $("#rand").addEventListener("click",function(){
+    var n=2+Math.floor(Math.random()*5), base=[]; for(var i=1;i<=n;i++) base.push(i);
+    for(var k=n-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var tmp=base[k];base[k]=base[j];base[j]=tmp; }
+    var win=base.map(function(v){ return v+n*(Math.floor(Math.random()*6)-2); });
+    winEl.value=win.join(", "); compute();
+  });
+
+  // built-in self-test (mirrors the Python ground truth)
+  (function(){
+    var st=$("#selftest"), pass=true, detail="";
+    try{
+      var w=new DARS.AffinePerm([10,3,-3,12]); var r=DARS.dualAffineRS(w);
+      var okPaper=JSON.stringify(r.Pbar)==="[[1,3],[2],[4]]"&&JSON.stringify(r.Qbar)==="[[1,2],[3],[4]]"&&JSON.stringify(r.lam)==="[6,6,5]"&&r.N0===7;
+      // round-trip on a few
+      var trips=[[4,1,-2,7],[3,1,4,2],[2,0,6,4,-2],[5]];
+      var allTrip=trips.every(function(win){ var ww=new DARS.AffinePerm(win); var rr=DARS.dualAffineRS(ww);
+        var bb=DARS.dualAffineRSInverse(rr.Pbar,rr.Qbar,rr.lam,rr.N0,ww.n); return JSON.stringify(bb.w)===JSON.stringify(win); });
+      pass=okPaper&&allTrip; detail=pass?"self-test passed (paper example + round-trips)":"self-test FAILED";
+    }catch(e){ pass=false; detail="self-test error: "+e.message; }
+    st.className="selftest "+(pass?"ok":"bad"); st.textContent="· "+detail+(pass?" ✓":" ✗");
+  })();
+
+  compute();
+})();
+</script>
+</body>
+</html>
