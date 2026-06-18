@@ -300,6 +300,27 @@ a.collapse_all:hover span{
     vertical-align: middle;
 }
 
+#papers-h1-toggle {
+    cursor: pointer;
+    position: relative;
+}
+#papers-h1-toggle::after {
+    content: 'click me ✦';
+    font-size: 8px;
+    font-weight: 400;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    margin-left: 7px;
+    vertical-align: middle;
+    opacity: 0;
+    transition: opacity 0.25s;
+    font-style: italic;
+}
+#papers-h1-toggle:hover::after {
+    opacity: 1;
+}
+
 ul.papers{
     padding-left: 0px;
     list-style-position: inside;
@@ -346,6 +367,13 @@ ul.papers li.hide + li.title {
 ul.papers li.details {
     padding-left: 0px;
     padding-bottom: 1px;
+    display: none;
+}
+ul.papers li.title[data-coauthors] {
+    cursor: pointer;
+}
+ul.papers li.title[data-coauthors]:hover strong {
+    color: var(--color1);
 }
 
 ul.papers li.details a.abs-btn,
@@ -520,7 +548,7 @@ ul.papers li.title.co-dimmed {
       </p>
     </section>
     <section id="papers">
-      <h1>Papers
+      <h1><span id="papers-h1-toggle">Papers</span>
         <a id="collapse-all" class="collapse_all" role="button" data-transformed="false" onclick="openAll()">
                     <i class="fas fa-plus"></i>
                     <span>Show Abstracts</span>
@@ -1018,6 +1046,48 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('ul.papers li.title').forEach(function(li) {
                 li.classList.remove('co-dimmed');
             });
+        });
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('papers-h1-toggle').addEventListener('click', function() {
+        var allDetails = document.querySelectorAll('ul.papers li.details');
+        var anyVisible = Array.from(allDetails).some(function(el) {
+            return el.style.display === 'block';
+        });
+        allDetails.forEach(function(el) {
+            if (anyVisible) {
+                el.style.display = 'none';
+                var hideEl = el.nextElementSibling;
+                if (hideEl && hideEl.classList.contains('hide')) {
+                    var collapse = hideEl.querySelector('.collapse');
+                    if (collapse) $(collapse).collapse('hide');
+                }
+            } else {
+                el.style.display = 'block';
+            }
+        });
+    });
+
+    document.querySelectorAll('ul.papers li.title[data-coauthors]').forEach(function(li) {
+        li.addEventListener('click', function(e) {
+            if (e.target.closest('a, .coauthor')) return;
+            var details = li.nextElementSibling;
+            if (!details || !details.classList.contains('details')) return;
+            var visible = details.style.display === 'block';
+            if (visible) {
+                details.style.display = 'none';
+                var hideEl = details.nextElementSibling;
+                if (hideEl && hideEl.classList.contains('hide')) {
+                    var collapse = hideEl.querySelector('.collapse');
+                    if (collapse) $(collapse).collapse('hide');
+                }
+            } else {
+                details.style.display = 'block';
+            }
         });
     });
 });
