@@ -271,42 +271,15 @@ ul.papers li.title a:link{
   transform: rotate(90deg);
 }
 
-.papers a.collapse_all[data-transformed="true"] i {
 
-    transform: rotate(45deg);
-}
-
-
-a.collapse_all span{
-    display: none;
-}
-a.collapse_all {
-    cursor: pointer;
-}
-a.collapse_all:hover span{
-    display: inline-block;
-    font-size: 11px;
-    vertical-align: middle;
-    padding-bottom: 5px;
-}
-
-#content h1 a.collapse_all {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    text-transform: none;
-    color: #999;
-    margin-left: 8px;
-    vertical-align: middle;
-}
-
-#papers-h1-toggle {
+#papers-h1-toggle,
+.section-toggle {
     cursor: pointer;
     position: relative;
 }
-#papers-h1-toggle::after {
+#papers-h1-toggle::after,
+.section-toggle::after {
     content: 'click me ✦';
-    font-size: 8px;
     font-weight: 400;
     color: #bbb;
     letter-spacing: 0.1em;
@@ -317,7 +290,14 @@ a.collapse_all:hover span{
     transition: opacity 0.25s;
     font-style: italic;
 }
-#papers-h1-toggle:hover::after {
+#papers-h1-toggle::after {
+    font-size: 8px;
+}
+.section-toggle::after {
+    font-size: 7px;
+}
+#papers-h1-toggle:hover::after,
+.section-toggle:hover::after {
     opacity: 1;
 }
 
@@ -548,13 +528,8 @@ ul.papers li.title.co-dimmed {
       </p>
     </section>
     <section id="papers">
-      <h1><span id="papers-h1-toggle">Papers</span>
-        <a id="collapse-all" class="collapse_all" role="button" data-transformed="false" onclick="openAll()">
-                    <i class="fas fa-plus"></i>
-                    <span>Show Abstracts</span>
-                </a>
-              </h1>
-      <h2>Preprints</h2> 
+      <h1><span id="papers-h1-toggle">Papers</span></h1>
+      <h2><span class="section-toggle" data-section="preprints">Preprints</span></h2>
 
       <ul class="papers">
         <li class="title" data-coauthors="huang">
@@ -578,7 +553,7 @@ ul.papers li.title.co-dimmed {
 
 
 
-      <h2>Published Articles.</h2>
+      <h2><span class="section-toggle" data-section="published">Published Articles.</span></h2>
 
       <ul class="papers">
           <li class="title" data-coauthors="burcroff ovenhouse schiffler">
@@ -982,20 +957,32 @@ for (let j = 0; j < 3; j++){
    
 
 <script>
-    var elems = document.getElementsByClassName("collapse");
-
-    function openAll() {
-        $('.collapse').collapse('show');
-        document.getElementById("collapse-all").setAttribute( "onClick", "javascript: closeAll();" );
-        document.getElementById("collapse-all").setAttribute( "data-transformed", "true" );
-        document.getElementById("collapse-all").innerHTML = "<i  style='transform:rotate(45deg); transition: all 0.6s;' class='fas fa-plus'></i> <span>Hide Abstracts</span>";
-    }
-    function closeAll() {
-        $('.collapse').collapse('hide');
-        document.getElementById("collapse-all").setAttribute( "onClick", "javascript: openAll();" );
-        document.getElementById("collapse-all").innerHTML = "<i class='fas fa-plus'></i> <span>Show Abstracts</span>";
-        document.getElementById("collapse-all").setAttribute( "data-transformed", "false" );
-    }	
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.section-toggle').forEach(function(h2span) {
+            var ul = h2span.closest('h2').nextElementSibling;
+            if (!ul || !ul.classList.contains('papers')) return;
+            h2span.addEventListener('click', function() {
+                var allDetails = ul.querySelectorAll('li.details');
+                var anyPinned = Array.from(allDetails).some(function(el) {
+                    return el.classList.contains('pinned');
+                });
+                allDetails.forEach(function(el) {
+                    if (anyPinned) {
+                        el.classList.remove('pinned');
+                        el.style.display = 'none';
+                        var hideEl = el.nextElementSibling;
+                        if (hideEl && hideEl.classList.contains('hide')) {
+                            var collapse = hideEl.querySelector('.collapse');
+                            if (collapse) $(collapse).collapse('hide');
+                        }
+                    } else {
+                        el.classList.add('pinned');
+                        el.style.display = 'block';
+                    }
+                });
+            });
+        });
+    });
 </script>
 
 <!--Top Nav function-->
@@ -1053,13 +1040,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Papers header: expand all / collapse all (tracks pinned state)
     document.getElementById('papers-h1-toggle').addEventListener('click', function() {
         var allDetails = document.querySelectorAll('ul.papers li.details');
-        var anyVisible = Array.from(allDetails).some(function(el) {
-            return el.style.display === 'block';
+        var anyPinned = Array.from(allDetails).some(function(el) {
+            return el.classList.contains('pinned');
         });
         allDetails.forEach(function(el) {
-            if (anyVisible) {
+            if (anyPinned) {
+                el.classList.remove('pinned');
                 el.style.display = 'none';
                 var hideEl = el.nextElementSibling;
                 if (hideEl && hideEl.classList.contains('hide')) {
@@ -1067,18 +1056,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (collapse) $(collapse).collapse('hide');
                 }
             } else {
+                el.classList.add('pinned');
                 el.style.display = 'block';
             }
         });
     });
 
     document.querySelectorAll('ul.papers li.title[data-coauthors]').forEach(function(li) {
+        var details = li.nextElementSibling;
+        if (!details || !details.classList.contains('details')) return;
+
+        function showDetails() {
+            if (details._hideTimer) { clearTimeout(details._hideTimer); details._hideTimer = null; }
+            details.style.display = 'block';
+        }
+        function maybeHide() {
+            if (!details.classList.contains('pinned')) {
+                details._hideTimer = setTimeout(function() {
+                    details.style.display = 'none';
+                }, 120);
+            }
+        }
+
+        // Hover: show while over title or details row
+        li.addEventListener('mouseenter', showDetails);
+        li.addEventListener('mouseleave', maybeHide);
+        details.addEventListener('mouseenter', showDetails);
+        details.addEventListener('mouseleave', maybeHide);
+
+        // Click: pin / unpin
         li.addEventListener('click', function(e) {
             if (e.target.closest('a, .coauthor')) return;
-            var details = li.nextElementSibling;
-            if (!details || !details.classList.contains('details')) return;
-            var visible = details.style.display === 'block';
-            if (visible) {
+            if (details.classList.contains('pinned')) {
+                details.classList.remove('pinned');
                 details.style.display = 'none';
                 var hideEl = details.nextElementSibling;
                 if (hideEl && hideEl.classList.contains('hide')) {
@@ -1086,6 +1096,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (collapse) $(collapse).collapse('hide');
                 }
             } else {
+                details.classList.add('pinned');
                 details.style.display = 'block';
             }
         });
