@@ -3,108 +3,125 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dual Affine Robinson–Schensted — interactive</title>
+<title>Dual Affine Robinson&ndash;Schensted</title>
 <style>
-  :root{
-    --bg:#ffffff; --ink:#15171a; --muted:#6b7280; --line:#e6e7ea;
-    --card:#fbfbfc; --accent:#0072B2; --good:#0a7d33; --bad:#b00020;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.5}
-  .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
-  h1{font-size:20px;margin:0 0 2px;font-weight:700}
-  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
-  .sub a{color:var(--accent)}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
-  input[type=text]{font:inherit;padding:8px 11px;border:1px solid var(--line);border-radius:8px;
-    width:260px;background:#fff;color:var(--ink)}
-  input[type=text]:focus{outline:2px solid #cfe6f3;border-color:var(--accent)}
-  button{font:inherit;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;
-    color:var(--ink);cursor:pointer}
-  button:hover{background:#f3f4f6}
-  .chip{padding:5px 9px;font-size:12px;border-radius:999px;background:#f1f3f5;border:1px solid var(--line)}
-  .chip:hover{background:#e7eaee}
-  label.opt{font-size:12px;color:var(--muted);display:inline-flex;gap:5px;align-items:center;cursor:pointer}
-  .msg{min-height:20px;font-size:13px;margin:4px 0 14px}
-  .msg.err{color:var(--bad)}
-  .msg.ok{color:var(--muted)}
-  .grid{display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start}
-  @media(max-width:880px){.grid{grid-template-columns:1fr}}
-  .card{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:16px}
-  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 12px}
-  .row{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
-  .blk{margin-bottom:14px}
-  .blk .t{font-size:12px;color:var(--muted);margin-bottom:5px}
-  .tabloid{display:inline-block}
-  .trow{display:flex;gap:0;margin-bottom:3px}
-  .cell{width:28px;height:28px;display:flex;align-items:center;justify-content:center;
-    border:1.6px solid #999;border-right:none;font-weight:700;background:#fff}
-  .trow .cell:last-child{border-right:1.6px solid #999}
-  .young{display:inline-block}
-  .yrow{display:flex}
-  .yc{width:15px;height:15px;border:1px solid #c2c4c8;background:#eef0f2}
-  .kv{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;margin-top:2px}
-  .kv b{font-weight:700}
-  .pill{padding:2px 8px;border-radius:6px;background:#eef2f5;font-size:12px}
-  .pill.good{background:#e7f6ec;color:var(--good)}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 10px}
-  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-  .diagwrap{position:relative;overflow:auto;max-height:620px;border:1px solid var(--line);border-radius:8px;background:#fff}
-  .diagram{display:block}
-  .sl{transition:opacity .08s,stroke-width .08s;cursor:pointer}
-  .diagram.hovering .sl{opacity:.13}
-  .diagram.hovering .sl.hl{opacity:1;stroke-width:3.6}
-  .tip{position:fixed;pointer-events:none;background:#15171a;color:#fff;padding:5px 8px;border-radius:6px;
-    font-size:12px;opacity:0;transition:opacity .1s;z-index:9;white-space:nowrap}
-  .foot{margin-top:18px;font-size:12px;color:var(--muted)}
-  .selftest{font-size:12px}
-  .selftest.ok{color:var(--good)} .selftest.bad{color:var(--bad)}
-  .lambdatab{font-size:12px;border-collapse:collapse;margin-top:6px}
-  .lambdatab td,.lambdatab th{padding:2px 8px;text-align:left;border-bottom:1px solid var(--line)}
-  .lambdatab tr.stable td{font-weight:700;color:var(--accent)}
-  code{background:#f1f3f5;padding:1px 5px;border-radius:5px}
+ :root{--bg:#fff;--ink:#16181b;--muted:#6b7280;--line:#e6e7ea;--card:#fbfbfc;--accent:#0072B2;--good:#0a7d33;--bad:#b00020}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55}
+ .wrap{max-width:1200px;margin:0 auto;padding:22px 20px 70px}
+ .top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+ h1{font-size:21px;margin:0;font-weight:700}
+ .modeswitch{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-left:auto}
+ .modeswitch button{border:none;border-radius:0;padding:8px 16px;background:#fff;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;font-size:13px}
+ .modeswitch button.active{background:var(--accent);color:#fff}
+ .modeswitch button:not(.active):hover{background:#f3f4f6}
+ .sub{color:var(--muted);font-size:13px;margin:6px 0 16px}
+ .sub a{color:var(--accent)}
+ .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:8px}
+ input[type=text]{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;width:200px;background:#fff;color:var(--ink)}
+ input[type=text]:focus{outline:2px solid #cfe6f3;border-color:var(--accent)}
+ button{font:inherit;padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);cursor:pointer}
+ button:hover{background:#f3f4f6}
+ .chip{padding:5px 9px;font-size:12px;border-radius:999px;background:#f1f3f5;border:1px solid var(--line)}
+ .chip:hover{background:#e7eaee}
+ label.opt{font-size:12px;color:var(--muted);display:inline-flex;gap:5px;align-items:center;cursor:pointer}
+ .err{min-height:20px;font-size:13px;margin:2px 0 12px;color:var(--bad)}
+ .view{display:none}.view.active{display:block}
+ /* cards / tabloids shared */
+ .card{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:16px}
+ .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 12px}
+ .tab{display:inline-block}.trow{display:flex}
+ .cell{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:1.6px solid #999;border-right:none;font-weight:700;transition:border-color .5s ease,color .5s ease}
+ .trow .cell:last-child{border-right:1.6px solid #999}
+ .young{display:inline-block}.yrow{display:flex}
+ .yc{width:15px;height:15px;border:1px solid #c2c4c8;background:#eef0f2}
+ .kv{display:flex;gap:6px;flex-wrap:wrap;font-size:13px;margin-top:2px}
+ .pill{padding:2px 8px;border-radius:6px;background:#eef2f5;font-size:12px;display:inline-block;margin:2px 4px 2px 0}
+ .pill.good{background:#e7f6ec;color:var(--good)}
+ .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 10px}
+ .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;transition:background .5s ease}
+ .blk{margin-bottom:14px}.blk .t{font-size:12px;color:var(--muted);margin-bottom:5px}
+ .row{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+ .lambdatab{font-size:12px;border-collapse:collapse;margin-top:6px}
+ .lambdatab td,.lambdatab th{padding:2px 8px;text-align:left;border-bottom:1px solid var(--line)}
+ .lambdatab tr.stable td{font-weight:700;color:var(--accent)}
+ code{background:#f1f3f5;padding:1px 5px;border-radius:5px}
+ .sl{transition:stroke .5s ease,opacity .08s,stroke-width .08s;cursor:pointer}
+ .stage svg text,.diagwrap svg text{transition:fill .5s ease}
+ svg.hoverable.hovering .sl{opacity:.13}
+ svg.hoverable.hovering .sl.hl{opacity:1;stroke-width:3.6}
+ .tip{position:fixed;pointer-events:none;background:#16181b;color:#fff;padding:5px 8px;border-radius:6px;font-size:12px;opacity:0;transition:opacity .1s;z-index:9;white-space:nowrap}
+ /* calc layout */
+ .grid{display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start}
+ @media(max-width:900px){.grid{grid-template-columns:1fr}}
+ .diagwrap{position:relative;overflow:auto;max-height:620px;border:1px solid var(--line);border-radius:8px;background:#fff}
+ /* illus layout */
+ .steps{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+ .step{display:flex;gap:9px;align-items:center;padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+ .step .num{width:22px;height:22px;border-radius:50%;background:#eef0f2;color:#555;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none}
+ .step .lab{font-size:13px}.step.active{border-color:var(--accent);background:#f2f9fd}
+ .step.active .num{background:var(--accent);color:#fff}.step .lab small{color:var(--muted);display:block;font-size:11px}
+ .nav{display:flex;gap:8px;align-items:center;margin-left:auto}
+ .main{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+ @media(max-width:900px){.main{grid-template-columns:1fr}}
+ .stage{border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px;overflow:auto;max-height:70vh}
+ .stage svg{display:block;margin:0 auto}
+ .panel{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:16px}
+ .panel h2{font-size:14px;margin:0 0 8px}.panel p{margin:0 0 10px;color:#2b2f33}.panel .k{color:var(--muted)}
+ .out{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px}
+ .foot{margin-top:16px;font-size:12px;color:var(--muted)} .foot.bad{color:var(--bad)} .foot.ok{color:var(--good)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Dual Affine Robinson–Schensted</h1>
-  <div class="sub">An interactive calculator for the map
-    <code>w &#8614; (P&#772;, Q&#772;, &#955;, N&#8320;)</code> of Huang &amp; Zhang
-    (<a href="https://arxiv.org/abs/2605.20383" target="_blank" rel="noopener">arXiv:2605.20383</a>).
-    Type the window of an extended affine permutation.</div>
-
-  <div class="controls">
-    <input id="win" type="text" value="10, 3, -3, 12" autocomplete="off" spellcheck="false"
-           aria-label="affine permutation window">
-    <button id="rand">Random</button>
-    <span style="width:8px"></span>
-    <button class="chip" data-ex="10, 3, -3, 12">paper [10,3,&#8722;3,12]</button>
-    <button class="chip" data-ex="4, 1, -2, 7">[4,1,&#8722;2,7]</button>
-    <button class="chip" data-ex="3, 1, 4, 2">finite [3,1,4,2]</button>
-    <button class="chip" data-ex="2, 0, 6, 4, -2">[2,0,6,4,&#8722;2]</button>
-    <button class="chip" data-ex="5">[5]</button>
-    <span style="flex:1"></span>
-    <label class="opt"><input type="checkbox" id="optBoundary" checked> west labels</label>
-    <label class="opt"><input type="checkbox" id="optEdges"> edge labels</label>
-  </div>
-  <div id="msg" class="msg ok"></div>
-
-  <div class="grid">
-    <div class="card" id="result"></div>
-    <div class="card">
-      <h2>Affine growth diagram</h2>
-      <div class="legend" id="legend"></div>
-      <div class="diagwrap" id="diagwrap"><div id="diag"></div></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:8px">
-        Hover a shadow line to highlight it. Marks <b>&#9679;</b> are tiles with <code>w(j)=i</code>;
-        the bold box is the first stable window <code>&#937;<sub>N&#8320;</sub></code>.</div>
+  <div class="top">
+    <h1>Dual Affine Robinson&ndash;Schensted</h1>
+    <div class="modeswitch">
+      <button data-mode="calc" class="active">Calculation mode</button>
+      <button data-mode="illus">Illustration mode</button>
     </div>
   </div>
+  <div class="sub" id="sub"></div>
 
-  <div class="foot">
-    Tabloid row <i>r</i> is drawn in the colour of shadow-line colour <i>r</i> — the same colour as in
-    the diagram. <span id="selftest" class="selftest"></span>
+  <div class="controls">
+    <span class="k" style="color:var(--muted)">w =</span>
+    <input id="win" type="text" value="10, 3, -3, 12" autocomplete="off" spellcheck="false" aria-label="affine permutation window">
+    <button id="rand">Random</button>
+    <button class="chip" data-ex="10, 3, -3, 12">paper [10,3,&#8722;3,12]</button>
+    <button class="chip" data-ex="5, 4, 3">[5,4,3]</button>
+    <button class="chip" data-ex="4, 3, 2">[4,3,2]</button>
+    <button class="chip" data-ex="2, 0, 6, 4, -2">[2,0,6,4,&#8722;2]</button>
+    <button class="chip" data-ex="3, 2">[3,2]</button>
+    <span id="calcopts" style="display:inline-flex;gap:12px;margin-left:4px">
+      <label class="opt"><input type="checkbox" id="optBoundary" checked> west labels</label>
+      <label class="opt"><input type="checkbox" id="optEdges"> edge labels</label>
+    </span>
+  </div>
+  <div id="err" class="err"></div>
+
+  <!-- ===== Calculation mode ===== -->
+  <div id="calc" class="view active">
+    <div class="grid">
+      <div class="card" id="calc-result"></div>
+      <div class="card">
+        <h2>Affine growth diagram</h2>
+        <div class="legend" id="clegend"></div>
+        <div class="diagwrap"><div id="cdiag"></div></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">
+          Hover a shadow line to highlight it. Marks <b>&#9679;</b> are tiles with <code>w(j)=i</code>;
+          the bold box is the first stable window <code>&#937;<sub>N&#8320;</sub></code>.</div>
+      </div>
+    </div>
+    <div class="foot" id="cfoot"></div>
+  </div>
+
+  <!-- ===== Illustration mode ===== -->
+  <div id="illus" class="view">
+    <div class="steps" id="steps"></div>
+    <div class="main">
+      <div class="stage"><div id="idiag">&nbsp;</div></div>
+      <div class="panel" id="panel"></div>
+    </div>
   </div>
 </div>
 <div class="tip" id="tip"></div>
@@ -379,63 +396,117 @@
   var PALETTE = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#117733", "#882255", "#999999", "#440154"];
   function colorHex(c) { return PALETTE[(c - 1) % PALETTE.length]; }
 
+  // Layered SVG renderer. Options:
+  //   scale, marks(bool), windows(bool),
+  //   edgeLabels: 'none'|'full'|'faint',  shadow: 'none'|'mono'|'color',
+  //   boundary(bool, west colour/label column), monoColor.
+  // Back-compat: showLabels -> boundary, showEdges -> edgeLabels:'full'.
   function svgDiagram(ap, opts) {
     opts = opts || {};
-    var scale = opts.scale || 22, showLabels = opts.showLabels !== false, showEdges = !!opts.showEdges;
+    var scale = opts.scale || 22;
+    var showMarks = opts.marks !== false;
+    var showWindows = opts.windows !== false;
+    var edgeLabels = opts.edgeLabels || (opts.showEdges ? 'full' : 'none');
+    var shadow = opts.shadow || 'color';
+    var boundary = (opts.boundary !== undefined) ? opts.boundary
+      : (opts.showLabels !== false && shadow === 'color');
+    var mono = opts.monoColor || '#5b6168';
+    // revealVars: paint colour-c strokes/labels with var(--rvC, mono) so the page
+    // can fade colours in one at a time by setting --rv1, --rv2, ... in turn.
+    var revealVars = !!opts.revealVars;
+
     var res = dualAffineRS(ap), D = res.diagram, N0 = res.N0, n = ap.n;
     var imin = D.i_top, imax = (N0 + 1) * n, jmax = 1;
     for (var i = imin; i <= imax; i++) for (var j = 0; j <= D.j_right; j++) if ((D.V[key(i, j)] || 0) || (D.H[key(i, j)] || 0)) jmax = Math.max(jmax, j);
     var jmin = 0; jmax = jmax + 1;
-    var padLeft = 4, pad = 1.2;
+    var padLeft = boundary ? 4 : 1.7, pad = 1.2;
     var W = (jmax - jmin + padLeft + pad) * scale, Hh = (imax - imin + 2 * pad) * scale;
     function X(j) { return (j - jmin + padLeft) * scale; }
     function Y(i) { return (i - imin + pad) * scale; }
     var out = [];
     out.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W.toFixed(0) + '" height="' + Hh.toFixed(0) + '" viewBox="0 0 ' + W.toFixed(0) + ' ' + Hh.toFixed(0) + '" font-family="ui-monospace,Menlo,monospace">');
     out.push('<rect width="' + W.toFixed(0) + '" height="' + Hh.toFixed(0) + '" fill="var(--bg,#fff)"/>');
-    for (j = jmin; j <= jmax; j++) out.push('<line x1="' + X(j).toFixed(1) + '" y1="' + Y(imin).toFixed(1) + '" x2="' + X(j).toFixed(1) + '" y2="' + Y(imax).toFixed(1) + '" stroke="#e8e8e8"/>');
-    for (i = imin; i <= imax; i++) out.push('<line x1="' + X(jmin).toFixed(1) + '" y1="' + Y(i).toFixed(1) + '" x2="' + X(jmax).toFixed(1) + '" y2="' + Y(i).toFixed(1) + '" stroke="#e8e8e8"/>');
+    for (j = jmin; j <= jmax; j++) out.push('<line x1="' + X(j).toFixed(1) + '" y1="' + Y(imin).toFixed(1) + '" x2="' + X(j).toFixed(1) + '" y2="' + Y(imax).toFixed(1) + '" stroke="#e9eaec"/>');
+    for (i = imin; i <= imax; i++) out.push('<line x1="' + X(jmin).toFixed(1) + '" y1="' + Y(i).toFixed(1) + '" x2="' + X(jmax).toFixed(1) + '" y2="' + Y(i).toFixed(1) + '" stroke="#e9eaec"/>');
     // windows
-    var mlo = Math.floor(imin / n), mhi = N0 + 1;
-    for (var m = mlo; m <= mhi; m++) {
-      var top = (m - 1) * n, bot = m * n; if (bot <= imin || top >= imax) continue;
-      var stable = (m === N0), col = stable ? "#111" : "#9aa0a6", swd = stable ? 2 : 1;
-      var yT = Y(Math.max(top, imin)), yB = Y(Math.min(bot, imax));
-      out.push('<rect x="' + X(0).toFixed(1) + '" y="' + yT.toFixed(1) + '" width="' + (X(n) - X(0)).toFixed(1) + '" height="' + (yB - yT).toFixed(1) + '" fill="none" stroke="' + col + '" stroke-width="' + swd + '"/>');
-      if (top >= imin && top + n <= imax + 1)
-        out.push('<text x="' + (X(0) - 6).toFixed(1) + '" y="' + (Y((top + bot) / 2) + 4).toFixed(1) + '" text-anchor="end" font-size="' + (0.62 * scale).toFixed(0) + '" fill="' + col + '">Ω' + sub(m) + (stable ? "★" : "") + '</text>');
-    }
-    var r = 0.5, swl = 2.2;
-    function seg(x1, y1, x2, y2, c, lid) { out.push('<line class="sl" data-line="' + lid + '" x1="' + x1.toFixed(2) + '" y1="' + y1.toFixed(2) + '" x2="' + x2.toFixed(2) + '" y2="' + y2.toFixed(2) + '" stroke="' + colorHex(c) + '" stroke-width="' + swl + '" stroke-linecap="round"/>'); }
-    function arc(x1, y1, x2, y2, cx, cy, c, lid) { var sweep = ((x2 - x1) * (cy - y1) - (y2 - y1) * (cx - x1)) < 0 ? 1 : 0; out.push('<path class="sl" data-line="' + lid + '" d="M ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A ' + (r * scale).toFixed(2) + ' ' + (r * scale).toFixed(2) + ' 0 0 ' + sweep + ' ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + '" fill="none" stroke="' + colorHex(c) + '" stroke-width="' + swl + '" stroke-linecap="round"/>'); }
-    for (i = imin + 1; i <= imax; i++) for (j = 1; j <= jmax; j++) {
-      var nL = D.H[key(i - 1, j)] || 0, sL = D.H[key(i, j)] || 0, wL = D.V[key(i, j - 1)] || 0, eL = D.V[key(i, j)] || 0;
-      var marked = (ap.call(j) === i);
-      if (!(nL || sL || wL || eL) && !marked) continue;
-      var nmx = X(j - 0.5), nmy = Y(i - 1), smx = X(j - 0.5), smy = Y(i), wmx = X(j - 1), wmy = Y(i - 0.5), emx = X(j), emy = Y(i - 0.5), cx = X(j - 0.5), cy = Y(i - 0.5);
-      if (marked) {
-        var lid0 = D.lineIdOfEdge("H," + i + "," + j);
-        arc(wmx, wmy, smx, smy, cx, cy, D.colorOfEdge("H," + i + "," + j), lid0);
-        out.push('<circle cx="' + cx.toFixed(2) + '" cy="' + cy.toFixed(2) + '" r="' + (0.13 * scale).toFixed(2) + '" fill="var(--ink,#111)"/>');
-      } else if (nL === eL && nL !== 0) {
-        arc(nmx, nmy, emx, emy, cx, cy, D.colorOfEdge("H," + (i - 1) + "," + j), D.lineIdOfEdge("H," + (i - 1) + "," + j));
-        arc(wmx, wmy, smx, smy, cx, cy, D.colorOfEdge("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
-      } else if (nL !== eL) {
-        if (nL) seg(nmx, nmy, smx, smy, D.colorOfEdge("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
-        if (eL) seg(wmx, wmy, emx, emy, D.colorOfEdge("V," + i + "," + j), D.lineIdOfEdge("V," + i + "," + j));
-      }
-      if (showEdges) {
-        if (sL) out.push('<text x="' + smx.toFixed(1) + '" y="' + (smy - 1).toFixed(1) + '" text-anchor="middle" font-size="' + (0.32 * scale).toFixed(0) + '" fill="#888">' + sL + '</text>');
+    if (showWindows) {
+      var mlo = Math.floor(imin / n), mhi = N0 + 1;
+      for (var m = mlo; m <= mhi; m++) {
+        var top = (m - 1) * n, bot = m * n; if (bot <= imin || top >= imax) continue;
+        var stable = (m === N0), col = stable ? "#111" : "#aab0b6", swd = stable ? 2 : 1;
+        var yT = Y(Math.max(top, imin)), yB = Y(Math.min(bot, imax));
+        out.push('<rect x="' + X(0).toFixed(1) + '" y="' + yT.toFixed(1) + '" width="' + (X(n) - X(0)).toFixed(1) + '" height="' + (yB - yT).toFixed(1) + '" fill="none" stroke="' + col + '" stroke-width="' + swd + '"/>');
+        if (top >= imin && top + n <= imax + 1)
+          out.push('<text x="' + (X(0) - (boundary ? 16 : 5)).toFixed(1) + '" y="' + (Y((top + bot) / 2) + 4).toFixed(1) + '" text-anchor="end" font-size="' + (0.55 * scale).toFixed(0) + '" fill="' + col + '">Ω' + sub(m) + (stable ? "★" : "") + '</text>');
       }
     }
-    if (showLabels) {
-      for (i = imin + 1; i <= imax; i++) { var lab = D.V[key(i, 0)] || 0; if (lab) out.push('<text x="' + (X(0) - 22).toFixed(1) + '" y="' + (Y(i - 0.5) + 4).toFixed(1) + '" text-anchor="end" font-size="' + (0.42 * scale).toFixed(0) + '" fill="' + colorHex(D.colorOfEdge("V," + i + ",0")) + '">' + lab + '</text>'); }
+    // shadow lines
+    var r = 0.5, swl = 2.4;
+    function seg(x1, y1, x2, y2, hex, lid) { out.push('<line class="sl" data-line="' + lid + '" x1="' + x1.toFixed(2) + '" y1="' + y1.toFixed(2) + '" x2="' + x2.toFixed(2) + '" y2="' + y2.toFixed(2) + '" stroke="' + hex + '" stroke-width="' + swl + '" stroke-linecap="round"/>'); }
+    function arc(x1, y1, x2, y2, cx, cy, hex, lid) { var sweep = ((x2 - x1) * (cy - y1) - (y2 - y1) * (cx - x1)) < 0 ? 1 : 0; out.push('<path class="sl" data-line="' + lid + '" d="M ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A ' + (r * scale).toFixed(2) + ' ' + (r * scale).toFixed(2) + ' 0 0 ' + sweep + ' ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + '" fill="none" stroke="' + hex + '" stroke-width="' + swl + '" stroke-linecap="round"/>'); }
+    function shex(edge) { if (shadow !== 'color') return mono; var c = D.colorOfEdge(edge); return revealVars ? ('var(--rv' + c + ',' + mono + ')') : colorHex(c); }
+    if (shadow !== 'none') {
+      for (i = imin + 1; i <= imax; i++) for (j = 1; j <= jmax; j++) {
+        var nL = D.H[key(i - 1, j)] || 0, eL = D.V[key(i, j)] || 0;
+        var marked = (ap.call(j) === i);
+        var nmx = X(j - 0.5), nmy = Y(i - 1), smx = X(j - 0.5), smy = Y(i), wmx = X(j - 1), wmy = Y(i - 0.5), emx = X(j), emy = Y(i - 0.5), cx = X(j - 0.5), cy = Y(i - 0.5);
+        if (marked) {
+          arc(wmx, wmy, smx, smy, cx, cy, shex("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
+        } else if (nL === eL && nL !== 0) {
+          arc(nmx, nmy, emx, emy, cx, cy, shex("H," + (i - 1) + "," + j), D.lineIdOfEdge("H," + (i - 1) + "," + j));
+          arc(wmx, wmy, smx, smy, cx, cy, shex("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
+        } else if (nL !== eL) {
+          if (nL) seg(nmx, nmy, smx, smy, shex("H," + i + "," + j), D.lineIdOfEdge("H," + i + "," + j));
+          if (eL) seg(wmx, wmy, emx, emy, shex("V," + i + "," + j), D.lineIdOfEdge("V," + i + "," + j));
+        }
+      }
+    }
+    // marks (drawn on top of shadow lines)
+    if (showMarks) {
+      for (i = imin + 1; i <= imax; i++) for (j = 1; j <= jmax; j++) if (ap.call(j) === i)
+        out.push('<circle cx="' + X(j - 0.5).toFixed(2) + '" cy="' + Y(i - 0.5).toFixed(2) + '" r="' + (0.15 * scale).toFixed(2) + '" fill="var(--ink,#111)"/>');
+    }
+    // edge labels (on top, with white halo)
+    if (edgeLabels !== 'none') {
+      var ecol = edgeLabels === 'faint' ? '#aeb4ba' : '#2b2f33';
+      var efs = (0.30 * scale).toFixed(1);
+      function elab(x, y, v) {
+        out.push('<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" text-anchor="middle" dominant-baseline="central" font-size="' + efs + '" paint-order="stroke" stroke="var(--bg,#fff)" stroke-width="3" fill="' + ecol + '">' + v + '</text>');
+      }
+      for (i = imin; i <= imax; i++) for (j = 1; j <= jmax; j++) { var hl = D.H[key(i, j)] || 0; if (hl) elab(X(j - 0.5), Y(i), hl); }
+      for (i = imin + 1; i <= imax; i++) for (j = 0; j <= jmax; j++) { var vl = D.V[key(i, j)] || 0; if (vl) elab(X(j), Y(i - 0.5), vl); }
+    }
+    // west boundary colour labels
+    if (boundary) {
+      for (i = imin + 1; i <= imax; i++) {
+        var lab = D.V[key(i, 0)] || 0; if (!lab) continue;
+        var bc = D.colorOfEdge("V," + i + ",0");
+        var bf = revealVars ? ('var(--rv' + bc + ',#aab0b6)') : colorHex(bc);
+        out.push('<text x="' + (X(0) - 6).toFixed(1) + '" y="' + (Y(i - 0.5) + 4).toFixed(1) + '" text-anchor="end" font-size="' + (0.4 * scale).toFixed(0) + '" fill="' + bf + '">' + lab + '</text>');
+      }
     }
     out.push('</svg>');
-    // per-shadow-line info (constant label + colour) keyed by line id
     var lineInfo = {};
     for (var rootk in D.members) { try { lineInfo[rootk] = { label: D.compLabel[rootk], color: D.colorOfRoot(rootk) }; } catch (e) { } }
     return { svg: out.join("\n"), res: res, region: { imin: imin, imax: imax, jmax: jmax }, lineInfo: lineInfo };
+  }
+
+  // The four construction stages, as render-option presets.
+  var STAGE_OPTS = [
+    { marks: true, windows: true, edgeLabels: 'none', shadow: 'none', boundary: false },
+    { marks: true, windows: true, edgeLabels: 'full', shadow: 'none', boundary: false },
+    { marks: true, windows: true, edgeLabels: 'faint', shadow: 'mono', boundary: false },
+    { marks: true, windows: true, edgeLabels: 'none', shadow: 'color', boundary: true }
+  ];
+  function svgStage(ap, stage, opts) {
+    opts = opts || {};
+    var p = {}, src = STAGE_OPTS[stage] || STAGE_OPTS[3];
+    for (var k in src) p[k] = src[k];
+    if (opts.scale) p.scale = opts.scale;
+    if (opts.edgeLabels) p.edgeLabels = opts.edgeLabels;
+    if (opts.shadow) p.shadow = opts.shadow;
+    if (opts.revealVars) p.revealVars = true;
+    return svgDiagram(ap, p);
   }
   var SUB = "₀₁₂₃₄₅₆₇₈₉";
   function sub(k) { return String(k).split("").map(function (d) { return d === "-" ? "₋" : SUB[+d]; }).join(""); }
@@ -445,160 +516,169 @@
   root.DARS = {
     AffinePerm: AffinePerm, dualAffineRS: dualAffineRS, dualAffineRSInverse: dualAffineRSInverse,
     findFirstStableWindow: findFirstStableWindow, firstFullWindow: firstFullWindow, lambdaM: lambdaM,
-    GrowthDiagram: GrowthDiagram, svgDiagram: svgDiagram, partStr: partStr, colorHex: colorHex,
+    GrowthDiagram: GrowthDiagram, svgDiagram: svgDiagram, svgStage: svgStage, partStr: partStr, colorHex: colorHex,
     PALETTE: PALETTE, sub: sub, trim: trim, diffComposition: diffComposition, isPartition: isPartition, eqArr: eqArr
   };
 })(typeof globalThis !== "undefined" ? globalThis : this);
 
 </script>
-
 <script>
 (function(){
-  "use strict";
-  var $=function(s){return document.querySelector(s);};
-  var winEl=$("#win"), msg=$("#msg"), result=$("#result"), diag=$("#diag"),
-      legend=$("#legend"), tip=$("#tip"), diagram=null, lineInfo=null;
+ "use strict";
+ var $=function(s){return document.querySelector(s);};
+ var winEl=$("#win"), err=$("#err"), tip=$("#tip"), sub=$("#sub");
+ var mode='calc', stage=0, lineInfo=null, res=null, revTimers=[];
 
-  function parseWindow(s){
-    var parts=s.trim().split(/[\s,]+/).filter(function(x){return x.length;});
-    if(!parts.length) throw new Error("enter a window, e.g. 10, 3, -3, 12");
-    return parts.map(function(x){
-      if(!/^-?\d+$/.test(x)) throw new Error("not an integer: \""+x+"\"");
-      return parseInt(x,10);
-    });
-  }
+ // ---------- shared helpers ----------
+ function parseWindow(s){
+  var parts=s.trim().split(/[\s,]+/).filter(function(x){return x.length;});
+  if(!parts.length) throw new Error("enter a window, e.g. 10, 3, -3, 12");
+  return parts.map(function(x){ if(!/^-?\d+$/.test(x)) throw new Error("not an integer: \""+x+"\""); return parseInt(x,10); });
+ }
+ function getAP(){ return new DARS.AffinePerm(parseWindow(winEl.value)); }
+ function tooBig(ap){ var fs=DARS.findFirstStableWindow(ap), Wmin=Math.min.apply(null,ap.w); return (fs.N0+1)*ap.n-(Wmin-1)>320; }
+ function tabHTML(rows,reveal){ if(!rows||!rows.length) return '<span style="color:var(--muted)">&#8709;</span>';
+  var h='<div class="tab">'; for(var r=0;r<rows.length;r++){ var col=reveal?('var(--rv'+(r+1)+',#c9cdd1)'):DARS.colorHex(r+1);
+   h+='<div class="trow">'+rows[r].map(function(v){return '<div class="cell" style="border-color:'+col+';color:'+col+'">'+v+'</div>';}).join("")+'</div>'; }
+  return h+'</div>'; }
+ function youngHTML(lam){ if(!lam.length) return '<span style="color:var(--muted)">&#8709;</span>';
+  var h='<div class="young">'; for(var r=0;r<lam.length;r++){ h+='<div class="yrow">'; for(var c=0;c<lam[r];c++) h+='<div class="yc"></div>'; h+='</div>'; } return h+'</div>'; }
+ function lambdaTable(w,N0){ var Nf=DARS.firstFullWindow(w),lam={},rows="";
+  for(var m=Nf;m<=N0+2;m++) lam[m]=DARS.lambdaM(w,m);
+  for(var m2=Nf;m2<=N0;m2++){ var mu=DARS.diffComposition(lam[m2+1],lam[m2]), mu2=DARS.diffComposition(lam[m2+2],lam[m2+1]);
+   var st=DARS.isPartition(mu)&&DARS.eqArr(mu,mu2);
+   rows+='<tr class="'+(m2===N0?'stable':'')+'"><td>'+m2+'</td><td>'+DARS.partStr(lam[m2])+'</td><td>'+DARS.partStr(mu)+'</td><td>'+(st?'yes &#9664;':'no')+'</td></tr>'; }
+  return '<table class="lambdatab"><tr><th>m</th><th>&#955;<sup>m</sup></th><th>&#956;<sup>m</sup></th><th>stable?</th></tr>'+rows+'</table>'; }
 
-  function cell(v,color){ return '<div class="cell" style="border-color:'+color+';color:'+color+'">'+v+'</div>'; }
-  function tabloidHTML(rows){
-    if(!rows.length) return '<span style="color:var(--muted)">&#8709;</span>';
-    var h='<div class="tabloid">';
-    for(var r=0;r<rows.length;r++){
-      var color=DARS.colorHex(r+1);
-      h+='<div class="trow">'+rows[r].map(function(v){return cell(v,color);}).join("")+'</div>';
-    }
-    return h+'</div>';
-  }
-  function youngHTML(lam){
-    if(!lam.length) return '<span style="color:var(--muted)">&#8709;</span>';
-    var h='<div class="young">';
-    for(var r=0;r<lam.length;r++){ h+='<div class="yrow">'; for(var c=0;c<lam[r];c++) h+='<div class="yc"></div>'; h+='</div>'; }
-    return h+'</div>';
-  }
-  function lambdaTable(w,N0){
-    var Nf=DARS.firstFullWindow(w), lam={}, rows="";
-    for(var m=Nf;m<=N0+1;m++) lam[m]=DARS.lambdaM(w,m);
-    for(var m2=Nf;m2<=N0;m2++){
-      var mu=DARS.diffComposition(lam[m2+1],lam[m2]);
-      var mu2=DARS.diffComposition(lam[m2+2]||DARS.lambdaM(w,m2+2),lam[m2+1]);
-      var stable=DARS.isPartition(mu)&&DARS.eqArr(mu,mu2);
-      rows+='<tr class="'+(m2===N0?'stable':'')+'"><td>'+m2+'</td><td>'+DARS.partStr(lam[m2])+
-            '</td><td>'+DARS.partStr(mu)+'</td><td>'+(stable?'yes &#9664;':'no')+'</td></tr>';
-    }
-    return '<table class="lambdatab"><tr><th>m</th><th>&#955;<sup>m</sup></th>'+
-           '<th>&#956;<sup>m</sup>=&#955;<sup>m+1</sup>&#8722;&#955;<sup>m</sup></th><th>stable?</th></tr>'+rows+'</table>';
-  }
+ function wireHover(svg){
+  svg.addEventListener('mousemove',function(ev){
+   var lid=ev.target&&ev.target.getAttribute&&ev.target.getAttribute('data-line');
+   if(lid){ if(svg.__lid!==lid){ svg.classList.add('hovering');
+      var all=svg.querySelectorAll('.sl'); for(var i=0;i<all.length;i++) all[i].classList.toggle('hl',all[i].getAttribute('data-line')===lid); svg.__lid=lid; }
+     var inf=lineInfo&&lineInfo[lid];
+     if(inf){ tip.style.opacity='1'; tip.textContent='shadow line · '+(inf.color?('colour '+inf.color+' · '):'')+'label '+inf.label;
+       tip.style.left=(ev.clientX+12)+'px'; tip.style.top=(ev.clientY+12)+'px'; } } else clear(); });
+  svg.addEventListener('mouseleave',clear);
+  function clear(){ svg.classList.remove('hovering'); svg.__lid=null; tip.style.opacity='0';
+    var a=svg.querySelectorAll('.sl.hl'); for(var i=0;i<a.length;i++) a[i].classList.remove('hl'); }
+ }
 
-  function renderResult(w,res){
-    var n=w.n, ok=true, back="";
-    try{ var b=DARS.dualAffineRSInverse(res.Pbar,res.Qbar,res.lam,res.N0,n); ok=(JSON.stringify(b.w)===JSON.stringify(w.w)); back=b.windowStr(); }
-    catch(e){ ok=false; back="error"; }
-    var idxRel=DARS.partStr(res.lam)+', |&#955;|='+res.lam.reduce(function(a,b){return a+b;},0)+
-      ' = n(N&#8320;&#8722;2)&#8722;i = '+n+'&#183;'+(res.N0-2)+'&#8722;'+res.index+' = '+(n*(res.N0-2)-res.index);
-    result.innerHTML=
-      '<h2>RS('+w.windowStr().replace(/-/g,'&#8722;')+')</h2>'+
-      '<div class="kv" style="margin-bottom:14px"><span class="pill">index i = '+res.index+'</span>'+
-        '<span class="pill">&#956; = shape = '+DARS.partStr(res.mu)+'</span>'+
-        '<span class="pill">N&#8320; = '+res.N0+'</span></div>'+
-      '<div class="row">'+
-        '<div class="blk"><div class="t">P&#772; (east boundary)</div>'+tabloidHTML(res.Pbar)+'</div>'+
-        '<div class="blk"><div class="t">Q&#772; (north boundary)</div>'+tabloidHTML(res.Qbar)+'</div>'+
-      '</div>'+
-      '<div class="blk"><div class="t">&#955; = '+DARS.partStr(res.lam)+'</div>'+youngHTML(res.lam)+'</div>'+
-      '<div class="blk"><div class="t">stable-window search</div>'+lambdaTable(w,res.N0)+'</div>'+
-      '<div class="kv"><span class="pill">'+idxRel+'</span></div>'+
-      '<div class="kv" style="margin-top:8px"><span class="pill '+(ok?'good':'')+'">'+
-        'RS&#8224; recovers w: '+back.replace(/-/g,'&#8722;')+(ok?' &#10003;':' &#10007;')+'</span></div>';
-  }
+ // ---------- Calculation mode ----------
+ function renderCalc(){
+  var w; try{ w=getAP(); }catch(e){ err.textContent=e.message; return; }
+  if(tooBig(w)){ err.textContent="diagram too large to render interactively; try smaller shifts."; return; }
+  err.textContent="";
+  var out; try{ out=DARS.svgDiagram(w,{scale:20,showLabels:$("#optBoundary").checked,showEdges:$("#optEdges").checked}); }
+  catch(e){ err.textContent="error: "+e.message; return; }
+  res=out.res; lineInfo=out.lineInfo;
+  // result card
+  var n=w.n, ok=true, back="";
+  try{ var b=DARS.dualAffineRSInverse(res.Pbar,res.Qbar,res.lam,res.N0,n); ok=(JSON.stringify(b.w)===JSON.stringify(w.w)); back=b.windowStr(); }catch(e){ ok=false; back="error"; }
+  $("#calc-result").innerHTML=
+   '<h2>RS('+w.windowStr().replace(/-/g,'&#8722;')+')</h2>'+
+   '<div class="kv" style="margin-bottom:14px"><span class="pill">index i = '+res.index+'</span>'+
+     '<span class="pill">&#956; = '+DARS.partStr(res.mu)+'</span><span class="pill">N&#8320; = '+res.N0+'</span></div>'+
+   '<div class="row"><div class="blk"><div class="t">P&#772; (east boundary)</div>'+tabHTML(res.Pbar,false)+'</div>'+
+     '<div class="blk"><div class="t">Q&#772; (north boundary)</div>'+tabHTML(res.Qbar,false)+'</div></div>'+
+   '<div class="blk"><div class="t">&#955; = '+DARS.partStr(res.lam)+'</div>'+youngHTML(res.lam)+'</div>'+
+   '<div class="blk"><div class="t">stable-window search</div>'+lambdaTable(w,res.N0)+'</div>'+
+   '<div class="kv"><span class="pill">|&#955;| = n(N&#8320;&#8722;2)&#8722;i = '+sum(res.lam)+'</span></div>'+
+   '<div class="kv" style="margin-top:8px"><span class="pill '+(ok?'good':'')+'">RS&#8224; recovers w: '+back.replace(/-/g,'&#8722;')+(ok?' &#10003;':' &#10007;')+'</span></div>';
+  // legend + diagram
+  var leg=''; for(var c=1;c<=res.diagram.N;c++) leg+='<span><i style="background:'+DARS.colorHex(c)+'"></i>colour '+c+'</span>';
+  $("#clegend").innerHTML=leg||'<span>(no shadow lines)</span>';
+  $("#cdiag").innerHTML=out.svg;
+  var svg=$("#cdiag").querySelector('svg'); if(svg){ svg.classList.add('hoverable'); wireHover(svg); }
+  $("#cfoot").className='foot'; $("#cfoot").textContent='w ∈ Ŝ'+DARS.sub(n)+'^('+res.index+'),  N₀ = '+res.N0+',  '+res.diagram.N+' shadow-line colour(s).';
+ }
+ function sum(a){var s=0;for(var i=0;i<a.length;i++)s+=a[i];return s;}
 
-  function renderLegend(N){
-    var h="";
-    for(var c=1;c<=N;c++) h+='<span><i style="background:'+DARS.colorHex(c)+'"></i>colour '+c+'</span>';
-    legend.innerHTML=h||'<span>(no shadow lines)</span>';
-  }
+ // ---------- Illustration mode ----------
+ var STEPS=[{t:"The affine permutation",s:"marks (rock diagram)"},{t:"Edge-label growth diagram",s:"the dual growth rule"},
+   {t:"Shadow lines",s:"connect equal labels"},{t:"Colour the shadow lines",s:"read off P&#772;, Q&#772;, &lambda;, N&#8320;"}];
+ function tileSVG(p){ return '<svg width="64" height="64" viewBox="0 0 64 64" style="vertical-align:middle"><rect x="8" y="8" width="48" height="48" fill="none" stroke="#cfd2d6"/>'+p+'</svg>'; }
+ function el(x,y,t){ return '<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2b2f33">'+t+'</text>'; }
+ var G="#5b6168";
+ var RULE='<div class="rule" style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin:10px 0">'+
+   '<div style="text-align:center">'+tileSVG(el(32,4,"0")+el(60,32,"0")+el(32,60,"0")+el(4,32,"0"))+'<div class="k">empty</div></div>'+
+   '<div style="text-align:center">'+tileSVG('<path d="M8 32 A24 24 0 0 1 32 56" fill="none" stroke="'+G+'" stroke-width="2.4"/><circle cx="32" cy="32" r="4" fill="#111"/>'+el(32,4,"0")+el(60,32,"0")+el(32,60,"1")+el(4,32,"1"))+'<div class="k">mark&nbsp; 0,0&#8594;1,1</div></div>'+
+   '<div style="text-align:center">'+tileSVG('<line x1="32" y1="8" x2="32" y2="56" stroke="'+G+'" stroke-width="2.4"/><line x1="8" y1="32" x2="56" y2="32" stroke="'+G+'" stroke-width="2.4"/>'+el(32,4,"2")+el(60,32,"3")+el(32,60,"2")+el(5,32,"3"))+'<div class="k">cross&nbsp; a&#8800;b</div></div>'+
+   '<div style="text-align:center">'+tileSVG('<path d="M32 8 A24 24 0 0 0 56 32" fill="none" stroke="'+G+'" stroke-width="2.4"/><path d="M8 32 A24 24 0 0 1 32 56" fill="none" stroke="'+G+'" stroke-width="2.4"/>'+el(32,4,"2")+el(60,32,"2")+el(32,60,"3")+el(5,32,"3"))+'<div class="k">bump&nbsp; a&#8594;a+1</div></div>'+
+   '</div>';
+ var TILES='<div class="tiles" style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin:10px 0">'+
+   '<div style="text-align:center">'+tileSVG('<line x1="32" y1="8" x2="32" y2="56" stroke="'+G+'" stroke-width="2.4"/><line x1="8" y1="32" x2="56" y2="32" stroke="'+G+'" stroke-width="2.4"/>')+'<div class="k">cross: pass straight</div></div>'+
+   '<div style="text-align:center">'+tileSVG('<path d="M32 8 A24 24 0 0 0 56 32" fill="none" stroke="'+G+'" stroke-width="2.4"/><path d="M8 32 A24 24 0 0 1 32 56" fill="none" stroke="'+G+'" stroke-width="2.4"/>')+'<div class="k">bump: two elbows</div></div>'+
+   '<div style="text-align:center">'+tileSVG('<path d="M8 32 A24 24 0 0 1 32 56" fill="none" stroke="'+G+'" stroke-width="2.4"/><circle cx="32" cy="32" r="4" fill="#111"/>')+'<div class="k">mark: a line is born</div></div></div>';
 
-  function compute(){
-    var s=winEl.value, w;
-    try{ w=new DARS.AffinePerm(parseWindow(s)); }
-    catch(e){ msg.className="msg err"; msg.textContent=e.message; return; }
-    // guard against pathologically large diagrams
-    try{
-      var fs=DARS.findFirstStableWindow(w);
-      var Wmin=Math.min.apply(null,w.w);
-      var rows=(fs.N0+1)*w.n-(Wmin-1);
-      if(rows>320){ msg.className="msg err"; msg.textContent="diagram too large to draw interactively (N₀="+fs.N0+"); try smaller shifts."; return; }
-    }catch(e){ msg.className="msg err"; msg.textContent=e.message; return; }
+ function panelHTML(w){
+  if(stage===0) return '<h2>1 &middot; The affine permutation</h2>'+
+    '<p>In matrix coordinates (row <i>i</i> down, column <i>j</i> right), put a mark <b>&#9679;</b> in tile <code>(i,j)</code> exactly when <code>w(j)=i</code>.</p>'+
+    '<p class="k">The window <code>['+w.w.join(", ")+']</code> gives <code>w(1..'+w.n+')</code>; the picture repeats with period <i>n</i> along the diagonal, <code>w(j+n)=w(j)+n</code>. Columns <code>1..'+w.n+'</code> are one standard window.</p>'+
+    '<p class="k">index <code>i = '+w.index()+'</code>.</p>';
+  if(stage===1) return '<h2>2 &middot; Edge-label growth diagram</h2>'+
+    '<p>Every edge far to the north/east starts at <code>0</code>. Sweep southwest: each tile turns its (north,&nbsp;east) labels into (south,&nbsp;west) by the <b>dual growth rule</b>.</p>'+RULE+
+    '<p class="k">A label is the <b>column</b> into which a box is inserted.</p>';
+  if(stage===2) return '<h2>3 &middot; Shadow lines</h2>'+
+    '<p>Inside each tile, join the two edges with the <b>same label</b>. This makes the <b>shadow lines</b>; each keeps a single label.</p>'+TILES+
+    '<p class="k">Hover a line to highlight it. A line of label <code>a+1</code> is <b>repelled</b> by the line of label <code>a</code> they share at a bump.</p>';
+  var leg=''; for(var c=1;c<=res.diagram.N;c++) leg+='<span><i style="background:var(--rv'+c+',#c9cdd1)"></i>colour '+c+'</span>';
+  return '<h2>4 &middot; Colour the shadow lines</h2>'+
+   '<p>There are at most <i>n</i> lines labelled <code>1</code>; order them northeast&#8594;southwest to get colours <code>1..N</code>. Following the repelling chains, every line inherits a colour. Watch the colours go in one at a time:</p>'+
+   '<div class="legend">'+leg+'</div>'+
+   '<div style="margin:2px 0 12px"><button id="replay">&#8635; Replay</button> <span id="cprog" class="k" style="margin-left:8px"></span></div>'+
+   '<p>Read the result off the first stable window <code>&#937;<sub>'+res.N0+'</sub>&#9733;</code>:</p>'+
+   '<div class="out"><div><div class="k">P&#772; (east)</div>'+tabHTML(res.Pbar,true)+'</div><div><div class="k">Q&#772; (north)</div>'+tabHTML(res.Qbar,true)+'</div></div>'+
+   '<div style="margin-top:10px"><span class="pill">&lambda; = '+DARS.partStr(res.lam)+'</span><span class="pill">N&#8320; = '+res.N0+'</span><span class="pill">&mu; = '+DARS.partStr(res.mu)+'</span></div>';
+ }
+ function renderSteps(){
+  $("#steps").innerHTML=STEPS.map(function(s,k){ return '<div class="step'+(k===stage?' active':'')+'" data-k="'+k+'"><div class="num">'+(k+1)+'</div><div class="lab">'+s.t+'<small>'+s.s+'</small></div></div>'; }).join("")+
+   '<div class="nav"><button id="prev">&#8592; Prev</button><button id="next">Next &#8594;</button></div>';
+  $("#steps").querySelectorAll('.step').forEach(function(e){ e.onclick=function(){ stage=+e.getAttribute('data-k'); renderIllus(); }; });
+  $("#prev").onclick=function(){ stage=(stage+3)%4; renderIllus(); };
+  $("#next").onclick=function(){ stage=(stage+1)%4; renderIllus(); };
+ }
+ function clearColours(){ var host=$("#illus"); for(var c=1;c<=9;c++) host.style.removeProperty('--rv'+c); revTimers.forEach(clearTimeout); revTimers=[]; }
+ function revealColours(N){ clearColours(); var host=$("#illus"), prog=$("#cprog"); if(prog) prog.textContent='0 / '+N+' colours';
+  for(var k=1;k<=N;k++){ (function(k){ revTimers.push(setTimeout(function(){ host.style.setProperty('--rv'+k,DARS.colorHex(k)); if(prog) prog.textContent=k+' / '+N+' colours'+(k===N?'  ✓':''); }, 400+(k-1)*750)); })(k); } }
+ function renderIllus(){
+  var w; try{ w=getAP(); }catch(e){ err.textContent=e.message; return; }
+  if(tooBig(w)){ err.textContent="diagram too large to illustrate; try smaller shifts."; return; }
+  err.textContent="";
+  var fs=DARS.findFirstStableWindow(w), Wmin=Math.min.apply(null,w.w);
+  var scale=Math.max(20,Math.min(54, 620/((fs.N0+1)*w.n-(Wmin-1)+4)));
+  var out=DARS.svgStage(w,stage,{scale:scale, revealVars: stage===3});
+  res=out.res; lineInfo=out.lineInfo;
+  $("#idiag").innerHTML=out.svg;
+  var svg=$("#idiag").querySelector('svg'); if(stage>=2&&svg){ svg.classList.add('hoverable'); wireHover(svg); }
+  $("#panel").innerHTML=panelHTML(w); renderSteps();
+  if(stage===3&&svg){ var rb=$("#replay"); if(rb) rb.onclick=function(){ revealColours(res.diagram.N); }; revealColours(res.diagram.N); }
+  else clearColours();
+ }
 
-    var out;
-    try{ out=DARS.svgDiagram(w,{scale:20,showLabels:$("#optBoundary").checked,showEdges:$("#optEdges").checked}); }
-    catch(e){ msg.className="msg err"; msg.textContent="error: "+e.message; return; }
-    msg.className="msg ok"; msg.textContent="w ∈ Ŝ"+sub(w.n)+"^("+out.res.index+"),  N₀ = "+out.res.N0+",  "+out.res.diagram.N+" shadow-line colour(s).";
-    diagram=out.res.diagram; lineInfo=out.lineInfo;
-    renderResult(w,out.res);
-    renderLegend(out.res.diagram.N);
-    diag.innerHTML=out.svg;
-    var svg=diag.querySelector("svg"); if(svg){ svg.classList.add("diagram"); wireHover(svg); }
-  }
-  function sub(k){ return DARS.sub(k); }
+ // ---------- mode + events ----------
+ function setMode(m){ mode=m; clearColours();
+  document.querySelectorAll('.modeswitch button').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-mode')===m); });
+  $("#calc").classList.toggle('active',m==='calc'); $("#illus").classList.toggle('active',m==='illus');
+  $("#calcopts").style.display = m==='calc' ? 'inline-flex' : 'none';
+  sub.innerHTML = m==='calc'
+    ? 'Compute <code>w &#8614; (P&#772;, Q&#772;, &lambda;, N&#8320;)</code> of Huang &amp; Zhang (<a href="https://arxiv.org/abs/2605.20383" target="_blank" rel="noopener">arXiv:2605.20383</a>). Type a window; everything updates live.'
+    : 'Walk through the construction stage by stage. <span class="k">Tip: a small window such as [5,4,3] keeps the edge labels legible.</span>';
+  render();
+ }
+ function render(){ if(mode==='calc') renderCalc(); else renderIllus(); }
 
-  function wireHover(svg){
-    svg.addEventListener("mousemove",function(ev){
-      var t=ev.target, lid=t&&t.getAttribute&&t.getAttribute("data-line");
-      if(lid){
-        if(svg.__lid!==lid){
-          svg.classList.add("hovering");
-          var all=svg.querySelectorAll(".sl");
-          for(var i=0;i<all.length;i++) all[i].classList.toggle("hl",all[i].getAttribute("data-line")===lid);
-          svg.__lid=lid;
-        }
-        var inf=lineInfo&&lineInfo[lid];
-        if(inf){ tip.style.opacity="1"; tip.textContent="shadow line · colour "+inf.color+" · label "+inf.label;
-          tip.style.left=(ev.clientX+12)+"px"; tip.style.top=(ev.clientY+12)+"px"; }
-      }else{ clearHover(svg); }
-    });
-    svg.addEventListener("mouseleave",function(){ clearHover(svg); });
-  }
-  function clearHover(svg){ svg.classList.remove("hovering"); svg.__lid=null; tip.style.opacity="0";
-    var all=svg.querySelectorAll(".sl.hl"); for(var i=0;i<all.length;i++) all[i].classList.remove("hl"); }
+ var timer=null;
+ winEl.addEventListener('input',function(){ clearTimeout(timer); timer=setTimeout(render,120); });
+ $("#optBoundary").addEventListener('change',render); $("#optEdges").addEventListener('change',render);
+ document.querySelectorAll('.chip').forEach(function(b){ b.onclick=function(){ winEl.value=b.getAttribute('data-ex'); render(); }; });
+ $("#rand").onclick=function(){ var n=2+Math.floor(Math.random()*4),base=[]; for(var i=1;i<=n;i++)base.push(i);
+   for(var k=n-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=base[k];base[k]=base[j];base[j]=t;}
+   winEl.value=base.map(function(v){return v+n*(Math.floor(Math.random()*5)-1);}).join(", "); render(); };
+ document.querySelectorAll('.modeswitch button').forEach(function(b){ b.onclick=function(){ setMode(b.getAttribute('data-mode')); }; });
+ document.addEventListener('keydown',function(e){ if(mode!=='illus') return;
+   if(e.key==='ArrowRight'){ stage=(stage+1)%4; renderIllus(); } else if(e.key==='ArrowLeft'){ stage=(stage+3)%4; renderIllus(); } });
 
-  // events
-  var timer=null;
-  winEl.addEventListener("input",function(){ clearTimeout(timer); timer=setTimeout(compute,120); });
-  $("#optBoundary").addEventListener("change",compute);
-  $("#optEdges").addEventListener("change",compute);
-  document.querySelectorAll(".chip").forEach(function(b){ b.addEventListener("click",function(){ winEl.value=b.getAttribute("data-ex"); compute(); }); });
-  $("#rand").addEventListener("click",function(){
-    var n=2+Math.floor(Math.random()*5), base=[]; for(var i=1;i<=n;i++) base.push(i);
-    for(var k=n-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var tmp=base[k];base[k]=base[j];base[j]=tmp; }
-    var win=base.map(function(v){ return v+n*(Math.floor(Math.random()*6)-2); });
-    winEl.value=win.join(", "); compute();
-  });
-
-  // built-in self-test (mirrors the Python ground truth)
-  (function(){
-    var st=$("#selftest"), pass=true, detail="";
-    try{
-      var w=new DARS.AffinePerm([10,3,-3,12]); var r=DARS.dualAffineRS(w);
-      var okPaper=JSON.stringify(r.Pbar)==="[[1,3],[2],[4]]"&&JSON.stringify(r.Qbar)==="[[1,2],[3],[4]]"&&JSON.stringify(r.lam)==="[6,6,5]"&&r.N0===7;
-      // round-trip on a few
-      var trips=[[4,1,-2,7],[3,1,4,2],[2,0,6,4,-2],[5]];
-      var allTrip=trips.every(function(win){ var ww=new DARS.AffinePerm(win); var rr=DARS.dualAffineRS(ww);
-        var bb=DARS.dualAffineRSInverse(rr.Pbar,rr.Qbar,rr.lam,rr.N0,ww.n); return JSON.stringify(bb.w)===JSON.stringify(win); });
-      pass=okPaper&&allTrip; detail=pass?"self-test passed (paper example + round-trips)":"self-test FAILED";
-    }catch(e){ pass=false; detail="self-test error: "+e.message; }
-    st.className="selftest "+(pass?"ok":"bad"); st.textContent="· "+detail+(pass?" ✓":" ✗");
-  })();
-
-  compute();
+ setMode('calc');
 })();
 </script>
 </body>
