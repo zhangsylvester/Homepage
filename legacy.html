@@ -49,8 +49,7 @@
 <style>
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-      color: #222;
+      font-family: Arial, sans-serif;
     }
     .main-content {
       width: 100%;
@@ -61,24 +60,17 @@
       box-sizing: border-box;
       width: 100%;
       margin: 0;
-      padding: 32px 56px;
-      scroll-margin-top: 100px;
-    }
-    section p, section li {
-      font-size: 14px;
-      line-height: 1.8;
-      color: #444;
+      padding: 20px 40px;
+      scroll-margin-top: 100px; /* Adjust based on your navbar height */
     }
     section:nth-child(odd) {
-      background: #ffffff;
-      color: #222;
+      background:#F0FFFF;
+     
+      color: black;
     }
     section:nth-child(even) {
-      background: #ffffff;
-      color: #222;
-    }
-    #content section {
-      border-top: 1px solid #efefef;
+      background: white;
+      color: black;
     }
     .skip {
       background: white;
@@ -103,9 +95,8 @@
         color:#3f4042;
     }
     #content a:hover {
-        text-shadow: none;
-        text-decoration: underline;
-        text-underline-offset: 2px;
+        text-shadow: 0.618px 0.618px var(--color2);
+        text-decoration: none;
     }
     #content a:hover i{
         text-shadow: none;
@@ -118,21 +109,11 @@
         color: black;
     }
     #content h1 {
-      font-size: 17px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #1a1a2e;
-      margin-bottom: 1.2em;
+      font-size: 18pt;
     }
     #content h2 {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #999;
-      margin-top: 1.6em;
-      margin-bottom: 0.8em;
+      font-size: 14pt;
+      text-decoration: italic;
     }
 
 ul.papers li.title a:link{
@@ -186,16 +167,15 @@ ul.papers li.title a:link{
     }
 
     .secondary-name {
-      font-size: 1.5em;
+      font-size: 1.8em;
       margin: 0.3em 0 8px 0;
       font-weight: 400;
-      color: #7a8fa6;
+      color: #1d4c87;
     }
     .details {
       margin: 0.25em 0;
-      font-size: 0.9em;
-      color: #999;
-      letter-spacing: 0.04em;
+      font-size: 1em;
+      color: #1d4c87;
     }
     .bottom-nav {
       display: flex;
@@ -212,20 +192,17 @@ ul.papers li.title a:link{
     .bottom-nav a {
       margin: 0 15px;
       text-decoration: none;
-      font-size: 0.72em;
-      color: #bbb;
-      font-weight: 400;
+      font-size: 0.9em;
+      color: #85b8db;
+      font-weight: 200;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
       transition: color 0.3s ease;
-      padding-bottom: 3px;
     }
 
     .bottom-nav a:hover, .bottom-nav a.active {
       text-decoration: none;
-      color: #1a1a2e;
-      font-weight: 400;
-      border-bottom: 1.5px solid #1a1a2e;
+      color: #1d4c87;
+      font-weight: bold;
     }
     #about {
       display: flex;
@@ -271,34 +248,23 @@ ul.papers li.title a:link{
   transform: rotate(90deg);
 }
 
+.papers a.collapse_all[data-transformed="true"] i {
 
-#papers-h1-toggle,
-.section-toggle {
+    transform: rotate(45deg);
+}
+
+
+a.collapse_all span{
+    display: none;
+}
+a.collapse_all {
     cursor: pointer;
-    position: relative;
 }
-#papers-h1-toggle::after,
-.section-toggle::after {
-    content: 'click me ✦';
-    font-weight: 400;
-    color: #bbb;
-    letter-spacing: 0.1em;
-    text-transform: lowercase;
-    margin-left: 7px;
+a.collapse_all:hover span{
+    display: inline-block;
+    font-size:15px;
     vertical-align: middle;
-    opacity: 0;
-    transition: opacity 0.25s;
-    font-style: italic;
-}
-#papers-h1-toggle::after {
-    font-size: 8px;
-}
-.section-toggle::after {
-    font-size: 7px;
-}
-#papers-h1-toggle:hover::after,
-.section-toggle:hover::after {
-    opacity: 1;
+    padding-bottom: 5px;
 }
 
 ul.papers{
@@ -316,71 +282,32 @@ ul.papers li.details {
 ul.papers li.details a.abs-btn{
     display:inline-block;
     width: 100px;
-    font-size: 12px;
+    font-size: 11pt;
 }
 
 ul.papers li.details a.arxiv{
     display:inline-block;
     width: 145px;
-    font-size: 12px;
+    font-size: 11pt;
 }
 
 ul.papers li.details a.journal{
     display:inline-block;
-    font-size: 12px;
+    width: flex;
+    font-size: 11pt;
 }
+
+
 
 ul.papers li.title{
-    list-style-type: none;
-    padding-top: 8px;
-    padding-bottom: 1px;
-    font-size: 13px;
-    line-height: 1.4;
-    color: #222;
-}
-
-ul.papers li.hide + li.title {
-    border-top: 1px solid #efefef;
-    margin-top: 2px;
-}
-
-ul.papers li.details {
-    padding-left: 0px;
-    padding-bottom: 1px;
-    display: none;
-}
-ul.papers li.title[data-coauthors] {
-    cursor: pointer;
-}
-ul.papers li.title[data-coauthors]:hover strong {
-    color: var(--color1);
-}
-
-ul.papers li.details a.abs-btn,
-ul.papers li.details a.arxiv,
-ul.papers li.details a.journal {
-    font-size: 11px;
+    /* padding-left: 15px; */
+    list-style-type: disc;
 }
 
 ul.papers li.hide{
-    list-style-type: none;
-    padding-bottom: 2px;
-    margin: 0px;
-}
-
-.coauthor {
-    cursor: pointer;
-}
-.coauthor:hover {
-    text-decoration: underline;
-    text-decoration-style: dotted;
-    text-underline-offset: 2px;
-}
-ul.papers li.title {
-    transition: opacity 0.2s;
-}
-ul.papers li.title.co-dimmed {
-    opacity: 0.2;
+    list-style-type:none;
+    padding-bottom:10px;
+    margin:0px;
 }
 
 <!--Top Nav-->
@@ -528,7 +455,12 @@ ul.papers li.title.co-dimmed {
       </p>
     </section>
     <section id="papers">
-      <h1><span id="papers-h1-toggle">Papers</span></h1>
+      <h1>Papers
+        <a id="collapse-all" class="collapse_all" role="button" data-transformed="false" onclick="openAll()">
+            <i class="fas fa-plus"></i>
+            <span>Show Abstracts</span>
+        </a>
+      </h1>
       <h2><span class="section-toggle" data-section="preprints">Preprints</span></h2>
 
       <ul class="papers">
@@ -824,7 +756,7 @@ ul.papers li.title.co-dimmed {
       <p>
         The content of this website is current as of January 2024.
       </p>
-      <p><a href="legacy.html">← View legacy style</a></p>
+      <p><a href="index.html">← Switch to new style</a></p>
     </section>
   </div>
 </div>
@@ -1106,6 +1038,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+</script>
+
+<script>
+    var elems = document.getElementsByClassName("collapse");
+    function openAll() {
+        $('.collapse').collapse('show');
+        document.getElementById("collapse-all").setAttribute("onClick","javascript: closeAll();");
+        document.getElementById("collapse-all").setAttribute("data-transformed","true");
+        document.getElementById("collapse-all").innerHTML = "<i style='transform:rotate(45deg); transition: all 0.6s;' class='fas fa-plus'></i> <span>Hide Abstracts</span>";
+    }
+    function closeAll() {
+        $('.collapse').collapse('hide');
+        document.getElementById("collapse-all").setAttribute("onClick","javascript: openAll();");
+        document.getElementById("collapse-all").innerHTML = "<i class='fas fa-plus'></i> <span>Show Abstracts</span>";
+        document.getElementById("collapse-all").setAttribute("data-transformed","false");
+    }
 </script>
 
 </body>
