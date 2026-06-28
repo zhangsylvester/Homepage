@@ -1078,9 +1078,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Hover: show while over title or details row
-        li.addEventListener('mouseenter', showDetails);
-        li.addEventListener('mouseleave', maybeHide);
+        // Hover: show while over the paper title (strong) or the details row
+        var strong = li.querySelector('strong');
+        if (strong) {
+            strong.addEventListener('mouseenter', showDetails);
+            strong.addEventListener('mouseleave', maybeHide);
+        }
         details.addEventListener('mouseenter', showDetails);
         details.addEventListener('mouseleave', maybeHide);
 
