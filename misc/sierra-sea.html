@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sierra &amp; Sea — 10 Road Trip Loops from Culver City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root{
+  --ink:#17170f;
+  --paper:#fbfaf5;
+  --panel:#f0eee5;
+  --line:#d8d5c8;
+  --forest:#29513b;
+  --sequoia:#8a4a2f;
+  --granite:#6e7378;
+  --golden:#c2932e;
+  --pacific:#2f6b86;
+  --sign:#1e5b3a;
+  --display:'Archivo',sans-serif;
+  --body:'Public Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+
+/* ---------- sticky nav ---------- */
+nav{position:sticky;top:0;z-index:2000;background:var(--ink);display:flex;align-items:center;gap:6px;padding:10px 16px;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+nav .brand{font-family:var(--display);font-weight:900;font-stretch:75%;color:var(--paper);font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin-right:10px;flex:none}
+nav a{flex:none;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--paper);text-decoration:none;border:1px solid rgba(251,250,245,.35);padding:4px 10px;border-radius:3px;transition:background .15s,color .15s}
+nav a:hover,nav a:focus-visible{background:var(--paper);color:var(--ink);outline:none}
+nav .navsep{color:rgba(251,250,245,.4);font-family:var(--mono);font-size:12px;flex:none}
+
+/* ---------- cover ---------- */
+.cover{max-width:1060px;margin:0 auto;padding:0 20px}
+.cover-band{background:var(--ink);color:var(--paper);margin:28px 0 0;padding:34px 34px 30px;position:relative}
+.cover-band .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--golden);margin-bottom:14px}
+.cover-band h1{font-family:var(--display);font-weight:900;font-stretch:80%;font-size:clamp(40px,7vw,84px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em}
+.cover-band .sub{margin-top:16px;font-size:17px;max-width:640px;color:#e6e4da}
+.cover-band .rangerline{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--mono);font-size:12.5px;color:#bdbaa9}
+.cover-note{border:2px solid var(--ink);border-top:none;padding:18px 24px;font-size:14.5px;background:var(--panel)}
+.cover-note strong{font-weight:700}
+
+/* comparison table */
+.compare-wrap{margin:34px 0 8px;overflow-x:auto;border:2px solid var(--ink)}
+table.compare{width:100%;border-collapse:collapse;font-size:13.5px;min-width:860px;background:#fff}
+table.compare caption{caption-side:top;text-align:left;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:800;font-stretch:80%;text-transform:uppercase;letter-spacing:.08em;font-size:15px;padding:10px 14px}
+table.compare th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:9px 12px;background:var(--panel);border-bottom:2px solid var(--ink);color:#4c4a3f}
+table.compare td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.compare tr:last-child td{border-bottom:none}
+table.compare td.code a{font-family:var(--mono);font-weight:600;color:#fff;text-decoration:none;display:inline-block;padding:3px 8px;border-radius:3px}
+table.compare td.rt{font-weight:600}
+table.compare tr:hover td{background:#f6f4ea}
+
+/* ---------- option pages ---------- */
+.page{max-width:1060px;margin:56px auto 0;padding:0 20px}
+.page-inner{border:2px solid var(--ink);background:#fff}
+.band{background:var(--ink);color:var(--paper);display:flex;align-items:stretch;flex-wrap:wrap;gap:0;border-bottom:5px solid var(--accent,var(--forest))}
+.band .code{font-family:var(--display);font-weight:900;font-size:clamp(34px,4.5vw,52px);font-stretch:78%;padding:18px 22px;background:var(--accent,var(--forest));display:flex;align-items:center;line-height:1}
+.band .titleblock{padding:16px 22px;flex:1 1 320px;min-width:260px;display:flex;flex-direction:column;justify-content:center}
+.band .titleblock h2{font-family:var(--display);font-weight:900;font-stretch:82%;font-size:clamp(22px,3.4vw,34px);text-transform:uppercase;line-height:1.02;letter-spacing:.005em}
+.band .titleblock .route{font-family:var(--mono);font-size:12px;color:#c9c6b6;margin-top:6px;letter-spacing:.04em}
+.band .meta{display:flex;align-items:center;gap:0;margin-left:auto}
+.band .meta div{padding:14px 18px;border-left:1px solid rgba(251,250,245,.22);text-align:center}
+.band .meta .num{font-family:var(--display);font-weight:900;font-size:24px;line-height:1}
+.band .meta .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#bdbaa9;margin-top:3px}
+
+.pagebody{padding:26px 28px 30px}
+.why{border-left:5px solid var(--accent,var(--forest));background:var(--panel);padding:14px 18px;font-size:15px;margin-bottom:22px}
+.why b{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:5px;color:var(--accent,var(--forest))}
+.dogbox{border:1.5px dashed var(--accent,var(--forest));background:#fff;padding:12px 16px;font-size:14px;margin:-8px 0 22px;border-radius:4px}
+.dogbox b{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:4px;color:var(--accent,var(--forest))}
+.dognote{border-top:none}
+
+/* stat row */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border:1.5px solid var(--ink);margin-bottom:24px}
+.stats .st{padding:12px 14px;border-right:1px solid var(--line)}
+.stats .st:last-child{border-right:none}
+.stats .st .v{font-family:var(--display);font-weight:800;font-stretch:85%;font-size:19px;line-height:1.15}
+.stats .st .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--granite);margin-top:3px}
+
+/* photo strip */
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px}
+.photos figure{margin:0}
+.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:1.5px solid var(--ink);background:var(--panel)}
+.photos figcaption{font-family:var(--mono);font-size:11px;line-height:1.45;margin-top:6px;color:#3f3d33}
+.photos figcaption .cr{display:block;color:#9a978a;font-size:9.5px;margin-top:1px}
+.strip-title{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--granite);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.strip-title::after{content:"";flex:1;height:1px;background:var(--line)}
+.section-gap{margin-top:26px}
+
+/* map */
+.mapbox{border:2px solid var(--ink)}
+.map{height:430px;width:100%;background:var(--panel)}
+.mapcap{font-family:var(--mono);font-size:11px;padding:7px 12px;background:var(--panel);border-top:1.5px solid var(--ink);color:#4c4a3f}
+
+/* day plans */
+.day{border:1.5px solid var(--ink);margin-bottom:16px;background:#fff}
+.dayhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;background:var(--accent,var(--forest));color:#fff;padding:10px 16px}
+.dayhead .dnum{font-family:var(--display);font-weight:900;font-stretch:80%;font-size:18px;text-transform:uppercase;letter-spacing:.03em}
+.dayhead .dtitle{font-weight:700;font-size:15.5px}
+.dayhead .ddrive{margin-left:auto;font-family:var(--mono);font-size:11.5px;background:rgba(0,0,0,.28);padding:3px 10px;border-radius:3px;letter-spacing:.05em}
+.entries{padding:6px 0}
+.entry{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:9px 16px;border-bottom:1px dashed var(--line)}
+.entry:last-child{border-bottom:none}
+.entry .t{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent,var(--forest));padding-top:2px;white-space:nowrap}
+.entry .x{font-size:14.5px}
+.entry .x b{font-weight:700}
+.entry .x .dur{font-family:var(--mono);font-size:11px;color:var(--granite);white-space:nowrap}
+.entry.drive{background:#f4f6f2}
+.drivechip{display:inline-flex;align-items:center;gap:8px;background:var(--sign);color:#fff;font-family:var(--mono);font-size:12px;font-weight:600;padding:4px 12px;border-radius:5px;border:1.5px solid #143f28;letter-spacing:.03em}
+.drivechip::before{content:"▸";font-size:11px}
+
+/* lodging + expect */
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.panelbox{border:1.5px solid var(--ink);background:var(--panel);padding:16px 18px}
+.panelbox h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;color:var(--ink);display:flex;gap:8px;align-items:center}
+.panelbox h4 .sw{width:12px;height:12px;background:var(--accent,var(--forest));display:inline-block;flex:none}
+.panelbox ul{list-style:none}
+.panelbox li{font-size:13.8px;padding:5px 0 5px 16px;position:relative;border-bottom:1px dotted var(--line)}
+.panelbox li:last-child{border-bottom:none}
+.panelbox li::before{content:"—";position:absolute;left:0;color:var(--accent,var(--forest));font-weight:700}
+.panelbox li b{font-weight:700}
+
+/* footer */
+footer{max-width:1060px;margin:56px auto 40px;padding:0 20px}
+.footbox{border-top:5px solid var(--ink);padding-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--granite);line-height:1.7}
+
+@media (max-width:760px){
+  .photos{grid-template-columns:repeat(2,1fr)}
+  .twocol{grid-template-columns:1fr}
+  .band .meta{width:100%;border-top:1px solid rgba(251,250,245,.22)}
+  .band .meta div{flex:1;border-left:none;border-right:1px solid rgba(251,250,245,.22)}
+  .pagebody{padding:18px 16px 22px}
+  .entry{grid-template-columns:64px 1fr;gap:10px;padding:9px 12px}
+  .map{height:340px}
+}
+@media print{
+  nav{display:none}
+  .page{page-break-before:always;margin-top:0}
+  .cover{page-break-after:always}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<nav aria-label="Jump to option">
+  <span class="brand">Sierra &amp; Sea</span>
+  <a href="#top">Cover</a>
+  <span class="navsep">4-day:</span>
+  <a href="#opt-4a">4A</a><a href="#opt-4b">4B</a><a href="#opt-4c">4C</a><a href="#opt-4d">4D</a><a href="#opt-4e">4E</a>
+  <span class="navsep">3-day:</span>
+  <a href="#opt-3a">3A</a><a href="#opt-3b">3B</a><a href="#opt-3c">3C</a><a href="#opt-3d">3D</a><a href="#opt-3e">3E</a>
+</nav>
+
+<header class="cover" id="top">
+  <div class="cover-band">
+    <div class="kicker">Trip Dossier · Culver City → Giant Sequoias → Home · July 2026</div>
+    <h1>Sierra &amp; Sea</h1>
+    <div class="sub">Ten ways to loop from Culver City to the giant sequoias and back — five 4-day routes and five 3-day routes, every day tuned to 4–6 hours behind the wheel. Sequoia National Park is the anchor of all ten; the variable is what you pair with it: Yosemite, the Kings Canyon gorge, the Central Coast, the Kern River backcountry, or an Ojai wind-down.</div>
+    <div class="rangerline">
+      <span>NO YOSEMITE ENTRY RESERVATION IN 2026 — FEE STILL APPLIES</span>
+      <span>VALLEY PARKING FULL BY ~7:30 AM</span>
+      <span>MIDWEEK ≫ WEEKEND</span>
+      <span>$80 ANNUAL PASS COVERS EVERY PARK HERE</span>
+    </div>
+  </div>
+  <div class="cover-note">
+    <strong>Book-now checklist:</strong> lodging in Three Rivers and Oakhurst (July weekends genuinely sell out) · a digital park entrance pass on Recreation.gov · Hearst Castle tour if you pick 4C · Kern raft trip if you pick 4D/3D · check NPS road &amp; trail alerts the week you go (Crystal Cave tours and CA-190 status change year to year). No gas is sold inside any park — fill up in Visalia, Fresno, or Oakhurst.
+  </div>
+  <div class="cover-note dognote">
+    <strong>🐾 Traveling with the Maltese — the one rule that shapes everything:</strong> the national parks (Sequoia, Kings Canyon, Yosemite) ban dogs on <em>all</em> trails — leashed pets are limited to paved roads, campgrounds, picnic areas and viewpoint pullouts, and can never be left in a parked car (it's 100°F in the foothills). The national <em>forest</em> is the loophole: the <strong>Trail of 100 Giants and Dome Rock welcome leashed dogs among the sequoias</strong>. Every option below carries a paw-print verdict; <strong>4E is built dog-first</strong>, and 4D, 3D and 3E are the friendliest of the rest. One July hazard worth knowing: foxtails in dry grass are a real danger to a 10-lb dog's paws, ears and nose — stick to paved paths and check the pup after walks.
+  </div>
+
+  <div class="compare-wrap">
+  <table class="compare">
+    <caption>The ten options at a glance</caption>
+    <thead><tr>
+      <th>Code</th><th>Route</th><th>Nights</th><th>Total drive</th><th>Sequoia time</th><th>Yosemite</th><th>Ocean</th><th>Crowds</th><th>Best for</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="code"><a href="#opt-4a" style="background:#29513b">4A</a></td><td class="rt">The Grand Loop — Sequoia → Kings Canyon → Yosemite</td><td>3</td><td>≈18 hr</td><td>Full day +</td><td>Full day</td><td>—</td><td>High (Yosemite)</td><td>First-timers who want every icon</td></tr>
+      <tr><td class="code"><a href="#opt-4b" style="background:#8a4a2f">4B</a></td><td class="rt">The Reverse Loop — Yosemite first, Sequoia last</td><td>3</td><td>≈17 hr</td><td>Full day</td><td>1.5 days</td><td>—</td><td>High (Yosemite)</td><td>Anyone who dreads a long final slog</td></tr>
+      <tr><td class="code"><a href="#opt-4c" style="background:#2f6b86">4C</a></td><td class="rt">Trees &amp; Sea — Sequoia → Paso Robles → Cambria/Morro Bay → Solvang</td><td>3</td><td>≈15 hr</td><td>1.5 days</td><td>—</td><td>Full day +</td><td>Low–medium</td><td>The most relaxed, most varied trip</td></tr>
+      <tr><td class="code"><a href="#opt-4d" style="background:#8c6414">4D</a></td><td class="rt">Backdoor Giants — Kernville → Trail of 100 Giants → Sequoia</td><td>3</td><td>≈13.5 hr</td><td>2 full days</td><td>—</td><td>—</td><td>Lowest</td><td>Crowd allergies + river time</td></tr>
+      <tr><td class="code"><a href="#opt-4e" style="background:#445a38">4E 🐾</a></td><td class="rt">The Maltese Loop — Kernville → 100 Giants → Paso → dog-beach coast</td><td>3</td><td>≈14 hr</td><td>100 Giants, dog at your side</td><td>—</td><td>Full day</td><td>Lowest</td><td>Bringing the 10-lb co-pilot everywhere</td></tr>
+      <tr><td class="code"><a href="#opt-3a" style="background:#2f5d46">3A</a></td><td class="rt">Deep Dive — Sequoia + the Kings Canyon gorge</td><td>2</td><td>≈14 hr</td><td>2+ days</td><td>—</td><td>—</td><td>Low</td><td>Going deep on the main interest</td></tr>
+      <tr><td class="code"><a href="#opt-3b" style="background:#7a3b2e">3B</a></td><td class="rt">A Taste of Yosemite — Sequoia → Yosemite sprint</td><td>2</td><td>≈16 hr</td><td>1 day</td><td>Half day + grove</td><td>—</td><td>High</td><td>Checklist maximalists (most driving)</td></tr>
+      <tr><td class="code"><a href="#opt-3c" style="background:#2f6b86">3C</a></td><td class="rt">Coast Sampler — Sequoia → Paso → Morro Bay → Solvang</td><td>2</td><td>≈14 hr</td><td>1.5 days</td><td>—</td><td>Morning</td><td>Low–medium</td><td>Forest + wine + one ocean hit</td></tr>
+      <tr><td class="code"><a href="#opt-3d" style="background:#8c6414">3D</a></td><td class="rt">Kern Mini Loop — Kernville → 100 Giants → Sequoia</td><td>2</td><td>≈12.5 hr</td><td>1.5 days</td><td>—</td><td>—</td><td>Lowest</td><td>Off-the-beaten-path in 3 days</td></tr>
+      <tr><td class="code"><a href="#opt-3e" style="background:#7c4f63">3E</a></td><td class="rt">Ojai Wind-Down — Sequoia → Ojai spa town</td><td>2</td><td>≈11.5 hr</td><td>1.5 days</td><td>—</td><td>—</td><td>Low</td><td>The gentlest re-entry (least driving)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</header>
+
+<main id="pages"></main>
+
+<footer>
+  <div class="footbox">
+    ROUTE LINES ARE SCHEMATIC — they connect stops in order, not turn-by-turn roads. Drive times assume normal summer traffic and include mountain-road pace; add padding on Friday/Sunday afternoons on I-5 and CA-99. Photographs © their respective Google Maps contributors, credited under each image. Park conditions, tour schedules, and road status change — verify on nps.gov and fs.usda.gov the week of the trip. Compiled July 2026.
+  </div>
+</footer>
+
+<script>
+/* ---------- photo library (Google Maps contributor photos) ---------- */
+const PH = {
+  sherman:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjCY-TuyagYazrBeyfypYYQeXu-PL_1BjZhmIFdD-X76WeZF1g4wq5PFf92pql8UtEA7H4Q3gIpnOiD-jtUOSkkuh6rcwOrQYCG-MAwj_v4pLR8RPbMnycmbeKbGPG1dzWsTyXbR-WJ4nUhhOQ=s4800-w800-h600",cr:"Photo: Chris Husong / Google Maps"},
+  moro:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjBI-OHWCk43cpkAku5jAXFwjtm9AiILjForsGcKLEM2vbIRqsWQHx0An2UWlA7jo-tNoXV3bK0TP_AkClSWwMZ92HiKgzCj0osE7QK3FwdZOlz1u7VeUnciat4-NSvc37Vzn9zug0DVwzkS-AE=s4800-w800-h600",cr:"Photo: Jordan Quinn / Google Maps"},
+  grant:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjDSw1XGAumKgPvFx19DqSYgRa1hGRGT9-3DThB9BT2mviKmQN1JGkRTzTxS2hhIxOG3AcuE-T2-xnW9nfzmxNEwicxJl_vMLU7F9pAhnInjs3J2CfdDRmOAapiMMKppcesutFbb3Vj8-4wtWxo=s4800-w800-h600",cr:"Photo: S. Permenter / Google Maps"},
+  tunnel:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjDEnorMyxDtPlEZd1QnItaHTmlYh-Q9poJNbpqQUurom4IgYmJjRbkk5kqHI7WatS2KppgGa0--JZ1aH9Jumd74TsHwICdptwDqf26h98wP9i-Rl_cNIObvo3tLv85JcVJTtQq1pL3auXqm-A=s4800-w800-h600",cr:"Photo: Péter Horváth / Google Maps"},
+  glacier:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjCWG6bFxgGlu-9-CnRYE7UXP7JKP3fUaVrh528fmbXWc-tH_vlInDxOD855en_NY6kBbMrTc3BMM8-YQSMXUGFSbKNSE7gDHiyRA3-FbfRFVlBiB3aOsFWlM7tB8fp3vndYnKglo0CMgmA-cw=s4800-w800-h600",cr:"Photo: Yuriy K / Google Maps"},
+  marigrove:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjABj1inA_x9hsLAH8RbyBJanOVDMRRw3lH6Lvxz2yz30Vnp7mmdKZuoH1fhxosq8GD_skXO0SX_gNMa_icaGvF1N_F4MyJOcmEPS_b5ll82Xd5txVSaKyFi8a1bjHBmdzzgEbMCov8lxJQ62A=s4800-w800-h600",cr:"Photo: Patrick S. / Google Maps"},
+  buckeye:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjD0PwfkZLgnlZYjEa9F6kWm7JH1Vh1snpTarROVqxtmT8oX0Nq6o-MosoGBt0HEphSlEAzAXQA8d-_L5K2cWa7PAnWAc57ZzXty5QLTDWK-kZwvzexvAd8T-5HwVoxG2WBvPwWThB7FfJDNrsGmhegLIg=s4800-w800-h600",cr:"Photo: Buckeye Tree Lodge / Google Maps"},
+  tokopah:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZMtBgOBUci9pQ3oPTcX7_L8jlV1MMU2kHRaVI312GcmHvwDLShNJTLMHRNtftjUNP8_8n_YHgx0r-3zucf0SkgpPPWauVoLgggvfSzwe7chXm3WUtUewEC0dKp5lut53dQ_gWWdIJj42G1eig=s4800-w800-h600",cr:"Photo: Tina Nguyen / Google Maps"},
+  crescent:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZM5-zOQbFEoiKOpRG9V_-VDOCn0ApHXdQ_i-Fs4DYljly5R_jbcxIR70r5Ret8TNwA8z6nN6bz9238_dlEeRpM99HfWfWdoTI-GOcfOpdxtsHZCZ43PlwIbsmjBdH2c05Cr8gsK3Oxlojc-Vg=s4800-w800-h600",cr:"Photo: Town Traveller / Google Maps"},
+  roaring:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZP-F8-p9lTNnXJSwy_SMDxd2Gdt__brtPjVCJzq1pGKFWlq1NFU7R3OCYkdsKD9e5bJuS6SPK8-4PV8K1anZ28khA6WCUCHIEx60pxfls2WkpfOSpw3e9uZ41eM2RFwF_kmSKCfAwbC-qpckw=s4800-w800-h600",cr:"Photo: Ryota Suzuki / Google Maps"},
+  yfalls:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZPQ3Il3ERW9r_nqSa44Q5MiwZXsrEmm6baiy8xEZ7VBdycuxFCYMuiPgaBUrCzozgIvvG0Rie7TUGd-JQsfJhId_swgz22FKPcdTc18ZiecZZUmIyxU22o8qKPKZNlW9C1UzR6uh46ny8vW=s4800-w800-h600",cr:"Photo: Ryan LaZur / Google Maps"},
+  tenaya:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjDFrEXGNs843VZeZBU5EA_Pk86eUFAYFZc7ikNMAbpncRCbniohxXoPZx9NxmfdzXG8JpDXC5tquBLYTzIAcl650Be4DCRqKVgNcDDMO48e8_YjJvQT0CNfriWNmNt68WXddo0hoCV4yHJF=s4800-w800-h600",cr:"Photo: Tenaya Lodge / Google Maps"},
+  giants:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjBvRWGgTwvTBItOoGLKEYx3gpxIt6sMC3v_OJNaDAXVC-lyTY4iliyOjgo4NM24Wf83N3aLLzPABUCSNRcaJR003ZM8PYpe95R7xX6n3J6BcQeUNBhVD_zYo9HYy3icqHNDMnQEFwKW8vqaK-lKa0_v0A=s4800-w800-h600",cr:"Photo: D S / Google Maps"},
+  kernville:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZN4UWZyELKPaEWTOcFy6cf8EVm1GmhEQqYw8W-ObW0umwlCL3BILD1wT-X5gTyhtXOXFW9_oW6x0XpwldwkSRXiBi4vNruqUKTfH2t-XpYQp4Cam5B-ituYoQHJL9NhpDwnB0vt8oOvmjWJpw=s4800-w800-h600",cr:"Photo: Abdullah Siddique / Google Maps"},
+  pinnacles:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZMz0ucr9xvwrgAOaG9qBLZ2P56XXZdVgaViYGG_aBXeA2Bouel0LdrhgSngsj0j2AYXP-ZtILgsZkhD1Gh56jW3q0oByzHCGETwYD3C88Mvte9sWvuOW4ZQoU3oFjIycKfhRtxNFiw=s4800-w800-h600",cr:"Photo: Charles Rowe / Google Maps"},
+  paso:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZM2vW5OCD6DyMP_VZwasFVRqoIcEC0cE3yscoH1fXq8Jq91qWCCbSMBvhFM271VUJ2P4-4210ACMhAdN9VX5FdQVSih-mEvGQKrOR7E8hyM3reWPSmsZR3XIcB0pZNWpEBwzg5s9MbGWPF-Cm0=s4800-w800-h600",cr:"Photo: Koh Uehara / Google Maps"},
+  hearst:{src:"https://lh3.googleusercontent.com/place-photos/AG9NLjCuPzn5ieMSXwWzV-FND3l4GgYi8KBu0bS-CO4-RIvmmaDP13AyHpYVmKqmQwRwI2VuKiSnkUJ2wNKyrj0avJlTyuy0n-_FRo_XxDHMeslEbVw8RGaY9CgehgkwHLjUzIvkJSFLO4NgMC2l1A=s4800-w800-h600",cr:"Photo: Valmontas Valiukenas / Google Maps"},
+  seals:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZOb8i_CsYU9gpVw5oy8umx6CmIDkVyE5p6tgzEfzoGqNM0-LEZEmn7WZhctPmRN_FVrMfjjx2DhuJBYUkY7ym96uosoenmvHAc3_tWGgKBGFiEJ8wvZcelnDWtrb3c-56s9Wh_kvXvrhXFKmw=s4800-w800-h600",cr:"Photo: Steve Diano / Google Maps"},
+  morro:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZMP9iiHkZioegxl8aYYpllKQJld7vrY4rf_ne0ovdKvBJUkvzYb85hMZ0JgjFxhzRb9qbpnLYn7uIlwAA_P4izal30VR1cpAaNpUVIGGZzDHxpHWz5cQmOEK1oo2GfYiX9f6ZUsDk1KSHX0fRI83vinbQ=s4800-w800-h600",cr:"Photo: Anna / Google Maps"},
+  solvang:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZMp0cwNeppyGuGCudWsUXs2p_CkSgoVUUjGmZtp56EmPd-p_f1P09RWDiCkfBfL-sopfTJ2twkXIDiM2tcwPUSNE_WVxxdpjW6laTdLoxXcIH9rn3DUYLKAGStbcyuPhxVyie74iL3Cs8AJ0A=s4800-w800-h600",cr:"Photo: CT / Google Maps"},
+  barts:{src:"https://lh3.googleusercontent.com/place-photos/AJRVUZNcz0Tt6C_IcRXmRWJeFG1_Ylm9d8jzDo1dPqPRE_wy27NtuNUuBIHllOwLpqiwFSygdkip2PgyF4CNMc74e1d-HABZ4FynrEbbHebNSB8fUTz2cziMF1jr2h-nb02pNKN2sYOID_oDIt_4Zw=s4800-w800-h600",cr:"Photo: Craig Helsley / Google Maps"}
+};
+
+/* ---------- shared coordinates ---------- */
+const C = {
+  cc:[34.0211,-118.3965], visalia:[36.3302,-119.2921], threeRivers:[36.4386,-118.9043],
+  sherman:[36.5817,-118.7514], moro:[36.5468,-118.7657], crescent:[36.5588,-118.7484],
+  lodgepole:[36.6047,-118.7233], tokopah:[36.6086,-118.6901],
+  grant:[36.7482,-118.9712], grantVillage:[36.7397,-118.9626],
+  roaring:[36.7805,-118.6209], roadsEnd:[36.7946,-118.5827],
+  fresno:[36.7378,-119.7871], oakhurst:[37.3283,-119.6493], fishcamp:[37.4733,-119.6350],
+  marigrove:[37.5136,-119.5968], tunnel:[37.7158,-119.6775], valley:[37.7456,-119.5936],
+  glacier:[37.7282,-119.5735],
+  paso:[35.6262,-120.6901], cambria:[35.5746,-121.1131], seals:[35.6631,-121.2570],
+  hearst:[35.6850,-121.1700], morro:[35.3694,-120.8677], slo:[35.2828,-120.6596],
+  solvang:[34.5958,-120.1376], sb:[34.4208,-119.6982],
+  bakersfield:[35.3733,-119.0187], lakeIsabella:[35.6183,-118.4790], kernville:[35.7547,-118.4256],
+  giants:[35.9770,-118.5962], domeRock:[36.0682,-118.5514], porterville:[36.0652,-119.0168],
+  soledad:[36.4247,-121.3263], kingcity:[36.2128,-121.1263], pinnacles:[36.4906,-121.1825],
+  exeter:[36.2961,-119.1421], ojai:[34.4480,-119.2429]
+};
+
+/* ---------- the ten options ---------- */
+const OPTIONS = [
+
+/* ============ 4A GRAND LOOP ============ */
+{
+id:"4a", code:"4A", accent:"#29513b", title:"The Grand Loop",
+route:"CULVER CITY → SEQUOIA → KINGS CANYON → YOSEMITE → CULVER CITY",
+meta:[["4","days"],["3","nights"],["≈18 hr","total drive"],["≈720 mi","distance"]],
+why:"The classic. You hit the biggest tree on Earth on day one while you're fresh, cross Kings Canyon on a low-mileage transfer day, give Yosemite a full dedicated day, and cash in an easy sequoia grove on the way home. Every day lands inside the 4–6 hour window, with the longest drive first.",
+dog:"Hard mode. Dogs are banned from every trail in Sequoia, Kings Canyon and Yosemite — paved roads, picnic areas and viewpoint pullouts only, and never alone in the car. The bright spots: Yosemite&rsquo;s fully paved Valley floor paths (the Lower Yosemite Fall loop and Cook&rsquo;s Meadow boardwalk) ARE pet-legal 🐾, and every scenic pullout works on leash. Sherman, Congress, Moro Rock, Glacier Point&rsquo;s trail and Mariposa Grove mean tag-teaming. Honest advice: board the pup, or pick 4E.",
+stats:[["Full day +","Sequoia / Kings Cyn"],["Full day","Yosemite"],["None","Ocean"],["High","Crowds (Yosemite)"],["$$–$$$","Lodging"]],
+photos:[
+ [PH.sherman,"Day 1 · General Sherman — the largest tree on Earth by volume; a half-mile paved walk, then the quiet Congress Trail."],
+ [PH.moro,"Day 1 · Moro Rock — 350 steps carved into granite; do it near sunset for the whole Great Western Divide in gold."],
+ [PH.tunnel,"Day 3 · Tunnel View at 7:45 AM — El Capitan, Half Dome and Bridalveil in one frame, before the lots fill."],
+ [PH.glacier,"Day 3 · Glacier Point at golden hour — 3,200 ft directly above the Valley floor, staring at Half Dome."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Three Rivers (lunch, Night 1)",C.threeRivers],
+ ["Day 1 · General Sherman + Congress Trail",C.sherman],["Day 1 · Moro Rock + Tunnel Log",C.moro],
+ ["Day 2 · General Grant Tree + Panoramic Point",C.grant],["Day 2 · Oakhurst (Nights 2–3)",C.oakhurst],
+ ["Day 3 · Tunnel View + Valley loop",C.tunnel],["Day 3 · Yosemite Valley",C.valley],
+ ["Day 3 · Glacier Point",C.glacier],["Day 4 · Mariposa Grove",C.marigrove],["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.visalia,C.threeRivers,C.sherman,C.moro,C.sherman,C.grant,C.fresno,C.oakhurst,C.tunnel,C.valley,C.glacier,C.oakhurst,C.marigrove,C.oakhurst,C.fresno,C.visalia,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → the Giant Forest",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 3 HR 30 · I-5 N → CA-99 N → CA-198 E",x:"Leave Culver City. Last cheap gas and picnic groceries in <b>Visalia</b>."},
+  {tm:"11:00 AM",x:"<b>Three Rivers</b> — lunch at Sierra Subs &amp; Salads; enter at the Ash Mountain gate ($35/vehicle or annual pass). It will be ~100°F down here; it won't be up top."},
+  {tm:"12:15 PM",chip:"DRIVE 1 HR · Generals Hwy switchbacks, +4,500 ft",x:"Steep and winding — the climb is part of the show."},
+  {tm:"1:30 PM",x:"<b>General Sherman Tree</b> — half-mile paved walk down to the tree; remember the walk back up is at 7,000 ft <span class=dur>(45 min)</span>."},
+  {tm:"2:30 PM",x:"<b>Congress Trail</b> — flat 2-mile loop from Sherman through the densest giants in the park; the crowd evaporates ten minutes in <span class=dur>(1 hr)</span>."},
+  {tm:"3:45 PM",x:"<b>Giant Forest Museum + Big Trees Trail</b> — the best 20-minute crash course on why sequoias grow only here <span class=dur>(45 min)</span>."},
+  {tm:"5:00 PM",x:"<b>Moro Rock</b> — 350 steps to a 6,725-ft granite summit; then drive through <b>Tunnel Log</b> on the same Crescent Meadow spur <span class=dur>(1 hr 15)</span>."},
+  {tm:"6:30 PM",chip:"DRIVE 1 HR · back down to Three Rivers",x:"Low gear on the descent. Dinner at River View Restaurant. <b>Night 1: Three Rivers.</b>"}
+ ]},
+ {n:"Day 2",t:"Kings Canyon → Oakhurst",dr:"≈3.5–4 hr driving",rows:[
+  {tm:"8:30 AM",chip:"DRIVE 1 HR 30 · Generals Hwy N to Grant Grove",x:"Rolling ridge-top forest the whole way."},
+  {tm:"10:15 AM",x:"<b>General Grant Tree</b> — the “Nation's Christmas Tree,” calmer and arguably more atmospheric than Sherman; walk through the Fallen Monarch <span class=dur>(45 min)</span>."},
+  {tm:"11:15 AM",x:"<b>Panoramic Point</b> — short spur road plus a 300-yard walk to a Sierra-crest view over Hume Lake <span class=dur>(30 min)</span>."},
+  {tm:"12:15 PM",x:"Lunch at Grant Grove Restaurant. <i>Optional big-day add:</i> CA-180 down to <b>Roaring River Falls</b> and back (+2.5 hr driving) — only if you'd rather see the gorge than settle in early."},
+  {tm:"1:30 PM",chip:"DRIVE 2 HR · CA-180 W → Fresno → CA-41 N",x:""},
+  {tm:"3:30 PM",x:"<b>Oakhurst</b> — check in, grocery run for tomorrow's Valley picnic (lines inside Yosemite are long). <b>Nights 2–3: Oakhurst.</b>"}
+ ]},
+ {n:"Day 3",t:"Yosemite Valley + Glacier Point",dr:"≈4 hr driving (all scenic)",rows:[
+  {tm:"6:30 AM",chip:"DRIVE 1 HR 15 · CA-41 N through the south entrance",x:"Non-negotiable early start: in summer 2026 Valley parking is effectively full by ~7:30 AM."},
+  {tm:"7:45 AM",x:"<b>Tunnel View</b> — the whole Valley in one frame <span class=dur>(15 min)</span>."},
+  {tm:"8:15 AM",x:"<b>Bridalveil Fall</b> — half-mile round trip <span class=dur>(30 min)</span>."},
+  {tm:"9:00 AM",x:"Park once at <b>Yosemite Village</b>; ride the free Valley shuttle from here on."},
+  {tm:"9:30 AM",x:"<b>Lower Yosemite Fall</b> loop — flow is light by mid-July, still iconic <span class=dur>(45 min)</span>; then <b>Cook's Meadow + Sentinel Bridge</b> for the Half Dome reflection <span class=dur>(40 min)</span>."},
+  {tm:"11:30 AM",x:"Picnic at <b>El Capitan Meadow</b> — bring binoculars and find the climbers on the wall <span class=dur>(1 hr)</span>."},
+  {tm:"1:00 PM",x:"Flex block: <b>Mirror Lake</b> walk, Yosemite Valley Lodge break, or an early exit ahead of afternoon gridlock <span class=dur>(90 min)</span>."},
+  {tm:"3:00 PM",chip:"DRIVE 1 HR · Wawona Rd → Glacier Point Rd",x:""},
+  {tm:"4:15 PM",x:"<b>Washburn Point</b>, then <b>Glacier Point</b> — 3,200 ft directly above the Valley; stay for golden hour, it's the best 30 minutes of the trip <span class=dur>(1.5–2 hr)</span>."},
+  {tm:"6:30 PM",chip:"DRIVE 1 HR 30 · back to Oakhurst",x:"Dinner at South Gate Brewing Co."}
+ ]},
+ {n:"Day 4",t:"Mariposa Grove → home",dr:"≈5.5 hr driving",rows:[
+  {tm:"7:15 AM",chip:"DRIVE 45 MIN · CA-41 N to the Mariposa Grove Welcome Plaza",x:"Arrive before the lot fills; the first shuttle into the grove runs at 8:00."},
+  {tm:"8:00 AM",x:"<b>Mariposa Grove</b> — Grizzly Giant Loop, 2 miles past the Bachelor &amp; Three Graces, the Grizzly Giant, and the California Tunnel Tree <span class=dur>(2 hr)</span>."},
+  {tm:"10:30 AM",chip:"DRIVE 2 HR · CA-41 S to Fresno",x:""},
+  {tm:"12:30 PM",x:"Lunch in <b>Fresno</b> — or hold out for kitschy <b>Bravo Farms</b> in Traver on CA-99."},
+  {tm:"1:30 PM",chip:"DRIVE 3 HR 15 · CA-99 S → I-5 S",x:"Home in Culver City ≈ 4:45 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins (riverfront, at the park gate) or Comfort Inn; splurge — Wuksachi Lodge inside the park to skip re-driving the switchbacks.",
+ "<b>Nights 2–3 · Oakhurst:</b> Best Western Plus Yosemite Gateway Inn or an Airbnb; splurge — Tenaya at Yosemite in Fish Camp, 10 min from the gate.",
+ "Alternative Yosemite base: <b>Mariposa</b> — Gold Rush main street, uses the CA-140 entrance instead.",
+ "Book this week; July weekends genuinely sell out in all three towns."
+],
+expect:[
+ "A 30–40°F daily swing: ~100°F in Three Rivers, ~75°F in the Giant Forest, chilly at Glacier Point after sunset — pack layers.",
+ "Steep mountain switchbacks on Generals Hwy and Wawona Rd; descend in low gear.",
+ "Yosemite runs without entry reservations in 2026, so crowds are heavy — every Yosemite morning starts before 7 AM.",
+ "No gas inside either park; fill up in Visalia, Fresno, or Oakhurst.",
+ "One $80 America the Beautiful annual pass covers both parks (vs $35 each)."
+]
+},
+
+/* ============ 4B REVERSE LOOP ============ */
+{
+id:"4b", code:"4B", accent:"#8a4a2f", title:"The Reverse Loop",
+route:"CULVER CITY → YOSEMITE → KINGS CANYON → SEQUOIA → CULVER CITY",
+meta:[["4","days"],["3","nights"],["≈17 hr","total drive"],["≈700 mi","distance"]],
+why:"Same three parks as 4A, run backwards. You bank the longest highway day first, see Yosemite while your legs are fresh, and finish with the shortest, easiest drive home of any 4-day option — plus a river-swim morning in Three Rivers before you go. Trade-off: your headline act, Sequoia, comes last.",
+dog:"Same national-park trail ban as 4A. The pup&rsquo;s good moments: Yosemite&rsquo;s paved Valley paths 🐾, the Exeter mural walk (fully dog-friendly small-town sidewalks 🐾), and the day-4 Kaweah riverbank morning. The groves and Moro Rock are tag-team territory.",
+stats:[["Full day","Sequoia"],["1.5 days","Yosemite"],["None","Ocean"],["High","Crowds (Yosemite)"],["$$–$$$","Lodging"]],
+photos:[
+ [PH.marigrove,"Day 1 · Mariposa Grove in the quieter afternoon window — 500 giants including the 3,000-year-old Grizzly Giant."],
+ [PH.yfalls,"Day 2 · Yosemite Falls — North America's tallest; light flow in July, but the granite amphitheater never turns off."],
+ [PH.grant,"Day 3 · General Grant Tree — the calmer super-tree, with a fallen sequoia you can walk through."],
+ [PH.moro,"Day 3 · Moro Rock at sunset — the grand finale before you drop down to Three Rivers for the night."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Oakhurst (Nights 1–2)",C.oakhurst],
+ ["Day 1 · Mariposa Grove (afternoon)",C.marigrove],["Day 2 · Tunnel View + Valley",C.tunnel],
+ ["Day 2 · Glacier Point",C.glacier],["Day 3 · General Grant Tree",C.grant],
+ ["Day 3 · Crescent Meadow + Sherman",C.sherman],["Day 3 · Moro Rock sunset",C.moro],
+ ["Day 3 · Three Rivers (Night 3)",C.threeRivers],["Day 4 · Exeter mural stop",C.exeter],["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.fresno,C.oakhurst,C.marigrove,C.oakhurst,C.tunnel,C.valley,C.glacier,C.oakhurst,C.fresno,C.grant,C.lodgepole,C.sherman,C.moro,C.threeRivers,C.exeter,C.visalia,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → Oakhurst → Mariposa Grove",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 4 HR 30 · I-5 N → CA-99 N → CA-41 N",x:"Lunch stop in Fresno on the way through."},
+  {tm:"1:00 PM",x:"<b>Oakhurst</b> — check in, drop bags, grab picnic groceries. <b>Nights 1–2: Oakhurst.</b>"},
+  {tm:"2:00 PM",chip:"DRIVE 30 MIN · CA-41 N to the Mariposa Grove Welcome Plaza",x:""},
+  {tm:"2:30 PM",x:"<b>Mariposa Grove</b> — the afternoon window is noticeably quieter than morning; Grizzly Giant Loop, last shuttle back ~8 PM <span class=dur>(2.5 hr)</span>."},
+  {tm:"6:00 PM",x:"Dinner in Oakhurst (South Gate Brewing Co. or Oakhurst Grill)."}
+ ]},
+ {n:"Day 2",t:"Yosemite Valley + Glacier Point",dr:"≈4 hr driving",rows:[
+  {tm:"6:30 AM",chip:"DRIVE 1 HR 15 · into the park before the 7:30 parking crunch",x:""},
+  {tm:"7:45 AM",x:"<b>Tunnel View → Bridalveil Fall → park at Yosemite Village</b> and switch to the free shuttle."},
+  {tm:"9:30 AM",x:"<b>Lower Yosemite Fall, Cook's Meadow, Sentinel Bridge, El Capitan Meadow picnic</b> — the full Valley floor circuit <span class=dur>(4 hr)</span>."},
+  {tm:"3:00 PM",chip:"DRIVE 1 HR · Glacier Point Rd",x:""},
+  {tm:"4:15 PM",x:"<b>Washburn Point + Glacier Point</b> — stay through golden hour <span class=dur>(1.5–2 hr)</span>."},
+  {tm:"6:30 PM",chip:"DRIVE 1 HR 30 · back to Oakhurst",x:""}
+ ]},
+ {n:"Day 3",t:"Kings Canyon → the Giant Forest",dr:"≈4.5 hr driving",rows:[
+  {tm:"8:00 AM",chip:"DRIVE 2 HR · CA-41 S → CA-180 E to Grant Grove",x:""},
+  {tm:"10:15 AM",x:"<b>General Grant Tree</b> <span class=dur>(45 min)</span>."},
+  {tm:"11:15 AM",chip:"DRIVE 1 HR · Generals Hwy S",x:""},
+  {tm:"12:30 PM",x:"Lunch at <b>Lodgepole</b>; if legs allow, tack on the riverside start of the Tokopah trail <span class=dur>(45 min)</span>."},
+  {tm:"2:00 PM",x:"<b>Crescent Meadow + Tharp's Log</b> — John Muir's “gem of the Sierra,” frequent bear sightings in the meadow grass <span class=dur>(1 hr)</span>."},
+  {tm:"3:30 PM",x:"<b>General Sherman + Congress Trail</b> <span class=dur>(1.5 hr)</span>."},
+  {tm:"5:45 PM",x:"<b>Moro Rock at sunset</b> <span class=dur>(1 hr)</span>."},
+  {tm:"7:00 PM",chip:"DRIVE 1 HR · down to Three Rivers",x:"<b>Night 3: Three Rivers.</b>"}
+ ]},
+ {n:"Day 4",t:"River morning → home",dr:"≈3.5 hr driving (shortest final day)",rows:[
+  {tm:"9:00 AM",x:"Slow morning: breakfast at <b>Sequoia Coffee Co.</b>, then a dip at a Kaweah River hole near the lodge (mind the current, even in July)."},
+  {tm:"10:30 AM",chip:"DRIVE 40 MIN · CA-198 W to Exeter",x:""},
+  {tm:"11:15 AM",x:"<b>Exeter</b> — 30+ downtown murals, easy walking loop, coffee <span class=dur>(45 min)</span>."},
+  {tm:"12:15 PM",chip:"DRIVE 3 HR · CA-99 S → I-5 S",x:"Home ≈ 3:15 PM — unpack in daylight."}
+ ]}
+],
+lodging:[
+ "<b>Nights 1–2 · Oakhurst:</b> Best Western Plus Yosemite Gateway Inn, an Airbnb, or Tenaya at Yosemite (Fish Camp) for the splurge.",
+ "<b>Night 3 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn; Wuksachi Lodge if you'd rather sleep at 7,000 ft.",
+ "Same booking urgency as 4A — reserve now for July."
+],
+expect:[
+ "The one 4.5-hour highway slog happens on day 1 when you're fresh; the last day is the shortest of any option here.",
+ "Two pre-7 AM starts (days 2 and, ideally, 3).",
+ "Park fatigue is real — by day 3 you'll be glad Sequoia's stops are short walks, not hikes.",
+ "Everything in 4A's Expect list about heat, switchbacks, gas, and the $80 pass applies here too."
+]
+},
+
+/* ============ 4C TREES & SEA ============ */
+{
+id:"4c", code:"4C", accent:"#2f6b86", title:"Trees & Sea",
+route:"CULVER CITY → SEQUOIA → PASO ROBLES → CAMBRIA / MORRO BAY → SOLVANG → CULVER CITY",
+meta:[["4","days"],["3","nights"],["≈15 hr","total drive"],["≈640 mi","distance"]],
+why:"The most relaxed of the ten, and the most varied: giant trees, a wine-country evening, elephant seals, a volcanic rock rising out of a harbor, and a Danish village — with no day over 5 hours of driving and one day under 2. Pick this if the goal is a vacation rather than a checklist. (No Yosemite.)",
+dog:"Half of this trip is genuinely great with a small dog: the Moonstone Beach boardwalk, the elephant-seal vista (leashed; a barker goes back to the car), Morro&rsquo;s harborfront, Paso patios and Solvang are all 🐾-approved — and adding Cambria&rsquo;s Fiscalini Ranch Bluff Trail gives the pup a world-class mile. The Sequoia days are the catch: no dogs on any park trail, so plan to tag-team Sherman and skip Tokopah. If the dog is the priority, 4E is this trip rebuilt around the leash.",
+stats:[["1.5 days","Sequoia"],["None","Yosemite"],["Full day +","Ocean"],["Low–med","Crowds"],["$$–$$$","Lodging"]],
+photos:[
+ [PH.sherman,"Day 1 · The Giant Forest — Sherman, the Congress Trail, and Moro Rock at sunset."],
+ [PH.paso,"Day 2 · Paso Robles' Downtown City Park — string lights, tasting rooms, and dinner on the square."],
+ [PH.morro,"Day 3 · Morro Rock at sunset — a 576-ft volcanic plug with otters rafting off the Embarcadero."],
+ [PH.solvang,"Day 4 · Solvang — aebleskivers and windmills, the 90-minute lunch stop on the drive home."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Three Rivers (Night 1)",C.threeRivers],
+ ["Day 1 · Giant Forest (Sherman, Moro Rock)",C.sherman],["Day 2 · Crescent Meadow + Tokopah",C.lodgepole],
+ ["Day 2 · Paso Robles (Night 2)",C.paso],["Day 3 · Cambria — Moonstone Beach",C.cambria],
+ ["Day 3 · Piedras Blancas elephant seals / Hearst Castle",C.seals],["Day 3 · Morro Bay (Night 3)",C.morro],
+ ["Day 4 · Solvang lunch",C.solvang],["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.visalia,C.threeRivers,C.sherman,C.lodgepole,C.threeRivers,C.paso,C.cambria,C.seals,C.hearst,C.cambria,C.morro,C.slo,C.solvang,C.sb,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → the Giant Forest",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 3 HR 30 · I-5 N → CA-99 N → CA-198 E",x:"Same opening day as 4A: Three Rivers lunch, Sherman + Congress Trail, Giant Forest Museum, Moro Rock + Tunnel Log at sunset."},
+  {tm:"6:30 PM",chip:"DRIVE 1 HR · down to Three Rivers",x:"<b>Night 1: Three Rivers.</b>"}
+ ]},
+ {n:"Day 2",t:"One more mountain morning → wine country",dr:"≈4.5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 1 HR · back up Generals Hwy",x:"Early = empty roads and the best bear odds."},
+  {tm:"8:45 AM",x:"<b>Crescent Meadow</b> — quiet loop past Tharp's Log, the cabin built inside a fallen sequoia <span class=dur>(1 hr)</span>."},
+  {tm:"10:00 AM",x:"<b>Tokopah Falls</b> from Lodgepole — 3.4-mi round trip along the river to a 1,200-ft granite cascade <span class=dur>(2.5 hr)</span>. Shorter alternative: a second pass at Sherman."},
+  {tm:"12:30 PM",x:"Picnic at Lodgepole."},
+  {tm:"1:00 PM",chip:"DRIVE 1 HR · down the switchbacks",x:""},
+  {tm:"2:00 PM",chip:"DRIVE 3 HR · CA-198 W → CA-99 S → CA-46 W",x:"The Central Valley flat, then golden Paso hills."},
+  {tm:"5:00 PM",x:"<b>Paso Robles</b> — pool break, stroll Downtown City Park, dinner on the square (Fish Gaucho, La Cosecha). <b>Night 2: Paso Robles.</b>"}
+ ]},
+ {n:"Day 3",t:"Wine, seals, and the sea",dr:"≈1.5 hr driving (lightest day of any option)",rows:[
+  {tm:"10:00 AM",x:"<b>Tasting</b> — Tin City's warehouse district for the fun, Daou's hilltop for the view <span class=dur>(2 hr; designate a driver)</span>."},
+  {tm:"12:30 PM",chip:"DRIVE 40 MIN · CA-46 W → CA-1 N",x:"The moment the fog line breaks is the best reveal of the trip."},
+  {tm:"1:15 PM",x:"<b>Cambria</b> — Moonstone Beach boardwalk + lunch in the village <span class=dur>(1.5 hr)</span>."},
+  {tm:"3:00 PM",x:"<b>Piedras Blancas elephant seal boardwalk</b> — free, and absurd <span class=dur>(30–45 min)</span>. Alternative if pre-booked: a <b>Hearst Castle</b> tour <span class=dur>(2.5 hr)</span>."},
+  {tm:"5:00 PM",chip:"DRIVE 40 MIN · CA-1 S",x:""},
+  {tm:"5:45 PM",x:"<b>Morro Bay</b> — walk out to the Rock, watch otters off the Embarcadero, fish &amp; chips at sunset. <b>Night 3: Morro Bay (or Cambria).</b>"}
+ ]},
+ {n:"Day 4",t:"The 101 home, the pretty way",dr:"≈4 hr driving",rows:[
+  {tm:"9:30 AM",x:"Morro Rock in morning light; coffee on the Embarcadero <span class=dur>(45 min)</span>."},
+  {tm:"10:15 AM",chip:"DRIVE 1 HR 45 · US-101 S",x:""},
+  {tm:"12:00 PM",x:"<b>Solvang</b> — aebleskivers at Paula's Pancake House, windmill photos, a pastry box for the road <span class=dur>(1.5 hr)</span>."},
+  {tm:"1:30 PM",chip:"DRIVE 2 HR 15 · US-101 S past Santa Barbara",x:"Optional Stearns Wharf leg-stretch. Home ≈ 4:00 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn.",
+ "<b>Night 2 · Paso Robles:</b> Paso Robles Inn on the square, La Quinta for budget, Allegretto for the splurge.",
+ "<b>Night 3 · Morro Bay:</b> Anderson Inn (on the Embarcadero) or 456 Embarcadero Inn; Cambria's Moonstone Beach motels are the quieter alternative.",
+ "Hearst Castle tours sell out in July — book the moment you commit to this option."
+],
+expect:[
+ "The biggest scenery whiplash of any option: 100°F sequoia country to 65°F coastal fog in one afternoon — the coast wants a jacket even in July.",
+ "Day 3 is intentionally tiny (≈1.5 hr driving) — that's the vacation part.",
+ "CA-46 west is a fast, pretty two-lane; watch speed through the curves near the coast.",
+ "Elephant seals are molting in July — hundreds on the beach, zero effort required.",
+ "No Yosemite on this route; pair it with option 3B some other weekend if that stings."
+]
+},
+
+/* ============ 4D BACKDOOR GIANTS ============ */
+{
+id:"4d", code:"4D", accent:"#8c6414", title:"Backdoor Giants",
+route:"CULVER CITY → KERNVILLE → TRAIL OF 100 GIANTS → SEQUOIA NP → CULVER CITY",
+meta:[["4","days"],["3","nights"],["≈13.5 hr","total drive"],["≈560 mi","distance"]],
+why:"Maximum sequoias, minimum people. You enter the southern Sierra through the back door: a night in the river town of Kernville, then the Western Divide Highway past a major sequoia grove that's routinely near-empty, before finishing with a full crowd-managed day in the national park. The least total driving of the 4-day options — but the slowest, twistiest miles.",
+dog:"The best of the original ten with a dog: Kernville&rsquo;s Riverside Park, the ENTIRE Trail of 100 Giants loop and Dome Rock are all leash-legal 🐾 — your Maltese genuinely walks among the sequoias here. Only day 3&rsquo;s national-park trails exclude the pup: tag-team Sherman and Moro Rock, and swap the Tokopah hike for a longer Crescent-road viewpoint cruise.",
+stats:[["2 full days","Sequoia country"],["None","Yosemite"],["River, not ocean","Water"],["Lowest","Crowds"],["$–$$","Lodging"]],
+photos:[
+ [PH.kernville,"Day 1 · Kernville's Riverside Park — swim, raft, then walk to dinner; the whole town faces the Kern."],
+ [PH.giants,"Day 2 · Trail of 100 Giants — a paved 1.3-mile loop through a monarch grove you may have to yourself."],
+ [PH.tokopah,"Day 3 · Tokopah Falls — the park's best half-day hike, 3.4 miles along the Marble Fork."],
+ [PH.moro,"Day 3 · Moro Rock to close the day — the Great Western Divide floats on the horizon."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Kern River Canyon (CA-178)",C.lakeIsabella],
+ ["Day 1 · Kernville (Night 1)",C.kernville],["Day 2 · Trail of 100 Giants",C.giants],
+ ["Day 2 · Dome Rock",C.domeRock],["Day 2 · Three Rivers (Nights 2–3)",C.threeRivers],
+ ["Day 3 · Sherman / Crescent Meadow / Tokopah",C.sherman],["Day 3 · Moro Rock sunset",C.moro],
+ ["Day 4 · optional Grant Grove",C.grant],["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.bakersfield,C.lakeIsabella,C.kernville,C.giants,C.domeRock,C.porterville,C.threeRivers,C.sherman,C.moro,C.threeRivers,C.visalia,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → Kernville",dr:"≈3 hr driving",rows:[
+  {tm:"8:30 AM",chip:"DRIVE 3 HR · I-5 N → CA-99 → Bakersfield → CA-178 E up the Kern River Canyon",x:"The last 45 minutes trace the river through a rock gorge."},
+  {tm:"11:30 AM",x:"Viewpoint pullout over <b>Lake Isabella</b>, then into <b>Kernville</b> for lunch."},
+  {tm:"1:00 PM",x:"<b>Afternoon on the Kern</b> — a Class II “Lickety Split” raft trip (Kern River Outfitters, ~2 hr, book ahead) or a lazy swim at Riverside Park."},
+  {tm:"6:00 PM",x:"<b>Kern River Brewing Co.</b> — get the Citra. <b>Night 1: Kernville.</b>"}
+ ]},
+ {n:"Day 2",t:"The Western Divide Highway",dr:"≈4 hr of slow, spectacular driving",rows:[
+  {tm:"9:00 AM",chip:"DRIVE 1 HR 15 · Mtn Hwy 99 N along the Wild & Scenic Kern → Johnsondale → Western Divide Hwy",x:"Fuel up in Kernville — nothing reliable until Springville."},
+  {tm:"10:15 AM",x:"<b>Trail of 100 Giants</b> — paved 1.3-mi loop through a monarch grove, routinely near-empty on weekdays ($12 parking) <span class=dur>(1.25 hr)</span>."},
+  {tm:"12:00 PM",x:"<b>Dome Rock</b> — a 5-minute walk to a Moro-Rock-class view with zero stairs <span class=dur>(30 min)</span>; picnic at the Ponderosa."},
+  {tm:"1:30 PM",chip:"DRIVE 2 HR 30 · CA-190 W down endless switchbacks → Springville → Porterville → CA-65/198",x:""},
+  {tm:"4:00 PM",x:"<b>Three Rivers</b> — river dip before dinner. <b>Nights 2–3: Three Rivers.</b>"}
+ ]},
+ {n:"Day 3",t:"The full Giant Forest day",dr:"≈2.5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 1 HR · up Generals Hwy",x:""},
+  {tm:"8:30 AM",x:"<b>Sherman + Congress Trail</b> before the tour buses <span class=dur>(1.5 hr)</span>."},
+  {tm:"10:15 AM",x:"<b>Crescent Meadow + Tharp's Log</b> <span class=dur>(1 hr)</span>; lunch at Lodgepole."},
+  {tm:"12:30 PM",x:"<b>Tokopah Falls</b> hike <span class=dur>(2.5 hr)</span>."},
+  {tm:"3:30 PM",x:"<b>Giant Forest Museum + Big Trees Trail</b> <span class=dur>(45 min)</span>."},
+  {tm:"5:30 PM",x:"<b>Moro Rock sunset</b>, then down the hill for dinner."}
+ ]},
+ {n:"Day 4",t:"Easy exit",dr:"≈3.5 hr driving (+2 hr if you add Grant Grove)",rows:[
+  {tm:"8:30 AM",x:"Breakfast at <b>Sequoia Coffee Co.</b> <i>Optional add:</i> a Grant Grove morning for the General Grant Tree (+2 hr driving)."},
+  {tm:"10:00 AM",chip:"DRIVE 3 HR 30 · CA-198 W → CA-99 S → I-5 S",x:"Home by ≈ 1:30 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Kernville:</b> The Kernville Inn or Whispering Pines Lodge (riverfront); lots of cabin Airbnbs.",
+ "<b>Nights 2–3 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins, Comfort Inn, or a river-deck Airbnb.",
+ "Raft trips book out summer weekends — reserve with the lodging."
+],
+expect:[
+ "Hours of winding two-lane mountain road on day 2 — wonderful if you like driving, queasy if you don't.",
+ "Long no-cell-service stretches on the Western Divide Hwy; download offline maps before Kernville.",
+ "Check Sierra National Forest / CA-190 road status before you go — fire-related closures shift year to year.",
+ "Fire scars from the 2021 KNP/Windy fires are visible near the 100 Giants — and so is the regrowth.",
+ "The Kern is genuinely dangerous outside designated calm spots; swim where locals swim."
+]
+},
+
+/* ============ 4E THE MALTESE LOOP ============ */
+{
+id:"4e", code:"4E", accent:"#445a38", title:"The Maltese Loop",
+route:"CULVER CITY → KERNVILLE → TRAIL OF 100 GIANTS → PASO ROBLES → CAMBRIA / MORRO BAY → CULVER CITY",
+meta:[["4","days"],["3","nights"],["≈14 hr","total drive"],["≈590 mi","distance"]],
+why:"The dog-first option, built so the leash comes to every single stop. National parks ban dogs on all trails — so this route gets its giant sequoias in the national forest instead (the Trail of 100 Giants loop is fully dog-legal), pairs them with a river town, dog-friendly wine patios, a famous bluff trail, two beaches your Maltese can actually set paws on, and one off-leash cove for the victory zoomies.",
+dog:"This whole page IS the dog plan — every stop below welcomes a leashed dog, and the 🐾 marks the pup's headline moments. The one classic sight skipped on purpose is Hearst Castle (no dogs); the elephant seals more than cover it.",
+stats:[["1.3 mi","Sequoia loop — dogs OK"],["2 + 1 off-leash","Dog beaches"],["Bluff trail","Fiscalini Ranch"],["Lowest","Crowds"],["$$","Lodging + pet fees"]],
+photos:[
+ [PH.kernville,"Day 1 · Riverside Park, Kernville 🐾 — grassy riverfront with calm coves sized for a 10-lb wader."],
+ [PH.giants,"Day 2 · Trail of 100 Giants 🐾 — the headline: leashed dogs are welcome on the whole paved loop among monarch sequoias."],
+ [PH.seals,"Day 3 · Piedras Blancas 🐾 — leashed pups can join you at the vista; if the bellowing starts a bark-off, back to the car."],
+ [PH.morro,"Day 3 · Morro Bay at sunset — harborfront strolling, otters below, dog-tolerant patios for fish &amp; chips."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Kernville — Riverside Park (Night 1)",C.kernville],
+ ["Day 2 · Trail of 100 Giants 🐾",C.giants],["Day 2 · Dome Rock 🐾",C.domeRock],
+ ["Day 2 · Paso Robles (Night 2)",C.paso],["Day 3 · Cambria — Fiscalini Ranch Bluff Trail 🐾",C.cambria],
+ ["Day 3 · Elephant seal vista 🐾",C.seals],["Day 3 · Morro Bay (Night 3)",C.morro],
+ ["Day 4 · Olde Port Beach, Avila — off-leash 🐾",[35.1747,-120.7580]],
+ ["Day 4 · Solvang patio lunch 🐾",C.solvang],["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.bakersfield,C.lakeIsabella,C.kernville,C.giants,C.domeRock,C.porterville,C.paso,C.cambria,C.seals,C.cambria,C.morro,[35.1747,-120.7580],C.slo,C.solvang,C.sb,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → Kernville",dr:"≈3 hr driving",rows:[
+  {tm:"8:30 AM",chip:"DRIVE 3 HR · I-5 N → CA-99 → Bakersfield → CA-178 E up the Kern Canyon",x:"Curvy final stretch — if the pup gets carsick, this is the segment; crack a window."},
+  {tm:"11:30 AM",x:"<b>Kernville</b> — lunch on a dog-friendly patio in the two-block downtown."},
+  {tm:"1:00 PM",x:"🐾 <b>Riverside Park</b> — grassy riverfront with calm coves for tiny-dog wading. Humans can tag-team a 2-hr Class II raft trip while one of you lounges with the Maltese <span class=dur>(all afternoon)</span>."},
+  {tm:"6:00 PM",x:"🐾 <b>Kern River Brewing Co.</b> — dogs welcome on the patio. <b>Night 1: Kernville.</b>"}
+ ]},
+ {n:"Day 2",t:"Sequoias with the dog → wine country",dr:"≈4.5 hr driving",rows:[
+  {tm:"9:00 AM",chip:"DRIVE 1 HR 15 · Mtn Hwy 99 N → Western Divide Hwy",x:"Fuel up in Kernville; long empty stretch, no cell service."},
+  {tm:"10:15 AM",x:"🐾 <b>Trail of 100 Giants</b> — the reason this route exists: it's national <i>forest</i>, so your Maltese walks the whole paved 1.3-mi loop among monarch sequoias, on leash, in cool 6,400-ft air ($12 parking) <span class=dur>(1.5 hr)</span>."},
+  {tm:"12:00 PM",x:"🐾 <b>Dome Rock</b> — 5-minute walk to a huge granite-dome view; keep the leash short near the edges <span class=dur>(30 min)</span>. Picnic at the Ponderosa."},
+  {tm:"1:30 PM",chip:"DRIVE 2 HR 45 · CA-190 W switchbacks → Porterville → CA-99 S → CA-46 W",x:""},
+  {tm:"4:30 PM",x:"<b>Paso Robles</b> — check in, then 🐾 a shady lap of <b>Downtown City Park</b> and dinner on a dog-friendly patio on the square. <b>Night 2: Paso Robles.</b>"}
+ ]},
+ {n:"Day 3",t:"Patio wine → the small-dog coast",dr:"≈1.5 hr driving (lightest day)",rows:[
+  {tm:"10:00 AM",x:"🐾 <b>Dog-friendly tasting</b> — Sculpterra (stroll the sculpture garden with the pup) or Eberle's deck <span class=dur>(90 min)</span>."},
+  {tm:"12:00 PM",chip:"DRIVE 40 MIN · CA-46 W → CA-1",x:""},
+  {tm:"12:45 PM",x:"<b>Cambria</b> — garden-patio lunch (Robin's) with the dog underfoot."},
+  {tm:"1:45 PM",x:"🐾 <b>Fiscalini Ranch Preserve — Bluff Trail</b>: THE small-dog walk of the trip. A flat mile of ocean bluff, otters and seals on the rocks below, driftwood benches; 6-ft leash required <span class=dur>(1.5 hr)</span>."},
+  {tm:"3:15 PM",x:"🐾 <b>Moonstone Beach boardwalk</b> — dogs on the boardwalk (not this sand; the beach comes next) <span class=dur>(45 min)</span>."},
+  {tm:"4:00 PM",x:"🐾 <b>Piedras Blancas elephant seal vista</b> — leashed, well-behaved dogs are allowed; a barking dog goes back to the car, so be ready to tag-team <span class=dur>(30 min)</span>."},
+  {tm:"5:00 PM",chip:"DRIVE 30 MIN · CA-1 S",x:"🐾 Quick stop at <b>Cayucos Beach</b> — leashed dogs are allowed ON the sand here."},
+  {tm:"6:00 PM",x:"<b>Morro Bay</b> — sunset under the Rock, fish &amp; chips on a patio. <b>Night 3: Morro Bay (or a Moonstone Beach Dr inn in Cambria).</b>"}
+ ]},
+ {n:"Day 4",t:"Off-leash victory lap → home",dr:"≈4 hr driving",rows:[
+  {tm:"9:00 AM",x:"🐾 Embarcadero walk — otters raft right off the boardwalk <span class=dur>(45 min)</span>."},
+  {tm:"10:00 AM",chip:"DRIVE 30 MIN · CA-1 S → Avila Beach Dr",x:""},
+  {tm:"10:30 AM",x:"🐾 <b>Olde Port Beach, Avila</b> — the off-leash cove: cliff-bounded sand made for safe zoomies <span class=dur>(45 min)</span>. Towel off, water up."},
+  {tm:"11:30 AM",chip:"DRIVE 1 HR 15 · US-101 S",x:""},
+  {tm:"12:45 PM",x:"🐾 <b>Solvang</b> — half the patios and bakeries hand out dog treats; aebleskivers for you <span class=dur>(1.25 hr)</span>."},
+  {tm:"2:00 PM",chip:"DRIVE 2 HR 15 · US-101 S",x:"Home ≈ 4:15 PM with one tired, sandy Maltese."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Kernville:</b> The Kernville Inn or Whispering Pines Lodge — both take pets; confirm the fee when booking.",
+ "<b>Night 2 · Paso Robles:</b> La Quinta Paso Robles (pets stay free) or Adelaide Inn.",
+ "<b>Night 3 · coast:</b> Cambria Shores Inn or Fogcatcher Inn on Moonstone Beach Dr (famously dog-welcoming — treats at check-in), or a pet room at a Morro Bay Embarcadero motel.",
+ "Always book the pet rate directly — third-party sites regularly get pet policies wrong."
+],
+expect:[
+ "Heat management is the whole game: Kernville and Paso hit 95–100°F — dog walks early and late, palm-test the pavement, and never leave the dog in the car, even for minutes.",
+ "The sequoia grove at ~6,400 ft is the cool midday refuge — plan the hot hours around it.",
+ "July foxtails line every dry-grass edge; stay on pavement and check paws, ears and nose after each walk.",
+ "Leash laws apply everywhere on this route except Olde Port Beach — 6 ft max at Fiscalini.",
+ "Pack: collapsible bowl, towel, extra water, current flea/tick meds, and save the emergency vets in Bakersfield, Templeton and SLO."
+]
+},
+
+/* ============ 3A DEEP DIVE ============ */
+{
+id:"3a", code:"3A", accent:"#2f5d46", title:"The Deep Dive",
+route:"CULVER CITY → SEQUOIA → KINGS CANYON GORGE → CULVER CITY",
+meta:[["3","days"],["2","nights"],["≈14 hr","total drive"],["≈560 mi","distance"]],
+why:"Your main interest, doubled. Instead of racing to a second region, you spend the middle day on the Kings Canyon Scenic Byway — a 3,000-ft descent into a glacial gorge that genuinely rivals Yosemite Valley at a tenth of the crowds — and sleep among the sequoias at Grant Grove. The best trees-per-mile ratio of all ten options.",
+dog:"Tough one: almost everything here is national-park trail, where dogs are banned. The pup gets roadside canyon overlooks, picnic areas, the Grant Grove parking loop and the Exeter mural walk 🐾 — that&rsquo;s the list. Board the dog, or choose 3D/3E instead.",
+stats:[["2+ days","Sequoia / Kings Cyn"],["None","Yosemite"],["None","Ocean"],["Low","Crowds"],["$$","Lodging"]],
+photos:[
+ [PH.sherman,"Day 1 · General Sherman and the Congress Trail — the headliner, done unhurried."],
+ [PH.roaring,"Day 2 · Roaring River Falls — a five-minute paved walk off the Scenic Byway, all power, no crowd."],
+ [PH.grant,"Day 2 · The General Grant Tree at dusk, a short stroll from your cabin at Grant Grove."],
+ [PH.crescent,"Day 1 · Crescent Meadow — Muir's “gem of the Sierra,” and the park's best bear-spotting odds."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Three Rivers (Night 1)",C.threeRivers],
+ ["Day 1 · Giant Forest (Sherman, Crescent, Moro)",C.sherman],
+ ["Day 2 · Grant Grove (Night 2)",C.grant],["Day 2 · Grizzly Falls + Roaring River Falls",C.roaring],
+ ["Day 2 · Zumwalt Meadow / Roads End",C.roadsEnd],["Day 3 · Exeter murals + lunch",C.exeter],
+ ["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.visalia,C.threeRivers,C.sherman,C.threeRivers,C.grant,C.roaring,C.roadsEnd,C.grant,C.fresno,C.exeter,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → the Giant Forest",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 3 HR 30 · I-5 N → CA-99 N → CA-198 E",x:"Standard opening: Three Rivers lunch, then Sherman + Congress Trail, Crescent Meadow + Tharp's Log, museum, Moro Rock sunset."},
+  {tm:"6:30 PM",chip:"DRIVE 1 HR · down to Three Rivers",x:"<b>Night 1: Three Rivers</b> (or splurge on Wuksachi Lodge and skip the descent)."}
+ ]},
+ {n:"Day 2",t:"The Kings Canyon Scenic Byway",dr:"≈4.5 hr of slow, scenic driving",rows:[
+  {tm:"8:00 AM",chip:"DRIVE 1 HR 30 · Generals Hwy N to Grant Grove",x:""},
+  {tm:"9:30 AM",x:"<b>General Grant Tree</b> <span class=dur>(45 min)</span> — check-in comes later; head straight for the byway."},
+  {tm:"10:30 AM",chip:"DRIVE 1 HR · CA-180 E — the Scenic Byway, 3,000 ft down into the gorge",x:"Stop at <b>Junction View</b>: two forks of the Kings, one immense V of granite."},
+  {tm:"11:45 AM",x:"<b>Grizzly Falls</b> — 50 ft, right off the road <span class=dur>(15 min)</span>; picnic at Cedar Grove."},
+  {tm:"1:00 PM",x:"<b>Roaring River Falls</b> — 5-minute paved walk <span class=dur>(30 min)</span>."},
+  {tm:"1:45 PM",x:"<b>Zumwalt Meadow / River Trail loop</b> — boardwalk meadow under 3,500-ft walls; the “Yosemite without people” hour <span class=dur>(1.5 hr)</span>."},
+  {tm:"3:30 PM",x:"Touch <b>Roads End</b> — where the pavement stops and the backcountry begins — then turn around."},
+  {tm:"3:45 PM",chip:"DRIVE 1 HR 15 · back up the byway",x:""},
+  {tm:"5:30 PM",x:"Check in, then sunset at <b>Panoramic Point</b>. <b>Night 2: Grant Grove</b> (John Muir Lodge or the cabins)."}
+ ]},
+ {n:"Day 3",t:"Grove morning → murals → home",dr:"≈4.5 hr driving",rows:[
+  {tm:"8:30 AM",x:"<b>North Grove loop</b> — an hour among giants with nobody around; the payoff of sleeping up here."},
+  {tm:"9:45 AM",chip:"DRIVE 1 HR 30 · CA-180 W → CA-99 S",x:""},
+  {tm:"11:30 AM",x:"<b>Exeter</b> — 30+ murals on a walkable main street + lunch <span class=dur>(1 hr)</span>."},
+  {tm:"12:45 PM",chip:"DRIVE 3 HR · CA-99 S → I-5 S",x:"Home ≈ 3:45 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn; Wuksachi Lodge to stay high.",
+ "<b>Night 2 · Grant Grove:</b> John Muir Lodge (timber-lodge rooms) or Grant Grove Cabins — book direct via Visit Sequoia; these go first.",
+ "Cedar Grove Lodge, down in the gorge itself, is the remote alternative if available."
+],
+expect:[
+ "The byway is a 3,000-ft descent and re-climb — brakes down, patience up; RVs set the pace.",
+ "Cedar Grove sits at ~4,600 ft and runs hot (90s°F) mid-afternoon; the meadow walk is best before 2 PM.",
+ "Evenings at Grant Grove (6,600 ft) drop into the 40s°F even in July.",
+ "Cell service is near-zero from the byway onward — download maps first.",
+ "This option trades breadth for depth: no ocean, no Yosemite, maximum trees."
+]
+},
+
+/* ============ 3B TASTE OF YOSEMITE ============ */
+{
+id:"3b", code:"3B", accent:"#7a3b2e", title:"A Taste of Yosemite",
+route:"CULVER CITY → SEQUOIA → YOSEMITE → CULVER CITY",
+meta:[["3","days"],["2","nights"],["≈16 hr","total drive"],["≈680 mi","distance"]],
+why:"Both marquee parks in three days. It works — barely — by treating Yosemite as an afternoon-plus-a-morning: Tunnel View, one Valley stop, Glacier Point at golden hour, then Mariposa Grove before the drive home. Pick this only if seeing both matters more to you than lingering in either. It is, by design, the most driving-intensive option here.",
+dog:"The least dog-compatible option left: two parks&rsquo; worth of no-dog trails plus long, hot drive days. Board the pup for this one — there&rsquo;s no good tag-team version of a schedule this tight.",
+stats:[["1 day","Sequoia"],["½ day + grove","Yosemite"],["None","Ocean"],["High","Crowds"],["$$–$$$","Lodging"]],
+photos:[
+ [PH.sherman,"Day 1 · The Giant Forest — full afternoon with the biggest trees on Earth."],
+ [PH.grant,"Day 2 · A quick General Grant stop bridges the two parks."],
+ [PH.tunnel,"Day 2 · Tunnel View at 2 PM — still staggering, even at the busiest hour."],
+ [PH.marigrove,"Day 3 · Mariposa Grove at 7:30 AM, before the shuttle crowds — then point the car home."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Three Rivers (Night 1)",C.threeRivers],
+ ["Day 1 · Giant Forest",C.sherman],["Day 2 · General Grant Tree",C.grant],
+ ["Day 2 · Oakhurst (Night 2)",C.oakhurst],["Day 2 · Tunnel View + one Valley stop",C.tunnel],
+ ["Day 2 · Glacier Point golden hour",C.glacier],["Day 3 · Mariposa Grove",C.marigrove],
+ ["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.visalia,C.threeRivers,C.sherman,C.threeRivers,C.grant,C.fresno,C.oakhurst,C.tunnel,C.valley,C.glacier,C.oakhurst,C.marigrove,C.fresno,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → the Giant Forest",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 3 HR 30 · I-5 N → CA-99 N → CA-198 E",x:"Standard opening day, full Sequoia afternoon, Moro Rock sunset. <b>Night 1: Three Rivers.</b>"}
+ ]},
+ {n:"Day 2",t:"Two parks, one long glorious day",dr:"≈5.5 hr driving",rows:[
+  {tm:"7:00 AM",chip:"DRIVE 1 HR 45 · Generals Hwy N to Grant Grove",x:""},
+  {tm:"8:45 AM",x:"<b>General Grant Tree</b>, briskly <span class=dur>(40 min)</span>."},
+  {tm:"9:30 AM",chip:"DRIVE 2 HR · CA-180 W → CA-41 N to Oakhurst",x:"Lunch in Oakhurst; check in if the room's ready."},
+  {tm:"12:45 PM",chip:"DRIVE 1 HR 15 · into Yosemite via the south entrance",x:""},
+  {tm:"2:00 PM",x:"<b>Tunnel View + Bridalveil Fall</b> <span class=dur>(1 hr)</span>."},
+  {tm:"3:15 PM",x:"One Valley-floor stop: <b>Sentinel Bridge / Cook's Meadow</b> for Half Dome and Yosemite Falls <span class=dur>(1 hr)</span>."},
+  {tm:"4:30 PM",chip:"DRIVE 1 HR · Glacier Point Rd",x:""},
+  {tm:"5:30 PM",x:"<b>Washburn Point + Glacier Point</b> — golden hour 3,200 ft over the Valley <span class=dur>(1.5 hr)</span>."},
+  {tm:"7:15 PM",chip:"DRIVE 1 HR 30 · to Oakhurst",x:"Late dinner. <b>Night 2: Oakhurst.</b>"}
+ ]},
+ {n:"Day 3",t:"Mariposa Grove → home",dr:"≈5.5 hr driving",rows:[
+  {tm:"7:15 AM",x:"<b>Mariposa Grove</b> — first shuttle, Grizzly Giant Loop <span class=dur>(2 hr)</span>."},
+  {tm:"10:00 AM",chip:"DRIVE 5 HR · CA-41 S → CA-99 S → I-5 S, lunch in Fresno",x:"Home ≈ 3:30 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn.",
+ "<b>Night 2 · Oakhurst:</b> Best Western Plus Yosemite Gateway Inn; Tenaya at Yosemite (Fish Camp) shaves 20 minutes off both park drives."
+],
+expect:[
+ "This is the ceiling of your driving budget: two days flirt with 5.5 hours. Two drivers help a lot.",
+ "You will skip things in Yosemite — the plan deliberately trades the full Valley circuit for Glacier Point.",
+ "Midweek makes or breaks this option; on a Saturday the 12:45 PM Valley entry will cost you an hour.",
+ "If you'd rather linger: option 4A is this trip with room to breathe, and 3A skips Yosemite entirely."
+]
+},
+
+/* ============ 3C COAST SAMPLER ============ */
+{
+id:"3c", code:"3C", accent:"#2f6b86", title:"Coast Sampler",
+route:"CULVER CITY → SEQUOIA → PASO ROBLES → MORRO BAY → SOLVANG → CULVER CITY",
+meta:[["3","days"],["2","nights"],["≈14 hr","total drive"],["≈600 mi","distance"]],
+why:"Option 4C compressed into a long weekend: a proper day and a half among the sequoias, a Paso Robles wine-country evening, one clean hit of Pacific — Morro Rock in morning light — and a Danish-pastry lunch on the way home. Balanced, unhurried, no pre-dawn starts required.",
+dog:"The Sequoia day is a no-dog-trails day (tag-team Sherman; the pup works the picnic areas), but everything after is friendly: Paso&rsquo;s square and patios, Morro&rsquo;s Embarcadero, and Solvang&rsquo;s treat-dispensing bakeries 🐾. Worthwhile upgrade: detour 15 min from Morro to Cayucos Beach, where leashed dogs are allowed on the actual sand 🐾.",
+stats:[["1.5 days","Sequoia"],["None","Yosemite"],["Morning","Ocean"],["Low–med","Crowds"],["$$","Lodging"]],
+photos:[
+ [PH.moro,"Day 2 · Moro Rock in morning light — do the 350 steps before the heat and the crowd."],
+ [PH.crescent,"Day 2 · Crescent Meadow — one quiet loop before trading granite for grapevines."],
+ [PH.paso,"Day 2 · Paso's square at dusk — tasting rooms within stumbling distance of dinner."],
+ [PH.solvang,"Day 3 · Solvang — the mandatory aebleskiver stop on the 101 home."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Three Rivers (Night 1)",C.threeRivers],
+ ["Day 1 · Giant Forest",C.sherman],["Day 2 · Moro Rock + Crescent Meadow",C.moro],
+ ["Day 2 · Paso Robles (Night 2)",C.paso],["Day 3 · Morro Bay morning",C.morro],
+ ["Day 3 · Solvang lunch",C.solvang],["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.visalia,C.threeRivers,C.sherman,C.moro,C.threeRivers,C.paso,C.morro,C.slo,C.solvang,C.sb,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → the Giant Forest",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 3 HR 30 · I-5 N → CA-99 N → CA-198 E",x:"Standard opening day: Sherman, Congress Trail, museum — save Moro Rock for tomorrow morning. <b>Night 1: Three Rivers.</b>"}
+ ]},
+ {n:"Day 2",t:"Mountain morning → Paso Robles",dr:"≈4.5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 1 HR · up Generals Hwy",x:""},
+  {tm:"8:30 AM",x:"<b>Moro Rock</b> in morning light — cooler, emptier, clearer air than any afternoon <span class=dur>(45 min)</span>."},
+  {tm:"9:30 AM",x:"<b>Crescent Meadow</b> loop <span class=dur>(1 hr)</span>."},
+  {tm:"10:45 AM",chip:"DRIVE 1 HR · down to the foothills",x:"Lunch in Visalia."},
+  {tm:"12:45 PM",chip:"DRIVE 3 HR · CA-198 → CA-99 S → CA-46 W",x:""},
+  {tm:"3:45 PM",x:"<b>Tin City</b> — Paso's warehouse district of small-batch wineries and a brewery <span class=dur>(90 min)</span>."},
+  {tm:"6:30 PM",x:"Dinner on the <b>Downtown City Park</b> square. <b>Night 2: Paso Robles.</b>"}
+ ]},
+ {n:"Day 3",t:"Ocean morning → the 101 home",dr:"≈4.5 hr driving",rows:[
+  {tm:"8:30 AM",chip:"DRIVE 1 HR · CA-46 W → CA-1 S",x:""},
+  {tm:"9:30 AM",x:"<b>Morro Bay</b> — walk to the Rock, otters off the Embarcadero, harbor coffee <span class=dur>(1.25 hr)</span>."},
+  {tm:"11:00 AM",chip:"DRIVE 1 HR 45 · US-101 S",x:""},
+  {tm:"12:45 PM",x:"<b>Solvang</b> — aebleskivers, windmills, pastry box <span class=dur>(1.25 hr)</span>."},
+  {tm:"2:00 PM",chip:"DRIVE 2 HR 15 · US-101 S",x:"Home ≈ 4:15 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn.",
+ "<b>Night 2 · Paso Robles:</b> Paso Robles Inn on the square; La Quinta for budget."
+],
+expect:[
+ "100°F foothills to 65°F coastal fog inside day 2 — keep a jacket in the cab, not the trunk.",
+ "Tasting with a drive after: split a flight or use Paso's walkable downtown rooms after parking at the hotel.",
+ "Morro Bay mornings are often foggy until ~11 AM — atmospheric rather than a problem.",
+ "No day exceeds ~5 hours of driving, and nothing here requires a dawn alarm."
+]
+},
+
+/* ============ 3D KERN MINI LOOP ============ */
+{
+id:"3d", code:"3D", accent:"#8c6414", title:"Kern Mini Loop",
+route:"CULVER CITY → KERNVILLE → TRAIL OF 100 GIANTS → SEQUOIA → CULVER CITY",
+meta:[["3","days"],["2","nights"],["≈12.5 hr","total drive"],["≈520 mi","distance"]],
+why:"The 4D backdoor route squeezed into three days, and the least-total-driving mountain option: a Kern River afternoon, the empty monarch grove on the Western Divide Highway, then one sharp, early Giant Forest morning before an easy afternoon drive home. Off the beaten path the whole way.",
+dog:"Days 1–2 are fully dog-friendly — Kern riverbank, the whole 100 Giants loop, Dome Rock 🐾. Only the final Giant Forest morning is off-limits: one of you walks Sherman while the other has coffee with the Maltese by the river in Three Rivers, then swap for Moro Rock. The best 3-day compromise with a pup.",
+stats:[["1.5 days","Sequoia country"],["None","Yosemite"],["River","Water"],["Lowest","Crowds"],["$–$$","Lodging"]],
+photos:[
+ [PH.kernville,"Day 1 · Kernville — raft or swim the Kern, then walk to the brewery."],
+ [PH.giants,"Day 2 · Trail of 100 Giants — monarch sequoias, often nobody else on the loop."],
+ [PH.sherman,"Day 3 · General Sherman at 8 AM — you, the ranger, and the biggest tree on Earth."],
+ [PH.moro,"Day 3 · Moro Rock before the drive home — 15 minutes of stairs, a hundred miles of view."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Kernville (Night 1)",C.kernville],
+ ["Day 2 · Trail of 100 Giants",C.giants],["Day 2 · Dome Rock",C.domeRock],
+ ["Day 2 · Three Rivers (Night 2)",C.threeRivers],["Day 3 · Sherman + Moro Rock",C.sherman],
+ ["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.bakersfield,C.lakeIsabella,C.kernville,C.giants,C.domeRock,C.porterville,C.threeRivers,C.sherman,C.moro,C.threeRivers,C.visalia,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → Kernville",dr:"≈3 hr driving",rows:[
+  {tm:"8:30 AM",chip:"DRIVE 3 HR · I-5 → CA-99 → CA-178 E up the Kern Canyon",x:""},
+  {tm:"11:30 AM",x:"<b>Kernville</b> — lunch, then a Class II raft trip or Riverside Park swim; Kern River Brewing for dinner. <b>Night 1: Kernville.</b>"}
+ ]},
+ {n:"Day 2",t:"Western Divide Highway → Three Rivers",dr:"≈4 hr slow scenic driving",rows:[
+  {tm:"9:00 AM",chip:"DRIVE 1 HR 15 · Mtn Hwy 99 N → Western Divide Hwy",x:"Fuel up first; long empty stretch ahead."},
+  {tm:"10:15 AM",x:"<b>Trail of 100 Giants</b> paved loop <span class=dur>(1.25 hr)</span>, then <b>Dome Rock</b>'s 5-minute walk <span class=dur>(30 min)</span>; Ponderosa picnic."},
+  {tm:"1:30 PM",chip:"DRIVE 2 HR 30 · CA-190 W switchbacks → Porterville → CA-65/198",x:""},
+  {tm:"4:00 PM",x:"<b>Three Rivers</b> — river dip, dinner at River View. <b>Night 2: Three Rivers.</b>"}
+ ]},
+ {n:"Day 3",t:"Giant Forest sprint → home",dr:"≈5.5 hr driving",rows:[
+  {tm:"7:00 AM",chip:"DRIVE 1 HR · up Generals Hwy at first light",x:""},
+  {tm:"8:00 AM",x:"<b>Sherman + Congress Trail</b> with the morning hush <span class=dur>(1.5 hr)</span>."},
+  {tm:"9:45 AM",x:"<b>Moro Rock</b> <span class=dur>(45 min)</span>, quick museum stop."},
+  {tm:"10:45 AM",chip:"DRIVE 1 HR · down to Three Rivers",x:"Early lunch."},
+  {tm:"1:00 PM",chip:"DRIVE 3 HR 30 · CA-198 → CA-99 S → I-5 S",x:"Home ≈ 4:30 PM."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Kernville:</b> The Kernville Inn or Whispering Pines Lodge.",
+ "<b>Night 2 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn."
+],
+expect:[
+ "Day 2 is slow-mile mountain driving with no cell service — offline maps, full tank, snacks.",
+ "The park day is front-loaded: up at 7, done by 11, home by 4:30.",
+ "Check CA-190 / Western Divide road status (fs.usda.gov) before committing.",
+ "Swim only where locals swim — the Kern's current earns its reputation."
+]
+},
+
+/* ============ 3E OJAI WIND-DOWN ============ */
+{
+id:"3e", code:"3E", accent:"#7c4f63", title:"Ojai Wind-Down",
+route:"CULVER CITY → SEQUOIA → OJAI → CULVER CITY",
+meta:[["3","days"],["2","nights"],["≈11.5 hr","total drive"],["≈500 mi","distance"]],
+why:"The gentlest re-entry of all ten: big-tree days first, then a night in Ojai — spa town, pink-sunset valley, the world's largest outdoor bookstore — leaving a 90-minute final hop home. You end the trip rested instead of road-fried. Least total driving of any option.",
+dog:"Second only to 4E for the pup: Ojai is one of SoCal&rsquo;s most dog-friendly towns — Bart&rsquo;s Books lets dogs browse the stacks 🐾, the paved Ojai Valley Trail is leash-legal 🐾, and half the patios in town set out water bowls. Swap day 2&rsquo;s Tokopah hike (no dogs) for a Kaweah riverbank morning, and this whole itinerary works on one leash except the day-1 grove walks (tag-team those).",
+stats:[["1.5 days","Sequoia"],["None","Yosemite"],["None (valley town)","Ocean"],["Low","Crowds"],["$$–$$$","Lodging"]],
+photos:[
+ [PH.sherman,"Day 1 · The Giant Forest, done properly on fresh legs."],
+ [PH.tokopah,"Day 2 · Tokopah Falls — earn the afternoon's spa-town lounging."],
+ [PH.barts,"Day 3 · Bart's Books — shelves in the open air; browse with a coffee for an hour."],
+ [PH.buckeye,"Night 1 · Buckeye Tree Lodge in Three Rivers — the Kaweah runs past the lawn."]
+],
+stops:[
+ ["Start · Culver City",C.cc],["Day 1 · Three Rivers (Night 1)",C.threeRivers],
+ ["Day 1 · Giant Forest",C.sherman],["Day 2 · Tokopah Falls morning",C.tokopah],
+ ["Day 2 · Ojai (Night 2)",C.ojai],["Day 3 · Bart's Books + Ojai Ave",C.ojai],
+ ["Finish · Culver City",C.cc]
+],
+line:[C.cc,C.visalia,C.threeRivers,C.sherman,C.tokopah,C.threeRivers,C.porterville,C.bakersfield,C.ojai,C.cc],
+days:[
+ {n:"Day 1",t:"Culver City → the Giant Forest",dr:"≈5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 3 HR 30 · I-5 N → CA-99 N → CA-198 E",x:"Standard opening day: Sherman, Congress, museum, Moro Rock sunset. <b>Night 1: Three Rivers.</b>"}
+ ]},
+ {n:"Day 2",t:"Waterfall morning → Ojai's Pink Moment",dr:"≈4.5 hr driving",rows:[
+  {tm:"7:30 AM",chip:"DRIVE 1 HR · up to Lodgepole",x:""},
+  {tm:"8:30 AM",x:"<b>Tokopah Falls</b> — 3.4-mi round trip along the Marble Fork to the granite cascade <span class=dur>(2.5 hr)</span>. Easier alternative: Crescent Meadow + the museum."},
+  {tm:"11:15 AM",chip:"DRIVE 1 HR · down the hill",x:"Lunch in Three Rivers."},
+  {tm:"1:00 PM",chip:"DRIVE 2 HR 45 · CA-65 S → Porterville → Bakersfield → CA-99 → CA-166 W → CA-33 S",x:"The last hour on CA-33 through Los Padres is a gorgeous, curvy mountain road. (Flatter alternative: CA-99 → I-5 → CA-126, same time.)"},
+  {tm:"4:15 PM",x:"<b>Ojai</b> — check in, pool or spa hour."},
+  {tm:"6:30 PM",x:"The <b>“Pink Moment”</b> — the Topatopa bluffs blush at sunset; watch from Meditation Mount or the Ojai Valley Trail. Dinner downtown. <b>Night 2: Ojai.</b>"}
+ ]},
+ {n:"Day 3",t:"Ojai slow morning → 90 minutes home",dr:"≈2 hr driving (lightest final day)",rows:[
+  {tm:"9:00 AM",x:"Coffee, then <b>Bart's Books</b> — the world's largest outdoor bookstore <span class=dur>(1.5 hr)</span>."},
+  {tm:"10:45 AM",x:"<b>Ojai Ave</b> — arcade shops, olive-oil tasting <span class=dur>(1 hr)</span>; lunch."},
+  {tm:"1:00 PM",x:"Optional: rent bikes for a stretch of the <b>Ojai Valley Trail</b> <span class=dur>(1.5 hr)</span>."},
+  {tm:"2:30 PM",chip:"DRIVE 1 HR 30 · CA-33 → US-101 S",x:"Home ≈ 4:00 PM, relaxed."}
+ ]}
+],
+lodging:[
+ "<b>Night 1 · Three Rivers:</b> Buckeye Tree Lodge &amp; Cabins or Comfort Inn.",
+ "<b>Night 2 · Ojai:</b> Ojai Rancho Inn (hip, budget-ish) or Capri Hotel; Ojai Valley Inn for the full spa splurge."
+],
+expect:[
+ "Only ~11.5 hours of total driving — the least of all ten options — and the final day is 90 minutes.",
+ "CA-33 through Los Padres is curvy; take CA-126 instead if anyone's motion-sensitive.",
+ "Ojai closes early; dinner reservations before 8 PM.",
+ "No ocean, no Yosemite — this one optimizes for how you feel Monday morning."
+]
+}
+];
+
+/* ---------- renderer ---------- */
+const main = document.getElementById('pages');
+OPTIONS.forEach(o=>{
+  const sec = document.createElement('section');
+  sec.className = 'page';
+  sec.id = 'opt-' + o.id;
+  sec.style.setProperty('--accent', o.accent);
+  sec.innerHTML = `
+  <div class="page-inner">
+    <div class="band">
+      <div class="code">${o.code}</div>
+      <div class="titleblock"><h2>${o.title}</h2><div class="route">${o.route}</div></div>
+      <div class="meta">${o.meta.map(m=>`<div><div class="num">${m[0]}</div><div class="lbl">${m[1]}</div></div>`).join('')}</div>
+    </div>
+    <div class="pagebody">
+      <div class="why"><b>Why choose ${o.code}</b>${o.why}</div>
+      ${o.dog ? `<div class="dogbox"><b>🐾 With your Maltese</b>${o.dog}</div>` : ''}
+      <div class="stats">${o.stats.map(s=>`<div class="st"><div class="v">${s[0]}</div><div class="k">${s[1]}</div></div>`).join('')}</div>
+      <div class="strip-title">What to expect — in pictures</div>
+      <div class="photos">${o.photos.map(p=>`<figure><img loading="lazy" src="${p[0].src}" alt="${o.code} trip photo"><figcaption>${p[1]}<span class="cr">${p[0].cr}</span></figcaption></figure>`).join('')}</div>
+      <div class="section-gap strip-title">Route map</div>
+      <div class="mapbox"><div class="map" id="map-${o.id}"></div><div class="mapcap">SCHEMATIC ROUTE — numbered markers are the stops in order; the dashed line links them (not turn-by-turn). Zoom &amp; drag to explore.</div></div>
+      <div class="section-gap strip-title">The plan, day by day</div>
+      ${o.days.map(d=>`
+        <div class="day">
+          <div class="dayhead"><span class="dnum">${d.n}</span><span class="dtitle">${d.t}</span><span class="ddrive">${d.dr}</span></div>
+          <div class="entries">${d.rows.map(r=> r.chip
+            ? `<div class="entry drive"><div class="t">${r.tm}</div><div class="x"><span class="drivechip">${r.chip}</span>${r.x ? '<span style="display:block;margin-top:5px">'+r.x+'</span>' : ''}</div></div>`
+            : `<div class="entry"><div class="t">${r.tm}</div><div class="x">${r.x}</div></div>`
+          ).join('')}</div>
+        </div>`).join('')}
+      <div class="twocol">
+        <div class="panelbox"><h4><span class="sw"></span>Where to sleep</h4><ul>${o.lodging.map(l=>`<li>${l}</li>`).join('')}</ul></div>
+        <div class="panelbox"><h4><span class="sw"></span>What to expect</h4><ul>${o.expect.map(l=>`<li>${l}</li>`).join('')}</ul></div>
+      </div>
+    </div>
+  </div>`;
+  main.appendChild(sec);
+});
+
+/* ---------- maps (lazy init) ---------- */
+const built = {};
+function buildMap(o){
+  if (built[o.id]) return;
+  built[o.id] = true;
+  const m = L.map('map-' + o.id, {scrollWheelZoom:false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19, attribution:'&copy; OpenStreetMap contributors'}).addTo(m);
+  const line = L.polyline(o.line, {color:o.accent, weight:3, opacity:.85, dashArray:'7 7'}).addTo(m);
+  o.stops.forEach((s,i)=>{
+    const icon = L.divIcon({
+      className:'',
+      html:`<div style="background:${o.accent};color:#fff;font:600 11px/20px 'IBM Plex Mono',monospace;width:24px;height:24px;border-radius:50%;text-align:center;border:2px solid #17170f;box-shadow:0 1px 3px rgba(0,0,0,.45);box-sizing:border-box">${i+1}</div>`,
+      iconSize:[24,24], iconAnchor:[12,12]
+    });
+    L.marker(s[1], {icon}).addTo(m).bindPopup(`<b>${i+1}.</b> ${s[0]}`);
+  });
+  m.fitBounds(line.getBounds().pad(0.12));
+  setTimeout(()=>m.invalidateSize(), 250);
+}
+const byId = Object.fromEntries(OPTIONS.map(o=>[o.id,o]));
+if ('IntersectionObserver' in window){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        const id = e.target.id.replace('map-','');
+        buildMap(byId[id]);
+        io.unobserve(e.target);
+      }
+    });
+  }, {rootMargin:'400px 0px'});
+  OPTIONS.forEach(o=>io.observe(document.getElementById('map-'+o.id)));
+} else {
+  OPTIONS.forEach(buildMap);
+}
+</script>
+</body>
+</html>
