@@ -385,68 +385,65 @@ ul.papers li.title.co-dimmed {
 
 <!--Top Nav-->
 
-.mobile-container {
-  max-width: 500px;
-  margin: auto;
-  background-color: #555;
-  height: 500px;
-  color: white;
-  border-radius: 10px;
-}
-
 .topnav {
   overflow: hidden;
-  background-color: #333;
-  /*position: relative;*/
+  background-color: #ffffff;
   position: sticky;
   top: 0;
-
+  border-bottom: 1px solid #efefef;
+  z-index: 100;
 }
 
 .topnav #myLinks {
   display: none;
+  border-top: 1px solid #efefef;
 }
 
 .topnav a {
-  color: white;
-  padding: 14px 16px;
+  color: #1a1a2e;
+  padding: 13px 20px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   display: block;
 }
 
 .topnav a.icon {
-  background: black;
+  background: transparent;
   display: block;
   position: absolute;
   right: 0;
   top: 0;
+  color: #1a1a2e;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #f8f8f8;
+  color: #1a1a2e;
+  text-decoration: none;
 }
 
-@media (max-width: 500px) {
-  .large-screen { 
-      display: none; 
+@media (max-width: 600px) {
+  .large-screen {
+    display: none;
   }
-
-
-  #intro {
-      padding-top: 0px;
+  section {
+    padding: 24px 20px;
+    scroll-margin-top: 60px;
   }
-
-  #intro2 {
-      padding-bottom: 0px;
+  #content h1 {
+    font-size: 15px;
+  }
+  ul.papers li.title {
+    font-size: 12px;
   }
 }
-@media (min-width: 500px) {
-  .small-screen { 
-      display: none; 
-  }
 
+@media (min-width: 600px) {
+  .small-screen {
+    display: none;
+  }
 }
 </style>
 
